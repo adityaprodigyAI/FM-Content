@@ -10,6 +10,15 @@ name: WP push fallback (Path B WAF unblock)
 
 on:
   workflow_dispatch:
+    inputs:
+      mode:
+        description: "What to run"
+        required: true
+        default: "push"
+        type: choice
+        options:
+          - push          # default — push every pending draft
+          - verify-auth   # GET /users/me only; no posts created
   push:
     branches: [main]
     paths:
@@ -41,7 +50,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install -e .
 
+      - name: Verify WP credentials (no side effects)
+        if: ${{ github.event.inputs.mode == 'verify-auth' }}
+        env:
+          FM_WP_USER: ${{ secrets.FM_WP_USER }}
+          FM_WP_APP_PASSWORD: ${{ secrets.FM_WP_APP_PASSWORD }}
+        run: |
+          python -m tools.push_archive --verify-auth
+
       - name: Push pending drafts to WordPress
+        if: ${{ github.event.inputs.mode != 'verify-auth' }}
         env:
           FM_WP_USER: ${{ secrets.FM_WP_USER }}
           FM_WP_APP_PASSWORD: ${{ secrets.FM_WP_APP_PASSWORD }}
@@ -50,6 +68,7 @@ jobs:
           python -m tools.push_archive --apply
 
       - name: Commit wp_post_id write-back
+        if: ${{ github.event.inputs.mode != 'verify-auth' }}
         run: |
           git config user.name  "fm-content[bot]"
           git config user.email "fm-content-bot@firstmovers.ai"
