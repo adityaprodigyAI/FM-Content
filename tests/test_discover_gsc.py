@@ -125,11 +125,12 @@ def test_drops_queries_below_min_position():
 
 
 def test_drops_low_impression_queries():
+    """Below GSC_MIN_IMPRESSIONS (default 25) — drop the row."""
     inv = _inv(["unrelated"])
     raw = {
         "rows": [
             {"keys": ["low demand", "https://example.com/"],
-             "position": 15, "impressions": 50, "clicks": 0, "ctr": 0.0},
+             "position": 15, "impressions": 5, "clicks": 0, "ctr": 0.0},
         ]
     }
     assert discover(raw, inv) == []
@@ -145,6 +146,36 @@ def test_drops_high_ctr_queries():
         ]
     }
     assert discover(raw, inv) == []
+
+
+def test_drops_serp_feature_pollution():
+    """Long quoted phrases that look like People-Also-Ask snippets, not real queries."""
+    inv = _inv(["unrelated"])
+    raw = {
+        "rows": [
+            {"keys": ['"content intelligence" a content marketer\'s guide to natural language generation',
+                     "https://example.com/"],
+             "position": 28, "impressions": 30, "clicks": 0, "ctr": 0.0},
+            {"keys": ["this is a very long natural language phrase with way too many words for a real user query",
+                     "https://example.com/"],
+             "position": 15, "impressions": 100, "clicks": 0, "ctr": 0.0},
+        ]
+    }
+    assert discover(raw, inv) == [], "SERP-feature pollution leaked through"
+
+
+def test_keeps_short_real_user_queries():
+    inv = _inv(["unrelated"])
+    raw = {
+        "rows": [
+            {"keys": ["agi timeline", "https://example.com/"],
+             "position": 14, "impressions": 100, "clicks": 0, "ctr": 0.0},
+            {"keys": ["ai consulting cost", "https://example.com/"],
+             "position": 18, "impressions": 60, "clicks": 0, "ctr": 0.0},
+        ]
+    }
+    cands = discover(raw, inv)
+    assert {c.focus_keyword for c in cands} == {"agi timeline", "ai consulting cost"}
 
 
 # ---------- Provenance ----------

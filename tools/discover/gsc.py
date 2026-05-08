@@ -38,11 +38,19 @@ GSC_MIN_POSITION: Final[float] = 11.0
 GSC_MAX_POSITION: Final[float] = 30.0
 
 # Demand floor — fewer than this many impressions over 28d isn't worth the
-# write effort
-GSC_MIN_IMPRESSIONS: Final[int] = 200
+# write effort. Calibrated to FM's current scale; raise to 100-200 once the
+# site reaches enterprise-blog impression volumes.
+GSC_MIN_IMPRESSIONS: Final[int] = 25
 
 # CTR ceiling — if we're already converting on the query, don't crowd it
-GSC_MAX_CTR: Final[float] = 0.01  # 1%
+GSC_MAX_CTR: Final[float] = 0.02  # 2%
+
+# Query-length ceilings — GSC sometimes surfaces SERP-feature pollution that
+# looks like {'"content intelligence" a content marketer\'s guide to natural
+# language generation'}. These are not real user queries and shouldn't reach
+# Nikki. Drop anything that's clearly an extracted snippet.
+GSC_MAX_QUERY_WORDS: Final[int] = 10
+GSC_MAX_QUERY_CHARS: Final[int] = 80
 
 
 _TOPIC_TO_CATEGORY: Final[tuple[tuple[str, int], ...]] = (
@@ -75,6 +83,8 @@ def discover(
     max_position: float = GSC_MAX_POSITION,
     min_impressions: int = GSC_MIN_IMPRESSIONS,
     max_ctr: float = GSC_MAX_CTR,
+    max_query_words: int = GSC_MAX_QUERY_WORDS,
+    max_query_chars: int = GSC_MAX_QUERY_CHARS,
 ) -> list[Candidate]:
     """Extract striking-distance candidates from a GSC search-analytics response.
 
@@ -100,6 +110,15 @@ def discover(
         if not query:
             continue
         if query in seen_queries:
+            continue
+
+        # Drop SERP-feature pollution / non-query snippets
+        if len(query) > max_query_chars:
+            continue
+        if len(query.split()) > max_query_words:
+            continue
+        # Quoted phrases are usually People-Also-Ask snippets, not searches
+        if query.startswith('"') or query.startswith("'"):
             continue
 
         # Striking-distance filters
