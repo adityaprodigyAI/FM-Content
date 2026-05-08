@@ -1,0 +1,32 @@
+# Secrets
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Working files
+.tmp/
+*.log
+
+# Local Claude Code permission config (machine-specific)
+.claude/settings.local.json
+
+# Inventory snapshots may be large — track only if reasonable size
+# data/inventory/*.json

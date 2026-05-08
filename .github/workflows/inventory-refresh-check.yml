@@ -1,0 +1,33 @@
+name: Inventory freshness check
+
+# Runs daily at 06:00 UTC. Exits 0 if the inventory snapshot is fresh
+# (<= 7 days old), 1 if stale, 2 if missing. A non-zero exit fails the
+# workflow which sends an email notification to the runner.
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+jobs:
+  check:
+    name: Check inventory freshness
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install package
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+
+      - name: Run freshness check
+        run: |
+          python -m tools.inventory_refresh --check
