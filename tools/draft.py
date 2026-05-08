@@ -67,7 +67,7 @@ def prepare_brief(
     *,
     target_word_count: int = 2500,
     target_h2_count: int = 7,
-    target_image_count: int = 4,
+    target_image_count: int = 0,  # text-only in v1
 ) -> DraftBrief:
     """Build the brief Claude uses when writing the prose.
 
@@ -127,12 +127,18 @@ def render_brief_for_prompt(brief: DraftBrief) -> str:
     ]
     for bullet in p.outline_bullets:
         out.append(f"- {bullet}")
+    image_line = (
+        f", {brief.target_image_count} images"
+        if brief.target_image_count > 0 else ", text-only (no images)"
+    )
+    fk_targets = "lede, ≥1 H2, slug, seo_title, meta_description"
+    if brief.target_image_count > 0:
+        fk_targets = "lede, ≥1 H2, ≥1 image alt, slug, seo_title, meta_description"
     out.extend([
         "",
-        f"**Target:** {brief.target_word_count}w, {brief.target_h2_count} H2s, "
-        f"{brief.target_image_count} images, ≥3 external dofollow links.",
-        f"**Focus keyword must appear in:** lede, ≥1 H2, ≥1 image alt, slug, "
-        f"seo_title, meta_description.",
+        f"**Target:** {brief.target_word_count}w, {brief.target_h2_count} H2s"
+        f"{image_line}, ≥3 external dofollow links.",
+        f"**Focus keyword must appear in:** {fk_targets}.",
         "",
         "**Internal links to weave (audience-routed):**",
     ])
@@ -186,9 +192,9 @@ def assemble(
     *,
     body_html: str,
     faq_items: list[FaqItem],
-    images: list[ImageRef],
     seo_title: str,
     meta_description: str,
+    images: list[ImageRef] | None = None,
     excerpt: str | None = None,
 ) -> AssembledDraft:
     """Assemble the final body and validate against the rubric.
@@ -196,29 +202,30 @@ def assemble(
     Inputs:
       - `body_html`  — the prose Claude wrote, already converted to HTML.
       - `faq_items`  — 3-8 FAQ entries Claude wrote.
-      - `images`     — 4 ImageRef records Claude fetched from Pexels.
       - `seo_title` / `meta_description` — Claude's metadata.
+      - `images`     — optional. v1 ships text-only drafts; if non-empty,
+                       images[0] becomes the hero and the rest are spread
+                       through the body.
 
     Output:
-      - AssembledDraft with body_html that includes images + FAQ schema.
+      - AssembledDraft with body_html that includes images (if any) + FAQ schema.
       - Raises `RubricViolation` if any rule fails.
     """
-    if len(images) < 1:
-        raise ValueError("assemble requires at least 1 image (the hero)")
+    images = images or []
 
-    # Inject hero image at the top, with focus-keyword-bearing alt
-    first_h2 = _first_h2_text(body_html) or brief.proposal.working_title
-    hero = images[0]
-    hero_alt_text = hero_alt(brief.proposal.focus_keyword, first_h2)
-    hero_block = render_figure(hero, alt_override=hero_alt_text, is_hero=True)
-
-    # Inject body images after every other H2
-    body_with_images = _inject_body_images(body_html, images[1:])
+    # Hero injection (only if images supplied)
+    hero_block = ""
+    hero_alt_text = ""
+    body_with_images = body_html
+    if images:
+        first_h2 = _first_h2_text(body_html) or brief.proposal.working_title
+        hero = images[0]
+        hero_alt_text = hero_alt(brief.proposal.focus_keyword, first_h2)
+        hero_block = render_figure(hero, alt_override=hero_alt_text, is_hero=True)
+        body_with_images = _inject_body_images(body_html, images[1:])
 
     # FAQ JSON-LD (Rank Math emits BlogPosting + BreadcrumbList)
     schema_html = render_jsonld([faq_page([
-        # Convert local FaqItem to schemas.FaqItem
-        # (they have the same shape; we re-import locally to keep types clean)
         type("X", (), {"question": q.question, "answer": q.answer})()  # noqa: E721
         for q in faq_items
     ])]) if faq_items else ""
@@ -230,7 +237,9 @@ def assemble(
         s for s in [hero_block, body_with_images, faq_html, schema_html] if s
     )
 
-    image_alts = [hero_alt_text] + [img.alt for img in images[1:]]
+    image_alts: list[str] = []
+    if images:
+        image_alts = [hero_alt_text] + [img.alt for img in images[1:]]
 
     draft = Draft(
         title=brief.proposal.working_title,
@@ -450,6 +459,8 @@ def _main(argv: list[str] | None = None) -> int:
         FaqItem(question=item["question"], answer=item["answer"])
         for item in bundle.get("faq_items", [])
     ]
+    # Images are optional (text-only in v1). If the bundle includes them,
+    # they get injected; if not, the assembler skips image-related steps.
     images = [
         ImageRef(
             url=img["url"],
@@ -460,16 +471,16 @@ def _main(argv: list[str] | None = None) -> int:
             width=int(img.get("width", 0)),
             height=int(img.get("height", 0)),
         )
-        for img in bundle.get("images", [])
+        for img in bundle.get("images", []) or []
     ]
 
     assembled = assemble(
         brief,
         body_html=bundle["body_html"],
         faq_items=faq_items,
-        images=images,
         seo_title=bundle["seo_title"],
         meta_description=bundle["meta_description"],
+        images=images or None,
     )
 
     # Append to data/runs/_drafts/<week>.json (one entry per call)

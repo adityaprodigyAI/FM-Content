@@ -16,8 +16,9 @@ from tools.rubric import (
 
 
 def _good_body() -> str:
-    """A 2,500-word body with 7 H2s, 4 images, 3 external links, focus_kw in
-    H2 + img alt + lede + body. Used as the baseline for fault-injection tests.
+    """A 2,500-word body with 7 H2s, 3 external dofollow links, focus_kw in
+    lede + ≥1 H2. v1 ships text-only — no <img> tags. Used as the baseline
+    for fault-injection tests.
     """
     h2_texts = [
         "Why ai inbox automation matters now",
@@ -37,16 +38,9 @@ def _good_body() -> str:
 
     parts = []
     parts.append(f"<p>AI inbox automation changes how a leader's day starts. {paragraph}</p>")
-    for i, h in enumerate(h2_texts):
+    for h in h2_texts:
         parts.append(f"<h2>{h}</h2>")
         parts.append(f"<p>{paragraph}</p>")
-        if i in (0, 1, 2, 3):
-            # 4 images total — alt #0 contains focus keyword
-            alt = "ai inbox automation hero" if i == 0 else f"contextual image {i}"
-            parts.append(
-                f'<img src="https://example.com/img-{i}.jpg" alt="{alt}" '
-                f'width="1200" height="800">'
-            )
     parts.append(
         '<p>For more, see '
         '<a href="https://hbr.org/topic/ai">HBR</a>, '
@@ -63,7 +57,7 @@ def _good_draft(**overrides) -> Draft:
     base = dict(
         title="AI Inbox Automation: A Proven 2026 Operating Guide",
         seo_title="AI Inbox Automation: Proven 2026 Guide",
-        meta_description="AI inbox automation in 2026 — proven 3-layer system to cut email time. Step-by-step guide for ops leaders.",
+        meta_description="AI inbox automation in 2026 - proven 3-layer system to cut email time. Step-by-step guide for ops leaders.",
         focus_keyword="ai inbox automation",
         slug="ai-inbox-automation-guide-2026",
         category_id=28,
@@ -74,12 +68,7 @@ def _good_draft(**overrides) -> Draft:
             FaqItem(question="How long to set up?", answer="Days."),
             FaqItem(question="What does it cost?", answer="$25K-60K range."),
         ],
-        image_alts=[
-            "ai inbox automation hero",
-            "contextual image 1",
-            "contextual image 2",
-            "contextual image 3",
-        ],
+        image_alts=[],  # v1 ships text-only
     )
     base.update(overrides)
     return Draft(**base)
@@ -197,18 +186,19 @@ def test_h1_in_body_fails():
         validate(_good_draft(body_html=body))
 
 
-# ---------- images ----------
+# ---------- images (DISABLED in v1) ----------
 
 
-def test_too_few_images_fails():
-    body = _good_body().replace('<img', '<spam', 3)  # remove 3 img tags
-    with pytest.raises(RubricViolation, match="image_count"):
-        validate(_good_draft(body_html=body))
+def test_text_only_body_passes_in_v1():
+    """Body with no <img> tags is valid in v1 (text-only mode)."""
+    body = _good_body()
+    assert "<img" not in body
+    validate(_good_draft(body_html=body))
 
 
-def test_no_image_alt_with_focus_keyword_fails():
-    with pytest.raises(RubricViolation, match="image_alt_focus_keyword"):
-        validate(_good_draft(image_alts=["a", "b", "c", "d"]))
+def test_text_only_body_with_empty_image_alts_passes():
+    """No image_alts list is fine when MIN_IMAGE_COUNT is 0."""
+    validate(_good_draft(image_alts=[]))
 
 
 # ---------- external links ----------

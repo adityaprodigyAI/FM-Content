@@ -79,7 +79,9 @@ class Draft:
 MIN_WORD_COUNT: Final[int] = 2000  # production target 2,500
 MAX_WORD_COUNT: Final[int] = 20_000
 MIN_H2_COUNT: Final[int] = 6
-MIN_IMAGE_COUNT: Final[int] = 3
+# Images are disabled in v1 — text-only blog drafts. Set MIN_IMAGE_COUNT > 0
+# AND re-add `_validate_images` to `_VALIDATORS` to require images again.
+MIN_IMAGE_COUNT: Final[int] = 0
 MIN_EXTERNAL_LINK_COUNT: Final[int] = 3
 MIN_FAQ_COUNT: Final[int] = 3
 MAX_FAQ_COUNT: Final[int] = 8
@@ -295,12 +297,21 @@ def _validate_no_h1(d: Draft) -> None:
 
 
 def _validate_images(d: Draft) -> None:
+    """Image validators are inert in v1 (text-only blog drafts).
+
+    To require images again:
+      1. Set `MIN_IMAGE_COUNT` to >= 3 in this module
+      2. Re-add `_validate_images` to `_VALIDATORS`
+      3. Pass non-empty `images=[...]` into `draft.assemble`
+    """
+    if MIN_IMAGE_COUNT <= 0:
+        return  # text-only mode — skip both checks
     if _img_count(d.body_html) < MIN_IMAGE_COUNT:
         raise RubricViolation(
             "image_count",
             f"body has {_img_count(d.body_html)} <img> tags; minimum is {MIN_IMAGE_COUNT}",
         )
-    if not any(_contains_kw(alt, d.focus_keyword) for alt in d.image_alts):
+    if d.image_alts and not any(_contains_kw(alt, d.focus_keyword) for alt in d.image_alts):
         raise RubricViolation(
             "image_alt_focus_keyword",
             f"no image alt contains focus_keyword {d.focus_keyword!r}; "

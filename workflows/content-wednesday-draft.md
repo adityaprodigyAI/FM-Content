@@ -69,31 +69,29 @@ for proposal in approved_proposals:
     # 3b. Fetch SERP intent (for the model writing the prose).
     serp = mcp__ahrefs__serp-overview(keyword=proposal.focus_keyword, country="us")
 
-    # 3c. Fetch 4 Pexels images.
-    pexels_raw = <call Pexels API or use mcp__playwright__... for visual research>
-    images = parse_pexels_response(pexels_raw, focus_keyword=proposal.focus_keyword)
-    if len(images) < 4:
-        post_status(f"only {len(images)} images for {proposal.focus_keyword}; skipping")
-        continue
+    # 3c. (v1: skipped.) Image fetching is disabled in v1 — drafts ship text-only.
+    # Nikki adds the featured image post-publish. To re-enable, see
+    # tools/rubric.py::MIN_IMAGE_COUNT and the rubric SKILL.md section 6.
 
     # 3d. Load the rubric skill.
     Skill(skill="firstmovers-blog-rubric")
 
     # 3e. Generate prose.
     # Pass render_brief_for_prompt(brief) + the SERP overview as your input.
-    # Write back: body_html (final HTML), faq_items (3-8 FaqItem records),
-    # seo_title (≤60 chars, contains focus_kw + power word), meta_description (≤155 chars).
-    body_html = "<p>...</p>"  # the prose Claude writes
+    # Write back: body_html (final HTML, NO <img> tags), faq_items (3-8 FaqItem
+    # records), seo_title (≤60 chars, contains focus_kw + power word),
+    # meta_description (≤155 chars).
+    body_html = "<p>...</p>"  # the prose Claude writes (no images)
     faq_items = [FaqItem(question="...", answer="...") for _ in range(5)]
     seo_title = f"<focus kw>: <power word> 2026 Guide"
     meta_description = "<focus kw> ... (≤155 chars)"
 
     # 3f. Assemble + validate. Raises RubricViolation on any rule failure.
+    # `images` defaults to None — text-only mode in v1.
     assembled = assemble(
         brief,
         body_html=body_html,
         faq_items=faq_items,
-        images=images,
         seo_title=seo_title,
         meta_description=meta_description,
     )

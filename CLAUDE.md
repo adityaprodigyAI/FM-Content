@@ -34,6 +34,7 @@ Phoenix is fixed offset UTC-7 year-round. No DST.
 13. Cannibalization gate: critical and high severity hard-block. Never propose them to Nikki.
 14. Inventory snapshot ≤ 7 days old (`assert_fresh` raises otherwise).
 15. Every WordPress call rejects any endpoint not on `firstmovers.ai`.
+16. **v1 ships text-only drafts.** No images in the body. To re-enable: see `tools/rubric.py::MIN_IMAGE_COUNT` (v1=0) and the rubric SKILL.md section 6.
 
 If `rubric.validate(draft)` raises a `ValueError`, the message names the exact rule violated. Fix the prose. Never silence the validation.
 
@@ -72,5 +73,5 @@ When Phase 5 (`tools/draft.py`) needs to generate body text:
 
 1. Load the rubric: invoke the `firstmovers-blog-rubric` skill via the `Skill` tool **before** writing.
 2. Fetch SERP context: `mcp__ahrefs__serp-overview(keyword=focus_keyword)` to read the top-10 results.
-3. Generate prose conforming to the rubric (≥2,500 words, ≥6 H2, focus keyword in lede + 1 H2 + 1 image alt, citation density, audience-routed CTA).
+3. Generate prose conforming to the rubric (≥2,500 words, ≥6 H2, focus keyword in lede + 1 H2, citation density, audience-routed CTA, **text-only — no images in the body**).
 4. Run `rubric.validate(draft)`. On any `ValueError`, fix the named rule and re-validate. Don't push until the rubric passes clean.

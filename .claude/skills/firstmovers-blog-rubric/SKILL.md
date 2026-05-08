@@ -7,7 +7,9 @@ description: Use when writing or auditing a blog post for firstmovers.ai. Captur
 
 Canonical reference for writing or auditing any blog post on firstmovers.ai. Synthesizes the Rank Math grading rubric, the published-post profile (15 most recent published posts, 2026-04-29 sample), and the validators baked into `tools/rubric.py`.
 
-> **Outcome target:** every draft scores ≥80/100 in Rank Math on first review, with a production target of 90+. The assembler enforces the hard floors below — drafts that violate them fail to assemble (loud `ValueError` with the failing check named).
+> **v1 ships text-only drafts.** No images. Nikki adds a featured image post-publish if she wants one. To re-enable image requirements, see the bottom of section 6.
+
+> **Outcome target:** every draft scores ≥75/100 in Rank Math on first review (without images, the ceiling drops slightly — Rank Math grades the "Use of Media" check at 0/4 when the body has no images, but the rest of the rubric still earns 75-85).
 
 ---
 
@@ -17,13 +19,13 @@ Canonical reference for writing or auditing any blog post on firstmovers.ai. Syn
 |---|---|---|
 | Word count | 2,000 | **2,500** |
 | H2 sections | 6 | **7** |
-| Images (`<img>` tags) | 3 | **4+** |
+| Images (`<img>` tags) | **0 (disabled in v1)** | 0 |
 | Internal links (in body, excluding CTA) | 4 | **6+** |
 | External dofollow links | 3 | **6+** |
 | SEO title length | ≤ 60 chars | 50-58 chars |
 | Post title length | ≤ 120 chars | 60-90 chars |
 | Meta description length | ≤ 155 chars | 130-150 chars |
-| Focus keyword in: SEO title, meta desc, URL, first 10% of content, ≥1 H2, ≥1 image alt | all required | all required |
+| Focus keyword in: SEO title, meta desc, URL, first 10% of content, ≥1 H2 | all required | all required |
 
 Defaults are calibrated to the **p25** of published First Movers posts. Targets are calibrated to the **median**.
 
@@ -47,7 +49,7 @@ Defaults are calibrated to the **p25** of published First Movers posts. Targets 
 | Check | Satisfied by | Notes |
 |---|---|---|
 | Focus keyword in subheadings | ≥1 H2 contains focus keyword | hard-fail validator |
-| Focus keyword in image alt | ≥1 `<img>` alt contains focus keyword | hero alt auto-handles this |
+| Focus keyword in image alt | n/a in v1 (text-only) | re-enable when images turn on |
 | Linking to External Sources | ≥3 outbound dofollow links | hard-fail validator |
 | Linking to Internal Resources | auto-injected via `internal_links.select` | always passes |
 | Focus Keyword Uniqueness | cannibalization gate blocks reuse | always passes |
@@ -119,13 +121,18 @@ Honesty:       honest, real, true, raw, no-nonsense
 
 ---
 
-## 6. Image rules
+## 6. Image rules — DISABLED IN V1
 
-- **4 Pexels images per post** via `images.fetch_pexels(focus_keyword, count=4)`.
-- Image #1 is the **hero**, placed above the first H2. Alt = `f"{focus_keyword}: {first_h2_text}"`.
-- Images #2-4 spread through the body.
-- **Pexels attribution:** every `<figcaption>` shows `Photo by <Photographer> on Pexels` with `rel="nofollow noopener" target="_blank"`.
-- **Hosting:** hotlinked from Pexels CDN. Cloudways/Wordfence blocks WP media uploads.
+v1 ships text-only drafts. The Pexels integration code is preserved (in `tools/images.py`) but the validator is inert and `tools/draft.py::assemble` accepts no images.
+
+When you're ready to turn images back on:
+1. Set `MIN_IMAGE_COUNT >= 3` in `tools/rubric.py`
+2. Re-add `_validate_images` to `_VALIDATORS` in `tools/rubric.py`
+3. Pass `images=[...]` into `draft.assemble`
+4. Set `PEXELS_API_KEY` in `.env` and the GH Actions secret store
+5. The agent fetches via `images.fetch_pexels(focus_keyword, count=4)` and passes the result to `assemble`
+
+Pexels CDN is hotlinked (Cloudways/Wordfence blocks WP media uploads). Every `<figcaption>` carries the photographer credit per Pexels API license.
 
 ---
 
@@ -205,10 +212,7 @@ Required: 5-7 `mainEntity` Question/Answer pairs phrased as the user (or AI sear
 [ ] body ≥ 2,500 words
 [ ] ≥ 6 H2 sections, at least one contains focus keyword
 [ ] paragraphs <120 words each
-[ ] FAQPage JSON-LD with 5-7 Q&A pairs
-[ ] 4 Pexels images
-    [ ] hero image alt contains focus keyword
-    [ ] every image has photographer credit in figcaption
+[ ] FAQPage JSON-LD with 3-7 Q&A pairs
 [ ] ≥ 3 external dofollow links from external_links.curated_for(category_id)
 [ ] no [AFFILIATE_LINK:X] tokens
 [ ] no leading <h1> in body
@@ -216,4 +220,5 @@ Required: 5-7 `mainEntity` Question/Answer pairs phrased as the user (or AI sear
 [ ] CTA matches audience (done-for-you → /consulting/, diy → /labs/)
 [ ] no "free audit" anywhere
 [ ] no em dashes
+[ ] no images (v1 ships text-only)
 ```

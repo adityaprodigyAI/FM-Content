@@ -29,8 +29,7 @@ from tools.discover.ga4_gap import discover as ga4_discover
 from tools.discover.gsc import discover as gsc_discover
 from tools.discover.searchable_aeo import discover_prompts, discover_topics
 from tools.draft import assemble, prepare_brief
-from tools.images import ImageRef
-from tools.inventory import Inventory, PublishedPost, build_inventory, load, save
+from tools.inventory import Inventory, PublishedPost, load, save
 from tools.push_wp import build_create_payload, parse_create_response
 from tools.rank_math import build_meta, to_payload
 from tools.rubric import FaqItem
@@ -77,10 +76,11 @@ def _fresh_inventory() -> Inventory:
 
 
 def _hand_crafted_body(focus_kw: str) -> str:
-    """A 2,500-word body that satisfies every rubric rule.
+    """A 2,500-word text-only body that satisfies every rubric rule.
 
-    Used here to prove the assemble->validate pipeline composes; in
-    production Claude writes this prose against the rubric skill.
+    v1 ships drafts with no images. Used here to prove the assemble->validate
+    pipeline composes; in production Claude writes this prose against the
+    rubric skill.
     """
     paragraph = (
         f"{focus_kw} is the practice of routing leads through a deterministic "
@@ -102,15 +102,9 @@ def _hand_crafted_body(focus_kw: str) -> str:
     parts = [
         f"<p>{focus_kw.title()} changes how a leader's day starts. {paragraph}</p>"
     ]
-    for i, h in enumerate(h2_texts):
+    for h in h2_texts:
         parts.append(f"<h2>{h}</h2>")
         parts.append(f"<p>{paragraph}</p>")
-        if i < 4:
-            alt = f"{focus_kw} in action" if i == 0 else f"contextual image {i}"
-            parts.append(
-                f'<img src="https://images.pexels.com/img-{i}.jpg" '
-                f'alt="{alt}" width="1200" height="800">'
-            )
     parts.append(
         '<p>For more research, see '
         '<a href="https://hbr.org/topic/subject/artificial-intelligence">HBR on AI</a>, '
@@ -121,18 +115,6 @@ def _hand_crafted_body(focus_kw: str) -> str:
         '</p>'
     )
     return "\n".join(parts)
-
-
-def _fake_image(idx: int, focus_kw: str) -> ImageRef:
-    return ImageRef(
-        url=f"https://images.pexels.com/img-{idx}.jpg",
-        alt=f"{focus_kw} hero" if idx == 0 else f"contextual image {idx}",
-        photographer=f"Photographer {idx}",
-        photographer_url=f"https://www.pexels.com/@photographer-{idx}/",
-        pexels_url=f"https://www.pexels.com/photo/{idx}/",
-        width=1200,
-        height=800,
-    )
 
 
 # ---------- the smoke test ----------
@@ -243,7 +225,6 @@ def test_full_pipeline_composes_end_to_end(tmp_path: Path):
     assert len(brief.external_citations) >= 3
 
     body_html = _hand_crafted_body(target.focus_keyword)
-    images = [_fake_image(i, target.focus_keyword) for i in range(4)]
     faq = [
         FaqItem(question=f"What is {target.focus_keyword}?",
                 answer="A workflow."),
@@ -256,17 +237,17 @@ def test_full_pipeline_composes_end_to_end(tmp_path: Path):
     meta = (f"{target.focus_keyword} guide for 2026. Proven framework, three "
             f"layers, real ops outcomes.")[:155]
 
+    # v1 text-only: no images passed.
     assembled = assemble(
         brief,
         body_html=body_html,
         faq_items=faq,
-        images=images,
         seo_title=seo_title,
         meta_description=meta,
     )
     # The rubric validator inside assemble didn't raise — every rule passed
     assert assembled.title == target.working_title
-    assert "https://images.pexels.com/" in assembled.body_html
+    assert "<img" not in assembled.body_html  # text-only mode
     assert assembled.slug == target.slug
 
     # 6. PUSH PAYLOAD — well-formed, status=draft, valid category

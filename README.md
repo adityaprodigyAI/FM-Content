@@ -4,7 +4,7 @@ A weekly content engine that posts 7 WordPress blog drafts into Nikki's review q
 
 ## The flow in one paragraph
 
-Sunday 07:00 Phoenix, the Sunday job rebuilds the published-content inventory (WordPress posts + pages + Rank Math focus keywords + Ahrefs organic keywords), pulls topic candidates from four discovery sources, runs them through a strict cannibalization gate, picks the top 12, and posts a parent task to ClickUp with 12 subtasks for Nikki to approve. Nikki ticks ≤7 by Tuesday EOD. Wednesday 09:00 Phoenix, the Wednesday job reads her approvals, re-runs cannibalization (defense in depth), generates 2,500–3,500 word drafts using Ahrefs SERP intent + the firstmovers-blog-rubric, validates against the rubric (hard-fails on any rule violation), and pushes the drafts to WordPress as `status=draft`. If the Cloudways/Wordfence WAF blocks the MCP push, drafts are queued to `data/runs/_pending-push/` and pushed via a GitHub Actions workflow that runs from a non-cloud IP.
+Sunday 07:00 Phoenix, the Sunday job rebuilds the published-content inventory (WordPress posts + pages + Rank Math focus keywords + Ahrefs organic keywords), pulls topic candidates from four discovery sources, runs them through a strict cannibalization gate, picks the top 12, and posts a parent task to ClickUp with 12 subtasks for Nikki to approve. Nikki ticks ≤7 by Tuesday EOD. Wednesday 09:00 Phoenix, the Wednesday job reads her approvals, re-runs cannibalization (defense in depth), generates 2,500–3,500 word **text-only** drafts using Ahrefs SERP intent + the firstmovers-blog-rubric, validates against the rubric (hard-fails on any rule violation), and pushes the drafts to WordPress as `status=draft`. Nikki adds a featured image (and any inline images, if she wants them) post-publish. If the Cloudways/Wordfence WAF blocks the MCP push, drafts are queued to `data/runs/_pending-push/` and pushed via a GitHub Actions workflow that runs from a non-cloud IP.
 
 ## Quick start
 
@@ -28,6 +28,7 @@ python -m tools.draft --week 2026-W22 --push      # write drafts to WP
 6. Inventory snapshot must be ≤ 7 days old before any draft.
 7. Cannibalization gate hard-blocks on slug, focus_keyword, or top organic keyword exact match.
 8. Discovery candidates must carry full provenance (`discovery_source`, `discovery_id`, `discovery_evidence`).
+9. **v1 ships text-only drafts.** No images in the body. Nikki adds a featured image post-publish if she wants one. To re-enable image requirements, see `tools/rubric.py::MIN_IMAGE_COUNT` and the rubric SKILL.md section 6.
 
 ## Directory layout
 
