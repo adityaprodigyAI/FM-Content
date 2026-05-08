@@ -90,6 +90,11 @@ for competitor in GAP_DISCOVERY_COMPETITORS:
 
 #### 3c. Searchable AEO
 
+> **v1.1 status:** the `mcp__claude_ai_searchable__*` server has not been
+> successfully invoked from FM-Content (no log directory created on first
+> attempt; the calls hung). Skip this source for now and let the operator
+> reconnect Searchable via `claude mcp` before the next Sunday cron.
+
 ```
 mcp__claude_ai_searchable__get_visibility_by_prompt(projectId="a04206b9-89ae-4175-8d4d-af48af32a1c6")
 mcp__claude_ai_searchable__get_visibility_by_topic(projectId="a04206b9-89ae-4175-8d4d-af48af32a1c6")
@@ -105,23 +110,20 @@ topic_candidates = discover_topics(topic_response, inventory)
 
 #### 3d. GA4 high-traffic gap
 
-```
-mcp__analytics-mcp__run_report(
-  property_id=<set from .env or inventory.json>,
-  dimensions=[{"name":"pagePath"}],
-  metrics=[{"name":"sessions"}],
-  date_ranges=[{"start_date":"28daysAgo","end_date":"yesterday"},
-               {"start_date":"56daysAgo","end_date":"29daysAgo"}],
-  limit=30
-)
-```
-
-Manually merge the two date ranges into one row per pagePath with `sessions` and `prior_sessions`, then:
+**Do not use `mcp__analytics-mcp__*`** — that server hangs indefinitely (verified 2026-04-27 and 2026-05-08). Use the direct SDK bypass instead:
 
 ```python
+from tools.ga4 import fetch_high_traffic_with_growth
 from tools.discover.ga4_gap import discover as ga4_discover
-ga4_candidates = ga4_discover(merged_rows, inventory)
+
+# Requires GOOGLE_APPLICATION_CREDENTIALS env var pointing at a service-account
+# JSON, OR ADC creds at ~/AppData/Roaming/gcloud/application_default_credentials.json
+# (see tools/ga4.py docstring for setup).
+rows = fetch_high_traffic_with_growth(window_days=28, limit=50)
+ga4_candidates = ga4_discover(rows, inventory)
 ```
+
+Verify auth works first with `python -m tools.ga4 --check` (read-only). Install the SDK with `pip install -e ".[ga4]"`.
 
 ### 4. Build the slate
 

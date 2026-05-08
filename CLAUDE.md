@@ -46,7 +46,7 @@ If `rubric.validate(draft)` raises a `ValueError`, the message names the exact r
 | `mcp__ahrefs__*` | Inventory join + gap discovery + SERP intent | `site-explorer-organic-keywords`, `serp-overview`, `keywords-explorer-overview` |
 | `mcp__gsc__*` | Striking-distance discovery | `get_search_analytics`, `get_search_by_page_query` |
 | `mcp__claude_ai_searchable__*` | AEO discovery | `get_visibility_by_prompt`, `get_visibility_by_topic`, `get_visibility_summary` |
-| `mcp__analytics-mcp__*` | GA4 high-traffic gap | `run_report`, `get_account_summaries` |
+| ~~`mcp__analytics-mcp__*`~~ | (hangs — DO NOT USE) | use `tools.ga4` direct SDK module instead |
 | `mcp__claude_ai_ClickUp__*` | Slate emit + approval read | `clickup_create_task`, `clickup_get_task`, `clickup_create_task_comment` |
 
 ## ClickUp identifiers (from `tools/identities.py`)

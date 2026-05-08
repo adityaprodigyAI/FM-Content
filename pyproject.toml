@@ -12,6 +12,10 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+ga4 = [
+    "google-analytics-data>=0.18",
+    "google-analytics-admin>=0.22",
+]
 dev = [
     "pytest>=8.0",
     "pytest-cov>=4.1",
