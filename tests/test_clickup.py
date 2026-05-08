@@ -155,6 +155,35 @@ def test_done_status_types_constant():
     assert "open" not in DONE_STATUS_TYPES
 
 
+def test_parse_approves_bare_string_status():
+    """The MCP returns subtasks with `status` as a string (not a dict) when
+    called with subtasks=true. Match by name allowlist."""
+    response = {
+        "subtasks": [
+            {"name": "title 1", "custom_id": "focus-1", "status": "published"},
+            {"name": "title 2", "custom_id": "focus-2", "status": "idea"},
+            {"name": "title 3", "custom_id": "focus-3", "status": "Closed"},
+        ]
+    }
+    approved = parse_approved_subtasks(response)
+    assert "focus-1" in approved
+    assert "focus-3" in approved
+    assert "focus-2" not in approved
+
+
+def test_parse_handles_status_object_with_published_name():
+    """Rich object form with `.type` not 'done'/'closed' but `.status` = 'published'."""
+    response = {
+        "subtasks": [
+            {"name": "x", "custom_id": "focus-x",
+             "status": {"id": "abc", "status": "published",
+                        "type": "closed", "color": "#008844"}},
+        ]
+    }
+    approved = parse_approved_subtasks(response)
+    assert approved == ["focus-x"]
+
+
 # ---------- filter_proposals_by_approval ----------
 
 

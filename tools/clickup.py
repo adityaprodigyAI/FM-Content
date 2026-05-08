@@ -14,7 +14,7 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass
-from typing import Any, Final
+from typing import Any, Final  # noqa: F401  — Final used in module-level constants
 
 from .identities import (
     CONTENT_PIPELINE_STATUS_TASK_ID,
@@ -29,6 +29,14 @@ from .slate import Slate, SlateProposal
 # correctness without hitting the network.
 
 DONE_STATUS_TYPES: Final[frozenset[str]] = frozenset({"done", "closed"})
+
+# When ClickUp returns subtasks via clickup_get_task(subtasks=true), the
+# `status` field is a bare string (the status name), not the rich object
+# with a `.type` field. We need a name allowlist that maps to "done" semantics.
+# These cover the canonical names across the FirstMovers ClickUp lists.
+DONE_STATUS_NAMES: Final[frozenset[str]] = frozenset(
+    {"published", "complete", "closed", "done", "ready"}
+)
 
 
 # ---------------------------------------------------------------------------
@@ -128,11 +136,7 @@ def parse_approved_subtasks(parent_task_response: Any) -> list[str]:
     for st in subtasks:
         if not isinstance(st, dict):
             continue
-        status = st.get("status") or {}
-        status_type = ""
-        if isinstance(status, dict):
-            status_type = str(status.get("type") or "").strip().lower()
-        if status_type not in DONE_STATUS_TYPES:
+        if not _is_subtask_done(st.get("status")):
             continue
         # Map back to focus_keyword. The Sunday job stored focus_keyword as
         # the subtask `custom_id` field; if missing, fall back to the
@@ -145,6 +149,29 @@ def parse_approved_subtasks(parent_task_response: Any) -> list[str]:
         if isinstance(name, str) and name.strip():
             approved.append(name.strip())
     return approved
+
+
+def _is_subtask_done(status: Any) -> bool:
+    """Recognize a 'done' subtask in two ClickUp response shapes:
+
+    1. Rich object: {"id": "...", "status": "published", "type": "closed", ...}
+       — used by clickup_get_task at task-detail level. The `.type` field is
+       authoritative when present.
+    2. Bare string: "published"
+       — used by clickup_get_task(subtasks=true). Falls back to a name
+       allowlist (DONE_STATUS_NAMES) since the type isn't surfaced.
+    """
+    if isinstance(status, dict):
+        type_str = str(status.get("type") or "").strip().lower()
+        if type_str:
+            # The type field is authoritative when present
+            return type_str in DONE_STATUS_TYPES
+        # Type missing — fall back to status name
+        name_str = str(status.get("status") or "").strip().lower()
+        return name_str in DONE_STATUS_NAMES
+    if isinstance(status, str):
+        return status.strip().lower() in DONE_STATUS_NAMES
+    return False
 
 
 def filter_proposals_by_approval(
