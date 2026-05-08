@@ -1,0 +1,186 @@
+{
+  "week": "2026-W20",
+  "proposals": [
+    {
+      "focus_keyword": "ai transformation is a problem of governance",
+      "working_title": "AI Transformation Is a Governance Problem: 5 Boardroom Gaps to Close in 2026",
+      "one_line_angle": "BCG's AI governance research calls transformation a governance problem; here's the operator-grade playbook for closing the gap without slowing delivery.",
+      "outline_bullets": [
+        "Why AI transformation is a governance problem, not a technology problem",
+        "The five boardroom gaps every operator inherits in 2026",
+        "How First Movers helps operators close governance gaps fast"
+      ],
+      "slug": "ai-transformation-is-a-problem-of-governance",
+      "audience": "done-for-you",
+      "category_id": 13,
+      "intent": "informational",
+      "target_date": "2026-05-11",
+      "discovery_source": "ahrefs_competitor_gap",
+      "discovery_id": "ahrefs:bcg.com:ai transformation is a problem of governance",
+      "discovery_evidence": {
+        "competitor": "bcg.com",
+        "keyword": "ai transformation is a problem of governance",
+        "volume": 79000,
+        "difficulty": 0,
+        "competitor_position": 10.0,
+        "competitor_traffic": 2420
+      },
+      "cannibalization_severity": "clear",
+      "cannibalization_rationale": "no overlap detected against current inventory",
+      "matched_post_url": null,
+      "score": 15.173183768065922
+    },
+    {
+      "focus_keyword": "what is prompt engineering",
+      "working_title": "What Is Prompt Engineering? A Practical 2026 Guide for Operators",
+      "one_line_angle": "McKinsey's explainer covers theory; this is the operator's guide to what actually moves outcomes in production.",
+      "outline_bullets": [
+        "What prompt engineering really means in production today",
+        "Four prompt patterns every operator should master",
+        "When prompt engineering stops mattering and infrastructure takes over"
+      ],
+      "slug": "what-is-prompt-engineering",
+      "audience": "done-for-you",
+      "category_id": 13,
+      "intent": "informational",
+      "target_date": "2026-05-12",
+      "discovery_source": "ahrefs_competitor_gap",
+      "discovery_id": "ahrefs:mckinsey.com:what is prompt engineering",
+      "discovery_evidence": {
+        "competitor": "mckinsey.com",
+        "keyword": "what is prompt engineering",
+        "volume": 28000,
+        "difficulty": 56,
+        "competitor_position": 5.0,
+        "competitor_traffic": 2662
+      },
+      "cannibalization_severity": "clear",
+      "cannibalization_rationale": "no overlap detected against current inventory",
+      "matched_post_url": null,
+      "score": 13.623599795712282
+    },
+    {
+      "focus_keyword": "hello ai",
+      "working_title": "Hello AI: Why Zero-Click Search Is Rewriting Customer Acquisition",
+      "one_line_angle": "Bain's 'Goodbye Clicks, Hello AI' essay frames the shift; here's what operators do about it next quarter.",
+      "outline_bullets": [
+        "The mechanics of zero-click search and where the traffic goes",
+        "What changes for paid plus organic acquisition",
+        "Three near-term moves for operators with limited budget"
+      ],
+      "slug": "hello-ai",
+      "audience": "done-for-you",
+      "category_id": 13,
+      "intent": "informational",
+      "target_date": "2026-05-13",
+      "discovery_source": "ahrefs_competitor_gap",
+      "discovery_id": "ahrefs:bain.com:hello ai",
+      "discovery_evidence": {
+        "competitor": "bain.com",
+        "keyword": "hello ai",
+        "volume": 32000,
+        "difficulty": 49,
+        "competitor_position": 12.0,
+        "competitor_traffic": 639
+      },
+      "cannibalization_severity": "clear",
+      "cannibalization_rationale": "no overlap detected against current inventory",
+      "matched_post_url": null,
+      "score": 13.11425651947045
+    },
+    {
+      "focus_keyword": "ai shopping",
+      "working_title": "AI Shopping: How Retailers Are Redefining Stores for the Next Decade",
+      "one_line_angle": "McKinsey's retail piece flags the shift; here's the operator view of what to build now without a Fortune-100 budget.",
+      "outline_bullets": [
+        "What changed in 2026 retail conversion and why",
+        "How AI-led shopping flows actually look in production",
+        "Building blocks for retailers running lean"
+      ],
+      "slug": "ai-shopping",
+      "audience": "done-for-you",
+      "category_id": 13,
+      "intent": "informational",
+      "target_date": "2026-05-14",
+      "discovery_source": "ahrefs_competitor_gap",
+      "discovery_id": "ahrefs:mckinsey.com:ai shopping",
+      "discovery_evidence": {
+        "competitor": "mckinsey.com",
+        "keyword": "ai shopping",
+        "volume": 4000,
+        "difficulty": 9,
+        "competitor_position": 2.0,
+        "competitor_traffic": 1452
+      },
+      "cannibalization_severity": "clear",
+      "cannibalization_rationale": "no overlap detected against current inventory",
+      "matched_post_url": null,
+      "score": 11.844992440642377
+    },
+    {
+      "focus_keyword": "agi timeline",
+      "working_title": "AGI Timeline: A Practical Look at the Reasonable 2026 to 2030 Bands",
+      "one_line_angle": "Cut through AGI hype with a sober operator-level read on the timeline and what it means for product roadmaps.",
+      "outline_bullets": [
+        "Why AGI timelines are noisy and which signals matter",
+        "The reasonable 2026 to 2030 band most leaders should plan against",
+        "What operators should bake into the 24-month roadmap today"
+      ],
+      "slug": "agi-timeline",
+      "audience": "done-for-you",
+      "category_id": 10,
+      "intent": "informational",
+      "target_date": "2026-05-15",
+      "discovery_source": "gsc_striking_distance",
+      "discovery_id": "gsc:agi timeline",
+      "discovery_evidence": {
+        "query": "agi timeline",
+        "page": "https://firstmovers.ai/agi-timeline/",
+        "position": 13.5,
+        "impressions": 108,
+        "clicks": 2,
+        "ctr": 0.0185
+      },
+      "cannibalization_severity": "clear",
+      "cannibalization_rationale": "no overlap detected against current inventory",
+      "matched_post_url": null,
+      "score": 6.115654026563198
+    },
+    {
+      "focus_keyword": "ai marketers",
+      "working_title": "AI Marketers in 2026: What Real Operators Use AI For (and What They Don't)",
+      "one_line_angle": "Beyond the AI-marketer headlines, what high-output marketers actually use AI for day-to-day, and where the hype falls flat.",
+      "outline_bullets": [
+        "What 'AI marketer' actually means in 2026",
+        "Five high-leverage workflows that ship results",
+        "Three failure modes that quietly waste budget"
+      ],
+      "slug": "ai-marketers",
+      "audience": "done-for-you",
+      "category_id": 13,
+      "intent": "informational",
+      "target_date": "2026-05-16",
+      "discovery_source": "gsc_striking_distance",
+      "discovery_id": "gsc:ai marketers",
+      "discovery_evidence": {
+        "query": "ai marketers",
+        "page": "https://firstmovers.ai/ai-marketer-guide/",
+        "position": 18.3,
+        "impressions": 58,
+        "clicks": 1,
+        "ctr": 0.0172
+      },
+      "cannibalization_severity": "clear",
+      "cannibalization_rationale": "no overlap detected against current inventory",
+      "matched_post_url": null,
+      "score": 5.059111034185692
+    }
+  ],
+  "discovery_summary": {
+    "by_source": {
+      "ahrefs_competitor_gap": 4,
+      "gsc_striking_distance": 2
+    },
+    "total_emitted": 6
+  }
+}
