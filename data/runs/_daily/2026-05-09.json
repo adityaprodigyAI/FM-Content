@@ -1,0 +1,43 @@
+{
+  "date": "2026-05-09",
+  "proposal": {
+    "focus_keyword": "what is prompt engineering",
+    "working_title": "What Is Prompt Engineering? A Practical 2026 Guide for Operators",
+    "one_line_angle": "McKinsey's explainer covers theory; this is the operator's guide to what actually moves outcomes in production.",
+    "outline_bullets": [
+      "What prompt engineering really means in production today",
+      "Four prompt patterns every operator should master",
+      "When prompt engineering stops mattering and infrastructure takes over"
+    ],
+    "slug": "what-is-prompt-engineering",
+    "audience": "done-for-you",
+    "category_id": 13,
+    "intent": "informational",
+    "target_date": "2026-05-12",
+    "discovery_source": "ahrefs_competitor_gap",
+    "discovery_id": "ahrefs:mckinsey.com:what is prompt engineering",
+    "discovery_evidence": {
+      "competitor": "mckinsey.com",
+      "keyword": "what is prompt engineering",
+      "volume": 28000,
+      "difficulty": 56,
+      "competitor_position": 5.0,
+      "competitor_traffic": 2662
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "no overlap detected against current inventory",
+    "matched_post_url": null,
+    "score": 13.623599795712282
+  },
+  "clickup_task_id": "86ahc56zj",
+  "clickup_emitted_at": "2026-05-08T03:55:00+00:00",
+  "approved_at": "2026-05-08T12:02:50.876594+00:00",
+  "approved_status_name": "published",
+  "wp_post_id": 72607,
+  "wp_edit_url": "https://firstmovers.ai/wp-admin/post.php?post=72607&action=edit",
+  "drafted_at": "2026-05-08T12:43:48.988222+00:00",
+  "notes": [
+    "Test backfill for daily-mode polling-drafter verification on 2026-05-08",
+    "Polling-drafter test run completed 2026-05-08; verified end-to-end before /schedule cron registration"
+  ]
+}
