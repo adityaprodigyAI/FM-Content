@@ -308,8 +308,16 @@ def attach_ahrefs_organic_keywords(
 
     `raw_by_url` is the per-URL response from
     `mcp__ahrefs__site-explorer-organic-keywords`. Pulls the top `top_n`
-    keywords by traffic. For pages or posts with no Ahrefs data, leaves
-    organic_keywords empty — pages are exempt from the completeness check.
+    keywords by traffic.
+
+    Fallback: blogs with no Ahrefs hit (e.g. freshly published, no
+    measurable traffic yet) get `organic_keywords=[focus_keyword]` so
+    `assert_complete()` still passes. The cannibalization gate's
+    focus-keyword-exact-match rule (Rule 2) still catches duplicates;
+    we just lose detection of secondary-ranking-keyword overlap for
+    these posts.
+
+    Pages remain exempt — they're allowed empty `organic_keywords`.
     """
     out: list[PublishedPost] = []
     for post in posts:
@@ -318,6 +326,9 @@ def attach_ahrefs_organic_keywords(
         kws: list[str] = []
         if raw is not None:
             kws = _extract_ahrefs_keywords(raw, top_n=top_n)
+        # Fallback for blogs without Ahrefs data
+        if not kws and post.kind == "blog" and post.focus_keyword:
+            kws = [post.focus_keyword]
         out.append(
             PublishedPost(
                 id=post.id,
@@ -400,18 +411,25 @@ def _wp_row_to_post(row: Any, *, kind: PostKind) -> PublishedPost | None:
     if not isinstance(row, dict):
         return None
     pid = row.get("id")
-    slug = row.get("slug")
-    if pid is None or not slug:
+    if pid is None:
         return None
 
-    # Title may be {rendered: "..."}
+    url = row.get("link") or row.get("url") or ""
+
+    # Title may be {rendered: "..."} or a plain string
     title_field = row.get("title")
     if isinstance(title_field, dict):
         title = title_field.get("rendered") or ""
     else:
         title = str(title_field or "")
 
-    url = row.get("link") or row.get("url") or ""
+    # Slug — preferred from the row, otherwise derive from the URL path.
+    slug = row.get("slug")
+    if not slug and url:
+        slug = _slug_from_url(url)
+    if not slug:
+        return None
+
     published_at = (row.get("date") or row.get("published_at") or "")[:10]
 
     cat_ids: list[int] = []
@@ -434,6 +452,22 @@ def _wp_row_to_post(row: Any, *, kind: PostKind) -> PublishedPost | None:
         focus_keyword=None,
         organic_keywords=[],
     )
+
+
+def _slug_from_url(url: str) -> str:
+    """Extract the last path segment from a URL as the slug."""
+    if not url:
+        return ""
+    # Drop scheme + host
+    s = url.strip()
+    if "://" in s:
+        s = s.split("://", 1)[1]
+    s = s.split("/", 1)[1] if "/" in s else ""
+    # Trim trailing slash + drop query/fragment
+    s = s.split("?", 1)[0].split("#", 1)[0].rstrip("/")
+    if not s:
+        return ""  # root URL ('/') has no slug
+    return s.split("/")[-1]
 
 
 def _extract_rank_math_focus_keyword(meta: Any) -> str | None:

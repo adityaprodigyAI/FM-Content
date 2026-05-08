@@ -236,11 +236,68 @@ def test_parse_wp_posts_skips_malformed_rows():
     raw = [
         {"id": 1, "slug": "ok", "title": "Ok", "link": "https://x/"},
         {"slug": "no-id"},
-        {"id": 2},
+        {"id": 2},  # no slug AND no url -> drop
         "not a dict",
     ]
     posts = parse_wp_posts(raw)
     assert len(posts) == 1 and posts[0].slug == "ok"
+
+
+def test_parse_wp_posts_derives_slug_from_url_when_missing():
+    """The MCP claude_ai_FirstMoversWP variant returns `url` but no `slug`;
+    parse_wp_posts must derive the slug from the URL path's last segment.
+    """
+    raw = [
+        {
+            "id": 72554,
+            "title": "Brand Visibility Strategy",
+            "url": "https://firstmovers.ai/brand-visibility-strategy/",
+            "status": "publish",
+            "type": "post",
+            "date": "2026-05-07 00:25:48",
+        },
+    ]
+    posts = parse_wp_posts(raw)
+    assert len(posts) == 1
+    assert posts[0].id == 72554
+    assert posts[0].slug == "brand-visibility-strategy"
+    assert posts[0].url == "https://firstmovers.ai/brand-visibility-strategy/"
+    assert posts[0].published_at == "2026-05-07"
+
+
+def test_attach_ahrefs_falls_back_to_focus_keyword_for_blogs_without_data():
+    """A freshly-published blog has no Ahrefs traffic data yet. The fallback
+    populates organic_keywords with [focus_keyword] so assert_complete passes
+    and the cannibalization gate's Rule 2 still matches the focus keyword.
+    """
+    posts = [
+        PublishedPost(
+            id=1, slug="brand-new-post",
+            title="Brand New Post",
+            url="https://firstmovers.ai/brand-new-post/",
+            published_at="2026-05-08", kind="blog",
+            focus_keyword="brand new post",  # set by attach_rank_math
+            organic_keywords=[],
+        ),
+    ]
+    enriched = attach_ahrefs_organic_keywords(posts, raw_by_url={})
+    assert enriched[0].organic_keywords == ["brand new post"]
+
+
+def test_attach_ahrefs_does_not_fallback_for_pages():
+    """Pages don't need organic_keywords populated even on Ahrefs miss."""
+    posts = [
+        PublishedPost(
+            id=1, slug="thank-you",
+            title="Thank You",
+            url="https://firstmovers.ai/thank-you/",
+            published_at="2026-04-01", kind="page",
+            focus_keyword="thank you",
+            organic_keywords=[],
+        ),
+    ]
+    enriched = attach_ahrefs_organic_keywords(posts, raw_by_url={})
+    assert enriched[0].organic_keywords == []
 
 
 # ---------- attach_rank_math_focus_keywords ----------
