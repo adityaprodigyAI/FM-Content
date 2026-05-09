@@ -49,10 +49,7 @@ STEPS
      If exit 1 (stale) or 2 (missing), refresh per workflows/content-inventory-
      refresh.md before continuing.
 
-  3. Discovery — call MCPs and parse:
-       gsc = mcp__gsc__get_search_analytics(
-         site_url="sc-domain:firstmovers.ai",
-         dimensions="query,page", days=28, row_limit=200)
+  3. Discovery — Ahrefs gap only (v1 testing has no GSC connector):
        Rotated competitor for ${DOW}:
          Monday    -> mckinsey.com
          Tuesday   -> bcg.com
@@ -67,20 +64,17 @@ STEPS
          limit=100, order_by="sum_traffic:desc")
 
   4. Filter + pick top-1 (Python in the repo):
-       from tools.discover.gsc import discover as gsc_discover
        from tools.discover.ahrefs_gap import discover as ahrefs_discover
        from tools.daily import pick_top_candidate, candidate_to_proposal_dict
        from tools.cannibalization import ProposedTopic, evaluate
        from tools.inventory import load
        inv = load(); inv.assert_fresh(); inv.assert_complete()
-       gsc_cands = gsc_discover(<gsc>, inv)
        translated = [{"keyword": kw["keyword"], "volume": kw["volume"],
                       "difficulty": kw["keyword_difficulty"],
                       "position": kw["best_position"],
                       "traffic": kw["sum_traffic"]}
                      for kw in <ahrefs>["keywords"]]
-       ahrefs_cands = ahrefs_discover(<competitor>, {"keywords": translated}, inv)
-       all_cands = gsc_cands + ahrefs_cands
+       all_cands = ahrefs_discover(<competitor>, {"keywords": translated}, inv)
        clear = []
        for c in all_cands:
          topic = ProposedTopic(slug=c.focus_keyword.lower().replace(" ", "-"),

@@ -35,18 +35,9 @@ If today's state file already exists at `data/runs/_daily/<YYYY-MM-DD>.json`, **
 
 ### 2. Pull discovery signals
 
-Same MCP calls as the Sunday slate, but smaller scope (we only need the top-1):
+> **v1 testing-phase note:** GSC striking-distance is disabled because there is no claude.ai built-in connector for Google Search Console (verified 2026-05-09). The daily routine runs on Ahrefs gap alone. Once we add a GSC SDK bypass module (see `tools/ga4.py` for the pattern) or claude.ai ships a GSC connector, re-enable the GSC source.
 
-```
-mcp__gsc__get_search_analytics(
-  site_url="sc-domain:firstmovers.ai",
-  dimensions="query,page",
-  days=28,
-  row_limit=200
-)
-```
-
-Plus 1-2 Ahrefs competitor calls (rotate competitors across days to keep API costs down):
+For v1 testing, only run the Ahrefs gap call (rotate competitors across days to keep API costs down):
 
 | Day-of-week | Competitor (Ahrefs `target`) |
 |---|---|
