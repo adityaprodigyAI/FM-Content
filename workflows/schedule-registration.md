@@ -49,7 +49,7 @@ STEPS
      If exit 1 (stale) or 2 (missing), refresh per workflows/content-inventory-
      refresh.md before continuing.
 
-  3. Discovery — Ahrefs gap only (v1 testing has no GSC connector):
+  3. Discovery — Ahrefs gap via direct REST (no MCP connector available):
        Rotated competitor for ${DOW}:
          Monday    -> mckinsey.com
          Tuesday   -> bcg.com
@@ -58,10 +58,15 @@ STEPS
          Friday    -> accenture.com
          Saturday  -> deloitte.com
          Sunday    -> mckinsey.com
-       ahrefs = mcp__ahrefs__site-explorer-organic-keywords(
-         target=<rotated competitor>, mode="subdomains", date=${TODAY},
-         select="keyword,best_position,best_position_url,sum_traffic,volume,keyword_difficulty",
-         limit=100, order_by="sum_traffic:desc")
+
+       AHREFS_API_TOKEN must be set as an env var by this routine prompt
+       (see registration). Then call directly via Python:
+
+         from tools.ahrefs import fetch_organic_keywords
+         ahrefs = fetch_organic_keywords(
+             target="<rotated competitor>", date_str="${TODAY}",
+             mode="subdomains", limit=100,
+             order_by="sum_traffic:desc")
 
   4. Filter + pick top-1 (Python in the repo):
        from tools.discover.ahrefs_gap import discover as ahrefs_discover
@@ -190,10 +195,9 @@ STEPS
        prop = SlateProposal(**state.proposal)
        brief = prepare_brief(prop, inv)   # cannibalization re-check
 
-       serp = mcp__ahrefs__serp-overview(
-         keyword=prop.focus_keyword, country="us",
-         select="title,url,position,domain_rating,backlinks,traffic,top_keyword",
-         top_positions=10)
+       from tools.ahrefs import fetch_serp_overview  # SDK bypass, no MCP
+       serp = fetch_serp_overview(
+           keyword=prop.focus_keyword, country="us", top_positions=10)
 
        Skill(skill="firstmovers-blog-rubric")
 
