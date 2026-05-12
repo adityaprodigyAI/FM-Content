@@ -2,16 +2,27 @@
 
 Two concerns in this module:
 
-1. **Payload builders + parsers** (legacy weekly-mode):
+1. **Payload builders + parsers** (used by both weekly-mode AND cron-mode):
    The agent makes MCP calls; this module produces the payloads
    and parses the responses. Pure data transforms, easy to test.
 
-2. **Direct REST wrappers** (cron/routine mode):
+2. **Direct REST wrappers** (LOCAL DEVELOPMENT ONLY):
    `create_task`, `get_task`, `create_task_comment`, `add_tag_to_task`.
-   Used by `/schedule` remote agents where the claude.ai ClickUp connector
-   is unavailable. Mirrors the SDK-bypass pattern in `tools/ahrefs.py` and
-   `tools/ga4.py`. Auth: bearer-style `Authorization: <pk_token>` header
-   from `CLICKUP_API_TOKEN` env var (or passed `api_token=`).
+   These hit `api.clickup.com` directly via urllib + a `CLICKUP_API_TOKEN`
+   bearer header. Mirrors the SDK-bypass pattern in `tools/ahrefs.py`.
+
+   **WARNING**: Do NOT use these direct-REST wrappers from a `/schedule`
+   cloud routine. The routine sandbox proxy blocks outbound HTTP to
+   `api.clickup.com` and returns `403 "Host not in allowlist"`. Cloud
+   routines must use the ClickUp MCP connector (`clickup_create_task`,
+   `clickup_get_task`, `clickup_create_task_comment`) which routes through
+   claude.ai's authenticated connector infrastructure and bypasses the
+   sandbox restriction. See `workflows/schedule-registration.md` for the
+   full constraint description.
+
+   The direct REST is useful for: local Claude Code sessions, ad-hoc
+   diagnostics (`python -m tools.clickup check`), unit-test fixtures,
+   one-off scripts run from a developer machine with unrestricted outbound.
 
 Approval mechanism: parent task with one subtask per slate proposal.
 A subtask with `status_type == "done"` (i.e., status name like "complete",

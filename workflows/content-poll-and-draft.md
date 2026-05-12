@@ -40,14 +40,16 @@ If the list is empty AND `pending_drafts()` is also empty → no work; post a qu
 
 ### 2. For each pending approval: poll ClickUp
 
-> **v1 testing-phase note:** Use `tools.clickup.get_task` (direct REST). The claude.ai ClickUp connector is unavailable to `/schedule` remote routines. Requires `CLICKUP_API_TOKEN` env var.
+> **Connector path:** Uses the **ClickUp claude.ai connector** (uuid `37a27fca`) attached to the routine. The agent resolves `clickup_get_task` to that connector. Direct HTTP to `api.clickup.com` is blocked by the routine sandbox proxy.
 
 ```python
 from tools.daily import is_task_approved, mark_approved, save_state
-from tools.clickup import get_task
 
 for state in pending_approvals():
-    response = get_task(state.clickup_task_id)
+    response = clickup_get_task(
+        task_id=state.clickup_task_id,
+        detail_level="summary",
+    )
     approved, status_name = is_task_approved(response)
     if approved:
         mark_approved(state, status_name=status_name)
@@ -68,7 +70,6 @@ from tools.push_wp import build_create_payload
 from tools.rank_math import build_meta
 from tools.rubric import FaqItem
 from tools.slate import SlateProposal
-from tools.clickup import create_task_comment
 
 inv = load_inventory()
 inv.assert_fresh()
@@ -139,7 +140,7 @@ for state in pending_drafts():
     mark_drafted(state, post_id=post_id, edit_url=edit_url)
     save_state(state)
 
-    create_task_comment(
+    clickup_create_task_comment(
         task_id=state.clickup_task_id,
         comment_text=(
             f"Drafted to WordPress.\n\n"
@@ -156,7 +157,7 @@ for state in pending_drafts():
 ### 4. Status comment on the pipeline status task
 
 ```python
-create_task_comment(
+clickup_create_task_comment(
     task_id="86ah3ywyh",
     comment_text=(
         f"Polling drafter run @ {now_iso}: "

@@ -35,7 +35,7 @@ If today's state file already exists at `data/runs/_daily/<YYYY-MM-DD>.json`, **
 
 ### 2. Pull discovery signals
 
-> **v1 testing-phase note:** GSC striking-distance is disabled because there is no claude.ai built-in connector for Google Search Console (verified 2026-05-09). The daily routine runs on Ahrefs gap alone. Once we add a GSC SDK bypass module (see `tools/ga4.py` for the pattern) or claude.ai ships a GSC connector, re-enable the GSC source.
+> **v1 testing-phase note:** GSC striking-distance is disabled because there is no claude.ai built-in connector for Google Search Console (verified 2026-05-09). The daily routine runs on Ahrefs gap alone via the **Ahrefs claude.ai connector** (uuid `09f92d25`, url `https://api.ahrefs.com/mcp/mcp`). Direct REST to `api.ahrefs.com` is blocked by the routine sandbox proxy (verified 2026-05-12).
 
 For v1 testing, only run the Ahrefs gap call (rotate competitors across days to keep API costs down):
 
@@ -131,20 +131,18 @@ save_state(state)
 
 ### 6. Emit single ClickUp task (no parent — top-level)
 
-> **v1 testing-phase note:** The claude.ai ClickUp connector is unavailable to `/schedule` remote routines (verified 2026-05-12 — the connector_uuid attached at registration becomes invalid when ClickUp reconnects). Use the direct REST wrapper `tools.clickup.create_task` instead. Requires `CLICKUP_API_TOKEN` env var (personal token starting with `pk_`).
+> **Connector path:** The `/schedule` cloud routine attaches the **ClickUp claude.ai connector** (uuid `37a27fca`, url `https://mcp.clickup.com/mcp`). Use bare MCP tool names — the agent resolves them to the connector. Direct HTTP to `api.clickup.com` is blocked by the routine sandbox proxy (returns `403 "Host not in allowlist"`).
 
 ```python
-from tools.clickup import create_task, create_task_comment, add_tag_to_task
-
-resp = create_task(
+parent_resp = clickup_create_task(
     list_id="901326229295",  # CONTENT_PROJECTS_LIST_ID
     name=f"[{today}] {proposal['working_title']}",
     markdown_description=<rich description with focus_kw, audience, category, outline, evidence>,
-    assignees=[26221739],     # Nikki (int, not str)
-    due_date=today,           # YYYY-MM-DD, internally converted to epoch-ms
+    assignees=[26221739],  # Nikki (int)
+    due_date=today,        # ms-epoch preferred; YYYY-MM-DD may need conversion depending on connector version
     tags=["fm-content-daily"],
 )
-state = mark_emitted(state, task_id=resp["id"])   # NOTE: direct API returns "id", not "task_id"
+state = mark_emitted(state, task_id=parent_resp.get("task_id") or parent_resp.get("id"))
 save_state(state)
 ```
 
@@ -153,14 +151,14 @@ The task description should match the subtask format from `clickup.build_subtask
 ### 7. Status comment on pipeline status task
 
 ```python
-create_task_comment(
+clickup_create_task_comment(
     task_id="86ah3ywyh",
     comment_text=(
         f"Daily idea {today} emitted: {proposal['working_title']!r} "
         f"(focus_kw: {proposal['focus_keyword']}, "
         f"score: {proposal['score']:.2f}, "
         f"source: {proposal['discovery_source']}). "
-        f"ClickUp task: https://app.clickup.com/t/{resp['id']}"
+        f"ClickUp task: https://app.clickup.com/t/{parent_resp.get('task_id') or parent_resp.get('id')}"
     ),
 )
 ```
