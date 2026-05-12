@@ -1,20 +1,33 @@
 """clickup — emit slate task + read subtask approvals.
 
-The agent makes the actual MCP calls; this module produces the payloads
-and parses the responses. Same separation as inventory_refresh — pure data
-transforms, easy to test.
+Two concerns in this module:
+
+1. **Payload builders + parsers** (legacy weekly-mode):
+   The agent makes MCP calls; this module produces the payloads
+   and parses the responses. Pure data transforms, easy to test.
+
+2. **Direct REST wrappers** (cron/routine mode):
+   `create_task`, `get_task`, `create_task_comment`, `add_tag_to_task`.
+   Used by `/schedule` remote agents where the claude.ai ClickUp connector
+   is unavailable. Mirrors the SDK-bypass pattern in `tools/ahrefs.py` and
+   `tools/ga4.py`. Auth: bearer-style `Authorization: <pk_token>` header
+   from `CLICKUP_API_TOKEN` env var (or passed `api_token=`).
 
 Approval mechanism: parent task with one subtask per slate proposal.
 A subtask with `status_type == "done"` (i.e., status name like "complete",
-"closed", "published") is considered approved. Phase 0b reads via
-`mcp__claude_ai_ClickUp__clickup_get_task` with `include_subtasks=True`.
+"closed", "published") is considered approved.
 """
 
 from __future__ import annotations
 
 import json
+import os
 from dataclasses import dataclass
+from datetime import date, datetime, timezone
 from typing import Any, Final  # noqa: F401  — Final used in module-level constants
+from urllib.error import HTTPError, URLError
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
 
 from .identities import (
     CONTENT_PIPELINE_STATUS_TASK_ID,
@@ -22,6 +35,10 @@ from .identities import (
     NIKKI_CLICKUP_USER_ID,
 )
 from .slate import Slate, SlateProposal
+
+CLICKUP_API_BASE: Final[str] = "https://api.clickup.com/api/v2"
+CLICKUP_API_TOKEN_ENV: Final[str] = "CLICKUP_API_TOKEN"
+DEFAULT_TIMEOUT_SECONDS: Final[int] = 30
 
 
 # ClickUp API call shapes Claude will make. Recorded here so the Sunday
@@ -270,3 +287,225 @@ def _unwrap(response: Any) -> Any:
         except (json.JSONDecodeError, TypeError):
             return None
     return response
+
+
+# ---------------------------------------------------------------------------
+# Direct REST wrappers (cron/routine mode)
+#
+# Used by /schedule remote agents where the claude.ai ClickUp connector is
+# unavailable. Mirrors the urllib-only pattern from tools/ahrefs.py.
+#
+# Auth: ClickUp uses the raw personal token as the Authorization header
+# value (no "Bearer " prefix). Token starts with `pk_`.
+#   Authorization: pk_96728606_XXX...
+# ---------------------------------------------------------------------------
+
+
+def create_task(
+    list_id: str,
+    *,
+    name: str,
+    markdown_description: str | None = None,
+    description: str | None = None,
+    assignees: list[int] | None = None,
+    due_date: str | int | None = None,
+    tags: list[str] | None = None,
+    api_token: str | None = None,
+    timeout: int = DEFAULT_TIMEOUT_SECONDS,
+) -> dict[str, Any]:
+    """Create a task in `list_id`. Returns raw ClickUp API response (dict with `id`).
+
+    `due_date` accepts YYYY-MM-DD (interpreted as end-of-day UTC) or an int
+    epoch-ms. Pass `markdown_description` for rich text; otherwise use plain
+    `description`.
+    """
+    body: dict[str, Any] = {"name": name}
+    if markdown_description is not None:
+        body["markdown_description"] = markdown_description
+    if description is not None:
+        body["description"] = description
+    if assignees:
+        body["assignees"] = list(assignees)
+    if tags:
+        body["tags"] = list(tags)
+    if due_date is not None:
+        body["due_date"] = _to_epoch_ms(due_date)
+        body["due_date_time"] = True
+    return _request(
+        method="POST",
+        path=f"/list/{list_id}/task",
+        body=body,
+        api_token=api_token,
+        timeout=timeout,
+    )
+
+
+def get_task(
+    task_id: str,
+    *,
+    include_subtasks: bool = False,
+    api_token: str | None = None,
+    timeout: int = DEFAULT_TIMEOUT_SECONDS,
+) -> dict[str, Any]:
+    """Fetch a task with `status`, `assignees`, and optionally `subtasks`."""
+    params: dict[str, Any] = {}
+    if include_subtasks:
+        params["include_subtasks"] = "true"
+    return _request(
+        method="GET",
+        path=f"/task/{task_id}",
+        params=params,
+        api_token=api_token,
+        timeout=timeout,
+    )
+
+
+def create_task_comment(
+    task_id: str,
+    *,
+    comment_text: str,
+    notify_all: bool = False,
+    api_token: str | None = None,
+    timeout: int = DEFAULT_TIMEOUT_SECONDS,
+) -> dict[str, Any]:
+    """Post a comment on a task. Returns `{id, hist_id, date}` on success."""
+    return _request(
+        method="POST",
+        path=f"/task/{task_id}/comment",
+        body={"comment_text": comment_text, "notify_all": notify_all},
+        api_token=api_token,
+        timeout=timeout,
+    )
+
+
+def add_tag_to_task(
+    task_id: str,
+    tag_name: str,
+    *,
+    api_token: str | None = None,
+    timeout: int = DEFAULT_TIMEOUT_SECONDS,
+) -> dict[str, Any]:
+    """Add an existing tag to a task. Returns `{}` on success."""
+    return _request(
+        method="POST",
+        path=f"/task/{task_id}/tag/{tag_name}",
+        api_token=api_token,
+        timeout=timeout,
+    )
+
+
+def _get_token(api_token: str | None) -> str:
+    if api_token:
+        return api_token
+    token = os.environ.get(CLICKUP_API_TOKEN_ENV)
+    if not token:
+        raise RuntimeError(
+            f"ClickUp API token not set. Pass api_token=, or set "
+            f"${CLICKUP_API_TOKEN_ENV}. Generate one at "
+            f"https://app.clickup.com/settings/apps (Personal token, starts with 'pk_')."
+        )
+    return token
+
+
+def _to_epoch_ms(value: str | int | date | datetime) -> int:
+    """Coerce a date-ish value to epoch-ms (UTC). 23:59:59 if just a date."""
+    if isinstance(value, int):
+        return value
+    if isinstance(value, datetime):
+        dt = value if value.tzinfo else value.replace(tzinfo=timezone.utc)
+        return int(dt.timestamp() * 1000)
+    if isinstance(value, date):
+        dt = datetime(value.year, value.month, value.day, 23, 59, 59, tzinfo=timezone.utc)
+        return int(dt.timestamp() * 1000)
+    if isinstance(value, str):
+        try:
+            d = datetime.strptime(value, "%Y-%m-%d").replace(
+                hour=23, minute=59, second=59, tzinfo=timezone.utc,
+            )
+            return int(d.timestamp() * 1000)
+        except ValueError as e:
+            raise ValueError(f"due_date string must be YYYY-MM-DD, got {value!r}") from e
+    raise TypeError(f"due_date must be str|int|date|datetime, got {type(value).__name__}")
+
+
+def _request(
+    *,
+    method: str,
+    path: str,
+    params: dict[str, Any] | None = None,
+    body: dict[str, Any] | None = None,
+    api_token: str | None,
+    timeout: int,
+) -> dict[str, Any]:
+    token = _get_token(api_token)
+    url = CLICKUP_API_BASE + path
+    if params:
+        url += "?" + urlencode(params)
+    data = json.dumps(body).encode("utf-8") if body is not None else None
+    headers = {
+        "Authorization": token,
+        "Accept": "application/json",
+        "User-Agent": "fm-content/0.1 (+clickup-bypass)",
+    }
+    if data is not None:
+        headers["Content-Type"] = "application/json"
+    req = Request(url, data=data, headers=headers, method=method)
+    try:
+        with urlopen(req, timeout=timeout) as resp:  # noqa: S310 — known host
+            text = resp.read().decode("utf-8")
+            if not text.strip():
+                return {}
+            return json.loads(text)
+    except HTTPError as e:
+        err_body = ""
+        try:
+            err_body = e.read().decode("utf-8", errors="ignore")[:500]
+        except Exception:  # noqa: BLE001
+            pass
+        raise RuntimeError(
+            f"ClickUp API HTTP {e.code} {e.reason} ({method} {path}): {err_body}"
+        ) from e
+    except URLError as e:
+        raise RuntimeError(f"ClickUp API network error ({method} {path}): {e}") from e
+
+
+# ---------------------------------------------------------------------------
+# CLI — `python -m tools.clickup {check|get-task}`
+# ---------------------------------------------------------------------------
+
+
+def _main(argv: list[str] | None = None) -> int:
+    import argparse
+    import sys
+    parser = argparse.ArgumentParser(
+        prog="tools.clickup",
+        description="Direct ClickUp API v2 wrapper (bypasses the claude.ai connector).",
+    )
+    sub = parser.add_subparsers(dest="cmd", required=True)
+
+    sub.add_parser("check", help="Verify auth by fetching the pipeline status task")
+
+    gt = sub.add_parser("get-task", help="Fetch a single task by id")
+    gt.add_argument("--task-id", required=True)
+    gt.add_argument("--subtasks", action="store_true")
+
+    args = parser.parse_args(argv)
+    try:
+        if args.cmd == "check":
+            resp = get_task(CONTENT_PIPELINE_STATUS_TASK_ID)
+            name = resp.get("name") or "<no name>"
+            print(f"ok: pipeline status task = {CONTENT_PIPELINE_STATUS_TASK_ID} ({name})")
+            return 0
+        if args.cmd == "get-task":
+            resp = get_task(args.task_id, include_subtasks=args.subtasks)
+            print(json.dumps(resp, indent=2, ensure_ascii=False))
+            return 0
+    except RuntimeError as e:
+        print(str(e), file=sys.stderr)
+        return 2
+    parser.print_help()
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(_main())

@@ -131,31 +131,36 @@ save_state(state)
 
 ### 6. Emit single ClickUp task (no parent — top-level)
 
+> **v1 testing-phase note:** The claude.ai ClickUp connector is unavailable to `/schedule` remote routines (verified 2026-05-12 — the connector_uuid attached at registration becomes invalid when ClickUp reconnects). Use the direct REST wrapper `tools.clickup.create_task` instead. Requires `CLICKUP_API_TOKEN` env var (personal token starting with `pk_`).
+
 ```python
-parent_resp = mcp__claude_ai_ClickUp__clickup_create_task(
+from tools.clickup import create_task, create_task_comment, add_tag_to_task
+
+resp = create_task(
     list_id="901326229295",  # CONTENT_PROJECTS_LIST_ID
     name=f"[{today}] {proposal['working_title']}",
     markdown_description=<rich description with focus_kw, audience, category, outline, evidence>,
-    assignees=["26221739"],  # Nikki
-    due_date=today,  # same day — Nikki has the rest of the day to approve
+    assignees=[26221739],     # Nikki (int, not str)
+    due_date=today,           # YYYY-MM-DD, internally converted to epoch-ms
+    tags=["fm-content-daily"],
 )
-state = mark_emitted(state, task_id=parent_resp["task_id"])
+state = mark_emitted(state, task_id=resp["id"])   # NOTE: direct API returns "id", not "task_id"
 save_state(state)
 ```
 
-The task description should match the subtask format from `clickup.build_subtask_payloads` (focus_keyword, audience, category, intent, target_date, angle, outline bullets, discovery evidence). Tag with `fm-content-daily` (the agent should also call `clickup_add_tag_to_task` if available).
+The task description should match the subtask format from `clickup.build_subtask_payloads` (focus_keyword, audience, category, intent, target_date, angle, outline bullets, discovery evidence).
 
 ### 7. Status comment on pipeline status task
 
 ```python
-mcp__claude_ai_ClickUp__clickup_create_task_comment(
+create_task_comment(
     task_id="86ah3ywyh",
     comment_text=(
         f"Daily idea {today} emitted: {proposal['working_title']!r} "
         f"(focus_kw: {proposal['focus_keyword']}, "
         f"score: {proposal['score']:.2f}, "
         f"source: {proposal['discovery_source']}). "
-        f"ClickUp task: https://app.clickup.com/t/{parent_resp['task_id']}"
+        f"ClickUp task: https://app.clickup.com/t/{resp['id']}"
     ),
 )
 ```

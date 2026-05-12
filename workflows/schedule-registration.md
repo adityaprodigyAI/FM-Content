@@ -1,17 +1,35 @@
 # `/schedule` registration — daily-idea + polling-drafter cron
 
-> Copy-paste invocations to register the two FM-Content cron routines via Claude Code's `/schedule` skill. Each routine is a remote Claude agent that runs on cron with your MCP credentials attached (WordPress, ClickUp, Ahrefs, GSC, GitHub).
+> Copy-paste invocations to register the two FM-Content cron routines via Claude Code's `/schedule` skill. Each routine is a remote Claude agent that runs on cron and uses **direct REST wrappers** for Ahrefs and ClickUp (the claude.ai connectors for those services are unavailable to `/schedule` routines as of 2026-05-12).
 
 ## TL;DR
 
-Run `/schedule` in Claude Code twice — once per routine. Use the cron expressions, names, and prompts below.
+Run `/schedule` in Claude Code to register or update each routine. Use the cron expressions, names, and prompts below.
 
 | Routine name | Cron (UTC) | Phoenix time | Purpose |
 |---|---|---|---|
 | `fm-content-daily-idea` | `0 14 * * *` | 07:00 daily | Pick one new topic, emit ClickUp task for Nikki |
 | `fm-content-poll-and-draft` | `0 */3 * * *` | every 3h | Detect approvals, generate prose, push WP drafts |
 
-After the user marks any daily task `published` in ClickUp, the polling drafter picks it up within 3 hours and produces a fully validated WordPress draft.
+After the user marks any daily task `published` (or any other ClickUp done-status name) in ClickUp, the polling drafter picks it up within 3 hours and produces a fully validated WordPress draft.
+
+## MCP connections to attach
+
+Only **FirstMoversWP** is needed. Ahrefs and ClickUp are accessed via direct REST in `tools/ahrefs.py` and `tools/clickup.py`. Do NOT attach the claude.ai ClickUp connector — it is not available to remote `/schedule` routines and its presence in `mcp_connections` blocks routine startup.
+
+| Connector | Reason |
+|---|---|
+| `FirstMoversWP` (uuid `d3546117-d69c-4fc4-9695-4948b0b9c9e9`) | `wp_create_post`, `wp_update_post_meta`. Polling drafter only. |
+| ~~`ClickUp`~~ | Use `tools/clickup.py` direct REST. Env: `CLICKUP_API_TOKEN`. |
+| ~~`Ahrefs`~~ | Use `tools/ahrefs.py` direct REST. Env: `AHREFS_API_TOKEN`. |
+
+## Env vars required at registration
+
+| Var | Used by | How to get it |
+|---|---|---|
+| `AHREFS_API_TOKEN` | both routines | https://ahrefs.com/api/profile |
+| `CLICKUP_API_TOKEN` | both routines (starts with `pk_`) | https://app.clickup.com/settings/apps |
+| `ANTHROPIC_API_KEY` | `fm-content-poll-and-draft` only (Claude prose generation) | https://console.anthropic.com/settings/keys |
 
 ---
 
@@ -21,7 +39,7 @@ After the user marks any daily task `published` in ClickUp, the polling drafter 
 
 **Name:** `fm-content-daily-idea`
 
-**Prompt** (paste this verbatim):
+**Prompt** (paste this verbatim — substitute `<...>` placeholders before registering):
 
 ```text
 You are running the FM-Content pipeline's daily-idea routine. Today's job is to
@@ -36,20 +54,23 @@ SETUP
   cd fm-content
   pip install -e .
 
+  export AHREFS_API_TOKEN="<paste-your-ahrefs-token>"
+  export CLICKUP_API_TOKEN="<paste-your-clickup-token-starts-with-pk_>"
+
   TODAY="$(python -c 'from datetime import datetime; from zoneinfo import ZoneInfo; print(datetime.now(ZoneInfo("America/Phoenix")).strftime("%Y-%m-%d"))')"
   DOW="$(python -c 'from datetime import datetime; from zoneinfo import ZoneInfo; print(datetime.now(ZoneInfo("America/Phoenix")).strftime("%A"))')"
 
 STEPS
   1. Idempotency: if data/runs/_daily/${TODAY}.json exists, post comment to
-     ClickUp task 86ah3ywyh: "Daily idea ${TODAY}: already emitted, skipping."
-     and exit 0.
+     ClickUp task 86ah3ywyh via tools.clickup.create_task_comment:
+     "Daily idea ${TODAY}: already emitted, skipping." and exit 0.
 
   2. Inventory freshness:
        python -m tools.inventory_refresh --check
      If exit 1 (stale) or 2 (missing), refresh per workflows/content-inventory-
      refresh.md before continuing.
 
-  3. Discovery — Ahrefs gap via direct REST (no MCP connector available):
+  3. Discovery — Ahrefs gap via direct REST (tools/ahrefs.py):
        Rotated competitor for ${DOW}:
          Monday    -> mckinsey.com
          Tuesday   -> bcg.com
@@ -59,16 +80,13 @@ STEPS
          Saturday  -> deloitte.com
          Sunday    -> mckinsey.com
 
-       AHREFS_API_TOKEN must be set as an env var by this routine prompt
-       (see registration). Then call directly via Python:
+       from tools.ahrefs import fetch_organic_keywords
+       ahrefs = fetch_organic_keywords(
+           target="<rotated competitor>", date_str="${TODAY}",
+           mode="subdomains", limit=100,
+           order_by="sum_traffic:desc")
 
-         from tools.ahrefs import fetch_organic_keywords
-         ahrefs = fetch_organic_keywords(
-             target="<rotated competitor>", date_str="${TODAY}",
-             mode="subdomains", limit=100,
-             order_by="sum_traffic:desc")
-
-  4. Filter + pick top-1 (Python in the repo):
+  4. Filter + pick top-1:
        from tools.discover.ahrefs_gap import discover as ahrefs_discover
        from tools.daily import pick_top_candidate, candidate_to_proposal_dict
        from tools.cannibalization import ProposedTopic, evaluate
@@ -78,8 +96,8 @@ STEPS
                       "difficulty": kw["keyword_difficulty"],
                       "position": kw["best_position"],
                       "traffic": kw["sum_traffic"]}
-                     for kw in <ahrefs>["keywords"]]
-       all_cands = ahrefs_discover(<competitor>, {"keywords": translated}, inv)
+                     for kw in ahrefs["keywords"]]
+       all_cands = ahrefs_discover("<competitor>", {"keywords": translated}, inv)
        clear = []
        for c in all_cands:
          topic = ProposedTopic(slug=c.focus_keyword.lower().replace(" ", "-"),
@@ -91,8 +109,11 @@ STEPS
            clear.append(c)
        top = pick_top_candidate(clear)
        if top is None:
-         comment 86ah3ywyh "Daily idea ${TODAY}: no clear candidates from
-         <competitor>. Will retry tomorrow with rotated competitor." and exit 0.
+         from tools.clickup import create_task_comment
+         create_task_comment(
+           task_id="86ah3ywyh",
+           comment_text=f"Daily idea ${TODAY}: no clear candidates from <competitor>. Will retry tomorrow.")
+         exit 0
 
   5. Generate working_title (≤120 chars, no trailing period, no em dashes,
      no "free audit"), one-line angle, three H2-starter outline bullets.
@@ -103,26 +124,28 @@ STEPS
                                               outline=<outline>, target_date=TODAY)
        state = DailyState(date=TODAY, proposal=proposal); save_state(state)
 
-  7. Emit ONE top-level ClickUp task:
-       resp = mcp__claude_ai_ClickUp__clickup_create_task(
+  7. Emit ONE top-level ClickUp task via direct REST:
+       from tools.clickup import create_task
+       resp = create_task(
          list_id="901326229295",
          name=f"[{TODAY}] {proposal['working_title']}",
          markdown_description=<rich description with focus_kw, audience, category,
                                intent, target_date, angle, outline bullets,
                                discovery evidence>,
-         assignees=["26221739"],   # Nikki Martinez
-         due_date=TODAY,
+         assignees=[26221739],           # Nikki Martinez (int)
+         due_date=TODAY,                  # YYYY-MM-DD
          tags=["fm-content-daily"])
-       state = mark_emitted(state, task_id=resp["task_id"]); save_state(state)
+       state = mark_emitted(state, task_id=resp["id"]); save_state(state)
 
   8. Status comment:
-       mcp__claude_ai_ClickUp__clickup_create_task_comment(
+       from tools.clickup import create_task_comment
+       create_task_comment(
          task_id="86ah3ywyh",
          comment_text=f"Daily idea {TODAY} emitted: {proposal['working_title']!r} "
                       f"(focus_kw: {proposal['focus_keyword']}, "
                       f"score: {proposal['score']:.2f}, "
                       f"source: {proposal['discovery_source']}). "
-                      f"ClickUp: https://app.clickup.com/t/{resp['task_id']}")
+                      f"ClickUp: https://app.clickup.com/t/{resp['id']}")
 
   9. Persist state to repo:
        git config user.name  "fm-content[bot]"
@@ -140,6 +163,7 @@ HARD RULES (per CLAUDE.md, never bypass)
 
 ON FAILURE
   - Post a status comment to ClickUp task 86ah3ywyh describing what failed
+    (use tools.clickup.create_task_comment with the CLICKUP_API_TOKEN env var)
   - Exit non-zero so the cron host logs the failure
   - Do not retry destructive actions (no double-emit on any task)
 ```
@@ -152,7 +176,7 @@ ON FAILURE
 
 **Name:** `fm-content-poll-and-draft`
 
-**Prompt** (paste this verbatim):
+**Prompt** (paste this verbatim — substitute `<...>` placeholders before registering):
 
 ```text
 You are running the FM-Content pipeline's polling drafter. Every 3 hours you
@@ -167,103 +191,110 @@ SETUP
   cd fm-content
   pip install -e .
 
-STEPS
-  1. List pending work:
-       python -m tools.daily pending-approvals
-       python -m tools.daily pending-drafts
-     If both lists are empty, exit 0 silently (do not spam the status task).
+  export AHREFS_API_TOKEN="<paste-your-ahrefs-token>"
+  export CLICKUP_API_TOKEN="<paste-your-clickup-token-starts-with-pk_>"
 
-  2. For each pending approval:
-       resp = mcp__claude_ai_ClickUp__clickup_get_task(
-         task_id=state.clickup_task_id, detail_level="summary")
-       from tools.daily import is_task_approved, mark_approved, save_state
-       approved, status_name = is_task_approved(resp)
-       if approved:
-         mark_approved(state, status_name=status_name)
-         save_state(state)
+Note: tools.clickup.{create_task, get_task, create_task_comment} and
+tools.ahrefs.fetch_serp_overview replace the corresponding MCP/connector
+calls. WordPress remains on the claude.ai FirstMoversWP connector.
 
-  3. For each pending draft (approved-but-undrafted state):
-       from tools.slate import SlateProposal
-       from tools.draft import prepare_brief, assemble
-       from tools.inventory import load
-       from tools.rubric import FaqItem
-       from tools.push_wp import build_create_payload
-       from tools.rank_math import build_meta
-       from tools.daily import mark_drafted
+WORKFLOW
 
-       inv = load(); inv.assert_fresh(); inv.assert_complete()
-       prop = SlateProposal(**state.proposal)
-       brief = prepare_brief(prop, inv)   # cannibalization re-check
+1. List pending work:
+     python -m tools.daily pending-approvals
+     python -m tools.daily pending-drafts
+   If both lists are empty, exit 0 silently (no status comment).
 
-       from tools.ahrefs import fetch_serp_overview  # SDK bypass, no MCP
-       serp = fetch_serp_overview(
-           keyword=prop.focus_keyword, country="us", top_positions=10)
+2. For each pending approval (state.is_emitted but not state.is_approved):
+     from tools.clickup import get_task
+     from tools.daily import is_task_approved, mark_approved, save_state
+     resp = get_task(state.clickup_task_id)
+     approved, status_name = is_task_approved(resp)
+     if approved: mark_approved(state, status_name=status_name); save_state(state)
 
-       Skill(skill="firstmovers-blog-rubric")
+3. For each pending draft (state.is_approved but not state.is_drafted):
+     from tools.slate import SlateProposal
+     from tools.draft import prepare_brief, assemble
+     from tools.inventory import load
+     from tools.rubric import FaqItem, RubricViolation
+     from tools.push_wp import build_create_payload
+     from tools.rank_math import build_meta
+     from tools.daily import mark_drafted
+     from tools.ahrefs import fetch_serp_overview
+     from tools.clickup import create_task_comment
 
-       # Generate body_html (2500-3500 words, 7 H2s, focus_kw in lede + ≥1 H2,
-       # ≥3 external dofollow citations from external_links.curated_for, no
-       # em dashes, no "free audit", FAQ NOT in body — assemble adds it),
-       # faq_items (3-7 FaqItem records), seo_title (≤60 chars with power
-       # word + focus_kw + year), meta_description (≤155 chars with focus_kw)
-       body_html = "<p>...</p>"
-       faq_items = [FaqItem(question="...", answer="...") for _ in range(5)]
-       seo_title = "..."
-       meta_description = "..."
+     inv = load(); inv.assert_fresh(); inv.assert_complete()
+     prop = SlateProposal(**state.proposal)
+     brief = prepare_brief(prop, inv)   # cannibalization re-check (defense in depth)
 
-       try:
-         assembled = assemble(brief, body_html=body_html, faq_items=faq_items,
-                               seo_title=seo_title, meta_description=meta_description)
-       except RubricViolation as e:
-         # Re-generate prose addressing the failed rule (max 2 retries)
-         continue / retry
+     serp = fetch_serp_overview(
+         keyword=prop.focus_keyword, country="us", top_positions=10)
 
-       wp = mcp__claude_ai_FirstMoversWP__wp_create_post(
-         title=assembled.title, content=assembled.body_html,
-         excerpt=assembled.excerpt, status="draft",
-         categories=[assembled.category_id], post_author=3)
-       post_id = int(wp["id"])
-       edit_url = f"https://firstmovers.ai/wp-admin/post.php?post={post_id}&action=edit"
+     # Generate body_html (2500-3500 words, 7 H2s, focus_kw in lede + ≥1 H2,
+     # ≥3 external dofollow citations from external_links.curated_for, no
+     # em dashes, no "free audit", FAQ NOT in body — assemble adds it),
+     # faq_items (3-7 FaqItem records), seo_title (≤60 chars with power
+     # word + focus_kw + year), meta_description (≤155 chars with focus_kw).
+     # Load the rubric SKILL before writing: Skill(skill="firstmovers-blog-rubric")
+     Skill(skill="firstmovers-blog-rubric")
+     body_html = "<p>...</p>"
+     faq_items = [FaqItem(question="...", answer="...") for _ in range(5)]
+     seo_title = "..."
+     meta_description = "..."
 
-       rm = build_meta(focus_keyword=assembled.focus_keyword,
-                       seo_title=assembled.seo_title,
-                       meta_description=assembled.meta_description,
-                       slug=assembled.slug)
-       for k, v in [("rank_math_focus_keyword", rm.focus_keyword),
-                    ("rank_math_title", rm.seo_title),
-                    ("rank_math_description", rm.meta_description)]:
-         mcp__claude_ai_FirstMoversWP__wp_update_post_meta(
-           post_id=post_id, key=k, value=v)
+     try:
+       assembled = assemble(brief, body_html=body_html, faq_items=faq_items,
+                             seo_title=seo_title, meta_description=meta_description)
+     except RubricViolation as e:
+       # Re-generate prose addressing the failed rule (max 2 retries)
+       continue / retry
 
-       mark_drafted(state, post_id=post_id, edit_url=edit_url); save_state(state)
+     # WordPress push via claude.ai FirstMoversWP connector
+     wp = wp_create_post(
+       title=assembled.title, content=assembled.body_html,
+       excerpt=assembled.excerpt, status="draft",
+       categories=[assembled.category_id], post_author=3)
+     post_id = int(wp["id"])
+     edit_url = f"https://firstmovers.ai/wp-admin/post.php?post={post_id}&action=edit"
 
-       mcp__claude_ai_ClickUp__clickup_create_task_comment(
-         task_id=state.clickup_task_id,
-         comment_text=f"Drafted to WordPress.\n\n"
-                      f"- Edit: {edit_url}\n"
-                      f"- Preview: https://firstmovers.ai/?p={post_id}&preview=true\n"
-                      f"- Word count: {len(assembled.body_html.split()):,}\n"
-                      f"- Author: Josh McCoy (post_author=3)\n\n"
-                      f"Nikki: review, set slug to '{assembled.slug}' if needed, "
-                      f"add featured image, get Josh CTA approval, publish, "
-                      f"NitroPack purge.")
+     rm = build_meta(focus_keyword=assembled.focus_keyword,
+                     seo_title=assembled.seo_title,
+                     meta_description=assembled.meta_description,
+                     slug=assembled.slug)
+     for k, v in [("rank_math_focus_keyword", rm.focus_keyword),
+                  ("rank_math_title", rm.seo_title),
+                  ("rank_math_description", rm.meta_description)]:
+       wp_update_post_meta(post_id=post_id, key=k, value=v)
 
-  4. Final status comment (only if any state advanced):
-       mcp__claude_ai_ClickUp__clickup_create_task_comment(
-         task_id="86ah3ywyh",
-         comment_text=f"Polling drafter run: <N> newly approved, "
-                      f"<M> drafted, <K> still awaiting approval.")
+     mark_drafted(state, post_id=post_id, edit_url=edit_url); save_state(state)
 
-  5. Persist state to repo:
-       git config user.name  "fm-content[bot]"
-       git config user.email "fm-content-bot@firstmovers.ai"
-       git add data/runs/_daily/
-       if git diff --cached --quiet; then
-         echo "no state changes"
-       else
-         git commit -m "chore(daily): poll+draft run $(date -u +%Y-%m-%dT%H:%MZ)"
-         git push
-       fi
+     create_task_comment(
+       task_id=state.clickup_task_id,
+       comment_text=f"Drafted to WordPress.\n\n"
+                    f"- Edit: {edit_url}\n"
+                    f"- Preview: https://firstmovers.ai/?p={post_id}&preview=true\n"
+                    f"- Word count: {len(assembled.body_html.split()):,}\n"
+                    f"- Author: Josh McCoy (post_author=3)\n\n"
+                    f"Nikki: review, set slug to '{assembled.slug}' if needed, "
+                    f"add featured image, get Josh CTA approval, publish, "
+                    f"NitroPack purge.")
+
+4. Final status comment (only if any state advanced):
+     create_task_comment(
+       task_id="86ah3ywyh",
+       comment_text=f"Polling drafter run: <N> newly approved, "
+                    f"<M> drafted, <K> still awaiting approval.")
+
+5. Persist state to repo:
+     git config user.name  "fm-content[bot]"
+     git config user.email "fm-content-bot@firstmovers.ai"
+     git add data/runs/_daily/
+     if git diff --cached --quiet; then
+       echo "no state changes"
+     else
+       git commit -m "chore(daily): poll+draft run $(date -u +%Y-%m-%dT%H:%MZ)"
+       git push
+     fi
 
 FAILURE HANDLING
   - CannibalizationError on prepare_brief: a topic that was clear at emit
@@ -299,19 +330,21 @@ IDEMPOTENCY
 
 ## After registration
 
-Verify both routines are registered:
+Verify both routines are registered (in this Claude Code session, after invoking `/schedule list`):
 
 ```
-/schedule list
-```
-
-You should see:
-```
-fm-content-daily-idea       0 14 * * *      next: 2026-05-10 14:00 UTC
+fm-content-daily-idea       0 14 * * *      next: 2026-05-12 14:00 UTC
 fm-content-poll-and-draft   0 */3 * * *     next: <upcoming :00>
 ```
 
 The daily-idea routine fires once tomorrow morning Phoenix time. The polling drafter fires every 3 hours and is a no-op until the daily routine emits the first task and Nikki approves it.
+
+## What changed on 2026-05-12
+
+- Dropped the claude.ai ClickUp connector from `mcp_connections` (it is not available to `/schedule` remote routines — the connector_uuid attached at registration becomes orphaned when ClickUp is reconnected).
+- Added `tools/clickup.py` direct REST wrappers: `create_task`, `get_task`, `create_task_comment`, `add_tag_to_task`.
+- Routines now read `CLICKUP_API_TOKEN` from the env (personal token, starts with `pk_`).
+- Direct REST returns the raw ClickUp API response — `resp["id"]` not `resp["task_id"]`.
 
 ## Switching back to weekly mode later
 
