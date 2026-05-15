@@ -31,7 +31,7 @@ from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
-from .identities import SITE_BASE_URL
+from .identities import SITE_BASE_URL, WP_AUTHOR_ID
 from .push_wp import (
     PENDING_PUSH_DIR,
     list_pending_pushes,
@@ -54,7 +54,7 @@ def _verify_auth(*, user: str, app_password: str,
         url,
         headers={
             "Authorization": "Basic " + pair,
-            "User-Agent": "fm-content/0.1 (+verify-auth)",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
             "Accept": "application/json",
         },
     )
@@ -88,11 +88,20 @@ def _verify_auth(*, user: str, app_password: str,
     print(f"  slug    : {slug}")
     print(f"  name    : {name}")
     print(f"  roles   : {', '.join(roles)}")
-    if pid != 3:
-        print(f"  note    : you authenticated as user {pid}, NOT Josh (3).")
-        print("            Set FM_WP_AUTHOR_ID=3 to force Josh as the post author.")
+    if pid != WP_AUTHOR_ID:
+        print(
+            f"  note    : you authenticated as user {pid}, NOT the configured "
+            f"author ({WP_AUTHOR_ID})."
+        )
+        print(
+            f"            Set FM_WP_AUTHOR_ID={WP_AUTHOR_ID} to force the "
+            f"configured author on every post."
+        )
     else:
-        print(f"  note    : authenticated as Josh McCoy (id 3) — no override needed.")
+        print(
+            f"  note    : authenticated as the configured author "
+            f"(id {WP_AUTHOR_ID}) — no override needed."
+        )
     return 0
 
 

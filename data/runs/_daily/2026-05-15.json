@@ -1,0 +1,46 @@
+{
+  "date": "2026-05-15",
+  "proposal": {
+    "focus_keyword": "ai customer support automation",
+    "working_title": "AI Customer Support Automation: The Operator Playbook for Cutting Ticket Volume Without Cutting Trust",
+    "one_line_angle": "Most AI support automation deflects tickets and quietly erodes trust. Here is the operator playbook for cutting ticket volume while keeping customers confident.",
+    "outline_bullets": [
+      "Why deflection-first AI customer support automation erodes trust faster than it cuts cost",
+      "The six systems an operator-grade support automation stack actually needs, from intent routing to agent-assist to escalation governance",
+      "Building the playbook: knowledge-base grounding, confidence thresholds, human handoff rules, and the metrics that prove trust held"
+    ],
+    "slug": "ai-customer-support-automation",
+    "audience": "done-for-you",
+    "category_id": 28,
+    "intent": "informational",
+    "target_date": "2026-05-15",
+    "discovery_source": "multi-source-2026-05-15",
+    "discovery_id": "rerun-after-inventory-refresh-2026-05-15",
+    "discovery_evidence": {
+      "reason": "Daily-idea re-run 2026-05-15 after inventory refresh (157 -> 245 posts). Friday rotation = accenture.com.",
+      "ahrefs_accenture_signal": "Accenture keyword set is brand-navigational; thin AI-content gap. Adjacent: cybersecurity/cloud consulting terms low-KD.",
+      "searchable_aeo": "AI Systems / customer-ops prompts at 0% mention rate.",
+      "cannibalization_severity": "clear",
+      "inventory_size": 245,
+      "inventory_note": "Rebuilt this run — gate now sees all 245 published posts (was blind to ~100).",
+      "candidates_evaluated": 5,
+      "candidates_clear": 5,
+      "category_match": "28 (Automation)",
+      "audience_routing": "done-for-you -> /consulting/"
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "no overlap against the rebuilt 245-post inventory; 5 candidates evaluated, all clear",
+    "matched_post_url": null,
+    "score": 8.7
+  },
+  "clickup_task_id": "86ahgk6x3",
+  "clickup_emitted_at": "2026-05-15T16:57:33.833085+00:00",
+  "approved_at": null,
+  "approved_status_name": null,
+  "wp_post_id": null,
+  "wp_edit_url": null,
+  "drafted_at": null,
+  "notes": [
+    "Daily-idea re-run 2026-05-15 after inventory refresh. Original 19:33 IST fire blocked on stale inventory; inventory rebuilt 157->245 posts, then re-ran."
+  ]
+}

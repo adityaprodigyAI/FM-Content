@@ -1,0 +1,48 @@
+{
+  "date": "2026-05-13",
+  "proposal": {
+    "focus_keyword": "ai customer experience",
+    "working_title": "AI Customer Experience: The Operator Playbook for Turning Service Costs Into Loyalty Compounding",
+    "one_line_angle": "Every B2B buyer expects a consumer-grade customer experience now. Here is the AI-powered CX architecture that compounds loyalty without ballooning headcount.",
+    "outline_bullets": [
+      "What an AI customer experience actually looks like inside a B2B operations team in 2026",
+      "The four loops every AI customer experience system needs: intent, sentiment, intervention, attribution",
+      "Building the playbook: data plumbing, model selection, escalation rules, and measurement that proves loyalty compounded"
+    ],
+    "slug": "ai-customer-experience",
+    "audience": "done-for-you",
+    "category_id": 30,
+    "intent": "informational",
+    "target_date": "2026-05-13",
+    "discovery_source": "multi-source-2026-05-13",
+    "discovery_id": "auto-fire-2026-05-13",
+    "discovery_evidence": {
+      "reason": "Autonomous /loop fire 2026-05-13 12:07 IST. Top-1 selected from 4-source synthesis.",
+      "ahrefs_bain_signal": "ai customer experience: Bain ranks #1, KD 13, vol 1500, traffic 170 (low-KD high-value target)",
+      "searchable_aeo_adjacency": "Customer-experience-related prompts are 0% mention rate; AI assistants citing Cognitiv/Accenture/Capgemini for this category",
+      "gsc_signal": "firstmovers.ai has no striking-distance queries for customer experience terms (no existing FM page)",
+      "ga4_decay_check": "no existing CX page in inventory, decay check N/A",
+      "cannibalization_severity": "clear",
+      "inventory_size": 157,
+      "candidates_evaluated": 5,
+      "candidates_clear": 5,
+      "category_match": "30 (AI Marketing)",
+      "audience_routing": "done-for-you -> /consulting/"
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "no overlap detected against current inventory (157 posts); 5 candidates evaluated, all clear",
+    "matched_post_url": null,
+    "score": 9.0
+  },
+  "clickup_task_id": "86aher4z0",
+  "clickup_emitted_at": "2026-05-13T07:46:41.826347+00:00",
+  "approved_at": "2026-05-14T05:50:55.879277+00:00",
+  "approved_status_name": "published",
+  "wp_post_id": 72667,
+  "wp_edit_url": "https://firstmovers.ai/wp-admin/post.php?post=72667&action=edit",
+  "drafted_at": "2026-05-14T05:54:51.271121+00:00",
+  "notes": [
+    "Autonomous /loop fire 2026-05-13 12:07 IST (06:37 UTC). Cron f110f1db one-shot. Picked from 4-source synthesis with strongest signal from Ahrefs Bain rotation.",
+    "2026-05-14 05:51 UTC inline polling-drafter run: Nikki approved task 86aher4z0 at 21:57 IST 2026-05-13, session was closed so no /loop fired. Manually advanced state to approved + drafted. Real prose (3702 words) for ai customer experience, passed rubric first try, pushed to WP as post 72667. Rank Math meta set via WP REST fallback."
+  ]
+}

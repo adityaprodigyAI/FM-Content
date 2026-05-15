@@ -6,16 +6,26 @@ You are operating the **weekly content automation pipeline for FirstMovers.ai**.
 
 **Never propose a topic that overlaps a topic FirstMovers.ai has already published.** That was the v5 bug we rebuilt this pipeline to fix. The cannibalization gate (`tools/cannibalization.py`) is the structural defense — never weaken it, never bypass it, never run a draft on a stale or degraded inventory snapshot.
 
-## The flow
+## The flow (hybrid /loop local + /schedule heartbeat — current production, 2026-05-12)
+
+| Day (Phoenix UTC-7) | Job | Runtime | What happens |
+|---|---|---|---|
+| Every day 07:00 | daily-idea | `/loop` in operator's Claude Code | All 4 discovery sources (Ahrefs + GSC + GA4 + Searchable) → cannibalization → 1 ClickUp task for Nikki |
+| Sun-Sat (continuous) | (Nikki) | manual | Mark approved tasks "done" in ClickUp |
+| Every 3 hours | polling-drafter | `/loop` in operator's Claude Code | Detect approvals → SERP + prose + rubric → push WP draft |
+| Every 12 hours | heartbeat | `/schedule` cloud | If no daily-idea task in last 36h, alert on `86ah3ywyh` |
+| Wed-Sun | (Nikki) | manual | Polish in WP, get Josh CTA approval, publish |
+
+Phoenix is fixed offset UTC-7 year-round. No DST.
+
+Runtime note: /loop fires only when operator's Claude Code session is open. A future plan will move /loop to an always-on VM. For now the heartbeat catches gaps. See `workflows/content-daily-idea-loop.md`, `workflows/content-poll-and-draft-loop.md`, `workflows/heartbeat-canary.md`.
+
+### Legacy weekly flow (deprecated 2026-05-12 — kept for reference only)
 
 | Day (Phoenix UTC-7) | Job | What happens |
 |---|---|---|
-| Sunday 07:00 | `python -m tools.slate --week=NNNN-WNN --emit` | Refresh inventory → run 4 discovery sources → cannibalization gate → top 12 → ClickUp parent task with 12 subtasks for Nikki |
-| Sun-Tue | (Nikki) | Tick ≤7 subtasks to "done" |
-| Wednesday 09:00 | `python -m tools.draft --week=NNNN-WNN --push` | Read approvals → re-run cannibalization → SERP fetch + Claude prose + rubric validate + Pexels images → push to WP as `status=draft` |
-| Wed-Sun | (Nikki) | Polish drafts in WP, get Josh CTA approval, publish |
-
-Phoenix is fixed offset UTC-7 year-round. No DST.
+| ~~Sunday 07:00~~ | ~~`python -m tools.slate --week=NNNN-WNN --emit`~~ | superseded by daily-idea /loop |
+| ~~Wednesday 09:00~~ | ~~`python -m tools.draft --week=NNNN-WNN --push`~~ | superseded by polling-drafter /loop |
 
 ## Hard rules (enforced in code)
 
@@ -46,8 +56,10 @@ If `rubric.validate(draft)` raises a `ValueError`, the message names the exact r
 | `mcp__ahrefs__*` | Inventory join + gap discovery + SERP intent | `site-explorer-organic-keywords`, `serp-overview`, `keywords-explorer-overview` |
 | `mcp__gsc__*` | Striking-distance discovery | `get_search_analytics`, `get_search_by_page_query` |
 | `mcp__claude_ai_searchable__*` | AEO discovery | `get_visibility_by_prompt`, `get_visibility_by_topic`, `get_visibility_summary` |
+| `mcp__gsc__*` | Striking-distance discovery (/loop only — no claude.ai connector) | `get_search_analytics`, `get_search_by_page_query` |
 | ~~`mcp__analytics-mcp__*`~~ | (hangs — DO NOT USE) | use `tools.ga4` direct SDK module instead |
-| `mcp__claude_ai_ClickUp__*` | Slate emit + approval read | `clickup_create_task`, `clickup_get_task`, `clickup_create_task_comment` |
+| `mcp__claude_ai_searchable__*` | AEO discovery (/loop only) | `get_visibility_by_prompt`, `get_visibility_by_topic`, `get_visibility_summary` |
+| `mcp__first-movers-clickup__*` (or `mcp__claude_ai_ClickUp__*`) | Slate emit + approval read | `clickup_create_task`, `clickup_get_task`, `clickup_create_task_comment` |
 
 ## ClickUp identifiers (from `tools/identities.py`)
 

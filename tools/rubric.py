@@ -34,7 +34,7 @@ from dataclasses import dataclass, field
 from typing import Final, Literal
 
 from .external_links import is_external
-from .identities import VALID_WP_CATEGORY_IDS
+from .identities import AUDIENCE_TO_CTA_PATH, VALID_WP_CATEGORY_IDS
 
 Audience = Literal["done-for-you", "diy"]
 
@@ -118,17 +118,17 @@ POWER_WORDS: Final[frozenset[str]] = frozenset(
     }
 )
 
-# Audience -> required CTA destination URL substring (a CTA must contain it)
-_AUDIENCE_TO_CTA_URL: Final[dict[Audience, str]] = {
-    "done-for-you": "/consulting/",
-    "diy": "/labs/",
-}
+# Audience -> required CTA destination path substring (a CTA must contain it).
+# Sourced from client_config.toml [audience_routing] via identities.
+_AUDIENCE_TO_CTA_URL: Final[dict[Audience, str]] = dict(AUDIENCE_TO_CTA_PATH)
 
-# Audience -> forbidden CTA destination (the OTHER tier's URL must not appear
-# as the primary CTA destination — cross-routing was a v5 review failure)
+# Audience -> forbidden CTA destination (the OTHER tier's path must not appear
+# as the primary CTA destination — cross-routing was a v5 review failure).
 _AUDIENCE_TO_FORBIDDEN_CTA: Final[dict[Audience, str]] = {
-    "done-for-you": "/labs/",
-    "diy": "/consulting/",
+    audience: path
+    for other, path in AUDIENCE_TO_CTA_PATH.items()
+    for audience in AUDIENCE_TO_CTA_PATH
+    if audience != other
 }
 
 

@@ -1,5 +1,15 @@
 # `/schedule` registration — daily-idea + polling-drafter cron
 
+> **DEPRECATED for production (2026-05-12).** The two routines documented below are kept for reference only. Production flow has migrated to `/loop` running in the operator's local Claude Code session, with all 4 discovery sources (Ahrefs + GSC + GA4 + Searchable) instead of Ahrefs-only:
+>
+> - `workflows/content-daily-idea-loop.md` — `/loop` daily-idea
+> - `workflows/content-poll-and-draft-loop.md` — `/loop` polling-drafter
+> - `workflows/heartbeat-canary.md` — the one `/schedule` routine still in use (safety-net heartbeat)
+>
+> The two `/schedule` routines below remain registered during the 7-day cutover window (2026-05-13 through 2026-05-19) for safety. After successful cutover, run `/schedule update fm-content-daily-idea enabled=false` and `/schedule update fm-content-poll-and-draft enabled=false`. Dual-mode safety relies on `tools.daily.should_skip_for_clickup_dup` to prevent double-emission while both are active.
+>
+> Future VM migration may revisit /loop vs cron+claude -p as the runtime mechanism.
+
 > Copy-paste invocations to register the two FM-Content cron routines via Claude Code's `/schedule` skill. Each routine is a remote Claude agent that runs on cron in claude.ai's cloud sandbox.
 
 ## Critical constraint — routine sandbox proxy

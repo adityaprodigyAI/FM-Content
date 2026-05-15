@@ -1,0 +1,46 @@
+{
+  "date": "2026-05-14",
+  "proposal": {
+    "focus_keyword": "ai sales enablement",
+    "working_title": "AI Sales Enablement: The 5-System Playbook That Lifts Quota Attainment Without Adding Headcount",
+    "one_line_angle": "Most AI sales enablement deployments add more dashboards than deals. Here is the operator playbook for the five systems that actually compound rep productivity and quota attainment.",
+    "outline_bullets": [
+      "Why most AI sales enablement deployments produce dashboards instead of deals in the first 90 days",
+      "The five systems every operator-grade AI sales enablement stack needs: account intelligence, content surfacing, coaching, forecasting, and revenue attribution",
+      "Building the playbook: data plumbing, model selection, change management, and the measurement framework that proves quota attainment moved"
+    ],
+    "slug": "ai-sales-enablement",
+    "audience": "done-for-you",
+    "category_id": 29,
+    "intent": "informational",
+    "target_date": "2026-05-14",
+    "discovery_source": "multi-source-2026-05-14",
+    "discovery_id": "auto-fire-2026-05-14",
+    "discovery_evidence": {
+      "reason": "Autonomous /loop fire 2026-05-14 19:33 IST. Thursday rotation = hubspot.com.",
+      "ahrefs_hubspot_signal": "sales enablement: HubSpot ranks #2, KD 35, vol 7700, traffic 1039. AI-x-sales-enablement angle exploitable.",
+      "searchable_aeo_adjacency": "Sales AI, Agentic AI, AI Systems topics all at 0% mention rate. Accenture/Deloitte/LeewayHertz cited.",
+      "gsc_signal": "firstmovers.ai has no striking-distance queries for sales enablement terms",
+      "cannibalization_severity": "clear",
+      "inventory_size": 157,
+      "candidates_evaluated": 6,
+      "candidates_clear": 6,
+      "category_match": "29 (AI Sales)",
+      "audience_routing": "done-for-you -> /consulting/"
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "no overlap detected against current inventory (157 posts); 6 candidates evaluated, all clear",
+    "matched_post_url": null,
+    "score": 8.8
+  },
+  "clickup_task_id": "86ahfpb5z",
+  "clickup_emitted_at": "2026-05-14T14:36:04.324624+00:00",
+  "approved_at": null,
+  "approved_status_name": null,
+  "wp_post_id": null,
+  "wp_edit_url": null,
+  "drafted_at": null,
+  "notes": [
+    "Autonomous /loop fire 2026-05-14 19:33 IST (14:03 UTC). Cron 3c03e2e8 recurring. Picked from 4-source synthesis with strongest signal from Ahrefs HubSpot Thursday rotation."
+  ]
+}

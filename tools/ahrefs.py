@@ -30,6 +30,8 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
+from .identities import SITE_HOST
+
 AHREFS_API_BASE: Final[str] = "https://api.ahrefs.com/v3"
 AHREFS_API_TOKEN_ENV: Final[str] = "AHREFS_API_TOKEN"
 DEFAULT_TIMEOUT_SECONDS: Final[int] = 30
@@ -206,10 +208,10 @@ def _main(argv: list[str] | None = None) -> int:
         if args.cmd == "check":
             # Cheapest possible call — 1 keyword for our own domain
             result = fetch_organic_keywords(
-                "firstmovers.ai", limit=1, mode="subdomains",
+                SITE_HOST, limit=1, mode="subdomains",
             )
             n = len(result.get("keywords", []))
-            print(f"AUTH OK ({n} keyword returned for firstmovers.ai sanity check)")
+            print(f"AUTH OK ({n} keyword returned for {SITE_HOST} sanity check)")
             return 0
 
         if args.cmd == "organic-keywords":

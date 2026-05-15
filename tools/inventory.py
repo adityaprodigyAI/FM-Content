@@ -26,15 +26,24 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Final, Iterable, Literal
 
+from .identities import SITE_BASE_URL, SITE_HOST
+
 PostKind = Literal["blog", "page"]
 
+# The client's site URL with exactly one trailing slash (SITE_BASE_URL has none).
+_SITE_URL_PREFIX: Final[str] = SITE_BASE_URL + "/"
+
 DEFAULT_FRESHNESS_MAX_AGE_DAYS: Final[int] = 7
+
+# Inventory filename is derived from the client's host so a new client's
+# snapshot never collides with another's (e.g. firstmovers.ai -> firstmovers-ai.json).
+INVENTORY_FILENAME: Final[str] = SITE_HOST.lower().replace(".", "-") + ".json"
 
 INVENTORY_PATH: Path = (
     Path(__file__).resolve().parents[1]
     / "data"
     / "inventory"
-    / "firstmovers-ai.json"
+    / INVENTORY_FILENAME
 )
 
 
@@ -155,11 +164,11 @@ class Inventory:
         return any(_normalize_url(p.url) == norm for p in self.posts)
 
     def slug_from_fm_url(self, url: str) -> str | None:
-        """Return the slug if `url` is a firstmovers.ai URL we know about."""
+        """Return the slug if `url` is a URL on the client's own site."""
         norm = _normalize_url(url)
-        if not norm.startswith("https://firstmovers.ai/"):
+        if not norm.startswith(_SITE_URL_PREFIX):
             return None
-        path = norm.removeprefix("https://firstmovers.ai/")
+        path = norm.removeprefix(_SITE_URL_PREFIX)
         slug = path.strip("/").split("/")[-1]
         return slug or None
 

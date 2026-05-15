@@ -29,10 +29,11 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import date, timedelta
-from typing import Any, Final
+from typing import Any
 
-# Property IDs — verified 2026-04-27 against firstmovers.ai
-FIRSTMOVERS_GA4_PROPERTY_ID: Final[str] = "466054145"
+# Property ID — sourced from client_config.toml via identities.
+# The constant name is kept stable for existing importers.
+from .identities import GA4_PROPERTY_ID as FIRSTMOVERS_GA4_PROPERTY_ID
 
 
 # ---------------------------------------------------------------------------

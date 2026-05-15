@@ -25,6 +25,7 @@ from typing import Any, Final
 
 from .cannibalization import ProposedTopic, evaluate_or_block
 from .external_links import ExternalLink, curated_for
+from .identities import AUDIENCE_TO_CTA_URL, SITE_BASE_URL
 from .images import ImageRef, hero_alt, render_figure
 from .internal_links import InternalLink, select as select_internal_links
 from .inventory import Inventory
@@ -54,11 +55,8 @@ class DraftBrief:
     forbidden_phrases: tuple[str, ...]
 
 
-# Audience -> CTA URL is duplicated here from rubric for readability
-_AUDIENCE_TO_CTA_URL: Final[dict[str, str]] = {
-    "done-for-you": "https://firstmovers.ai/consulting/",
-    "diy": "https://firstmovers.ai/labs/",
-}
+# Audience -> absolute CTA URL, sourced from client_config.toml via identities.
+_AUDIENCE_TO_CTA_URL: Final[dict[str, str]] = AUDIENCE_TO_CTA_URL
 
 
 def prepare_brief(
@@ -88,7 +86,7 @@ def prepare_brief(
 
     internal = select_internal_links(
         proposal.audience,  # type: ignore[arg-type]
-        exclude_url=f"https://firstmovers.ai/{proposal.slug}/",
+        exclude_url=f"{SITE_BASE_URL}/{proposal.slug}/",
         max_total=5,
     )
     external = curated_for(proposal.category_id, max_total=6)

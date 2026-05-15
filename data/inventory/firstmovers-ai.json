@@ -1,6 +1,81 @@
 {
-  "generated_at": "2026-05-08T08:58:47.451796+00:00",
+  "generated_at": "2026-05-15T16:55:12.209518+00:00",
   "posts": [
+    {
+      "id": 72370,
+      "slug": "building-agentic-ai-processes-for-sales",
+      "title": "Building Agentic AI Processes for Sales: The Operator&#8217;s 2026 Playbook for Building Systems That Actually Compound",
+      "url": "https://firstmovers.ai/building-agentic-ai-processes-for-sales/",
+      "published_at": "2026-05-12",
+      "kind": "blog",
+      "category_ids": [
+        29
+      ],
+      "focus_keyword": "agentic ai processes for sales",
+      "organic_keywords": [
+        "agentic ai processes for sales"
+      ]
+    },
+    {
+      "id": 71548,
+      "slug": "ai-consulting-roi",
+      "title": "AI Consulting ROI: How to Know You&#8217;re Getting Value Before You Sign Anything",
+      "url": "https://firstmovers.ai/ai-consulting-roi/",
+      "published_at": "2026-05-11",
+      "kind": "blog",
+      "category_ids": [
+        27
+      ],
+      "focus_keyword": "ai consulting roi",
+      "organic_keywords": [
+        "ai consulting roi"
+      ]
+    },
+    {
+      "id": 72606,
+      "slug": "ai-shopping",
+      "title": "AI Shopping: The Operator&#8217;s Guide to Winning Retail&#8217;s Biggest Shift Since Mobile (2026)",
+      "url": "https://firstmovers.ai/ai-shopping/",
+      "published_at": "2026-05-11",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "ai shopping",
+      "organic_keywords": [
+        "ai shopping"
+      ]
+    },
+    {
+      "id": 72607,
+      "slug": "what-is-prompt-engineering",
+      "title": "What Is Prompt Engineering? The Operator&#8217;s Guide to Building AI Systems That Actually Hold Up in Production (2026)",
+      "url": "https://firstmovers.ai/what-is-prompt-engineering/",
+      "published_at": "2026-05-11",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "what is prompt engineering",
+      "organic_keywords": [
+        "what is prompt engineering"
+      ]
+    },
+    {
+      "id": 71546,
+      "slug": "marketing-automation-with-ai",
+      "title": "Marketing Automation with AI: The System That Keeps Working When You&#8217;re Not",
+      "url": "https://firstmovers.ai/marketing-automation-with-ai/",
+      "published_at": "2026-05-08",
+      "kind": "blog",
+      "category_ids": [
+        30
+      ],
+      "focus_keyword": "marketing automation with AI",
+      "organic_keywords": [
+        "marketing automation with AI"
+      ]
+    },
     {
       "id": 72554,
       "slug": "brand-visibility-strategy",
@@ -8,7 +83,9 @@
       "url": "https://firstmovers.ai/brand-visibility-strategy/",
       "published_at": "2026-05-07",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        30
+      ],
       "focus_keyword": "brand visibility strategy",
       "organic_keywords": [
         "brand visibility strategy"
@@ -21,7 +98,9 @@
       "url": "https://firstmovers.ai/ai-automation-platforms-for-sales-teams/",
       "published_at": "2026-05-06",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        29
+      ],
       "focus_keyword": "ai automation platforms for sales teams",
       "organic_keywords": [
         "ai automation platforms for sales teams"
@@ -34,7 +113,9 @@
       "url": "https://firstmovers.ai/ai-for-small-business-operations/",
       "published_at": "2026-05-05",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai for small business operations",
       "organic_keywords": [
         "ai for small business operations"
@@ -47,7 +128,9 @@
       "url": "https://firstmovers.ai/ai-consulting-for-marketing-automation/",
       "published_at": "2026-05-04",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        30
+      ],
       "focus_keyword": "ai consulting for marketing automation",
       "organic_keywords": [
         "ai consulting for marketing automation"
@@ -60,7 +143,9 @@
       "url": "https://firstmovers.ai/ai-inbox-automation/",
       "published_at": "2026-05-01",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        28
+      ],
       "focus_keyword": "ai inbox automation",
       "organic_keywords": [
         "ai inbox automation"
@@ -69,11 +154,13 @@
     {
       "id": 71552,
       "slug": "which-business-processes-to-automate-with-ai",
-      "title": "Which Business Processes Should You Automate with AI (And Which Ones You Shouldn't)",
+      "title": "Which Business Processes Should You Automate with AI (And Which Ones You Shouldn&#8217;t)",
       "url": "https://firstmovers.ai/which-business-processes-to-automate-with-ai/",
       "published_at": "2026-05-01",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        28
+      ],
       "focus_keyword": "which business processes to automate with ai",
       "organic_keywords": [
         "which business processes to automate with ai"
@@ -86,7 +173,9 @@
       "url": "https://firstmovers.ai/ai-implementation-not-working/",
       "published_at": "2026-04-30",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        27
+      ],
       "focus_keyword": "ai implementation not working",
       "organic_keywords": [
         "ai implementation not working"
@@ -99,7 +188,9 @@
       "url": "https://firstmovers.ai/ai-consulting-roi-timeline/",
       "published_at": "2026-04-30",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        27
+      ],
       "focus_keyword": "ai consulting roi timeline",
       "organic_keywords": [
         "ai consulting roi timeline"
@@ -112,7 +203,9 @@
       "url": "https://firstmovers.ai/ai-workflow-tool/",
       "published_at": "2026-04-30",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        14
+      ],
       "focus_keyword": "ai workflow tool",
       "organic_keywords": [
         "ai workflow tool"
@@ -125,7 +218,9 @@
       "url": "https://firstmovers.ai/the-story-behind-the-clone/",
       "published_at": "2026-04-30",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        30
+      ],
       "focus_keyword": "the story behind the clone",
       "organic_keywords": [
         "the story behind the clone"
@@ -134,11 +229,13 @@
     {
       "id": 70174,
       "slug": "ai-for-sales-teams",
-      "title": "AI for Sales Teams: The Breakthrough Buyer's Guide to Automation That Actually Closes Deals (2026)",
+      "title": "AI for Sales Teams: The Breakthrough Buyer&#8217;s Guide to Automation That Actually Closes Deals (2026)",
       "url": "https://firstmovers.ai/ai-for-sales-teams/",
       "published_at": "2026-04-21",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        29
+      ],
       "focus_keyword": "ai for sales teams",
       "organic_keywords": [
         "ai for sales teams"
@@ -147,11 +244,13 @@
     {
       "id": 70171,
       "slug": "chatgpt-not-working-for-my-business",
-      "title": "Bought ChatGPT, but Still Doing Everything Manually? (+3 Clear Signs You've Hit a Ceiling)",
+      "title": "Bought ChatGPT, but Still Doing Everything Manually? (+3 Clear Signs You&#8217;ve Hit a Ceiling)",
       "url": "https://firstmovers.ai/chatgpt-not-working-for-my-business/",
       "published_at": "2026-04-20",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        28
+      ],
       "focus_keyword": "chatgpt not working for my business",
       "organic_keywords": [
         "chatgpt not working for my business"
@@ -164,7 +263,9 @@
       "url": "https://firstmovers.ai/agentic-ai/",
       "published_at": "2026-04-14",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        30
+      ],
       "focus_keyword": "agentic ai",
       "organic_keywords": [
         "agentic ai"
@@ -177,7 +278,9 @@
       "url": "https://firstmovers.ai/ai-sales-automation-platform/",
       "published_at": "2026-04-13",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        28
+      ],
       "focus_keyword": "ai sales automation platform",
       "organic_keywords": [
         "ai sales automation platform"
@@ -190,7 +293,9 @@
       "url": "https://firstmovers.ai/ai-email-sequence-automation/",
       "published_at": "2026-04-13",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        28
+      ],
       "focus_keyword": "ai email sequence automation",
       "organic_keywords": [
         "ai email sequence automation"
@@ -203,7 +308,9 @@
       "url": "https://firstmovers.ai/ai-workflow-setup/",
       "published_at": "2026-04-13",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        28
+      ],
       "focus_keyword": "ai workflow setup",
       "organic_keywords": [
         "ai workflow setup"
@@ -212,11 +319,13 @@
     {
       "id": 69111,
       "slug": "connect-ai-tools-workflows",
-      "title": "Your AI Tools Don't Talk to Each Other - Here's How to Connect Multiple AI Tools Into One Workflow",
+      "title": "Your AI Tools Don&#8217;t Talk to Each Other &#8211; Here&#8217;s How to Connect Multiple AI Tools Into One Workflow",
       "url": "https://firstmovers.ai/connect-ai-tools-workflows/",
       "published_at": "2026-04-09",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "connect ai tools workflows",
       "organic_keywords": [
         "connect ai tools workflows"
@@ -225,11 +334,13 @@
     {
       "id": 69332,
       "slug": "chatgpt-not-working",
-      "title": "ChatGPT Not Working for Business? Here's the Real Reason (And the Fix)",
+      "title": "ChatGPT Not Working for Business? Here&#8217;s the Real Reason (And the Fix)",
       "url": "https://firstmovers.ai/chatgpt-not-working/",
       "published_at": "2026-04-09",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "chatgpt not working",
       "organic_keywords": [
         "chatgpt not working"
@@ -242,7 +353,9 @@
       "url": "https://firstmovers.ai/ai-consulting-cost/",
       "published_at": "2026-04-07",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai consulting cost",
       "organic_keywords": [
         "ai consulting cost"
@@ -255,7 +368,9 @@
       "url": "https://firstmovers.ai/ai-consulting-partner/",
       "published_at": "2026-04-02",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai consulting partner",
       "organic_keywords": [
         "ai consulting partner"
@@ -268,7 +383,9 @@
       "url": "https://firstmovers.ai/ai-consulting-services/",
       "published_at": "2026-03-30",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai consulting services",
       "organic_keywords": [
         "ai consulting services"
@@ -281,7 +398,9 @@
       "url": "https://firstmovers.ai/done-with-you-ai-services/",
       "published_at": "2026-03-25",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "done with you ai services",
       "organic_keywords": [
         "done with you ai services"
@@ -294,7 +413,9 @@
       "url": "https://firstmovers.ai/done-for-you-ai/",
       "published_at": "2026-03-23",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "done for you ai",
       "organic_keywords": [
         "done for you ai"
@@ -307,7 +428,9 @@
       "url": "https://firstmovers.ai/openclaw/",
       "published_at": "2026-03-19",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        14
+      ],
       "focus_keyword": "openclaw",
       "organic_keywords": [
         "openclaw"
@@ -320,7 +443,9 @@
       "url": "https://firstmovers.ai/humanize-ai-content/",
       "published_at": "2026-03-18",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "humanize ai content",
       "organic_keywords": [
         "how to humanize ai content",
@@ -334,7 +459,9 @@
       "url": "https://firstmovers.ai/claude/",
       "published_at": "2026-03-17",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        14
+      ],
       "focus_keyword": "claude",
       "organic_keywords": [
         "claude"
@@ -347,7 +474,9 @@
       "url": "https://firstmovers.ai/done-for-you-ai-consulting/",
       "published_at": "2026-03-12",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "done for you ai consulting",
       "organic_keywords": [
         "done for you ai consulting"
@@ -360,7 +489,9 @@
       "url": "https://firstmovers.ai/done-for-you-ai-services/",
       "published_at": "2026-03-10",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "done for you ai services",
       "organic_keywords": [
         "done for you",
@@ -374,7 +505,9 @@
       "url": "https://firstmovers.ai/seo-vs-aeo/",
       "published_at": "2026-03-05",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "seo vs aeo",
       "organic_keywords": [
         "seo vs aeo"
@@ -387,7 +520,9 @@
       "url": "https://firstmovers.ai/clone/",
       "published_at": "2026-03-03",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "clone",
       "organic_keywords": [
         "clone"
@@ -400,7 +535,9 @@
       "url": "https://firstmovers.ai/digital-clone/",
       "published_at": "2026-02-27",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "digital clone",
       "organic_keywords": [
         "digital clone"
@@ -413,7 +550,9 @@
       "url": "https://firstmovers.ai/automate-content-marketing/",
       "published_at": "2026-02-25",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "automate content marketing",
       "organic_keywords": [
         "automate content marketing"
@@ -426,7 +565,9 @@
       "url": "https://firstmovers.ai/seo-vs-geo/",
       "published_at": "2026-02-23",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "seo vs geo",
       "organic_keywords": [
         "seo vs geo"
@@ -439,7 +580,9 @@
       "url": "https://firstmovers.ai/ai-marketing-company/",
       "published_at": "2026-02-17",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai marketing company",
       "organic_keywords": [
         "ai marketing company"
@@ -452,7 +595,9 @@
       "url": "https://firstmovers.ai/geo-strategy/",
       "published_at": "2026-02-16",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "geo strategy",
       "organic_keywords": [
         "geo strategy"
@@ -465,7 +610,9 @@
       "url": "https://firstmovers.ai/use-ai-marketing/",
       "published_at": "2026-02-13",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "use ai marketing",
       "organic_keywords": [
         "use ai marketing"
@@ -478,23 +625,12 @@
       "url": "https://firstmovers.ai/ai-marketing-service/",
       "published_at": "2026-02-11",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai marketing service",
       "organic_keywords": [
         "ai marketing service"
-      ]
-    },
-    {
-      "id": 46518,
-      "slug": "ai-training",
-      "title": "AI Training in 2026: Your Complete Guide to Mastering Artificial Intelligence Skills",
-      "url": "https://firstmovers.ai/ai-training/",
-      "published_at": "2026-02-09",
-      "kind": "blog",
-      "category_ids": [],
-      "focus_keyword": "ai training",
-      "organic_keywords": [
-        "ai training"
       ]
     },
     {
@@ -504,7 +640,9 @@
       "url": "https://firstmovers.ai/ai-marketing/",
       "published_at": "2026-02-06",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai marketing",
       "organic_keywords": [
         "ai marketing"
@@ -517,7 +655,9 @@
       "url": "https://firstmovers.ai/ai-marketing-consultant/",
       "published_at": "2026-02-04",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai marketing consultant",
       "organic_keywords": [
         "ai marketing consultant"
@@ -530,7 +670,9 @@
       "url": "https://firstmovers.ai/build-content/",
       "published_at": "2026-02-02",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "build content",
       "organic_keywords": [
         "build content"
@@ -543,7 +685,9 @@
       "url": "https://firstmovers.ai/ai-copywriting/",
       "published_at": "2026-02-02",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai copywriting",
       "organic_keywords": [
         "ai copywriting"
@@ -556,7 +700,9 @@
       "url": "https://firstmovers.ai/ai-content-marketing-survival-guide/",
       "published_at": "2026-01-30",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai content marketing survival guide",
       "organic_keywords": [
         "ai content marketing"
@@ -569,7 +715,9 @@
       "url": "https://firstmovers.ai/structuring-content/",
       "published_at": "2026-01-28",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "structuring content",
       "organic_keywords": [
         "structuring content"
@@ -582,7 +730,9 @@
       "url": "https://firstmovers.ai/seo-relevance/",
       "published_at": "2026-01-26",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "seo relevance",
       "organic_keywords": [
         "seo relevance"
@@ -595,7 +745,9 @@
       "url": "https://firstmovers.ai/ai-clip-maker/",
       "published_at": "2026-01-23",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        14
+      ],
       "focus_keyword": "ai clip maker",
       "organic_keywords": [
         "ai clip maker"
@@ -608,7 +760,9 @@
       "url": "https://firstmovers.ai/ai-clone/",
       "published_at": "2026-01-21",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai clone",
       "organic_keywords": [
         "ai clone"
@@ -617,11 +771,13 @@
     {
       "id": 65467,
       "slug": "how-aeo-works",
-      "title": "How AEO Works: Understanding AI's Method for Choosing Content",
+      "title": "How AEO Works: Understanding AI&#8217;s Method for Choosing Content",
       "url": "https://firstmovers.ai/how-aeo-works/",
       "published_at": "2026-01-19",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "how aeo works",
       "organic_keywords": [
         "how aeo works"
@@ -634,7 +790,9 @@
       "url": "https://firstmovers.ai/ai-solutions-architect/",
       "published_at": "2026-01-17",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai solutions architect",
       "organic_keywords": [
         "ai solutions architect"
@@ -647,7 +805,9 @@
       "url": "https://firstmovers.ai/ai-niche/",
       "published_at": "2026-01-16",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai niche",
       "organic_keywords": [
         "ai niche"
@@ -660,7 +820,9 @@
       "url": "https://firstmovers.ai/aeo-meaning/",
       "published_at": "2026-01-14",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "aeo meaning",
       "organic_keywords": [
         "aeo meaning"
@@ -673,7 +835,9 @@
       "url": "https://firstmovers.ai/chatgpt-custom-gpts/",
       "published_at": "2026-01-09",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        14
+      ],
       "focus_keyword": "chatgpt custom gpts",
       "organic_keywords": [
         "chatgpt custom gpts"
@@ -686,7 +850,9 @@
       "url": "https://firstmovers.ai/viral-posts/",
       "published_at": "2026-01-07",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "viral posts",
       "organic_keywords": [
         "viral posts"
@@ -699,7 +865,9 @@
       "url": "https://firstmovers.ai/ai-business-consultant/",
       "published_at": "2026-01-02",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai business consultant",
       "organic_keywords": [
         "ai business consultant"
@@ -712,7 +880,9 @@
       "url": "https://firstmovers.ai/ai-consulting-2/",
       "published_at": "2025-12-31",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai consulting 2",
       "organic_keywords": [
         "ai consulting 2"
@@ -725,7 +895,9 @@
       "url": "https://firstmovers.ai/ai-business-ideas/",
       "published_at": "2025-12-30",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai business ideas",
       "organic_keywords": [
         "ai business ideas"
@@ -738,7 +910,9 @@
       "url": "https://firstmovers.ai/custom-ai-solutions/",
       "published_at": "2025-12-24",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "custom ai solutions",
       "organic_keywords": [
         "custom ai solutions"
@@ -751,7 +925,9 @@
       "url": "https://firstmovers.ai/ai-consultants/",
       "published_at": "2025-12-23",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai consultants",
       "organic_keywords": [
         "ai consultants"
@@ -764,7 +940,9 @@
       "url": "https://firstmovers.ai/ai-writing/",
       "published_at": "2025-12-19",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        14
+      ],
       "focus_keyword": "ai writing",
       "organic_keywords": [
         "ai writing"
@@ -777,7 +955,9 @@
       "url": "https://firstmovers.ai/sales-page/",
       "published_at": "2025-12-17",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "sales page",
       "organic_keywords": [
         "sales page"
@@ -790,7 +970,9 @@
       "url": "https://firstmovers.ai/ai-consulting-small-business/",
       "published_at": "2025-12-11",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai consulting small business",
       "organic_keywords": [
         "ai consulting for small businesses"
@@ -803,23 +985,12 @@
       "url": "https://firstmovers.ai/ai-orchestration-platforms/",
       "published_at": "2025-12-08",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        14
+      ],
       "focus_keyword": "ai orchestration platforms",
       "organic_keywords": [
         "ai orchestration platforms"
-      ]
-    },
-    {
-      "id": 64162,
-      "slug": "workflow-automation",
-      "title": "Workflow Automation with AI: Make Your Business Flawless (+5 Elements of Flawless Automation)",
-      "url": "https://firstmovers.ai/workflow-automation/",
-      "published_at": "2025-12-05",
-      "kind": "blog",
-      "category_ids": [],
-      "focus_keyword": "workflow automation",
-      "organic_keywords": [
-        "workflow automation"
       ]
     },
     {
@@ -829,7 +1000,9 @@
       "url": "https://firstmovers.ai/ai-orchestration/",
       "published_at": "2025-12-02",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai orchestration",
       "organic_keywords": [
         "ai orchestration"
@@ -842,7 +1015,9 @@
       "url": "https://firstmovers.ai/ai-startup-ideas/",
       "published_at": "2025-11-28",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai startup ideas",
       "organic_keywords": [
         "best ai startup ideas"
@@ -855,7 +1030,9 @@
       "url": "https://firstmovers.ai/ai-engine-optimization/",
       "published_at": "2025-11-27",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai engine optimization",
       "organic_keywords": [
         "ai engine optimization"
@@ -864,11 +1041,13 @@
     {
       "id": 63843,
       "slug": "aeo",
-      "title": "AEO: The New Frontier Beyond SEO That's Changing How Content Gets Found",
+      "title": "AEO: The New Frontier Beyond SEO That&#8217;s Changing How Content Gets Found",
       "url": "https://firstmovers.ai/aeo/",
       "published_at": "2025-11-21",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "aeo",
       "organic_keywords": [
         "aeo"
@@ -881,7 +1060,9 @@
       "url": "https://firstmovers.ai/best-ai-writing-tools/",
       "published_at": "2025-11-17",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        14
+      ],
       "focus_keyword": "best ai writing tools",
       "organic_keywords": [
         "ai app",
@@ -896,7 +1077,9 @@
       "url": "https://firstmovers.ai/ai-consulting/",
       "published_at": "2025-11-13",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai consulting",
       "organic_keywords": [
         "ai consulting"
@@ -909,7 +1092,9 @@
       "url": "https://firstmovers.ai/first-mover-advantage/",
       "published_at": "2025-11-10",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "first mover advantage",
       "organic_keywords": [
         "first mover advantage"
@@ -922,7 +1107,9 @@
       "url": "https://firstmovers.ai/ai-research-tools/",
       "published_at": "2025-11-07",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        14
+      ],
       "focus_keyword": "ai research tools",
       "organic_keywords": [
         "how to use ai"
@@ -935,7 +1122,9 @@
       "url": "https://firstmovers.ai/ai-logo-generator/",
       "published_at": "2025-11-05",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        14
+      ],
       "focus_keyword": "ai logo generator",
       "organic_keywords": [
         "ai logo generator"
@@ -948,7 +1137,9 @@
       "url": "https://firstmovers.ai/ai-search-optimization/",
       "published_at": "2025-10-29",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai search optimization",
       "organic_keywords": [
         "ai search optimization"
@@ -961,7 +1152,9 @@
       "url": "https://firstmovers.ai/how-to-build-business-ai/",
       "published_at": "2025-10-27",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "how to build business ai",
       "organic_keywords": [
         "how to build business ai"
@@ -974,7 +1167,9 @@
       "url": "https://firstmovers.ai/what-is-ai-automation/",
       "published_at": "2025-10-24",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "what is ai automation",
       "organic_keywords": [
         "ai automation"
@@ -987,7 +1182,9 @@
       "url": "https://firstmovers.ai/viral-content-guide/",
       "published_at": "2025-10-22",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "viral content guide",
       "organic_keywords": [
         "virality ai",
@@ -998,11 +1195,13 @@
     {
       "id": 58480,
       "slug": "ai-for-business-course",
-      "title": "AI for Business Course: How to Choose One That's Best for You (+4 Things to Look for in a Course)",
+      "title": "AI for Business Course: How to Choose One That&#8217;s Best for You (+4 Things to Look for in a Course)",
       "url": "https://firstmovers.ai/ai-for-business-course/",
       "published_at": "2025-10-20",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai for business course",
       "organic_keywords": [
         "ai for business course"
@@ -1011,11 +1210,13 @@
     {
       "id": 58433,
       "slug": "ai-business-solutions",
-      "title": "AI Business Solutions: 78% of Businesses Use AI—Here's How to Catch Up (Before It's Too Late)",
+      "title": "AI Business Solutions: 78% of Businesses Use AI—Here&#8217;s How to Catch Up (Before It&#8217;s Too Late)",
       "url": "https://firstmovers.ai/ai-business-solutions/",
       "published_at": "2025-10-17",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai business solutions",
       "organic_keywords": [
         "ai business solutions"
@@ -1028,7 +1229,9 @@
       "url": "https://firstmovers.ai/ai-business-plan/",
       "published_at": "2025-10-15",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai business plan",
       "organic_keywords": [
         "ai business plan"
@@ -1037,11 +1240,13 @@
     {
       "id": 58287,
       "slug": "build-ai-business",
-      "title": "How to Build an AI Business: I Hit $100k/Month in Under 12 Months (Here's My Powerful Blueprint)",
+      "title": "How to Build an AI Business: I Hit $100k/Month in Under 12 Months (Here&#8217;s My Powerful Blueprint)",
       "url": "https://firstmovers.ai/build-ai-business/",
       "published_at": "2025-10-13",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "build ai business",
       "organic_keywords": [
         "build ai business"
@@ -1054,7 +1259,9 @@
       "url": "https://firstmovers.ai/first-mover/",
       "published_at": "2025-10-09",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "first mover",
       "organic_keywords": [
         "first mover",
@@ -1076,7 +1283,9 @@
       "url": "https://firstmovers.ai/ai-competitive-advantage/",
       "published_at": "2025-10-08",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai competitive advantage",
       "organic_keywords": [
         "ai competitive advantage"
@@ -1089,7 +1298,9 @@
       "url": "https://firstmovers.ai/ai-business-strategy-mistakes/",
       "published_at": "2025-10-06",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai business strategy mistakes",
       "organic_keywords": [
         "ai business strategy mistakes"
@@ -1102,7 +1313,9 @@
       "url": "https://firstmovers.ai/ai-image-designers/",
       "published_at": "2025-10-03",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        14
+      ],
       "focus_keyword": "ai image designers",
       "organic_keywords": [
         "ai image designers"
@@ -1115,7 +1328,9 @@
       "url": "https://firstmovers.ai/business-automation/",
       "published_at": "2025-09-29",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "business automation",
       "organic_keywords": [
         "business automation"
@@ -1128,7 +1343,9 @@
       "url": "https://firstmovers.ai/clone-myself/",
       "published_at": "2025-09-26",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        14
+      ],
       "focus_keyword": "clone myself",
       "organic_keywords": [
         "how much does it cost to clone yourself"
@@ -1141,7 +1358,9 @@
       "url": "https://firstmovers.ai/ai-tools-automation/",
       "published_at": "2025-09-24",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        14
+      ],
       "focus_keyword": "ai tools automation",
       "organic_keywords": [
         "ai automation platform"
@@ -1154,7 +1373,9 @@
       "url": "https://firstmovers.ai/ai-tools-developers/",
       "published_at": "2025-09-22",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        14
+      ],
       "focus_keyword": "ai tools developers",
       "organic_keywords": [
         "ai tools developers"
@@ -1167,7 +1388,9 @@
       "url": "https://firstmovers.ai/ai-tools-content-creation/",
       "published_at": "2025-09-17",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        14
+      ],
       "focus_keyword": "ai tools content creation",
       "organic_keywords": [
         "ai tools content creation"
@@ -1180,23 +1403,12 @@
       "url": "https://firstmovers.ai/ai-tools/",
       "published_at": "2025-09-11",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        14
+      ],
       "focus_keyword": "ai tools",
       "organic_keywords": [
         "ai tools"
-      ]
-    },
-    {
-      "id": 35016,
-      "slug": "ai-career",
-      "title": "How to Future-Proof Your AI Career: The No-BS Guide to Thriving (Not Just Surviving) in 2026",
-      "url": "https://firstmovers.ai/ai-career/",
-      "published_at": "2025-09-04",
-      "kind": "blog",
-      "category_ids": [],
-      "focus_keyword": "ai career",
-      "organic_keywords": [
-        "ai career"
       ]
     },
     {
@@ -1206,7 +1418,9 @@
       "url": "https://firstmovers.ai/enterprise-ai-training/",
       "published_at": "2025-09-02",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "enterprise ai training",
       "organic_keywords": [
         "enterprise ai training"
@@ -1219,7 +1433,9 @@
       "url": "https://firstmovers.ai/ai-marketer-guide-2/",
       "published_at": "2025-08-24",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai marketer guide 2",
       "organic_keywords": [
         "ai marketer guide 2"
@@ -1232,7 +1448,9 @@
       "url": "https://firstmovers.ai/ai-automation-workflows/",
       "published_at": "2025-08-21",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai automation workflows",
       "organic_keywords": [
         "ai automation workflows"
@@ -1245,7 +1463,9 @@
       "url": "https://firstmovers.ai/ai-productivity-tools-training/",
       "published_at": "2025-08-18",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        14
+      ],
       "focus_keyword": "ai productivity tools training",
       "organic_keywords": [
         "ai productivity tools training"
@@ -1258,7 +1478,9 @@
       "url": "https://firstmovers.ai/julia-mccoy-ai-clone/",
       "published_at": "2025-08-07",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        14
+      ],
       "focus_keyword": "julia mccoy ai clone",
       "organic_keywords": [
         "julia mccoy ai clone"
@@ -1271,7 +1493,9 @@
       "url": "https://firstmovers.ai/ai-business-transformation-course/",
       "published_at": "2025-08-03",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai business transformation course",
       "organic_keywords": [
         "ai business transformation course"
@@ -1284,7 +1508,9 @@
       "url": "https://firstmovers.ai/ai-mastery-certification/",
       "published_at": "2025-07-29",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai mastery certification",
       "organic_keywords": [
         "ai mastery certification"
@@ -1297,7 +1523,9 @@
       "url": "https://firstmovers.ai/ai-implementation-training/",
       "published_at": "2025-07-25",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "ai implementation training",
       "organic_keywords": [
         "ai implementation training"
@@ -1310,485 +1538,130 @@
       "url": "https://firstmovers.ai/custom-ai-bots-business/",
       "published_at": "2025-07-15",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        14
+      ],
       "focus_keyword": "custom ai bots business",
       "organic_keywords": [
         "custom ai bots business"
       ]
     },
     {
-      "id": 46908,
-      "slug": "affiliate-program",
-      "title": "Affiliate Program",
-      "url": "https://firstmovers.ai/affiliate-program/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "affiliate program",
-      "organic_keywords": []
-    },
-    {
-      "id": 71469,
-      "slug": "ai-in-arizona-group",
-      "title": "AI In AZ Group - You're In",
-      "url": "https://firstmovers.ai/ai-in-arizona-group/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "ai in arizona group",
-      "organic_keywords": []
-    },
-    {
-      "id": 67084,
-      "slug": "application-received",
-      "title": "Application Received",
-      "url": "https://firstmovers.ai/application-received/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "application received",
-      "organic_keywords": []
-    },
-    {
-      "id": 41778,
-      "slug": "automated-content-machine",
-      "title": "Automated Content Machine",
-      "url": "https://firstmovers.ai/automated-content-machine/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "automated content machine",
-      "organic_keywords": []
-    },
-    {
-      "id": 35747,
-      "slug": "blog",
-      "title": "Blog",
-      "url": "https://firstmovers.ai/blog/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "blog",
-      "organic_keywords": []
-    },
-    {
-      "id": 54854,
-      "slug": "blueprint",
-      "title": "Blueprint",
-      "url": "https://firstmovers.ai/blueprint/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "blueprint",
-      "organic_keywords": []
-    },
-    {
-      "id": 69011,
-      "slug": "blueprint-v2-draft",
-      "title": "Blueprint V2 Draft",
-      "url": "https://firstmovers.ai/blueprint-v2-draft/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "blueprint v2 draft",
-      "organic_keywords": []
-    },
-    {
-      "id": 69535,
-      "slug": "bootcamp",
-      "title": "Bootcamp",
-      "url": "https://firstmovers.ai/bootcamp/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "bootcamp",
-      "organic_keywords": []
-    },
-    {
-      "id": 68463,
-      "slug": "chat",
-      "title": "Chat",
-      "url": "https://firstmovers.ai/chat/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "chat",
-      "organic_keywords": []
-    },
-    {
-      "id": 68106,
-      "slug": "claude-consulting",
-      "title": "Claude Consulting",
-      "url": "https://firstmovers.ai/claude-consulting/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "claude consulting",
-      "organic_keywords": []
-    },
-    {
-      "id": 68318,
-      "slug": "claude-consulting-booking",
-      "title": "Claude Consulting Booking",
-      "url": "https://firstmovers.ai/claude-consulting-booking/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "claude consulting booking",
-      "organic_keywords": []
-    },
-    {
-      "id": 68926,
-      "slug": "onboarding-fm-c8x3k",
-      "title": "Client Onboarding",
-      "url": "https://firstmovers.ai/onboarding-fm-c8x3k/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "onboarding fm c8x3k",
-      "organic_keywords": []
-    },
-    {
-      "id": 65499,
-      "slug": "consulting",
-      "title": "Consulting",
-      "url": "https://firstmovers.ai/consulting/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "consulting",
-      "organic_keywords": []
-    },
-    {
-      "id": 65778,
-      "slug": "consulting-booking",
-      "title": "Consulting Booking",
-      "url": "https://firstmovers.ai/consulting-booking/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "consulting booking",
-      "organic_keywords": []
-    },
-    {
-      "id": 68928,
-      "slug": "consulting-v2-draft",
-      "title": "Consulting V2 — New Design Draft",
-      "url": "https://firstmovers.ai/consulting-v2-draft/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "consulting v2 draft",
-      "organic_keywords": []
-    },
-    {
-      "id": 41475,
-      "slug": "custom-ai-solutions",
-      "title": "Custom AI Solutions",
-      "url": "https://firstmovers.ai/custom-ai-solutions/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "custom ai solutions",
-      "organic_keywords": []
-    },
-    {
-      "id": 51680,
-      "slug": "david-shapiro",
-      "title": "David Shapiro",
-      "url": "https://firstmovers.ai/david-shapiro/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "david shapiro",
-      "organic_keywords": []
-    },
-    {
-      "id": 54670,
-      "slug": "david-shapiro-thank-you",
-      "title": "David Shapiro Thank You",
-      "url": "https://firstmovers.ai/david-shapiro-thank-you/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "david shapiro thank you",
-      "organic_keywords": []
-    },
-    {
-      "id": 41986,
-      "slug": "digital-video-clone",
-      "title": "Digital Video Clone",
-      "url": "https://firstmovers.ai/digital-video-clone/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "digital video clone",
-      "organic_keywords": []
-    },
-    {
-      "id": 67761,
-      "slug": "ethos",
-      "title": "Ethos",
-      "url": "https://firstmovers.ai/ethos/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "ethos",
-      "organic_keywords": []
-    },
-    {
-      "id": 70462,
-      "slug": "free-blueprint",
-      "title": "Free Blueprint",
-      "url": "https://firstmovers.ai/free-blueprint/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "free blueprint",
-      "organic_keywords": []
-    },
-    {
-      "id": 72113,
-      "slug": "labs-replay-call",
-      "title": "Full Labs Replay call",
-      "url": "https://firstmovers.ai/labs-replay-call/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "labs replay call",
-      "organic_keywords": []
-    },
-    {
-      "id": 18,
-      "slug": "hire-julia-mccoy",
-      "title": "Hire Julia McCoy",
-      "url": "https://firstmovers.ai/hire-julia-mccoy/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "hire julia mccoy",
-      "organic_keywords": []
-    },
-    {
-      "id": 37146,
-      "slug": "hiring",
-      "title": "Hiring",
-      "url": "https://firstmovers.ai/hiring/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "hiring",
-      "organic_keywords": []
-    },
-    {
-      "id": 68690,
-      "slug": "ai-mcp-website-ranking",
-      "title": "How AI-Powered MCP Tools Improve Your Website Ranking",
-      "url": "https://firstmovers.ai/ai-mcp-website-ranking/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "ai mcp website ranking",
-      "organic_keywords": []
-    },
-    {
-      "id": 35681,
-      "slug": "investors",
-      "title": "Investors",
-      "url": "https://firstmovers.ai/investors/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "investors",
-      "organic_keywords": []
-    },
-    {
-      "id": 59057,
-      "slug": "labs",
-      "title": "Labs",
-      "url": "https://firstmovers.ai/labs/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "labs",
+      "id": 50201,
+      "slug": "live-ai-training-sessions",
+      "title": "6 Reasons Why the Best LIVE AI Training Sessions Beat Self-Paced Courses Every Time",
+      "url": "https://firstmovers.ai/live-ai-training-sessions/",
+      "published_at": "2025-07-10",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "LIVE AI training sessions",
       "organic_keywords": [
-        "first movers"
+        "LIVE AI training sessions"
       ]
     },
     {
-      "id": 67253,
-      "slug": "marketing-automation",
-      "title": "Marketing Automation",
-      "url": "https://firstmovers.ai/marketing-automation/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "marketing automation",
-      "organic_keywords": []
-    },
-    {
-      "id": 67284,
-      "slug": "marketing-automation-plus",
-      "title": "Marketing Automation Plus",
-      "url": "https://firstmovers.ai/marketing-automation-plus/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "marketing automation plus",
-      "organic_keywords": []
-    },
-    {
-      "id": 67439,
-      "slug": "marketing-automation-plus-onboarding",
-      "title": "Marketing Automation Plus Onboarding",
-      "url": "https://firstmovers.ai/marketing-automation-plus-onboarding/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "marketing automation plus onboarding",
-      "organic_keywords": []
-    },
-    {
-      "id": 69102,
-      "slug": "mcp-ranking-polish-draft",
-      "title": "MCP Ranking Page — Polish Draft",
-      "url": "https://firstmovers.ai/mcp-ranking-polish-draft/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "mcp ranking polish draft",
-      "organic_keywords": []
-    },
-    {
-      "id": 41965,
-      "slug": "performance-ai-agents",
-      "title": "Performance AI Agents",
-      "url": "https://firstmovers.ai/performance-ai-agents/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "performance ai agents",
-      "organic_keywords": []
-    },
-    {
-      "id": 148,
-      "slug": "podcast",
-      "title": "Podcast",
-      "url": "https://firstmovers.ai/podcast/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "podcast",
-      "organic_keywords": []
-    },
-    {
-      "id": 38614,
-      "slug": "policy",
-      "title": "Policy",
-      "url": "https://firstmovers.ai/policy/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "policy",
-      "organic_keywords": []
-    },
-    {
-      "id": 37042,
-      "slug": "sneak-peek-youre-in",
-      "title": "Secret Sneak Peek (Labs)",
-      "url": "https://firstmovers.ai/sneak-peek-youre-in/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "sneak peek youre in",
-      "organic_keywords": []
-    },
-    {
-      "id": 38044,
-      "slug": "thank-you",
-      "title": "Thank You",
-      "url": "https://firstmovers.ai/thank-you/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "thank you",
-      "organic_keywords": []
-    },
-    {
-      "id": 38571,
-      "slug": "youre-in",
-      "title": "Thank You - You're In! (Email List)",
-      "url": "https://firstmovers.ai/youre-in/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "youre in",
-      "organic_keywords": []
-    },
-    {
-      "id": 45773,
-      "slug": "ty-booking-consultation",
-      "title": "Thank You Booking Consultation",
-      "url": "https://firstmovers.ai/ty-booking-consultation/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "ty booking consultation",
-      "organic_keywords": []
-    },
-    {
-      "id": 70846,
-      "slug": "youtube-clone-mastermind",
-      "title": "Youtube Clone Mastermind",
-      "url": "https://firstmovers.ai/youtube-clone-mastermind/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "youtube clone mastermind",
-      "organic_keywords": []
-    },
-    {
-      "id": 72583,
-      "slug": "clone-deposit",
-      "title": "Youtube Clone Mastermind Deposit",
-      "url": "https://firstmovers.ai/clone-deposit/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "clone deposit",
-      "organic_keywords": []
-    },
-    {
-      "id": 72027,
-      "slug": "youtube-clone-mastermind-onboarding",
-      "title": "Youtube Clone Mastermind Onboarding",
-      "url": "https://firstmovers.ai/youtube-clone-mastermind-onboarding/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "youtube clone mastermind onboarding",
-      "organic_keywords": []
-    },
-    {
-      "id": 72078,
-      "slug": "youtube-clone-mastermind-thank-you",
-      "title": "Youtube Clone Mastermind Thank you",
-      "url": "https://firstmovers.ai/youtube-clone-mastermind-thank-you/",
-      "published_at": "",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "youtube clone mastermind thank you",
-      "organic_keywords": []
-    },
-    {
-      "id": 9000000,
-      "slug": "ai-community",
-      "title": "Ai Community",
-      "url": "https://firstmovers.ai/ai-community/",
-      "published_at": "",
+      "id": 50195,
+      "slug": "ai-communications-certification",
+      "title": "The AI Communications Certification That Powerfully Prepares You for Tomorrow&#8217;s Workplace (+3 Reasons You Need a Certificate Today)",
+      "url": "https://firstmovers.ai/ai-communications-certification/",
+      "published_at": "2025-07-08",
       "kind": "blog",
-      "category_ids": [],
-      "focus_keyword": "ai community",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "AI communications certification",
+      "organic_keywords": [
+        "AI communications certification"
+      ]
+    },
+    {
+      "id": 50136,
+      "slug": "ai-certification-course-online",
+      "title": "The Complete Guide to Getting an AI Certification Course Online: Achieve a Successful Career in the AI Revolution",
+      "url": "https://firstmovers.ai/ai-certification-course-online/",
+      "published_at": "2025-07-05",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "ai certification course online",
+      "organic_keywords": [
+        "ai certification course online"
+      ]
+    },
+    {
+      "id": 50126,
+      "slug": "ready-to-deploy-ai-bots",
+      "title": "Ready to Deploy AI Bots: Stop Building From Scratch and Start Scaling Today",
+      "url": "https://firstmovers.ai/ready-to-deploy-ai-bots/",
+      "published_at": "2025-07-01",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "ready to deploy ai bots",
+      "organic_keywords": [
+        "ready to deploy ai bots"
+      ]
+    },
+    {
+      "id": 50004,
+      "slug": "highest-paying-ai-jobs",
+      "title": "The 4 Highest Paying AI Jobs That Don&#8217;t Exist Yet (And How to Succeed with Them)",
+      "url": "https://firstmovers.ai/highest-paying-ai-jobs/",
+      "published_at": "2025-06-25",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "Highest paying AI jobs",
+      "organic_keywords": [
+        "Highest paying AI jobs"
+      ]
+    },
+    {
+      "id": 49763,
+      "slug": "julia-mccoy-ai-training",
+      "title": "Julia McCoy AI Training: Revolutionary Training to Change Your Life and Business for Good",
+      "url": "https://firstmovers.ai/julia-mccoy-ai-training/",
+      "published_at": "2025-06-23",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "Julia McCoy AI Training",
+      "organic_keywords": [
+        "Julia McCoy AI Training"
+      ]
+    },
+    {
+      "id": 49747,
+      "slug": "ai-implementation-community",
+      "title": "What Makes an AI Implementation Community Different from Regular AI Training?",
+      "url": "https://firstmovers.ai/ai-implementation-community/",
+      "published_at": "2025-06-17",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "AI implementation community",
+      "organic_keywords": [
+        "AI implementation community"
+      ]
+    },
+    {
+      "id": 49586,
+      "slug": "ai-community",
+      "title": "Find Your AI Community: Top 10 AI Communities for Learning and Growing Your Skills in 2026",
+      "url": "https://firstmovers.ai/ai-community/",
+      "published_at": "2025-06-14",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "AI community",
       "organic_keywords": [
         "ai community platform",
         "ai community",
@@ -1796,13 +1669,738 @@
       ]
     },
     {
-      "id": 9000001,
-      "slug": "content-hacker",
-      "title": "Content Hacker",
-      "url": "https://firstmovers.ai/content-hacker/",
-      "published_at": "",
+      "id": 49602,
+      "slug": "learning-artificial-intelligence",
+      "title": "Learning Artificial Intelligence: Why the Traditional Education Model Is Broken (And What Works Instead)",
+      "url": "https://firstmovers.ai/learning-artificial-intelligence/",
+      "published_at": "2025-06-06",
       "kind": "blog",
-      "category_ids": [],
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "learning artificial intelligence",
+      "organic_keywords": [
+        "learning artificial intelligence"
+      ]
+    },
+    {
+      "id": 49316,
+      "slug": "content-marketing-ai-tools",
+      "title": "The Ultimate Guide to Content Marketing AI Tools: 30 Game-Changing Platforms That Drive Real Results (2026)",
+      "url": "https://firstmovers.ai/content-marketing-ai-tools/",
+      "published_at": "2025-05-29",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "content marketing ai tools",
+      "organic_keywords": [
+        "content marketing ai tools"
+      ]
+    },
+    {
+      "id": 49308,
+      "slug": "ai-seo",
+      "title": "AI SEO: Is AI Good for SEO? The Truth About AI Content and Search Rankings in 2026",
+      "url": "https://firstmovers.ai/ai-seo/",
+      "published_at": "2025-05-26",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "AI SEO",
+      "organic_keywords": [
+        "AI SEO"
+      ]
+    },
+    {
+      "id": 49292,
+      "slug": "ai-content-marketing-tools",
+      "title": "AI Content Marketing Tools: 9 Game-Changing Platforms That Actually Deliver Results (2026)",
+      "url": "https://firstmovers.ai/ai-content-marketing-tools/",
+      "published_at": "2025-05-19",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "AI content marketing tools",
+      "organic_keywords": [
+        "content marketing ai"
+      ]
+    },
+    {
+      "id": 47027,
+      "slug": "ai-education",
+      "title": "AI Education: Transforming How We Learn, Teach, and Work in 2026",
+      "url": "https://firstmovers.ai/ai-education/",
+      "published_at": "2025-05-15",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "AI education",
+      "organic_keywords": [
+        "AI education"
+      ]
+    },
+    {
+      "id": 46644,
+      "slug": "ai-certification-course",
+      "title": "8 Best AI Certification Courses to Supercharge Your Career in 2026",
+      "url": "https://firstmovers.ai/ai-certification-course/",
+      "published_at": "2025-05-14",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "AI certification course",
+      "organic_keywords": [
+        "AI certification course"
+      ]
+    },
+    {
+      "id": 46629,
+      "slug": "ai-learning-courses",
+      "title": "Best AI Learning Courses to Transform Your Career (The Top 10 Courses in 2026)",
+      "url": "https://firstmovers.ai/ai-learning-courses/",
+      "published_at": "2025-05-13",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "AI learning courses",
+      "organic_keywords": [
+        "AI learning courses"
+      ]
+    },
+    {
+      "id": 47033,
+      "slug": "ai-content-marketing",
+      "title": "AI Content Marketing: The Ultimate Guide to Winning in Your Industry in 2026",
+      "url": "https://firstmovers.ai/ai-content-marketing/",
+      "published_at": "2025-05-09",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "AI content marketing",
+      "organic_keywords": [
+        "AI content marketing"
+      ]
+    },
+    {
+      "id": 47030,
+      "slug": "ai-content-marketers",
+      "title": "How Many Marketers Use AI for Content Generation in 2026?",
+      "url": "https://firstmovers.ai/ai-content-marketers/",
+      "published_at": "2025-05-05",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "how many marketers use AI for content generation",
+      "organic_keywords": [
+        "how many marketers use AI for content generation"
+      ]
+    },
+    {
+      "id": 46546,
+      "slug": "introducing-new-consulting-services",
+      "title": "Introducing First Movers New Methodology &amp; Consulting Services: The Future Is Coming Faster Than You Think (But Not How You Imagine)",
+      "url": "https://firstmovers.ai/introducing-new-consulting-services/",
+      "published_at": "2025-05-02",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "first movers",
+      "organic_keywords": [
+        "first movers"
+      ]
+    },
+    {
+      "id": 46219,
+      "slug": "learn-ai",
+      "title": "Learn AI: A Beginner’s Guide to Mastering Artificial Intelligence in 2026",
+      "url": "https://firstmovers.ai/learn-ai/",
+      "published_at": "2025-05-01",
+      "kind": "blog",
+      "category_ids": [
+        14,
+        13,
+        11
+      ],
+      "focus_keyword": "learn ai",
+      "organic_keywords": [
+        "learn ai"
+      ]
+    },
+    {
+      "id": 46515,
+      "slug": "ai-learning",
+      "title": "AI Learning in 2026: Your Fast-Track Guide to Staying Relevant",
+      "url": "https://firstmovers.ai/ai-learning/",
+      "published_at": "2025-04-30",
+      "kind": "blog",
+      "category_ids": [
+        13,
+        14
+      ],
+      "focus_keyword": "AI learning",
+      "organic_keywords": [
+        "AI learning"
+      ]
+    },
+    {
+      "id": 44396,
+      "slug": "ai-content-generation-marketing",
+      "title": "AI Content Generation for Marketing: The Ultimate Guide to Transforming Your Content Strategy (+ 7 Tools for Next-Level Success)",
+      "url": "https://firstmovers.ai/ai-content-generation-marketing/",
+      "published_at": "2025-04-22",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "AI content generation for marketing",
+      "organic_keywords": [
+        "AI content generation for marketing"
+      ]
+    },
+    {
+      "id": 43611,
+      "slug": "generative-engine-optimization-implementation",
+      "title": "Generative Engine Optimization: What It Is, Why It&#8217;s Important, and How to Implement It",
+      "url": "https://firstmovers.ai/generative-engine-optimization-implementation/",
+      "published_at": "2025-04-16",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "generative engine optimization",
+      "organic_keywords": [
+        "what is generative engine optimization"
+      ]
+    },
+    {
+      "id": 43847,
+      "slug": "generative-engine-optimization-strategies",
+      "title": "Generative Engine Optimization Strategies: 5 Tips to Boost Your Brand in AI-Driven Search",
+      "url": "https://firstmovers.ai/generative-engine-optimization-strategies/",
+      "published_at": "2025-04-12",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "generative engine optimization strategies",
+      "organic_keywords": [
+        "generative engine optimization strategies"
+      ]
+    },
+    {
+      "id": 42804,
+      "slug": "ai-content-marketing-new-digital-landscape",
+      "title": "AI for Content Marketing: How to Adapt and Thrive in the New Digital Landscape (+8 Reasons to Convince You)",
+      "url": "https://firstmovers.ai/ai-content-marketing-new-digital-landscape/",
+      "published_at": "2025-04-10",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "ai for content marketing",
+      "organic_keywords": [
+        "ai for content marketing"
+      ]
+    },
+    {
+      "id": 42564,
+      "slug": "become-first-mover",
+      "title": "How to Be a First Mover in AI: 7 Strategic Steps that Work",
+      "url": "https://firstmovers.ai/become-first-mover/",
+      "published_at": "2025-04-07",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "how to be a first mover",
+      "organic_keywords": [
+        "how to be a first mover"
+      ]
+    },
+    {
+      "id": 41410,
+      "slug": "top-ai-marketing-tools",
+      "title": "The Top AI Marketing Tools Every Marketer Needs in 2026",
+      "url": "https://firstmovers.ai/top-ai-marketing-tools/",
+      "published_at": "2025-03-10",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "top AI marketing tools",
+      "organic_keywords": [
+        "top AI marketing tools"
+      ]
+    },
+    {
+      "id": 41365,
+      "slug": "ai-marketer-guide",
+      "title": "How to Be an AI Marketer: The Ultimate Guide for 2026",
+      "url": "https://firstmovers.ai/ai-marketer-guide/",
+      "published_at": "2025-03-09",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "how to be an AI marketer",
+      "organic_keywords": [
+        "how to be an AI marketer"
+      ]
+    },
+    {
+      "id": 41107,
+      "slug": "ai-marketer",
+      "title": "What Is an AI Marketer? Your Guide to the Future of Marketing (+3 Powerful Skills an AI Marketer Needs)",
+      "url": "https://firstmovers.ai/ai-marketer/",
+      "published_at": "2025-03-05",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "AI marketer",
+      "organic_keywords": [
+        "AI marketer"
+      ]
+    },
+    {
+      "id": 40681,
+      "slug": "ai-coders",
+      "title": "Superhuman AI Coders: The End of Programming As We Know It? (Sam Altman&#8217;s Shocking Revelation)",
+      "url": "https://firstmovers.ai/ai-coders/",
+      "published_at": "2025-02-16",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "AI coders",
+      "organic_keywords": [
+        "AI coders"
+      ]
+    },
+    {
+      "id": 40443,
+      "slug": "ai-expertise",
+      "title": "Building AI Expertise: How to Transform Your Business in the Age of Artificial Intelligence (+3 Predictions that Came True in 2025)",
+      "url": "https://firstmovers.ai/ai-expertise/",
+      "published_at": "2025-02-14",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "AI expertise",
+      "organic_keywords": [
+        "AI expertise"
+      ]
+    },
+    {
+      "id": 40431,
+      "slug": "deep-research",
+      "title": "Deep Research: OpenAI&#8217;s Game-Changing AI That&#8217;s Transforming Knowledge Work",
+      "url": "https://firstmovers.ai/deep-research/",
+      "published_at": "2025-02-09",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "deep research",
+      "organic_keywords": [
+        "deep research"
+      ]
+    },
+    {
+      "id": 38884,
+      "slug": "operator",
+      "title": "OpenAI&#8217;s Operator Launch: The Dawn of True AI Agents (And Why It Changes Everything)",
+      "url": "https://firstmovers.ai/operator/",
+      "published_at": "2025-01-27",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "operator",
+      "organic_keywords": [
+        "operator"
+      ]
+    },
+    {
+      "id": 38880,
+      "slug": "project-stargate",
+      "title": "Project Stargate: Inside the $500B American AI Revolution That&#8217;s Changing Everything",
+      "url": "https://firstmovers.ai/project-stargate/",
+      "published_at": "2025-01-25",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "project stargate",
+      "organic_keywords": [
+        "stargate project"
+      ]
+    },
+    {
+      "id": 38876,
+      "slug": "gpt-4b-micro",
+      "title": "GPT-4b micro: OpenAI&#8217;s Revolutionary AI Model That Could Help Us Live Longer",
+      "url": "https://firstmovers.ai/gpt-4b-micro/",
+      "published_at": "2025-01-24",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "gpt-4b micro",
+      "organic_keywords": [
+        "gpt-4b micro"
+      ]
+    },
+    {
+      "id": 38871,
+      "slug": "asi-race",
+      "title": "The ASI Race: How 2025&#8217;s Breakthroughs Are Reshaping AI&#8217;s Future",
+      "url": "https://firstmovers.ai/asi-race/",
+      "published_at": "2025-01-23",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "asi race",
+      "organic_keywords": [
+        "asi race"
+      ]
+    },
+    {
+      "id": 38609,
+      "slug": "coding-dead",
+      "title": "Coding Is Dead &#8211; What Salesforce&#8217;s 2025 Hiring Freeze Means for Software Engineers",
+      "url": "https://firstmovers.ai/coding-dead/",
+      "published_at": "2025-01-21",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "coding is dead",
+      "organic_keywords": [
+        "coding is dead"
+      ]
+    },
+    {
+      "id": 38604,
+      "slug": "openais-economic-blueprint",
+      "title": "OpenAI&#8217;s AGI Economic Blueprint: An Exciting Vision for the Future (And What They Missed)",
+      "url": "https://firstmovers.ai/openais-economic-blueprint/",
+      "published_at": "2025-01-20",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "economic blueprint",
+      "organic_keywords": [
+        "economic blueprint"
+      ]
+    },
+    {
+      "id": 38601,
+      "slug": "ai-brain",
+      "title": "The AI Brain Revolution: Inside Jensen Huang&#8217;s Groundbreaking CES 2025 Vision",
+      "url": "https://firstmovers.ai/ai-brain/",
+      "published_at": "2025-01-15",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "ai brain",
+      "organic_keywords": [
+        "ai brain"
+      ]
+    },
+    {
+      "id": 38510,
+      "slug": "ai-agents",
+      "title": "AI Agents: The Revolutionary Force Reshaping Business in 2025",
+      "url": "https://firstmovers.ai/ai-agents/",
+      "published_at": "2025-01-09",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "AI agents",
+      "organic_keywords": [
+        "AI agents"
+      ]
+    },
+    {
+      "id": 38480,
+      "slug": "whitelist-ai-domains",
+      "title": "How to Whitelist AI Domains: Never Miss Important Updates Again",
+      "url": "https://firstmovers.ai/whitelist-ai-domains/",
+      "published_at": "2025-01-06",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "how to whitelist ai domains",
+      "organic_keywords": [
+        "how to whitelist ai domains"
+      ]
+    },
+    {
+      "id": 38423,
+      "slug": "ai-video-generator",
+      "title": "AI Video Generator Revolution: Why Google Veo 2 Changes Everything",
+      "url": "https://firstmovers.ai/ai-video-generator/",
+      "published_at": "2025-01-04",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "ai video generator",
+      "organic_keywords": [
+        "ai video generator"
+      ]
+    },
+    {
+      "id": 38396,
+      "slug": "saas-death",
+      "title": "The Death of SaaS: Microsoft CEO Predicts the End of Software as We Know It",
+      "url": "https://firstmovers.ai/saas-death/",
+      "published_at": "2024-12-30",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "death of saas",
+      "organic_keywords": [
+        "death of saas"
+      ]
+    },
+    {
+      "id": 38387,
+      "slug": "chinas-robot-army",
+      "title": "China&#8217;s Robot Army: 190,000 Patents and 470 Robots per 10,000 Workers &#8211; The East Is Winning the Global Race",
+      "url": "https://firstmovers.ai/chinas-robot-army/",
+      "published_at": "2024-12-24",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "China's robot army",
+      "organic_keywords": [
+        "China's robot army"
+      ]
+    },
+    {
+      "id": 38382,
+      "slug": "nova",
+      "title": "Amazon Nova: The Game-Changing AI Launch That&#8217;s 75% Cheaper Than GPT-4",
+      "url": "https://firstmovers.ai/nova/",
+      "published_at": "2024-12-23",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "nova",
+      "organic_keywords": [
+        "nova"
+      ]
+    },
+    {
+      "id": 38377,
+      "slug": "openais-o3",
+      "title": "OpenAI&#8217;s O3: The Dawn of True Artificial General Intelligence",
+      "url": "https://firstmovers.ai/openais-o3/",
+      "published_at": "2024-12-22",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "O3",
+      "organic_keywords": [
+        "O3"
+      ]
+    },
+    {
+      "id": 38372,
+      "slug": "android-xr-glasses",
+      "title": "Android XR Glasses: Google&#8217;s Revolutionary Leap into the Golden Age of Extended Reality",
+      "url": "https://firstmovers.ai/android-xr-glasses/",
+      "published_at": "2024-12-21",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "android xr glasses",
+      "organic_keywords": [
+        "android xr glasses"
+      ]
+    },
+    {
+      "id": 38215,
+      "slug": "ai-superintelligence",
+      "title": "AI Superintelligence: Ilya Sutskever Reveals a Revolutionary Future at NeurIPS",
+      "url": "https://firstmovers.ai/ai-superintelligence/",
+      "published_at": "2024-12-19",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "ai superintelligence",
+      "organic_keywords": [
+        "ai superintelligence"
+      ]
+    },
+    {
+      "id": 38207,
+      "slug": "android-robots",
+      "title": "Clone Alpha: The Android Robots Revolution Begins with Living Muscles",
+      "url": "https://firstmovers.ai/android-robots/",
+      "published_at": "2024-12-14",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "android robots",
+      "organic_keywords": [
+        "android robots"
+      ]
+    },
+    {
+      "id": 37952,
+      "slug": "o1-pro",
+      "title": "O1 Pro: OpenAI&#8217;s Most Advanced AI Model Yet (Complete 2024 Guide)",
+      "url": "https://firstmovers.ai/o1-pro/",
+      "published_at": "2024-12-13",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "O1 Pro",
+      "organic_keywords": [
+        "O1 Pro"
+      ]
+    },
+    {
+      "id": 37884,
+      "slug": "googles-quantum-chip-willow",
+      "title": "Google&#8217;s Quantum Chip Willow: A Historic Breakthrough That Changes Everything",
+      "url": "https://firstmovers.ai/googles-quantum-chip-willow/",
+      "published_at": "2024-12-12",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "google's quantum chip willow",
+      "organic_keywords": [
+        "google's quantum chip willow"
+      ]
+    },
+    {
+      "id": 37880,
+      "slug": "chatgpt-pro",
+      "title": "ChatGPT Pro&#8217;s $200 Price Tag: Is OpenAI&#8217;s Latest Model Worth the Investment?",
+      "url": "https://firstmovers.ai/chatgpt-pro/",
+      "published_at": "2024-12-10",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "chatgpt pro",
+      "organic_keywords": [
+        "chatgpt pro"
+      ]
+    },
+    {
+      "id": 37447,
+      "slug": "ai-medicine",
+      "title": "AI in Medicine: The Shocking Study That Changed Everything",
+      "url": "https://firstmovers.ai/ai-medicine/",
+      "published_at": "2024-12-05",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "ai in medicine",
+      "organic_keywords": [
+        "ai in medicine"
+      ]
+    },
+    {
+      "id": 37452,
+      "slug": "crypto-agi-future",
+      "title": "Crypto and AGI: The Unstoppable Convergence Powering Our Financial Future (+5 Promising Cryptocurrencies)",
+      "url": "https://firstmovers.ai/crypto-agi-future/",
+      "published_at": "2024-12-02",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "crypto and agi",
+      "organic_keywords": [
+        "crypto and agi"
+      ]
+    },
+    {
+      "id": 37438,
+      "slug": "ai-agent",
+      "title": "AI Agents Are Creating Their Own Companies: The Future of Autonomous Business is Here",
+      "url": "https://firstmovers.ai/ai-agent/",
+      "published_at": "2024-12-01",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "ai agent",
+      "organic_keywords": [
+        "ai agent"
+      ]
+    },
+    {
+      "id": 37130,
+      "slug": "agi-blockchain-potential",
+      "title": "Blockchain and AGI: The Groundbreaking Convergence That Will Shape Our Future (+3 Reasons They Matter)",
+      "url": "https://firstmovers.ai/agi-blockchain-potential/",
+      "published_at": "2024-11-28",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "blockchain and agi",
+      "organic_keywords": [
+        "blockchain and agi"
+      ]
+    },
+    {
+      "id": 37113,
+      "slug": "ai-agents-2025",
+      "title": "True AI Agents in 2025: OpenAI&#8217;s Game-Changing &#8216;Operator&#8217;",
+      "url": "https://firstmovers.ai/ai-agents-2025/",
+      "published_at": "2024-11-21",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "ai agents",
+      "organic_keywords": [
+        "ai agents"
+      ]
+    },
+    {
+      "id": 36434,
+      "slug": "content-hacker",
+      "title": "What Is a Content Hacker?",
+      "url": "https://firstmovers.ai/content-hacker/",
+      "published_at": "2024-11-20",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
       "focus_keyword": "content hacker",
       "organic_keywords": [
         "content hacker",
@@ -1811,68 +2409,166 @@
       ]
     },
     {
-      "id": 9000002,
-      "slug": "crypto-ai-world",
-      "title": "Crypto Ai World",
-      "url": "https://firstmovers.ai/crypto-ai-world/",
-      "published_at": "",
+      "id": 37039,
+      "slug": "content-marketing-ai",
+      "title": "Content Marketing: The Future in the AI-Driven World",
+      "url": "https://firstmovers.ai/content-marketing-ai/",
+      "published_at": "2024-11-19",
       "kind": "blog",
-      "category_ids": [],
-      "focus_keyword": "crypto ai world",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "content marketing",
       "organic_keywords": [
-        "bitcoin and ai"
+        "content marketing"
       ]
     },
     {
-      "id": 9000003,
-      "slug": "chatgpt-hacks",
-      "title": "Chatgpt Hacks",
-      "url": "https://firstmovers.ai/chatgpt-hacks/",
-      "published_at": "",
+      "id": 36509,
+      "slug": "trumps-ai-revolution",
+      "title": "Trump&#8217;s AI Revolution: What His Administration Could Mean for America&#8217;s Tech Future",
+      "url": "https://firstmovers.ai/trumps-ai-revolution/",
+      "published_at": "2024-11-18",
       "kind": "blog",
-      "category_ids": [],
-      "focus_keyword": "chatgpt hacks",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "trump",
       "organic_keywords": [
-        "how to hack chat gpt"
+        "trump"
       ]
     },
     {
-      "id": 9000004,
-      "slug": "bible-ai-analysis",
-      "title": "Bible Ai Analysis",
-      "url": "https://firstmovers.ai/bible-ai-analysis/",
-      "published_at": "",
+      "id": 36540,
+      "slug": "ai-business-strategy",
+      "title": "AI in Business: Transforming Operations, Growth, and Strategy",
+      "url": "https://firstmovers.ai/ai-business-strategy/",
+      "published_at": "2024-11-18",
       "kind": "blog",
-      "category_ids": [],
-      "focus_keyword": "bible ai analysis",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "ai in business",
       "organic_keywords": [
-        "what does the bible say about ai",
-        "ai in the bible verse",
-        "ai in the bible"
+        "ai in business"
       ]
     },
     {
-      "id": 9000005,
-      "slug": "jobs-future",
-      "title": "Jobs Future",
-      "url": "https://firstmovers.ai/jobs-future/",
-      "published_at": "",
+      "id": 36266,
+      "slug": "agi-2025",
+      "title": "Sam Altman’s Bold Claim: OpenAI is on the Verge of AGI by 2025",
+      "url": "https://firstmovers.ai/agi-2025/",
+      "published_at": "2024-11-14",
       "kind": "blog",
-      "category_ids": [],
-      "focus_keyword": "jobs future",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "AGI by 2025",
       "organic_keywords": [
-        "emad mostaque"
+        "AGI by 2025"
       ]
     },
     {
-      "id": 9000006,
+      "id": 34008,
+      "slug": "ai-superintelligence-timeline",
+      "title": "The AI Superintelligence Timeline: From AGI to ASI and Beyond",
+      "url": "https://firstmovers.ai/ai-superintelligence-timeline/",
+      "published_at": "2024-11-14",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "AI superintelligence timeline",
+      "organic_keywords": [
+        "AI superintelligence timeline"
+      ]
+    },
+    {
+      "id": 36421,
+      "slug": "chatgpt",
+      "title": "OpenAI CPO Reveals: ChatGPT Turns $8,000 Legal Work into $3 (The Future is HERE!)",
+      "url": "https://firstmovers.ai/chatgpt/",
+      "published_at": "2024-11-13",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "chatgpt",
+      "organic_keywords": [
+        "chatgpt"
+      ]
+    },
+    {
+      "id": 36106,
+      "slug": "searchgpt-beat-google",
+      "title": "Will SearchGPT Beat Google? The Future of Search Is Here (And It&#8217;s Mind-Blowing)",
+      "url": "https://firstmovers.ai/searchgpt-beat-google/",
+      "published_at": "2024-11-11",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "will searchgpt beat google",
+      "organic_keywords": [
+        "will searchgpt beat google"
+      ]
+    },
+    {
+      "id": 36101,
+      "slug": "ai-detection",
+      "title": "Is AI Detection a Scam? The Surprising Truth Behind AI Content Detection",
+      "url": "https://firstmovers.ai/ai-detection/",
+      "published_at": "2024-11-10",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "ai detection",
+      "organic_keywords": [
+        "ai detection"
+      ]
+    },
+    {
+      "id": 33038,
+      "slug": "agi-preparation",
+      "title": "How to Prepare for AGI: Your Guide to the Future",
+      "url": "https://firstmovers.ai/agi-preparation/",
+      "published_at": "2024-11-08",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "how to prepare for agi",
+      "organic_keywords": [
+        "how to prepare for agi"
+      ]
+    },
+    {
+      "id": 35942,
+      "slug": "chatgpt-keyword-research",
+      "title": "How to Use ChatGPT to Find Keywords",
+      "url": "https://firstmovers.ai/chatgpt-keyword-research/",
+      "published_at": "2024-11-07",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "how to use chatgpt to find keyword",
+      "organic_keywords": [
+        "how to use chatgpt to find keyword"
+      ]
+    },
+    {
+      "id": 35899,
       "slug": "chatgpt-blogging",
-      "title": "Chatgpt Blogging",
+      "title": "ChatGPT for Blogs: Can It Beat Human Writers? Watch Me Use it to Write a Full Blog Post",
       "url": "https://firstmovers.ai/chatgpt-blogging/",
-      "published_at": "",
+      "published_at": "2024-11-07",
       "kind": "blog",
-      "category_ids": [],
-      "focus_keyword": "chatgpt blogging",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "chatgpt for blogs",
       "organic_keywords": [
         "chatgpt blogs",
         "seo friendly blog post kaise likhe",
@@ -1880,66 +2576,316 @@
       ]
     },
     {
-      "id": 9000007,
-      "slug": "resource-based-economy",
-      "title": "Resource Based Economy",
-      "url": "https://firstmovers.ai/resource-based-economy/",
-      "published_at": "",
+      "id": 36430,
+      "slug": "agi-future-abundance",
+      "title": "AGI = Age of Abundance: Why Our Future Could Be Brighter Than We Think",
+      "url": "https://firstmovers.ai/agi-future-abundance/",
+      "published_at": "2024-11-07",
       "kind": "blog",
-      "category_ids": [],
-      "focus_keyword": "resource based economy",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "age of abundance",
       "organic_keywords": [
-        "resource based economy"
+        "age of abundance"
       ]
     },
     {
-      "id": 9000008,
-      "slug": "ai-job-automation",
-      "title": "Ai Job Automation",
-      "url": "https://firstmovers.ai/ai-job-automation/",
-      "published_at": "",
+      "id": 36126,
+      "slug": "agi-readiness-gaps",
+      "title": "Ex-Open AI Researcher Shares 5 BIG AGI Readiness Gaps: We&#8217;re Not Ready",
+      "url": "https://firstmovers.ai/agi-readiness-gaps/",
+      "published_at": "2024-11-06",
       "kind": "blog",
-      "category_ids": [],
-      "focus_keyword": "ai job automation",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "agi readiness",
       "organic_keywords": [
-        "how many jobs will ai replace by 2030"
+        "agi readiness"
       ]
     },
     {
-      "id": 9000009,
-      "slug": "generative-engine-optimization-implementation",
-      "title": "Generative Engine Optimization Implementation",
-      "url": "https://firstmovers.ai/generative-engine-optimization-implementation/",
-      "published_at": "",
+      "id": 34143,
+      "slug": "ilya-sutskever-safe-superintelligence",
+      "title": "Will Ilya Sutskever Create Safe Superintelligence?",
+      "url": "https://firstmovers.ai/ilya-sutskever-safe-superintelligence/",
+      "published_at": "2024-11-06",
       "kind": "blog",
-      "category_ids": [],
-      "focus_keyword": "generative engine optimization implementation",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "superintelligence",
       "organic_keywords": [
-        "what is generative engine optimization"
+        "superintelligence"
       ]
     },
     {
-      "id": 9000010,
-      "slug": "white-collar-job-automation",
-      "title": "White Collar Job Automation",
-      "url": "https://firstmovers.ai/white-collar-job-automation/",
-      "published_at": "",
+      "id": 36524,
+      "slug": "crypto-ai-world",
+      "title": "The Future of Crypto in an AI World: Why Bitcoin Just Got Serious",
+      "url": "https://firstmovers.ai/crypto-ai-world/",
+      "published_at": "2024-10-29",
       "kind": "blog",
-      "category_ids": [],
-      "focus_keyword": "white collar job automation",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "crypto",
       "organic_keywords": [
-        "white collar jobs"
+        "bitcoin and ai"
       ]
     },
     {
-      "id": 9000011,
+      "id": 36426,
+      "slug": "computing-evolving-4x-faster",
+      "title": "NVIDIA CEO&#8217;s Game-Changing Revelation: Computing is Evolving 4x Faster Than Ever Before",
+      "url": "https://firstmovers.ai/computing-evolving-4x-faster/",
+      "published_at": "2024-10-27",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "computing",
+      "organic_keywords": [
+        "computing"
+      ]
+    },
+    {
+      "id": 37456,
+      "slug": "ai-filmmaking",
+      "title": "The Future of AI in Film: How Artificial Intelligence is Revolutionizing Hollywood&#8217;s Landscape",
+      "url": "https://firstmovers.ai/ai-filmmaking/",
+      "published_at": "2024-10-26",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "ai in film",
+      "organic_keywords": [
+        "ai in film"
+      ]
+    },
+    {
+      "id": 35488,
+      "slug": "generative-engine-optimization",
+      "title": "The Rise of Generative Engine Optimization (GEO) and How It’s Transforming SEO",
+      "url": "https://firstmovers.ai/generative-engine-optimization/",
+      "published_at": "2024-10-23",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "rise of generative engine optimization",
+      "organic_keywords": [
+        "rise of generative engine optimization"
+      ]
+    },
+    {
+      "id": 35932,
+      "slug": "googles-alphachip",
+      "title": "Google&#8217;s AlphaChip Can Design AI Chips Now: Did We Hit Matrix-Level?",
+      "url": "https://firstmovers.ai/googles-alphachip/",
+      "published_at": "2024-10-20",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "alphachip",
+      "organic_keywords": [
+        "alphachip"
+      ]
+    },
+    {
+      "id": 35420,
+      "slug": "quantum-computing-breakthrough",
+      "title": "Quantum Computing: Exploring Its Applications, Challenges, and the Quantum Future",
+      "url": "https://firstmovers.ai/quantum-computing-breakthrough/",
+      "published_at": "2024-10-16",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "quantum computing breakthrough",
+      "organic_keywords": [
+        "quantum computing breakthrough"
+      ]
+    },
+    {
+      "id": 35378,
+      "slug": "decentralizing-ai-power",
+      "title": "Decentralizing AI Power: The Key to AGI",
+      "url": "https://firstmovers.ai/decentralizing-ai-power/",
+      "published_at": "2024-10-13",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "decentralizing AI power",
+      "organic_keywords": [
+        "decentralizing AI power"
+      ]
+    },
+    {
+      "id": 35339,
+      "slug": "chatgpt-hacks",
+      "title": "ChatGPT Hacks for Beginners (With Prompts + Examples)",
+      "url": "https://firstmovers.ai/chatgpt-hacks/",
+      "published_at": "2024-10-10",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "chatgpt hacks",
+      "organic_keywords": [
+        "how to hack chat gpt"
+      ]
+    },
+    {
+      "id": 35265,
+      "slug": "flux-ai-image-generator",
+      "title": "Flux AI Image Generator: Create 100% Realistic Headshots (Full Tutorial)",
+      "url": "https://firstmovers.ai/flux-ai-image-generator/",
+      "published_at": "2024-10-08",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "Flux AI image generator",
+      "organic_keywords": [
+        "Flux AI image generator"
+      ]
+    },
+    {
+      "id": 35197,
+      "slug": "openai-leadership-changes",
+      "title": "Mass Exodus of Talent: The Impact of OpenAI Leadership Changes",
+      "url": "https://firstmovers.ai/openai-leadership-changes/",
+      "published_at": "2024-10-06",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "OpenAI leadership changes",
+      "organic_keywords": [
+        "OpenAI leadership changes"
+      ]
+    },
+    {
+      "id": 35112,
+      "slug": "agi-timeline",
+      "title": "Full AGI Timeline: How Close Are We to Humanity’s Last Invention?",
+      "url": "https://firstmovers.ai/agi-timeline/",
+      "published_at": "2024-10-02",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "AGI timeline",
+      "organic_keywords": [
+        "AGI timeline"
+      ]
+    },
+    {
+      "id": 35086,
+      "slug": "openai-agi-levels",
+      "title": "OpenAI’s 5 Steps to AGI: Level 2 Reasoners Officially Here",
+      "url": "https://firstmovers.ai/openai-agi-levels/",
+      "published_at": "2024-10-01",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "OpenAI AGI levels",
+      "organic_keywords": [
+        "OpenAI AGI levels"
+      ]
+    },
+    {
+      "id": 34655,
+      "slug": "openai-o1-model",
+      "title": "OpenAI&#8217;s New Reasoning Model, o1 Strawberry: Is This AGI?",
+      "url": "https://firstmovers.ai/openai-o1-model/",
+      "published_at": "2024-09-25",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "OpenAI O1 model",
+      "organic_keywords": [
+        "OpenAI O1 model"
+      ]
+    },
+    {
+      "id": 34559,
+      "slug": "openai-strawberry-model",
+      "title": "OpenAI Strawberry Model: Dawn of the AI Reasoning Era",
+      "url": "https://firstmovers.ai/openai-strawberry-model/",
+      "published_at": "2024-09-24",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "OpenAI Strawberry model",
+      "organic_keywords": [
+        "OpenAI Strawberry model"
+      ]
+    },
+    {
+      "id": 34356,
+      "slug": "humanoid-robot-economy",
+      "title": "How the Humanoid Robot Economy Shapes Global Markets",
+      "url": "https://firstmovers.ai/humanoid-robot-economy/",
+      "published_at": "2024-09-22",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "humanoid robot economy",
+      "organic_keywords": [
+        "humanoid robot economy"
+      ]
+    },
+    {
+      "id": 1168,
+      "slug": "agi-consciousness-soul",
+      "title": "Exploring AGI Consciousness and the Soul: Can Machines Truly Possess a Soul?",
+      "url": "https://firstmovers.ai/agi-consciousness-soul/",
+      "published_at": "2024-09-18",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "AGI consciousness soul",
+      "organic_keywords": [
+        "AGI consciousness soul"
+      ]
+    },
+    {
+      "id": 37692,
+      "slug": "ai-image-tools",
+      "title": "AI Image Tools in 2024: Which of These 7 is Right for You?",
+      "url": "https://firstmovers.ai/ai-image-tools/",
+      "published_at": "2024-07-26",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "ai image tools",
+      "organic_keywords": [
+        "ai image tools"
+      ]
+    },
+    {
+      "id": 34032,
       "slug": "uncanny-valley-ai",
-      "title": "Uncanny Valley Ai",
+      "title": "Uncanny Valley AI: Navigating the Human-Robot Divide",
       "url": "https://firstmovers.ai/uncanny-valley-ai/",
-      "published_at": "",
+      "published_at": "2024-07-23",
       "kind": "blog",
-      "category_ids": [],
-      "focus_keyword": "uncanny valley ai",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "uncanny valley AI",
       "organic_keywords": [
         "ai valley",
         "uncanny valley",
@@ -1947,43 +2893,644 @@
       ]
     },
     {
-      "id": 9000012,
-      "slug": "ai-content-marketing-tools",
-      "title": "Ai Content Marketing Tools",
-      "url": "https://firstmovers.ai/ai-content-marketing-tools/",
-      "published_at": "",
+      "id": 34232,
+      "slug": "human-ai-evolution",
+      "title": "Will Humans Merge With AI?",
+      "url": "https://firstmovers.ai/human-ai-evolution/",
+      "published_at": "2024-07-15",
       "kind": "blog",
-      "category_ids": [],
-      "focus_keyword": "ai content marketing tools",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "ai",
       "organic_keywords": [
-        "content marketing ai"
+        "ai"
       ]
     },
     {
-      "id": 9000013,
-      "slug": "project-stargate",
-      "title": "Project Stargate",
-      "url": "https://firstmovers.ai/project-stargate/",
-      "published_at": "",
+      "id": 1034,
+      "slug": "ai-singularity-predictions",
+      "title": "Decoding AI Singularity Predictions: How Close Are We?",
+      "url": "https://firstmovers.ai/ai-singularity-predictions/",
+      "published_at": "2024-07-15",
       "kind": "blog",
-      "category_ids": [],
-      "focus_keyword": "project stargate",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "AI singularity predictions",
       "organic_keywords": [
-        "stargate project"
+        "AI singularity predictions"
       ]
     },
     {
-      "id": 9000014,
+      "id": 21175,
+      "slug": "ai-safety",
+      "title": "AI Safety and Responsibility: A Guide for Entrepreneurs",
+      "url": "https://firstmovers.ai/ai-safety/",
+      "published_at": "2024-06-28",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "ai safety",
+      "organic_keywords": [
+        "ai safety"
+      ]
+    },
+    {
+      "id": 34037,
       "slug": "leopold-aschenbrenner-ai-predictions",
-      "title": "Leopold Aschenbrenner Ai Predictions",
+      "title": "Leopold Aschenbrenner AI Predictions: A Vision of Our Future",
       "url": "https://firstmovers.ai/leopold-aschenbrenner-ai-predictions/",
-      "published_at": "",
+      "published_at": "2024-06-24",
       "kind": "blog",
-      "category_ids": [],
-      "focus_keyword": "leopold aschenbrenner ai predictions",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "Leopold Aschenbrenner AI predictions",
       "organic_keywords": [
         "leopold aschenbrenner"
       ]
+    },
+    {
+      "id": 33874,
+      "slug": "ai-6-stages",
+      "title": "6 Stages of AI: Human Productivity in an AGI World",
+      "url": "https://firstmovers.ai/ai-6-stages/",
+      "published_at": "2024-06-08",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "AGI",
+      "organic_keywords": [
+        "AGI"
+      ]
+    },
+    {
+      "id": 33829,
+      "slug": "agi-timeline-predictions-benefits",
+      "title": "When Will AGI Happen? Predictions, Benefits and Risks",
+      "url": "https://firstmovers.ai/agi-timeline-predictions-benefits/",
+      "published_at": "2024-06-01",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "When will AGI happen?",
+      "organic_keywords": [
+        "When will AGI happen?"
+      ]
+    },
+    {
+      "id": 33642,
+      "slug": "ubi-limitations",
+      "title": "The Shortcomings of Universal Basic Income for Humanity",
+      "url": "https://firstmovers.ai/ubi-limitations/",
+      "published_at": "2024-05-19",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "universal basic income",
+      "organic_keywords": [
+        "universal basic income"
+      ]
+    },
+    {
+      "id": 33202,
+      "slug": "post-agi-world",
+      "title": "Beat The Scarcity Trap in a Post-AGI World",
+      "url": "https://firstmovers.ai/post-agi-world/",
+      "published_at": "2024-04-16",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "post-agi world",
+      "organic_keywords": [
+        "post-agi world"
+      ]
+    },
+    {
+      "id": 33041,
+      "slug": "life-post-agi",
+      "title": "What Will Life After AGI Look Like?",
+      "url": "https://firstmovers.ai/life-post-agi/",
+      "published_at": "2024-03-26",
+      "kind": "blog",
+      "category_ids": [
+        10
+      ],
+      "focus_keyword": "life after agi",
+      "organic_keywords": [
+        "life after agi"
+      ]
+    },
+    {
+      "id": 32753,
+      "slug": "ai-truth",
+      "title": "The Truth About AI: Its Real Impact on Humanity",
+      "url": "https://firstmovers.ai/ai-truth/",
+      "published_at": "2024-03-06",
+      "kind": "blog",
+      "category_ids": [
+        14
+      ],
+      "focus_keyword": "AI",
+      "organic_keywords": [
+        "AI"
+      ]
+    },
+    {
+      "id": 32455,
+      "slug": "ai-future",
+      "title": "Shaping Tomorrow: The Future of AI in Business and Life",
+      "url": "https://firstmovers.ai/ai-future/",
+      "published_at": "2024-01-16",
+      "kind": "blog",
+      "category_ids": [
+        13
+      ],
+      "focus_keyword": "future of AI",
+      "organic_keywords": [
+        "future of AI"
+      ]
+    },
+    {
+      "id": 72583,
+      "slug": "clone-deposit",
+      "title": "Youtube Clone Mastermind Deposit",
+      "url": "https://firstmovers.ai/clone-deposit/",
+      "published_at": "2026-05-07",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "clone deposit",
+      "organic_keywords": []
+    },
+    {
+      "id": 72113,
+      "slug": "labs-replay-call",
+      "title": "Full Labs Replay call",
+      "url": "https://firstmovers.ai/labs-replay-call/",
+      "published_at": "2026-05-01",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "labs replay call",
+      "organic_keywords": []
+    },
+    {
+      "id": 72078,
+      "slug": "youtube-clone-mastermind-thank-you",
+      "title": "Youtube Clone Mastermind Thank you",
+      "url": "https://firstmovers.ai/youtube-clone-mastermind-thank-you/",
+      "published_at": "2026-05-01",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "youtube clone mastermind thank you",
+      "organic_keywords": []
+    },
+    {
+      "id": 72027,
+      "slug": "youtube-clone-mastermind-onboarding",
+      "title": "Youtube Clone Mastermind Onboarding",
+      "url": "https://firstmovers.ai/youtube-clone-mastermind-onboarding/",
+      "published_at": "2026-04-30",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "youtube clone mastermind onboarding",
+      "organic_keywords": []
+    },
+    {
+      "id": 71469,
+      "slug": "ai-in-arizona-group",
+      "title": "AI In AZ Group &#8211; You&#8217;re In",
+      "url": "https://firstmovers.ai/ai-in-arizona-group/",
+      "published_at": "2026-04-28",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "ai in arizona group",
+      "organic_keywords": []
+    },
+    {
+      "id": 70846,
+      "slug": "youtube-clone-mastermind",
+      "title": "Youtube Clone Mastermind",
+      "url": "https://firstmovers.ai/youtube-clone-mastermind/",
+      "published_at": "2026-04-24",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "youtube clone mastermind",
+      "organic_keywords": []
+    },
+    {
+      "id": 70462,
+      "slug": "free-blueprint",
+      "title": "Free Blueprint",
+      "url": "https://firstmovers.ai/free-blueprint/",
+      "published_at": "2026-04-20",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "free blueprint",
+      "organic_keywords": []
+    },
+    {
+      "id": 69535,
+      "slug": "bootcamp",
+      "title": "Bootcamp",
+      "url": "https://firstmovers.ai/bootcamp/",
+      "published_at": "2026-04-12",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "bootcamp",
+      "organic_keywords": []
+    },
+    {
+      "id": 69102,
+      "slug": "mcp-ranking-polish-draft",
+      "title": "MCP Ranking Page — Polish Draft",
+      "url": "https://firstmovers.ai/mcp-ranking-polish-draft/",
+      "published_at": "2026-04-07",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "mcp ranking polish draft",
+      "organic_keywords": []
+    },
+    {
+      "id": 69011,
+      "slug": "blueprint-v2-draft",
+      "title": "Blueprint V2 Draft",
+      "url": "https://firstmovers.ai/blueprint-v2-draft/",
+      "published_at": "2026-04-07",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "blueprint v2 draft",
+      "organic_keywords": []
+    },
+    {
+      "id": 68690,
+      "slug": "ai-mcp-website-ranking",
+      "title": "How AI-Powered MCP Tools Improve Your Website Ranking",
+      "url": "https://firstmovers.ai/ai-mcp-website-ranking/",
+      "published_at": "2026-04-06",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "ai mcp website ranking",
+      "organic_keywords": []
+    },
+    {
+      "id": 68928,
+      "slug": "consulting-v2-draft",
+      "title": "Consulting V2 — New Design Draft",
+      "url": "https://firstmovers.ai/consulting-v2-draft/",
+      "published_at": "2026-04-02",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "consulting v2 draft",
+      "organic_keywords": []
+    },
+    {
+      "id": 68926,
+      "slug": "onboarding-fm-c8x3k",
+      "title": "Client Onboarding",
+      "url": "https://firstmovers.ai/onboarding-fm-c8x3k/",
+      "published_at": "2026-03-31",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "onboarding fm c8x3k",
+      "organic_keywords": []
+    },
+    {
+      "id": 68463,
+      "slug": "chat",
+      "title": "Chat",
+      "url": "https://firstmovers.ai/chat/",
+      "published_at": "2026-03-17",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "chat",
+      "organic_keywords": []
+    },
+    {
+      "id": 68318,
+      "slug": "claude-consulting-booking",
+      "title": "Claude Consulting Booking",
+      "url": "https://firstmovers.ai/claude-consulting-booking/",
+      "published_at": "2026-03-13",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "claude consulting booking",
+      "organic_keywords": []
+    },
+    {
+      "id": 68106,
+      "slug": "claude-consulting",
+      "title": "Claude Consulting",
+      "url": "https://firstmovers.ai/claude-consulting/",
+      "published_at": "2026-03-12",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "claude consulting",
+      "organic_keywords": []
+    },
+    {
+      "id": 67761,
+      "slug": "ethos",
+      "title": "Ethos",
+      "url": "https://firstmovers.ai/ethos/",
+      "published_at": "2026-03-03",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "ethos",
+      "organic_keywords": []
+    },
+    {
+      "id": 67439,
+      "slug": "marketing-automation-plus-onboarding",
+      "title": "Marketing Automation Plus Onboarding",
+      "url": "https://firstmovers.ai/marketing-automation-plus-onboarding/",
+      "published_at": "2026-02-13",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "marketing automation plus onboarding",
+      "organic_keywords": []
+    },
+    {
+      "id": 67284,
+      "slug": "marketing-automation-plus",
+      "title": "Marketing Automation Plus",
+      "url": "https://firstmovers.ai/marketing-automation-plus/",
+      "published_at": "2026-02-03",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "marketing automation plus",
+      "organic_keywords": []
+    },
+    {
+      "id": 67253,
+      "slug": "marketing-automation",
+      "title": "Marketing Automation",
+      "url": "https://firstmovers.ai/marketing-automation/",
+      "published_at": "2026-02-03",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "marketing automation",
+      "organic_keywords": []
+    },
+    {
+      "id": 67084,
+      "slug": "application-received",
+      "title": "Application Received",
+      "url": "https://firstmovers.ai/application-received/",
+      "published_at": "2026-01-27",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "application received",
+      "organic_keywords": []
+    },
+    {
+      "id": 65778,
+      "slug": "consulting-booking",
+      "title": "Consulting Booking",
+      "url": "https://firstmovers.ai/consulting-booking/",
+      "published_at": "2026-01-14",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "consulting booking",
+      "organic_keywords": []
+    },
+    {
+      "id": 65499,
+      "slug": "consulting",
+      "title": "Consulting",
+      "url": "https://firstmovers.ai/consulting/",
+      "published_at": "2026-01-13",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "consulting",
+      "organic_keywords": []
+    },
+    {
+      "id": 59057,
+      "slug": "labs",
+      "title": "Labs",
+      "url": "https://firstmovers.ai/labs/",
+      "published_at": "2025-10-18",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "labs",
+      "organic_keywords": []
+    },
+    {
+      "id": 54854,
+      "slug": "blueprint",
+      "title": "Blueprint",
+      "url": "https://firstmovers.ai/blueprint/",
+      "published_at": "2025-09-12",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "blueprint",
+      "organic_keywords": []
+    },
+    {
+      "id": 54670,
+      "slug": "david-shapiro-thank-you",
+      "title": "David Shapiro Thank You",
+      "url": "https://firstmovers.ai/david-shapiro-thank-you/",
+      "published_at": "2025-09-11",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "david shapiro thank you",
+      "organic_keywords": []
+    },
+    {
+      "id": 51680,
+      "slug": "david-shapiro",
+      "title": "David Shapiro",
+      "url": "https://firstmovers.ai/david-shapiro/",
+      "published_at": "2025-08-20",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "david shapiro",
+      "organic_keywords": []
+    },
+    {
+      "id": 50989,
+      "slug": "home",
+      "title": "Home",
+      "url": "https://firstmovers.ai/",
+      "published_at": "2025-08-17",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "home",
+      "organic_keywords": []
+    },
+    {
+      "id": 46908,
+      "slug": "affiliate-program",
+      "title": "Affiliate Program",
+      "url": "https://firstmovers.ai/affiliate-program/",
+      "published_at": "2025-05-12",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "affiliate program",
+      "organic_keywords": []
+    },
+    {
+      "id": 45773,
+      "slug": "ty-booking-consultation",
+      "title": "Thank You Booking Consultation",
+      "url": "https://firstmovers.ai/ty-booking-consultation/",
+      "published_at": "2025-04-28",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "ty booking consultation",
+      "organic_keywords": []
+    },
+    {
+      "id": 41986,
+      "slug": "digital-video-clone",
+      "title": "Digital Video Clone​",
+      "url": "https://firstmovers.ai/digital-video-clone/",
+      "published_at": "2025-03-18",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "digital video clone",
+      "organic_keywords": []
+    },
+    {
+      "id": 41965,
+      "slug": "performance-ai-agents",
+      "title": "Performance AI Agent​s",
+      "url": "https://firstmovers.ai/performance-ai-agents/",
+      "published_at": "2025-03-18",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "performance ai agents",
+      "organic_keywords": []
+    },
+    {
+      "id": 41778,
+      "slug": "automated-content-machine",
+      "title": "Automated Content Machine",
+      "url": "https://firstmovers.ai/automated-content-machine/",
+      "published_at": "2025-03-13",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "automated content machine",
+      "organic_keywords": []
+    },
+    {
+      "id": 41475,
+      "slug": "custom-ai-solutions",
+      "title": "Custom AI Solutions",
+      "url": "https://firstmovers.ai/custom-ai-solutions/",
+      "published_at": "2025-03-12",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "custom ai solutions",
+      "organic_keywords": [
+        "custom ai solutions"
+      ]
+    },
+    {
+      "id": 38614,
+      "slug": "policy",
+      "title": "Policy",
+      "url": "https://firstmovers.ai/policy/",
+      "published_at": "2025-01-21",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "policy",
+      "organic_keywords": []
+    },
+    {
+      "id": 38571,
+      "slug": "youre-in",
+      "title": "Thank You &#8211; You&#8217;re In! (Email List)",
+      "url": "https://firstmovers.ai/youre-in/",
+      "published_at": "2025-01-19",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "youre in",
+      "organic_keywords": []
+    },
+    {
+      "id": 38044,
+      "slug": "thank-you",
+      "title": "Thank You",
+      "url": "https://firstmovers.ai/thank-you/",
+      "published_at": "2024-12-17",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "thank you",
+      "organic_keywords": []
+    },
+    {
+      "id": 37146,
+      "slug": "hiring",
+      "title": "Hiring",
+      "url": "https://firstmovers.ai/hiring/",
+      "published_at": "2024-11-29",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "hiring",
+      "organic_keywords": []
+    },
+    {
+      "id": 37042,
+      "slug": "sneak-peek-youre-in",
+      "title": "Secret Sneak Peek (Labs)",
+      "url": "https://firstmovers.ai/sneak-peek-youre-in/",
+      "published_at": "2024-11-21",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "sneak peek youre in",
+      "organic_keywords": []
+    },
+    {
+      "id": 35747,
+      "slug": "blog",
+      "title": "Blog",
+      "url": "https://firstmovers.ai/blog/",
+      "published_at": "2024-11-07",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "blog",
+      "organic_keywords": []
+    },
+    {
+      "id": 35681,
+      "slug": "investors",
+      "title": "Investors",
+      "url": "https://firstmovers.ai/investors/",
+      "published_at": "2024-11-07",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "investors",
+      "organic_keywords": []
+    },
+    {
+      "id": 148,
+      "slug": "podcast",
+      "title": "Podcast",
+      "url": "https://firstmovers.ai/podcast/",
+      "published_at": "2024-11-02",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "podcast",
+      "organic_keywords": []
+    },
+    {
+      "id": 18,
+      "slug": "hire-julia-mccoy",
+      "title": "Hire Julia McCoy",
+      "url": "https://firstmovers.ai/hire-julia-mccoy/",
+      "published_at": "2024-11-01",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "hire julia mccoy",
+      "organic_keywords": []
     }
   ]
 }
