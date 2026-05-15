@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from dataclasses import asdict, dataclass, field
 from datetime import date, datetime, timezone
@@ -28,6 +29,7 @@ from pathlib import Path
 from typing import Any, Final
 
 from .discover import SOURCE_WEIGHTS, Candidate
+from .identities import CONTENT_PROJECTS_LIST_ID
 from .slate import SlateProposal, _slug_from_focus_keyword
 
 DAILY_DIR: Final[Path] = (
@@ -97,11 +99,23 @@ def save_state(state: DailyState, dir_: Path = DAILY_DIR) -> Path:
     return p
 
 
+_DAILY_FILENAME_RE: Final = re.compile(r"^\d{4}-\d{2}-\d{2}\.json$")
+
+
 def list_states(dir_: Path = DAILY_DIR) -> list[DailyState]:
+    """Load every active daily-state file.
+
+    Only filenames matching the strict ``YYYY-MM-DD.json`` pattern count.
+    This excludes archived/renamed files (e.g., ``2026-05-09.test-archive.json``
+    or ``2026-05-12.test-archive-pre-e2e.json``) which would otherwise re-enter
+    the pipeline as ``pending_approval`` states and cause duplicate drafts.
+    """
     if not dir_.exists():
         return []
     out: list[DailyState] = []
     for p in sorted(dir_.glob("*.json")):
+        if not _DAILY_FILENAME_RE.match(p.name):
+            continue
         try:
             with p.open(encoding="utf-8") as fh:
                 data = json.load(fh)
@@ -272,6 +286,59 @@ def _main(argv: list[str] | None = None) -> int:
 
     parser.print_help()
     return 0
+
+
+# ---------------------------------------------------------------------------
+# Dual-mode safety: ClickUp-side idempotency check
+# ---------------------------------------------------------------------------
+#
+# During the 7-day cutover window where both the legacy `/schedule` cloud
+# routine and the new `/loop` local routine fire on the same day, the local
+# state file in `data/runs/_daily/<DATE>.json` cannot prevent the cloud
+# routine from emitting a duplicate task (the cloud routine has no access to
+# the local disk). This helper queries ClickUp for an existing daily-idea
+# task tagged `fm-content-daily` with name starting `[<today>]`. If found,
+# the caller should mirror that task id into local state and skip emit.
+#
+# Remove this helper (and its call site in workflows/content-daily-idea-loop.md)
+# after the cutover window closes and the cloud routines are disabled.
+
+
+def should_skip_for_clickup_dup(
+    today: str,
+    clickup_search_fn,
+) -> tuple[bool, str | None]:
+    """Check ClickUp for an existing daily-idea task for `today`.
+
+    Args:
+        today: YYYY-MM-DD date string in operator's working timezone (Phoenix).
+        clickup_search_fn: Callable that takes ClickUp search kwargs and
+            returns a dict with a "tasks" list. Pass the MCP tool
+            `clickup_search` from the agent context, or a `tools.clickup`
+            wrapper for local testing.
+
+    Returns:
+        (skip, task_id):
+            skip=True means a duplicate already exists for today and the
+            caller should NOT emit a new task. task_id is the existing
+            ClickUp id to mirror into local state.
+            skip=False means no duplicate; proceed with normal emit flow.
+    """
+    prefix = f"[{today}]"
+    resp = clickup_search_fn(
+        list_id=CONTENT_PROJECTS_LIST_ID,
+        tags=["fm-content-daily"],
+        order_by="created",
+        reverse=True,
+        limit=5,
+    )
+    for task in resp.get("tasks", []):
+        if not task.get("name", "").startswith(prefix):
+            continue
+        tag_names = {t.get("name") for t in task.get("tags", [])}
+        if "fm-content-daily" in tag_names:
+            return True, task.get("id")
+    return False, None
 
 
 def _format_state_summary(s: DailyState) -> str:

@@ -7,6 +7,13 @@ description: Use when writing or auditing a blog post for firstmovers.ai. Captur
 
 Canonical reference for writing or auditing any blog post on firstmovers.ai. Synthesizes the Rank Math grading rubric, the published-post profile (15 most recent published posts, 2026-04-29 sample), and the validators baked into `tools/rubric.py`.
 
+> **See also (sibling skills — load these for the relevant phase):**
+> - `fm-prose-generation` — the **method** to write a body that hits this rubric
+> - `fm-wordpress-push` — pushing a validated draft to WP
+> - `fm-ahrefs` / `fm-gsc` / `fm-ga4` / `fm-searchable` — discovery
+> - `fm-cannibalization` — the gate that runs before discovery and again before assembly
+> - `fm-clickup-ops` — the human-loop surface
+
 > **v1 ships text-only drafts.** No images. Nikki adds a featured image post-publish if she wants one. To re-enable image requirements, see the bottom of section 6.
 
 > **Outcome target:** every draft scores ≥75/100 in Rank Math on first review (without images, the ceiling drops slightly — Rank Math grades the "Use of Media" check at 0/4 when the body has no images, but the rest of the rubric still earns 75-85).

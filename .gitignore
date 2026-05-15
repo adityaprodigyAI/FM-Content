@@ -27,6 +27,10 @@ Thumbs.db
 
 # Local Claude Code permission config (machine-specific)
 .claude/settings.local.json
+.claude/scheduled_tasks.lock
+
+# Playwright MCP local artifacts
+.playwright-mcp/
 
 # Inventory snapshots may be large — track only if reasonable size
 # data/inventory/*.json

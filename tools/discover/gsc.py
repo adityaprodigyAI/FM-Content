@@ -22,6 +22,7 @@ import math
 from typing import Any, Final
 
 from ..identities import (
+    SITE_HOST,
     WP_CATEGORY_AGI,
     WP_CATEGORY_AI_AUTOMATION,
     WP_CATEGORY_AI_CONSULTING,
@@ -169,7 +170,7 @@ def discover(
 
 
 def _is_existing_fm_url(url: str, inventory: Inventory) -> bool:
-    """True if `url` is a firstmovers.ai URL already in the inventory.
+    """True if `url` is a URL on the client's own site already in inventory.
 
     Defends against the W20 bug — GSC striking-distance queries can rank our
     OWN pages, and we should never propose a new topic for a query whose
@@ -178,12 +179,16 @@ def _is_existing_fm_url(url: str, inventory: Inventory) -> bool:
     if not url:
         return False
     cleaned = url.strip().lower()
-    if not (cleaned.startswith("https://firstmovers.ai") or cleaned.startswith("http://firstmovers.ai")):
+    host = SITE_HOST.lower()
+    if not (
+        cleaned.startswith(f"https://{host}")
+        or cleaned.startswith(f"http://{host}")
+    ):
         return False
     # Strict URL match
     if inventory.has_url(cleaned):
         return True
-    # Slug match — the URL points at firstmovers.ai but the inventory may
+    # Slug match — the URL points at the client's site but the inventory may
     # store a slightly different URL form. Pull the slug and compare.
     slug = inventory.slug_from_fm_url(cleaned)
     if slug and slug in inventory.all_slugs():

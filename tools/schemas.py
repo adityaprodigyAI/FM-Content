@@ -19,6 +19,8 @@ import json
 from dataclasses import dataclass
 from typing import Any
 
+from .identities import BRAND_NAME, SITE_BASE_URL
+
 
 @dataclass(frozen=True)
 class FaqItem:
@@ -50,11 +52,11 @@ def blog_posting(
     description: str,
     canonical_url: str,
     author_name: str = "Josh McCoy",
-    author_url: str = "https://firstmovers.ai/author/websitegenius/",
-    publisher_name: str = "First Movers",
-    publisher_url: str = "https://firstmovers.ai",
+    author_url: str = f"{SITE_BASE_URL}/author/websitegenius/",
+    publisher_name: str = BRAND_NAME,
+    publisher_url: str = SITE_BASE_URL,
     publisher_logo_url: str = (
-        "https://firstmovers.ai/wp-content/uploads/2024/01/first-movers-logo.png"
+        f"{SITE_BASE_URL}/wp-content/uploads/2024/01/first-movers-logo.png"
     ),
     date_published: str,
     date_modified: str | None = None,
@@ -92,7 +94,7 @@ def breadcrumb_list(
     *,
     blog_title: str,
     canonical_url: str,
-    site_base_url: str = "https://firstmovers.ai",
+    site_base_url: str = SITE_BASE_URL,
 ) -> dict[str, Any]:
     """Build a 3-level breadcrumb. Same warning as blog_posting()."""
     return {

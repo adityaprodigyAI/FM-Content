@@ -26,6 +26,7 @@ from dataclasses import dataclass
 from typing import Final
 
 from .identities import (
+    SITE_HOST,
     VALID_WP_CATEGORY_IDS,
     WP_CATEGORY_AGI,
     WP_CATEGORY_AI_AUTOMATION,
@@ -36,8 +37,10 @@ from .identities import (
     WP_CATEGORY_AI_TOOLS,
 )
 
+# The client's own host(s) — a self-citation is never a valid "external" link.
+# Sourced from client_config.toml [brand].site_host via identities.
 INTERNAL_HOSTS: Final[frozenset[str]] = frozenset(
-    {"firstmovers.ai", "www.firstmovers.ai"}
+    {SITE_HOST, f"www.{SITE_HOST}"}
 )
 
 

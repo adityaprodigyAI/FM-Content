@@ -1,0 +1,40 @@
+{
+  "date": "2026-05-12",
+  "proposal": {
+    "focus_keyword": "ai sales pipeline",
+    "working_title": "AI Sales Pipeline: How SMB Teams Build Predictable Revenue with AI in 2026",
+    "one_line_angle": "Predictable revenue beats hustle metrics. Here's the operator playbook for an AI-assisted sales pipeline that doesn't need a 20-person team.",
+    "outline_bullets": [
+      "What an AI-assisted sales pipeline actually looks like in production",
+      "The four pipeline stages where AI moves the needle (and where it doesn't)",
+      "Building it without a six-figure stack: tools, integrations, and the order to add them"
+    ],
+    "slug": "ai-sales-pipeline",
+    "audience": "done-for-you",
+    "category_id": 29,
+    "intent": "informational",
+    "target_date": "2026-05-12",
+    "discovery_source": "manual_seed_2026-05-12",
+    "discovery_id": "manual:test-end-to-end-after-mcp-fix",
+    "discovery_evidence": {
+      "reason": "manual test seed to verify autonomous polling-drafter end-to-end after MCP routing fix on 2026-05-12",
+      "cannibalization_severity": "clear",
+      "category_match": "29 (AI Sales)",
+      "audience_routing": "done-for-you -> /consulting/"
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "manual seed: cannibalization.evaluate() returned severity=\"clear\" against 157-post inventory",
+    "matched_post_url": null,
+    "score": 10.0
+  },
+  "clickup_task_id": "86ahe10xa",
+  "clickup_emitted_at": "2026-05-12T09:21:53.144126+00:00",
+  "approved_at": null,
+  "approved_status_name": null,
+  "wp_post_id": null,
+  "wp_edit_url": null,
+  "drafted_at": null,
+  "notes": [
+    "Manual seed for end-to-end verification of polling-drafter after MCP-routing fix (commit f17915e, 2026-05-12 07:46 UTC)."
+  ]
+}

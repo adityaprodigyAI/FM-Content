@@ -1,0 +1,123 @@
+# ============================================================================
+# CONTENT PIPELINE — PER-CLIENT CONFIGURATION
+# ============================================================================
+# This is the ONE file you edit to retarget the whole content-automation
+# pipeline to a new client. Fill in every value below for the new client,
+# connect their MCPs, populate .env, and the pipeline runs against their site.
+#
+# The pipeline code (tools/) reads everything client-specific from this file.
+# You should not need to edit any .py file to onboard a new client — only:
+#   1. this file
+#   2. .env  (credentials — see .env.example)
+#   3. tools/external_links.py   (curated citation allowlist — per-brand)
+#   4. tools/internal_links.py   (the client's own Tier-1 + cross-link URLs)
+#   5. .claude/skills/<client>-blog-rubric/SKILL.md  (brand voice + profile)
+#
+# See docs/DEPLOYMENT-SOP.md for the full new-client onboarding walkthrough.
+#
+# Current values below are First Movers (firstmovers.ai) — the reference
+# implementation. Replace them wholesale for a new client.
+# ============================================================================
+
+[brand]
+# Human-readable client/brand name. Used in skill names, docs, comments.
+name = "First Movers"
+# Canonical site URL, no trailing slash.
+site_base_url = "https://firstmovers.ai"
+# Bare host. Used by the cannibalization gate's "is this already our URL" check
+# and by external_links.py to reject self-citations.
+site_host = "firstmovers.ai"
+
+[wordpress]
+# The WP user id that authors every draft (post_author). The pipeline always
+# pushes drafts under this author. Find it via:
+#   GET /wp-json/wp/v2/users  (look up the intended author)
+author_id = 3
+# Valid blog category ids. The rubric REJECTS any draft whose category is not
+# in this set. Get the client's category ids from:
+#   GET /wp-json/wp/v2/categories?per_page=100
+category_ids = [10, 13, 14, 27, 28, 29, 30]
+# Credentials live in .env (never committed):
+#   FM_WP_USER           = WP Application Password username
+#   FM_WP_APP_PASSWORD   = WP Application Password (not the login password)
+# Direct REST + a browser User-Agent is used because the WP MCP is firewalled;
+# see memory/project_wp_mcp_blocked.md.
+
+[clickup]
+# The ClickUp workspace, the list daily-idea tasks land in, and the canary
+# task the pipeline posts status/heartbeat comments to.
+workspace_id = "9013404166"
+content_projects_list_id = "901326229295"
+pipeline_status_task_id = "86ah3ywyh"
+# The human who approves daily-idea tasks (the approval gate). The daily-idea
+# task is assigned to this user; the polling-drafter drafts once they flip the
+# task status to a done-type status.
+approver_user_id = 26221739
+# Display name of the approver. Used only in the human-readable ClickUp
+# comment the pipeline posts after a draft push ("<approver>: review, ...").
+approver_name = "Nikki"
+# Optional — the person who signs off the CTA before publish. Informational.
+cta_approver_user_id = 120239313
+# Display name of the CTA approver. Used only in the ClickUp comment text.
+cta_approver_name = "Josh"
+
+[searchable]
+# Searchable.ai project id for AEO (answer-engine) discovery. Get it from
+# mcp__claude_ai_searchable__list_projects. Set to "" to disable Searchable.
+project_id = "a04206b9-89ae-4175-8d4d-af48af32a1c6"
+
+[ga4]
+# Google Analytics 4 property id for traffic-decay discovery.
+# Auth is via the GOOGLE_APPLICATION_CREDENTIALS env var (service-account JSON).
+# Set property_id = "" to disable GA4 discovery.
+property_id = "466054145"
+
+[gsc]
+# Google Search Console property for striking-distance discovery.
+# Use the sc-domain: form for a domain property, or the full https:// URL
+# for a URL-prefix property. Set to "" to disable GSC discovery.
+site_url = "sc-domain:firstmovers.ai"
+
+[discovery]
+# Ahrefs competitor-gap rotation — one competitor domain per weekday, in
+# Monday..Sunday order. The daily-idea routine pulls the competitor for the
+# current weekday to keep Ahrefs API cost bounded. Pick competitors the client
+# wants to out-rank (keywords they rank for and the client does not = the gap).
+competitor_rotation = [
+    "mckinsey.com",   # Monday
+    "bcg.com",        # Tuesday
+    "bain.com",       # Wednesday
+    "hubspot.com",    # Thursday
+    "accenture.com",  # Friday
+    "deloitte.com",   # Saturday
+    "mckinsey.com",   # Sunday
+]
+# Keyword-difficulty ceiling (Ahrefs KD, 0-100). Candidates above this are
+# skipped — too hard to rank for. Tune to the client's domain rating: a
+# DR-30 site should keep this ~50-60; a DR-70 site can push to 75+.
+kd_ceiling = 60
+
+[audience_routing]
+# Each audience tier maps to the CTA destination path on the client's site.
+# The rubric HARD-FAILS a draft whose CTA does not match its audience.
+# Keys must be exactly "done-for-you" and "diy" (the two audience tiers).
+"done-for-you" = "/consulting/"
+"diy" = "/labs/"
+
+[schedule]
+# Operator timezone — the timezone the local machine running /loop is in.
+# CronCreate interprets /loop cron expressions in THIS timezone, not UTC.
+operator_timezone = "Asia/Kolkata"
+# /loop cron expressions, in operator-local time.
+# daily_idea target: 07:00 in the client's content timezone.
+#   First Movers content tz = America/Phoenix (UTC-7). 07:00 Phoenix = 19:33 IST.
+daily_idea_local_cron = "33 19 * * *"
+polling_drafter_local_cron = "0 */3 * * *"
+# The timezone daily-idea uses to key its state files (one file per this-tz day).
+content_timezone = "America/Phoenix"
+
+[rubric]
+# Which blog-rubric skill the prose generator loads. Each client gets their own
+# copy of the rubric skill with their brand voice, profile stats, and power
+# words. Create .claude/skills/<this-value>/SKILL.md per client.
+skill_name = "firstmovers-blog-rubric"

@@ -41,8 +41,10 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 from .identities import (
+    APPROVER_NAME,
     CONTENT_PIPELINE_STATUS_TASK_ID,
     CONTENT_PROJECTS_LIST_ID,
+    CTA_APPROVER_NAME,
     NIKKI_CLICKUP_USER_ID,
 )
 from .slate import Slate, SlateProposal
@@ -245,7 +247,10 @@ def build_edit_url_reply(
         f"Rank Math meta set on {rank_math_set_count} of "
         f"{len(edit_urls_by_focus_kw)} drafts."
     )
-    lines.append("Nikki: review, add featured image, request Josh CTA approval, publish.")
+    lines.append(
+        f"{APPROVER_NAME}: review, add featured image, "
+        f"request {CTA_APPROVER_NAME} CTA approval, publish."
+    )
     return "\n".join(lines)
 
 

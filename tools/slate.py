@@ -20,6 +20,7 @@ from typing import Any, Final
 
 from .cannibalization import ProposedTopic, evaluate
 from .discover import SOURCE_WEIGHTS, Candidate
+from .identities import BRAND_NAME
 from .inventory import Inventory
 
 SLATE_TARGET_COUNT: Final[int] = 12
@@ -262,7 +263,7 @@ def _default_angle(cand: Candidate) -> str:
     sources = {
         "gsc_striking_distance": "Real demand we already partially rank for; one clean post away from page 1.",
         "ahrefs_competitor_gap": "Competitor ranks for this; we don't. Owning it shifts SoV in the SERP.",
-        "searchable_prompt": "AI engines cite competitors here; a focused post earns First Movers a citation.",
+        "searchable_prompt": f"AI engines cite competitors here; a focused post earns {BRAND_NAME} a citation.",
         "searchable_competitor_topic": "Topic where our share of voice is below threshold across AI engines.",
         "ga4_high_traffic_gap": "Companion post to feed an already-rising page; creates a topical cluster.",
     }
@@ -276,7 +277,7 @@ def _default_outline(cand: Candidate) -> list[str]:
     return [
         f"Why {cand.focus_keyword} matters now (the operator-level reason)",
         f"How leading teams approach {cand.focus_keyword} (3 patterns from the field)",
-        f"How First Movers helps with {cand.focus_keyword} (audience-routed CTA)",
+        f"How {BRAND_NAME} helps with {cand.focus_keyword} (audience-routed CTA)",
     ]
 
 
