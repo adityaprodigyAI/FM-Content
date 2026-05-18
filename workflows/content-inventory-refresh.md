@@ -8,18 +8,30 @@
 
 ## Step-by-step
 
-### 1. Pull WordPress published BLOGS (categories 10, 13, 14, 27, 28, 29, 30)
+### 1. Pull ALL WordPress published BLOG posts (every category, all pages)
+
+The cannibalization gate must compare against EVERY published post — a post in
+any category can own a focus keyword a new draft would collide with. Pull every
+published post, with NO category filter, paginating until you have them all
+(`per_page` maxes at 100; the live site has ~260 posts = ~3 pages):
 
 ```
+# Repeat for page = 1, 2, 3, ... until a page returns fewer than per_page rows.
 mcp__first-movers-wordpress__wp_posts_search(
   per_page=100,
+  page=<1, then 2, 3, ...>,
   status="publish",
-  categories="10,13,14,27,28,29,30",
   _fields="id,slug,title,link,date,categories"
 )
 ```
 
-Save the response as `wp_posts`.
+Concatenate every page into `wp_posts`.
+
+> **Do NOT filter by category.** The old `categories="10,13,14,27,28,29,30"`
+> filter (the categories new drafts use) silently dropped ~58 published posts in
+> other categories — e.g. post 34171 `resource-based-economy` (category 11) —
+> which caused the cannibalization gate to false-clear topics those posts
+> already own. The gate needs the whole site.
 
 ### 2. Pull WordPress published PAGES
 

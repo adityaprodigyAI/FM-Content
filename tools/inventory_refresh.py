@@ -60,22 +60,29 @@ Inventory refresh plan
 
 To rebuild data/inventory/firstmovers-ai.json, the agent must collect:
 
-1. WordPress published BLOG posts (categories 10, 13, 14, 27, 28, 29, 30):
+1. ALL WordPress published BLOG posts — every category, paginated:
      mcp__first-movers-wordpress__wp_posts_search
        per_page=100
+       page=1, 2, 3, ...   (paginate until every post is collected)
        status=publish
        _fields=id,slug,title,link,date,categories
-     -> bundle["wp_posts"]
+     -> bundle["wp_posts"]   (concatenate every page)
+
+   Do NOT filter by category. The cannibalization gate must see every
+   published post; a post in ANY category can own a focus keyword. The old
+   categories="10,13,14,27,28,29,30" filter dropped ~58 posts (e.g. post
+   34171 resource-based-economy, category 11) and caused false-clears.
 
 2. WordPress published PAGES (Tier-1 landing pages + everything in /pages/):
      mcp__first-movers-wordpress__wp_pages_search
        per_page=100
+       page=1, 2, ...      (paginate)
        status=publish
        _fields=id,slug,title,link,date
      -> bundle["wp_pages"]
 
-   (THIS WAS THE W20 BUG ORIGIN — pages MUST be collected, otherwise
-   resources like /resource-based-economy/ slip past the cannibalization gate.)
+   (Pages MUST be collected too — both posts and pages flow through the
+   cannibalization gate.)
 
 3. Rank Math focus keyword PER POST/PAGE, via:
      mcp__first-movers-wordpress__wp_get_post  (with meta=true)
