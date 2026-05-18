@@ -35,11 +35,11 @@
   },
   "clickup_task_id": "86ahgk6x3",
   "clickup_emitted_at": "2026-05-15T16:57:33.833085+00:00",
-  "approved_at": null,
-  "approved_status_name": null,
-  "wp_post_id": null,
-  "wp_edit_url": null,
-  "drafted_at": null,
+  "approved_at": "2026-05-18T10:00:56.292401+00:00",
+  "approved_status_name": "published",
+  "wp_post_id": 72710,
+  "wp_edit_url": "https://firstmovers.ai/wp-admin/post.php?post=72710&action=edit",
+  "drafted_at": "2026-05-18T10:07:01.678060+00:00",
   "notes": [
     "Daily-idea re-run 2026-05-15 after inventory refresh. Original 19:33 IST fire blocked on stale inventory; inventory rebuilt 157->245 posts, then re-ran."
   ]
