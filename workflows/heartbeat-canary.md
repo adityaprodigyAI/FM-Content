@@ -1,6 +1,6 @@
 # Heartbeat canary — /schedule safety net
 
-> **Goal.** If the /loop is not firing (operator's Claude Code is closed, Windows is asleep, machine is off, or future-VM is down), this /schedule routine still fires from claude.ai cloud and pings the ClickUp pipeline status task. The operator notices, restarts whatever needs restarting.
+> **Goal.** If the VPS jobs are not firing (VPS down, cron broken, or the Claude login expired), this /schedule routine still fires from claude.ai cloud — independently of the VPS — and pings the ClickUp pipeline status task. The operator notices and fixes whatever needs fixing.
 
 > **Templating.** This routine runs in the claude.ai cloud sandbox — it has NO access to the repo, so it cannot read `client_config.toml`. The two ClickUp ids below appear as `<<PLACEHOLDERS>>`. Before running `/schedule create`, substitute them with the client's real values from `client_config.toml`:
 > - `<<CONTENT_PROJECTS_LIST_ID>>` ← `clickup.content_projects_list_id`
@@ -8,7 +8,7 @@
 
 > **Cron.** `0 */12 * * *` UTC (every 12 hours: 00:00 and 12:00 UTC).
 
-> **Why.** /loop runs in the operator's local Claude Code session. If that session is closed, no /loop fires and no errors surface. This heartbeat is the independent canary. Especially important in the local-first phase where the workstation is NOT always-on.
+> **Why.** The daily-idea and polling-drafter jobs run as system cron on the VPS. If the VPS goes down or a job silently breaks, no errors surface anywhere. This heartbeat runs in the claude.ai cloud, completely independent of the VPS, so it is the one thing that can still raise the alarm.
 
 ---
 
@@ -37,7 +37,7 @@ WORKFLOW:
      resp = clickup_search(list_id='<<CONTENT_PROJECTS_LIST_ID>>', tags=['fm-content-daily'], order_by='created', reverse=True, limit=1)
 
 2. If resp has no tasks at all, ALERT and exit:
-     clickup_create_task_comment(task_id='<<PIPELINE_STATUS_TASK_ID>>', comment_text='Heartbeat ALERT: no daily-idea tasks found in the recent window. /loop machine may be offline or the daily-idea routine has been broken for >1 week.')
+     clickup_create_task_comment(task_id='<<PIPELINE_STATUS_TASK_ID>>', comment_text='Heartbeat ALERT: no daily-idea tasks found in the recent window. The VPS may be offline or the daily-idea job has been broken for >1 week.')
      exit 0
 
 3. Otherwise, compute hours since the latest task's date_created (ClickUp returns it as ms since epoch as a string):
@@ -48,7 +48,7 @@ WORKFLOW:
      hours_since = (now - created_at).total_seconds() / 3600
 
 4. If hours_since > 36, ALERT regardless of fire hour:
-     clickup_create_task_comment(task_id='<<PIPELINE_STATUS_TASK_ID>>', comment_text=f'Heartbeat ALERT: last daily-idea task was {hours_since:.1f} hours ago. Expected fresh task every 24h. /loop machine may be offline; restart Claude Code on the operator workstation.')
+     clickup_create_task_comment(task_id='<<PIPELINE_STATUS_TASK_ID>>', comment_text=f'Heartbeat ALERT: last daily-idea task was {hours_since:.1f} hours ago. Expected fresh task every 24h. The VPS may be down or cron may have stopped — SSH into the VPS and check.')
      exit 0
 
 5. Otherwise (healthy), check the current UTC hour:
@@ -83,4 +83,4 @@ This routine is intentionally minimal. If even this fails, investigate the Click
 
 ## When to retire
 
-When the future VM plan is implemented and /loop is running 24/7 on always-on infrastructure, this heartbeat becomes lower-priority — but keep it. The VM can also fail. The heartbeat is the only thing that pages independently of /loop infrastructure.
+Never — keep it. The jobs now run on an always-on VPS, but the VPS can still fail (downtime, an expired Claude login, a broken cron). This heartbeat is the only thing that pages independently of the VPS, so it stays.

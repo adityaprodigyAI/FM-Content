@@ -1,12 +1,12 @@
-# Daily idea — /loop variant (runs in operator's local Claude Code, all 4 discovery sources)
+# Daily idea — runs on the VPS via system cron, all 4 discovery sources
 
 > **Goal.** Once per day (target: 07:00 in the client's content timezone), post ONE blog topic to ClickUp for the approver to review. Uses all 4 discovery sources (Ahrefs gap + GSC striking-distance + GA4 decay + Searchable AEO).
 >
 > All client-specific values (content timezone, approver, ClickUp ids, GSC/GA4/Searchable targets, competitor rotation) come from `client_config.toml`. This workflow hardcodes none of them.
 
-> **Runtime.** Register with `/loop` inside the operator's local Claude Code session, using the cron in `client_config.toml` → `schedule.daily_idea_local_cron` (already converted to the operator's local timezone — see `schedule.operator_timezone`). The state-file idempotency guarantees only one emit per content-timezone day even if firing drifts by a few hours.
+> **Runtime.** This workflow is executed by the daily-idea **system cron job** on the always-on VPS — the `~/fm-content/scripts/run-job.sh` wrapper runs `claude -p` against this file once per day. The state-file idempotency guarantees only one emit per content-timezone day even if firing drifts by a few hours. (The filename keeps the `-loop` suffix for compatibility; it is no longer a `/loop`.)
 
-> **Why /loop not /schedule.** Three of the four discovery sources (GSC, GA4, Searchable) are not reachable from the /schedule sandbox proxy. The /loop runs in the operator's local Claude Code session where all local MCPs work. VM hosting is a future plan; for now the /loop fires only when Claude Code is open.
+> **Why a real Claude Code environment.** Three of the four discovery sources (GSC, GA4, Searchable) are not reachable from the `/schedule` cloud sandbox. Running on the VPS — a full Claude Code environment — unlocks all 4 sources, and the VPS being always-on is what makes the schedule unattended.
 
 ---
 

@@ -38,7 +38,8 @@ new-client onboarding walkthrough. The short version:
    `tools/internal_links.py` (the client's own links), and a
    `.claude/skills/<client>-blog-rubric/SKILL.md` (brand voice).
 4. Connect the client's MCPs (WordPress, Ahrefs, GSC, Searchable, ClickUp).
-5. Build the first inventory snapshot, verify, register the two `/loop`s.
+5. Build the first inventory snapshot, verify, and deploy to an always-on VPS
+   (system cron runs the jobs — see DEPLOYMENT-SOP §5).
 
 You do **not** edit any other Python file. The whole `tools/` package reads
 client-specific values through `tools/identities.py`, which loads
@@ -51,10 +52,10 @@ operation, the session-reopen recovery playbook, and the incident history.
 
 Key things to know:
 
-- `/loop` runs only while Claude Code is open. Re-register both loops at the
-  start of every session (the cron expressions are in `client_config.toml`
-  → `[schedule]`).
-- The heartbeat is the cloud canary for when your machine is closed.
+- The jobs run as **system cron on an always-on VPS** — they fire 24/7 with no
+  laptop and no re-registration. The VPS crontab is the schedule.
+- The `/schedule` heartbeat is the independent cloud canary if the VPS goes down.
+- Job logs live on the VPS at `~/fm-content/logs/*.log`.
 - Project rules and the MCP map are in [CLAUDE.md](CLAUDE.md).
 
 ## Repo map
@@ -65,7 +66,7 @@ Key things to know:
 | `.env.example` | Template for the secrets file. |
 | `tools/` | The pipeline engine — discovery, cannibalization, rubric, push. |
 | `tools/identities.py` | Loads `client_config.toml`; the bridge between config and code. |
-| `workflows/` | The job SOPs the `/loop`s execute. |
+| `workflows/` | The job SOPs the cron jobs execute. |
 | `.claude/skills/` | The 8 process skills + the client's blog-rubric skill. |
 | `docs/DEPLOYMENT-SOP.md` | New-client onboarding walkthrough. |
 | `docs/SYSTEM-HANDOVER.md` | Day-to-day operations + incident playbook. |

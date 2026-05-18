@@ -1,24 +1,35 @@
 # FM-Content — Operating Instructions
 
-You are operating the **weekly content automation pipeline for FirstMovers.ai**. Your job is to deliver 7 high-quality WordPress blog drafts every Wednesday for Nikki to review and publish across the week.
+You are operating the **daily content automation pipeline for FirstMovers.ai**. It produces one high-quality WordPress blog draft per day for Nikki to review and publish. It runs unattended on an always-on VPS.
 
 ## The single most important rule
 
 **Never propose a topic that overlaps a topic FirstMovers.ai has already published.** That was the v5 bug we rebuilt this pipeline to fix. The cannibalization gate (`tools/cannibalization.py`) is the structural defense — never weaken it, never bypass it, never run a draft on a stale or degraded inventory snapshot.
 
-## The flow (hybrid /loop local + /schedule heartbeat — current production, 2026-05-12)
+## The flow (always-on VPS cron — current production, 2026-05-17)
 
-| Day (Phoenix UTC-7) | Job | Runtime | What happens |
+| When (Phoenix UTC-7) | Job | Runtime | What happens |
 |---|---|---|---|
-| Every day 07:00 | daily-idea | `/loop` in operator's Claude Code | All 4 discovery sources (Ahrefs + GSC + GA4 + Searchable) → cannibalization → 1 ClickUp task for Nikki |
-| Sun-Sat (continuous) | (Nikki) | manual | Mark approved tasks "done" in ClickUp |
-| Every 3 hours | polling-drafter | `/loop` in operator's Claude Code | Detect approvals → SERP + prose + rubric → push WP draft |
+| Every day 07:00 | daily-idea | VPS cron → headless `claude -p` | All 4 discovery sources (Ahrefs + GSC + GA4 + Searchable) → cannibalization → 1 ClickUp task for Nikki |
+| Continuous | (Nikki) | manual | Mark approved tasks "done" in ClickUp |
+| Every 3 hours | polling-drafter | VPS cron → headless `claude -p` | Detect approvals → SERP + prose + rubric → push WP draft |
+| Monday 05:00 | inventory-refresh | VPS cron → headless `claude -p` | Rebuild the published-content inventory snapshot |
 | Every 12 hours | heartbeat | `/schedule` cloud | If no daily-idea task in last 36h, alert on `86ah3ywyh` |
-| Wed-Sun | (Nikki) | manual | Polish in WP, get Josh CTA approval, publish |
+| Continuous | (Nikki) | manual | Polish in WP, get Josh CTA approval, publish |
 
 Phoenix is fixed offset UTC-7 year-round. No DST.
 
-Runtime note: /loop fires only when operator's Claude Code session is open. A future plan will move /loop to an always-on VM. For now the heartbeat catches gaps. See `workflows/content-daily-idea-loop.md`, `workflows/content-poll-and-draft-loop.md`, `workflows/heartbeat-canary.md`.
+Runtime: the three jobs run as **system cron** on an always-on Hostinger VPS
+(`187.77.146.79`, user `fmcontent`, Ubuntu 24.04, system timezone
+America/Phoenix). Each cron tick runs headless Claude Code (`claude -p`) via
+`~/fm-content/scripts/run-job.sh`, which reads the workflow file and executes
+it. There is no `/loop`, no laptop session, and no re-registration — system
+cron survives reboots. The `/schedule` cloud heartbeat is the independent canary
+that alerts if the VPS itself goes down. Job logs are at
+`~/fm-content/logs/*.log`. See `workflows/content-daily-idea-loop.md`,
+`workflows/content-poll-and-draft-loop.md`,
+`workflows/content-inventory-refresh.md`, `workflows/heartbeat-canary.md`, and
+`docs/SYSTEM-HANDOVER.md`.
 
 ### Legacy weekly flow (deprecated 2026-05-12 — kept for reference only)
 
@@ -48,18 +59,21 @@ Runtime note: /loop fires only when operator's Claude Code session is open. A fu
 
 If `rubric.validate(draft)` raises a `ValueError`, the message names the exact rule violated. Fix the prose. Never silence the validation.
 
-## MCP map
+## MCP map (as deployed on the VPS)
 
-| MCP | Purpose | Critical tools |
+| Service | How it connects on the VPS | Critical tools |
 |---|---|---|
-| `mcp__first-movers-wordpress__*` | Inventory build + draft push | `wp_posts_search`, `wp_pages_search`, `wp_get_post`, `wp_get_page`, `wp_add_post`, `wp_users_search` |
-| `mcp__ahrefs__*` | Inventory join + gap discovery + SERP intent | `site-explorer-organic-keywords`, `serp-overview`, `keywords-explorer-overview` |
-| `mcp__gsc__*` | Striking-distance discovery | `get_search_analytics`, `get_search_by_page_query` |
-| `mcp__claude_ai_searchable__*` | AEO discovery | `get_visibility_by_prompt`, `get_visibility_by_topic`, `get_visibility_summary` |
-| `mcp__gsc__*` | Striking-distance discovery (/loop only — no claude.ai connector) | `get_search_analytics`, `get_search_by_page_query` |
-| ~~`mcp__analytics-mcp__*`~~ | (hangs — DO NOT USE) | use `tools.ga4` direct SDK module instead |
-| `mcp__claude_ai_searchable__*` | AEO discovery (/loop only) | `get_visibility_by_prompt`, `get_visibility_by_topic`, `get_visibility_summary` |
-| `mcp__first-movers-clickup__*` (or `mcp__claude_ai_ClickUp__*`) | Slate emit + approval read | `clickup_create_task`, `clickup_get_task`, `clickup_create_task_comment` |
+| Ahrefs | claude.ai account connector | `site-explorer-organic-keywords`, `serp-overview`, `keywords-explorer-overview` |
+| ClickUp | claude.ai account connector | `clickup_create_task`, `clickup_get_task`, `clickup_create_task_comment` |
+| Searchable | claude.ai account connector | `get_visibility_by_prompt`, `get_visibility_by_topic`, `get_visibility_summary` |
+| GSC | local `mcp-gsc` server (`~/mcp-gsc/`; OAuth token at `~/.config/mcp-gsc/token.json`) | `get_search_analytics`, `get_search_by_page_query` |
+| WordPress | claude.ai FirstMoversWP connector for the draft push; `tools/push_wp.py` direct REST is the fallback if the connector is WAF-blocked | `wp_create_post`, `wp_update_post_meta` |
+| GA4 | NOT an MCP — `tools/ga4.py` direct SDK with the service-account JSON at `GOOGLE_APPLICATION_CREDENTIALS` | `run_report` |
+| ~~`mcp__analytics-mcp__*`~~ | hangs — DO NOT USE; use `tools/ga4.py` instead | — |
+
+Tool-name note: the workflows were written with names like `mcp__ahrefs__*`; the
+claude.ai connectors expose the same tools (sometimes under a `claude_ai_`
+prefix). Use whichever tool name is actually available — the data is identical.
 
 ## ClickUp identifiers (from `tools/identities.py`)
 
@@ -76,8 +90,10 @@ If `rubric.validate(draft)` raises a `ValueError`, the message names the exact r
 | Draft missing focus keyword in alt | `rubric._validate_image_with_focus_keyword_alt` — hero image alt is auto-generated, check that injection ran |
 | WAF blocks WP push | Drafts queue to `data/runs/_pending-push/`. Run `gh workflow run wp-push-fallback.yml --ref main` to push from outside the WAF |
 | Cannibalization gate refuses to run | Inventory is degraded (some post has `focus_keyword == None` or `organic_keywords == []`). Re-run `python -m tools.inventory_refresh` |
-| Inventory > 7 days old | `assert_fresh` raises `StaleInventoryError`. Refresh before any draft |
-| Title slate ends up with <12 proposals | Discovery sources didn't surface enough fresh candidates after cannibalization. Check that GSC + Ahrefs + Searchable + GA4 all returned data |
+| Inventory > 7 days old | `assert_fresh` raises `StaleInventoryError`. The weekly inventory-refresh cron rebuilds it; to refresh now, run `python -m tools.inventory_refresh` on the VPS |
+| daily-idea finds no clear candidate | Discovery sources came back thin after cannibalization. Check `~/fm-content/logs/daily-idea.log` and that GSC + Ahrefs + Searchable + GA4 all returned data |
+| Jobs stopped firing entirely | Check the VPS: `crontab -l` lists the 3 jobs, `systemctl is-active cron`, and `claude -p "hi"` still works (subscription login can expire — re-run `claude` to re-login). The `/schedule` heartbeat will have alerted on `86ah3ywyh` |
+| Need to see what a job did | VPS logs at `~/fm-content/logs/{daily-idea,polling-drafter,inventory-refresh}.log`; run-status comments on ClickUp task `86ah3ywyh` |
 
 ## What "Claude writes prose" means
 

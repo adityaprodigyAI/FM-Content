@@ -1,9 +1,10 @@
 # FM-Content System Handover
 
 > **Audience:** the FirstMovers.ai team taking over operation of this automated blog pipeline.
-> **Last verified end-to-end:** 2026-05-12 via real autonomous test run (WP draft post 72659 + ClickUp task `86ahe8z5t`).
+> **Runtime (since 2026-05-17):** the jobs run as **system cron on an always-on Hostinger VPS** (`187.77.146.79`, user `fmcontent`, Ubuntu 24.04) — headless `claude -p`, no `/loop`, no laptop. Sections below that describe `/loop` or "session reopen" are kept as history; current operational guidance is in "Current Stack Inventory" and "Operator Checklist".
+> **Last verified end-to-end:** 2026-05-17 on the VPS (daily-idea task `86ahhbma4` + WP draft post 72674). Earlier autonomous test: 2026-05-12 (post 72659).
 
-This document describes how the FM-Content pipeline works in plain language. Two scheduled jobs run continuously; together they produce one new blog draft per Phoenix day, ready for Nikki to review and publish.
+This document describes how the FM-Content pipeline works in plain language. Three scheduled jobs run on the VPS; together they produce one new blog draft per Phoenix day, ready for Nikki to review and publish.
 
 ---
 
@@ -20,7 +21,7 @@ The whole thing is autonomous. The operator (Aditya) intervenes only when someth
 | | Job 1: Daily-Idea | Job 2: Polling-Drafter |
 |---|---|---|
 | **When it fires** | Once per day at 07:00 Phoenix (14:00 UTC) | Every 3 hours, 24/7 |
-| **Job ID** | `9d9e0f69` (after reload) | `d746c801` (after reload) |
+| **Cron (Phoenix time)** | `0 7 * * *` (07:00 daily) | `0 */3 * * *` (every 3h) |
 | **Purpose** | Find ONE new blog topic and emit a task to ClickUp | Detect Nikki's approvals and produce/push the actual blog draft |
 | **MCPs/tools used** | Ahrefs, GSC, GA4 (direct SDK), Searchable, ClickUp | Ahrefs (SERP), WordPress (direct REST), ClickUp |
 | **Time to complete** | 30 seconds to 2 minutes | 60 seconds to 5 minutes per draft |
@@ -317,14 +318,14 @@ If any rule fails, `assemble()` raises `RubricViolation` with the named rule. Th
 
 ## The Safety Net — Heartbeat /schedule routine
 
-`/loop` is session-only. If the operator closes Claude Code, both /loop jobs disappear. To detect that gap, there's one cloud-hosted `/schedule` routine called `fm-content-heartbeat` (routine ID `trig_011YyX9Lx253Fdf8XXjDmd17`).
+The jobs run on an always-on VPS, but the VPS itself can still fail — downtime, an expired Claude login, a broken cron. To catch that, there's one cloud-hosted `/schedule` routine called `fm-content-heartbeat` (routine ID `trig_011YyX9Lx253Fdf8XXjDmd17`), running completely independently of the VPS.
 
 **Cron:** `0 */12 * * *` UTC — fires every 12 hours.
 
 **What it does:**
 1. List the most recent task tagged `fm-content-daily` in list `901326229295` (via the cloud-hosted ClickUp connector).
 2. Compute hours since that task was created.
-3. If >36 hours, post a `Heartbeat ALERT` comment to `86ah3ywyh` saying the /loop machine may be offline.
+3. If >36 hours, post a `Heartbeat ALERT` comment to `86ah3ywyh` saying the VPS may be offline or a job has broken.
 4. If healthy AND it's the 00:00 UTC fire, post a daily `Heartbeat ok` comment as a positive proof-of-life signal.
 5. If healthy AND it's the 12:00 UTC fire, stay silent (one positive tick per day keeps the canary task clean).
 
@@ -334,7 +335,13 @@ The heartbeat is **deliberately minimal** — one MCP, no local filesystem depen
 
 ## Real Incident — 2026-05-14: Session reopen after Nikki approved overnight
 
-This incident is the textbook example of the session-lifetime constraint and exactly what operators should expect periodically until the VM phase ships. Capturing it here so future operators (or future Claude Code sessions taking over this pipeline) know how to handle it.
+> **HISTORICAL — no longer applies.** This incident happened under the old
+> `/loop`-on-a-laptop runtime. Since the 2026-05-17 VPS deployment the jobs run
+> on always-on system cron — there is no session to close and no "dark window."
+> Kept as the record of *why* the VPS migration happened; the session-reopen
+> playbook below is obsolete.
+
+This incident is the textbook example of the session-lifetime constraint that motivated moving the pipeline onto an always-on VPS. Captured here as history.
 
 ### Timeline
 
@@ -475,13 +482,11 @@ When we built this pipeline in plan-mode, we missed several things that real-wor
 
 **Follow-up needed:** Update `tools/rank_math.py` docs to point at the WP REST `meta` field as the primary path. Or install the Devora plugin to match the docs.
 
-### 4. CronCreate uses LOCAL timezone, not UTC
+### 4. Scheduler timezone (resolved by the VPS migration)
 
-**The problem:** The `CronCreate` tool used by `/loop` interprets cron expressions in the local machine timezone, not UTC. I initially computed cron times in UTC (assuming the same semantics as `/schedule` which IS UTC), and the cron silently never fired because the local interpretation pushed the target time into the past.
+**The problem:** The `CronCreate` tool used by the old `/loop` runtime interpreted cron expressions in the local machine timezone, not UTC — which caused silent missed fires when crons were computed in the wrong zone.
 
-**The fix:** For `/loop` crons, always set times in local. For `/schedule` cloud routines, always set times in UTC. The workflow files now have explicit notes about this.
-
-**Long-term:** When the system moves to a VM (separate future plan), the VM's timezone will be UTC (Linux default), so this ambiguity disappears.
+**The fix:** The 2026-05-17 VPS deployment removed `/loop` entirely. The VPS runs **system cron**, and the VPS system timezone is set to the content timezone (America/Phoenix). Cron expressions are now direct — `0 7 * * *` means 07:00 Phoenix — so the ambiguity is gone. The `/schedule` heartbeat remains on UTC.
 
 ### 5. `.env` file was missing
 
@@ -501,14 +506,17 @@ When we built this pipeline in plan-mode, we missed several things that real-wor
 
 ## Current Stack Inventory
 
-### Two /loop jobs (local, session-bound)
+### Three system cron jobs (on the always-on VPS)
 
-| Job | Cron | Job ID after reload |
+The VPS is a Hostinger KVM running Ubuntu 24.04 at `187.77.146.79` (user `fmcontent`, system timezone America/Phoenix). `crontab -l` shows:
+
+| Job | Cron (Phoenix time) | Wrapper invocation |
 |---|---|---|
-| Daily-idea | `0 14 * * *` UTC (or `0 8 * * *` local UTC machine, or set explicitly) | `9d9e0f69` (gets a new ID each session) |
-| Polling-drafter | `0 */3 * * *` (every 3h) | `d746c801` (gets a new ID each session) |
+| Daily-idea | `0 7 * * *` | `run-job.sh content-daily-idea-loop.md daily-idea` |
+| Polling-drafter | `0 */3 * * *` | `run-job.sh content-poll-and-draft-loop.md polling-drafter` |
+| Inventory-refresh | `0 5 * * 1` | `run-job.sh content-inventory-refresh.md inventory-refresh` |
 
-**Caveat:** /loop dies when the operator's Claude Code session closes. Re-register after each session restart. Permanent fix is the VM phase (separate future plan).
+Each tick runs `~/fm-content/scripts/run-job.sh`, which sources `.env`, activates the venv, and runs headless `claude -p` against the workflow file. Logs land in `~/fm-content/logs/*.log`. Cron is a system service — it survives VPS reboots with no manual step.
 
 ### One /schedule routine (cloud, always-on)
 
@@ -556,23 +564,22 @@ Acts as proof-of-life signal independent of the local /loop. Posts `Heartbeat ok
 | WP push fails with 403 / Wordfence block | Exception propagated, state stays at `approved` | Verify User-Agent in `tools/push_wp.py` is still browser-like; check if Cloudways rules changed |
 | WP push fails with WAF "blocked" message | `is_waf_block()` triggers Path B queue | `data/runs/_pending-push/` accumulates; trigger `gh workflow run wp-push-fallback.yml` |
 | Rank Math meta not persisted | Comment notes the failure; post still has body + standard meta | Operator manually sets Rank Math meta in WP admin |
-| Operator's Claude Code session closes | Both /loops die silently. Heartbeat detects >36h gap and posts ALERT on `86ah3ywyh` | Operator reopens Claude Code and re-registers both /loops. **If Nikki approved a task during the dark window, the polling-drafter never fired — see "Real Incident 2026-05-14" section for the inline-recovery playbook.** |
-| Session closed AND Nikki approves during the gap | Heartbeat may show `Heartbeat ok` (daily-idea is still recent enough), so nothing alerts. Approved task sits undrafted until next polling-drafter fire. | At session reopen, run the orphan check from the Daily Checklist. Execute polling-drafter logic inline for the orphan. |
+| VPS down / cron not firing | Heartbeat detects >36h with no daily-idea task and posts ALERT on `86ah3ywyh` | SSH into the VPS: check `systemctl is-active cron`, `crontab -l`, the Hostinger panel for VPS uptime. Reboot the VPS if needed — cron resumes automatically. |
+| Claude subscription login expired on the VPS | Jobs fire but every `claude -p` fails to authenticate; logs in `~/fm-content/logs/` show a login error; heartbeat alerts once daily-idea goes stale | SSH into the VPS, run `claude`, complete `/login` again. |
 | Heartbeat doesn't fire | Operator notices missing morning `Heartbeat ok` comment | Operator triggers heartbeat manually via `/schedule run trig_011YyX9Lx253Fdf8XXjDmd17` |
 
 ---
 
-## Operator Daily Checklist (first 7 days post-handover)
+## Operator Checklist (weekly spot-check)
 
-- [ ] Open this Claude Code session (or VM session, once that lands)
-- [ ] Verify both /loops registered: `/loop list` shows daily-idea + polling-drafter
-- [ ] If `/loop list` is empty: re-register both. **Cron is LOCAL IST, not UTC.** Daily-idea: `33 19 * * *` (= 07:03 Phoenix). Polling-drafter: `0 */3 * * *`.
-- [ ] **Check for orphan approved-but-not-drafted state files:** run `python -c "import sys; sys.path.insert(0,'.'); from dotenv import load_dotenv; load_dotenv(); from tools.daily import list_states; print([s.date for s in list_states() if s.is_approved and not s.is_drafted])"`. If anything is listed, polling-drafter missed it. Run polling-drafter inline. (See "Real Incident 2026-05-14" section above for the exact playbook.)
-- [ ] **Cross-check ClickUp task statuses against state files.** State files only get the `is_approved=True` flag when the polling-drafter ran. If Nikki approved a task while the session was closed, the state file says `is_approved=False` even though ClickUp shows `published`. Use `clickup_get_task` + `is_task_approved` to find these.
-- [ ] Check `86ah3ywyh` for the morning `Heartbeat ok` comment (fires at 00:06 UTC = 05:36 IST)
-- [ ] Verify today's daily-idea task landed in ClickUp list `901326229295`
-- [ ] If inventory >5 days old: queue `python -m tools.inventory_refresh` to run within 48h
-- [ ] If a previous day's draft was pushed: verify Nikki has the WP edit URL and the post is on her review list
+The pipeline is autonomous on the VPS — this is a light spot-check, not a daily chore.
+
+- [ ] Check `86ah3ywyh` for the morning `Heartbeat ok` comment and recent run-status comments from the jobs.
+- [ ] Verify today's daily-idea task landed in ClickUp list `901326229295`.
+- [ ] If anything looks off, SSH into the VPS and skim `~/fm-content/logs/{daily-idea,polling-drafter,inventory-refresh}.log`.
+- [ ] If a `Heartbeat ALERT` fired: SSH in, check `systemctl is-active cron`, `crontab -l`, and that `claude -p "hi"` still authenticates (re-run `claude` to re-login if not).
+- [ ] Inventory refreshes itself via the Monday cron; only run `python -m tools.inventory_refresh` manually if a `StaleInventoryError` shows up in a log.
+- [ ] When a draft was pushed, verify Nikki has the WP edit URL on her review list.
 
 ---
 

@@ -14,17 +14,19 @@
 
 ## 1. What the pipeline does
 
-A two-job content engine that produces WordPress blog drafts:
+A three-job content engine that produces WordPress blog drafts:
 
 | Job | Cadence | What it does |
 |---|---|---|
 | **daily-idea** | once/day | Pulls 4 discovery sources (Ahrefs gap, GSC striking-distance, GA4 decay, Searchable AEO) → runs the cannibalization gate → posts ONE topic to ClickUp for the client's approver. |
 | **polling-drafter** | every 3h | Detects approved ClickUp tasks → fetches SERP → generates rubric-compliant prose → pushes a WordPress **draft** (never publishes). |
+| **inventory-refresh** | weekly | Rebuilds the published-content inventory snapshot the cannibalization gate compares against. |
 | **heartbeat** | every 12h | A `/schedule` cloud canary. Alerts on the ClickUp status task if no daily-idea task has appeared in 36h. |
 
-Both jobs run as `/loop`s inside the operator's local Claude Code session. The
-heartbeat runs in the claude.ai cloud as a `/schedule` routine — it is the
-safety net for when the operator's machine is closed.
+The three jobs run as **system cron** on an always-on VPS — headless `claude -p`
+fires each on schedule, 24/7, surviving reboots (see §5). The heartbeat runs in
+the claude.ai cloud as a `/schedule` routine — the independent canary for if the
+VPS itself goes down.
 
 The single most important guarantee: the **cannibalization gate**
 (`tools/cannibalization.py`) blocks any topic that overlaps something the client
@@ -81,17 +83,17 @@ inline. The sections:
   client's domain rating).
 - `[audience_routing]` — maps each audience tier to its CTA path. Keys must be
   exactly `"done-for-you"` and `"diy"`.
-- `[schedule]` — `operator_timezone` (the timezone of the machine running
-  `/loop`), the two `/loop` cron expressions **in operator-local time**, and
-  `content_timezone` (the timezone state files are keyed by).
+- `[schedule]` — `content_timezone` (the timezone state files are keyed by, and
+  the timezone the VPS system clock is set to). The cron expressions in this
+  section are informational; the VPS crontab is the actual timing authority
+  (see §5).
 - `[rubric]` — `skill_name`: the name of this client's blog-rubric skill
   directory under `.claude/skills/`.
 
-> **Timezone gotcha.** `CronCreate` (the engine behind `/loop`) interprets cron
-> expressions in the operator's **local** timezone, not UTC. Compute the cron so
-> the job fires at the desired hour in the *content* timezone, expressed in
-> *operator-local* time. Example: First Movers wants 07:00 America/Phoenix; the
-> operator is in Asia/Kolkata; 07:00 Phoenix = 19:33 IST → `33 19 * * *`.
+> **Timezone tip.** Set the VPS system timezone to the client's
+> `content_timezone` (`sudo timedatectl set-timezone ...`). Then the crontab
+> times are direct — `0 7 * * *` simply means 07:00 for the client — with no
+> UTC conversion to get wrong.
 
 ### Step 2 — Populate `.env`
 
@@ -148,7 +150,7 @@ python -m tools.inventory_refresh
 The snapshot lands at `data/inventory/<site-host>.json` (the filename is derived
 from `brand.site_host`). It must be ≤7 days old or every draft run hard-fails.
 
-### Step 6 — Verify (see §4), then register the loops (see §5).
+### Step 6 — Verify (see §4), then deploy to the VPS (see §5).
 
 ---
 
@@ -173,24 +175,56 @@ Run before going live. Every item must pass.
 
 ---
 
-## 5. Running the loops
+## 5. Deploy to an always-on VPS
 
-Inside the operator's Claude Code session, register both `/loop`s using the
-cron expressions from `client_config.toml` → `[schedule]`:
+The pipeline runs as **system cron jobs on a small always-on Linux VPS**, so the
+schedule fires 24/7 with no laptop, no `/loop`, and no re-registration. Stand
+one up per client:
 
-- daily-idea: `schedule.daily_idea_local_cron`, prompt = the daily-idea loop
-  workflow (`workflows/content-daily-idea-loop.md`).
-- polling-drafter: `schedule.polling_drafter_local_cron`, prompt = the
-  poll-and-draft loop workflow (`workflows/content-poll-and-draft-loop.md`).
+1. **Provision** a VPS (Hostinger KVM, ~2 vCPU / 4-8 GB RAM, Ubuntu 24.04 LTS).
+   Harden it: a non-root user, key-only SSH (disable root login + password
+   auth), `ufw` allowing only SSH, `fail2ban`. Set the system timezone to the
+   client's content timezone (`sudo timedatectl set-timezone ...`) so cron
+   expressions are direct, with no UTC conversion.
+2. **Install the runtime:** Node.js LTS + Claude Code
+   (`npm i -g @anthropic-ai/claude-code`), Python 3.10+, `git`, `gh`.
+3. **Authenticate Claude Code** with the client's (or agency's) Claude
+   subscription — run `claude` and complete `/login`.
+4. **Clone the repo** using a GitHub deploy key *with write access* (the jobs
+   commit state back). Build the venv:
+   `python3 -m venv .venv && .venv/bin/pip install -e ".[ga4,dev]"`.
+5. **Copy secrets:** `scp` `.env` and the GA4 service-account JSON to the VPS;
+   `chmod 600` both; set `GOOGLE_APPLICATION_CREDENTIALS` to the VPS path. Quote
+   any `.env` value containing spaces (e.g. the WordPress app password) so the
+   wrapper can `source` the file.
+6. **Connect the discovery sources** on the VPS: Ahrefs, ClickUp, and Searchable
+   come through the operator's **claude.ai account connectors** automatically
+   once Claude Code is logged in; **GSC** runs as a local `mcp-gsc` server
+   (clone it, build its venv, authenticate with an OAuth token at
+   `~/.config/mcp-gsc/token.json`); **GA4** needs no MCP — it uses the
+   service-account JSON.
+7. **Verify** on the VPS: run §4's checklist, then one manual `claude -p` run
+   each of daily-idea and polling-drafter — confirm a ClickUp task and a
+   WordPress draft are produced.
+8. **Install the cron jobs.** Create the wrapper
+   `~/fm-content/scripts/run-job.sh` (it `cd`s to the repo, sources `.env`,
+   activates the venv, runs `claude -p` against the workflow file, logs to
+   `~/fm-content/logs/`). Then a crontab — VPS timezone is the content timezone,
+   so times are direct:
+   ```cron
+   0 7 * * *    run-job.sh workflows/content-daily-idea-loop.md     daily-idea        200
+   0 */3 * * *  run-job.sh workflows/content-poll-and-draft-loop.md polling-drafter   400
+   0 5 * * 1    run-job.sh workflows/content-inventory-refresh.md   inventory-refresh 200
+   ```
+9. **Register the heartbeat** as a `/schedule` cloud routine per
+   `workflows/heartbeat-canary.md` (substitute the two `<<PLACEHOLDER>>` ClickUp
+   ids). It is the independent canary if the VPS itself fails.
+10. Add a `logrotate` rule for `~/fm-content/logs/*.log` (include an
+    `su <user> <user>` directive), then reboot the VPS once to confirm cron
+    resumes automatically.
 
-Then register the heartbeat as a `/schedule` cloud routine following
-`workflows/heartbeat-canary.md` — remember to substitute the two
-`<<PLACEHOLDER>>` ClickUp ids with the client's real values before pasting.
-
-> **`/loop` is session-bound.** It fires only while the operator's Claude Code
-> is open. When the session closes, the loops stop; the heartbeat catches the
-> gap. Re-register both loops at the start of every session. Moving the loops to
-> an always-on VM is a separate future project.
+The reference First Movers install runs on a Hostinger VPS at `187.77.146.79`
+(Ubuntu 24.04, user `fmcontent`).
 
 ---
 
@@ -203,7 +237,7 @@ Then register the heartbeat as a `/schedule` cloud routine following
 | `StaleInventoryError` | Inventory > 7 days old. Re-run `python -m tools.inventory_refresh`. |
 | Cannibalization gate refuses to run | Inventory is degraded (a post is missing `focus_keyword` or `organic_keywords`). Rebuild the inventory. |
 | daily-idea task lands in the wrong ClickUp list | `clickup.content_projects_list_id` is wrong in the config. |
-| `/loop` never fired overnight | Expected — `/loop` is session-bound. Re-register at session start; the heartbeat should have alerted. |
+| Jobs stopped firing | On the VPS check: `crontab -l` lists the 3 jobs, `systemctl is-active cron`, and `claude -p "hi"` still works (the Claude subscription login can expire — re-run `claude` to re-login). The heartbeat should have alerted on the status task. |
 | GA4 discovery silently skipped | `GOOGLE_APPLICATION_CREDENTIALS` unset/expired, or `ga4.property_id` is `""`. The pipeline continues on the other 3 sources by design. |
 
 ---

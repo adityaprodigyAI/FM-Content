@@ -1,12 +1,12 @@
-# Polling drafter — /loop variant (runs in operator's local Claude Code)
+# Polling drafter — runs on the VPS via system cron
 
 > **Goal.** Every 3 hours, check daily-state files for ClickUp tasks the approver has marked done. For each newly-approved one: re-run cannibalization, fetch SERP, generate prose, validate via rubric, push to WordPress as draft.
 >
 > All client-specific values come from `client_config.toml` via `tools.identities`. This workflow hardcodes none of them.
 
-> **Runtime.** Register with `/loop` inside the operator's local Claude Code session, using `client_config.toml` → `schedule.polling_drafter_local_cron`.
+> **Runtime.** This workflow is executed by the polling-drafter **system cron job** on the always-on VPS — the `~/fm-content/scripts/run-job.sh` wrapper runs `claude -p` against this file every 3 hours. (The filename keeps the `-loop` suffix for compatibility; it is no longer a `/loop`.)
 
-> **Why /loop.** Local MCP access for Ahrefs (`serp-overview`), WordPress (`wp_create_post`), and ClickUp. Future enhancements (e.g., GSC pre-draft sanity check) require local MCP access too.
+> **MCP access.** Ahrefs (`serp-overview`) and ClickUp come via the claude.ai connectors; the WordPress draft push uses the FirstMoversWP connector, falling back to `tools/push_wp.py` direct REST on a WAF block; GSC via the local `mcp-gsc` server.
 
 ---
 
