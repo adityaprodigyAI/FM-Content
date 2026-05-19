@@ -1,0 +1,40 @@
+{
+  "date": "2026-05-19",
+  "proposal": {
+    "focus_keyword": "ai consulting agency",
+    "working_title": "How to Choose an AI Consulting Agency That Ships Working Systems, Not Slide Decks",
+    "one_line_angle": "Most AI consulting agency content is written by the strategy giants and optimizes for enterprise procurement. This is the operator's evaluation framework instead: score an agency on shipped outcomes, payback timeline, and system ownership transfer rather than brand name and bench size.",
+    "outline_bullets": [
+      "What an AI consulting agency actually delivers, and the 3 engagement models that hide very different risk",
+      "The 7-point scorecard for vetting an agency: payback math, system ownership, and proof of shipped work",
+      "Red flags that signal slide-deck consulting, plus what a real 90-day done-for-you engagement looks like"
+    ],
+    "slug": "ai-consulting-agency",
+    "audience": "done-for-you",
+    "category_id": 27,
+    "intent": "transactional",
+    "target_date": "2026-05-19",
+    "discovery_source": "ahrefs_competitor_gap",
+    "discovery_id": "ahrefs:bcg.com:ai consulting agency",
+    "discovery_evidence": {
+      "competitor": "bcg.com",
+      "keyword": "ai consulting agency",
+      "volume": 2200,
+      "difficulty": 55,
+      "competitor_position": 2.0,
+      "competitor_traffic": 475
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "",
+    "matched_post_url": null,
+    "score": 10.229376008642172
+  },
+  "clickup_task_id": "86ahjppgp",
+  "clickup_emitted_at": "2026-05-19T14:06:52.750290+00:00",
+  "approved_at": null,
+  "approved_status_name": null,
+  "wp_post_id": null,
+  "wp_edit_url": null,
+  "drafted_at": null,
+  "notes": []
+}
