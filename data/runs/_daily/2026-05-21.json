@@ -1,0 +1,38 @@
+{
+  "date": "2026-05-21",
+  "proposal": {
+    "focus_keyword": "labs explained",
+    "working_title": "AI Labs Explained: Why Operator Consultancies Run Their Own Experiments (And What You Get)",
+    "one_line_angle": "Most consulting firms sell strategy decks; an AI lab is what turns recommendations into field-tested playbooks before they ever hit a client engagement, and that changes the risk profile of every project.",
+    "outline_bullets": [
+      "What an AI lab actually is (and why most consultancies do not run one)",
+      "How a lab pipeline turns risky experiments into client-ready playbooks",
+      "What lab-tested AI means for your consulting timeline, budget, and integration risk"
+    ],
+    "slug": "labs-explained",
+    "audience": "done-for-you",
+    "category_id": 13,
+    "intent": "informational",
+    "target_date": "2026-05-21",
+    "discovery_source": "ga4_high_traffic_gap",
+    "discovery_id": "ga4:labs",
+    "discovery_evidence": {
+      "page_path": "/labs/",
+      "sessions": 9029,
+      "prior_sessions": 0,
+      "growth_ratio": null
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "",
+    "matched_post_url": null,
+    "score": 6.554153823205516
+  },
+  "clickup_task_id": "86ahmajcd",
+  "clickup_emitted_at": "2026-05-21T14:09:46.339544+00:00",
+  "approved_at": null,
+  "approved_status_name": null,
+  "wp_post_id": null,
+  "wp_edit_url": null,
+  "drafted_at": null,
+  "notes": []
+}
