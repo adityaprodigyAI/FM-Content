@@ -1,0 +1,40 @@
+{
+  "date": "2026-05-23",
+  "proposal": {
+    "focus_keyword": "ai use cases",
+    "working_title": "AI Use Cases for Small Business Operations: 12 High-ROI Plays Owners Can Ship in 30 Days",
+    "one_line_angle": "A ranked, payback-ordered field guide of operational AI use cases that small and midmarket teams can actually ship in 30 days, drawn from real engagements instead of enterprise white papers.",
+    "outline_bullets": [
+      "The 12 highest-ROI AI use cases for small business operations, ranked by 30/60/90-day payback",
+      "A 5-question gate for evaluating any AI use case before you spend a dollar",
+      "Build vs buy vs outsource: a decision tree for shipping each use case without a 12-month roadmap"
+    ],
+    "slug": "ai-use-cases",
+    "audience": "done-for-you",
+    "category_id": 13,
+    "intent": "informational",
+    "target_date": "2026-05-23",
+    "discovery_source": "ahrefs_competitor_gap",
+    "discovery_id": "ahrefs:deloitte.com:ai use cases",
+    "discovery_evidence": {
+      "competitor": "deloitte.com",
+      "keyword": "ai use cases",
+      "volume": 3000,
+      "difficulty": 52,
+      "competitor_position": 2.0,
+      "competitor_traffic": 1100
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "",
+    "matched_post_url": null,
+    "score": 10.988687913801707
+  },
+  "clickup_task_id": "86ahnnah7",
+  "clickup_emitted_at": "2026-05-23T14:08:16.321169+00:00",
+  "approved_at": null,
+  "approved_status_name": null,
+  "wp_post_id": null,
+  "wp_edit_url": null,
+  "drafted_at": null,
+  "notes": []
+}
