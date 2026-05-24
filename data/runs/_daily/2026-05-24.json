@@ -1,0 +1,38 @@
+{
+  "date": "2026-05-24",
+  "proposal": {
+    "focus_keyword": "blueprint explained",
+    "working_title": "AI Implementation Blueprint Explained: The 90-Day Operator Roadmap That Replaces Scattered AI Pilots",
+    "one_line_angle": "Most operator teams burn 18 months on disconnected AI experiments before shipping a working system; the Blueprint approach explained here is the 90-day, payback-ranked roadmap that sequences workstreams so revenue starts moving in week 4 instead of quarter 4.",
+    "outline_bullets": [
+      "What an AI implementation blueprint actually contains, explained without the consulting jargon",
+      "How to pressure-test any blueprint before kickoff, using a 5-question operator gate",
+      "Sequencing blueprint workstreams so payback hits in 30 days instead of waiting for the rollout finish line"
+    ],
+    "slug": "blueprint-explained",
+    "audience": "done-for-you",
+    "category_id": 13,
+    "intent": "informational",
+    "target_date": "2026-05-24",
+    "discovery_source": "ga4_high_traffic_gap",
+    "discovery_id": "ga4:blueprint",
+    "discovery_evidence": {
+      "page_path": "/blueprint/",
+      "sessions": 3623,
+      "prior_sessions": 0,
+      "growth_ratio": null
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "",
+    "matched_post_url": null,
+    "score": 6.097666833581435
+  },
+  "clickup_task_id": "86ahnu7ee",
+  "clickup_emitted_at": "2026-05-24T14:11:12.254599+00:00",
+  "approved_at": null,
+  "approved_status_name": null,
+  "wp_post_id": null,
+  "wp_edit_url": null,
+  "drafted_at": null,
+  "notes": []
+}
