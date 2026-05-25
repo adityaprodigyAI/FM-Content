@@ -31,10 +31,10 @@
   },
   "clickup_task_id": "86ahnnah7",
   "clickup_emitted_at": "2026-05-23T14:08:16.321169+00:00",
-  "approved_at": null,
-  "approved_status_name": null,
-  "wp_post_id": null,
-  "wp_edit_url": null,
-  "drafted_at": null,
+  "approved_at": "2026-05-25T07:01:00.804243+00:00",
+  "approved_status_name": "published",
+  "wp_post_id": 73549,
+  "wp_edit_url": "https://firstmovers.ai/wp-admin/post.php?post=73549&action=edit",
+  "drafted_at": "2026-05-25T07:16:41.142413+00:00",
   "notes": []
 }
