@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-18T12:03:54.331413+00:00",
+  "generated_at": "2026-05-25T12:16:16.395949+00:00",
   "posts": [
     {
       "id": 72370,
@@ -494,7 +494,8 @@
       "focus_keyword": "done for you ai services",
       "organic_keywords": [
         "done for you",
-        "done for you services"
+        "done for you services",
+        "doneforyou"
       ]
     },
     {
@@ -1094,8 +1095,7 @@
       ],
       "focus_keyword": "best ai writing tools",
       "organic_keywords": [
-        "best writing ai",
-        "best ai writer"
+        "best ai writing tools"
       ]
     },
     {
@@ -1200,7 +1200,8 @@
       ],
       "focus_keyword": "what is ai automation",
       "organic_keywords": [
-        "ai business automation"
+        "ai business automation",
+        "ai and automation"
       ]
     },
     {
@@ -1295,7 +1296,9 @@
         "the first mover",
         "first-mover",
         "examples of first movers",
-        "first mover companies"
+        "first mover companies",
+        "first movers",
+        "which of the following is true of first movers?"
       ]
     },
     {
@@ -1700,7 +1703,6 @@
       ],
       "focus_keyword": "AI community",
       "organic_keywords": [
-        "ai community platform",
         "ai community",
         "ai communities"
       ]
@@ -1792,7 +1794,7 @@
       ],
       "focus_keyword": "AI certification course",
       "organic_keywords": [
-        "AI certification course"
+        "best ai certificate programs"
       ]
     },
     {
@@ -2290,8 +2292,7 @@
       ],
       "focus_keyword": "project stargate",
       "organic_keywords": [
-        "the stargate project",
-        "stargate project"
+        "what is project stargate"
       ]
     },
     {
@@ -2712,7 +2713,6 @@
       "focus_keyword": "ai and the bible",
       "organic_keywords": [
         "what does the bible say about ai",
-        "ai in the bible",
         "daniel 12 4"
       ]
     },
@@ -3075,7 +3075,7 @@
       ],
       "focus_keyword": "chatgpt for blogs",
       "organic_keywords": [
-        "chatgpt blogs"
+        "chatgpt for blogs"
       ]
     },
     {
@@ -3121,141 +3121,6 @@
       "focus_keyword": "superintelligence",
       "organic_keywords": [
         "superintelligence"
-      ]
-    },
-    {
-      "id": 36112,
-      "slug": "e1-origin-story",
-      "title": "Leaders of AI E1: The Origin Story – David Shapiro and ‪Julia McCoy&#8217;s Personal Journey to AI",
-      "url": "https://firstmovers.ai/e1-origin-story/",
-      "published_at": "2024-11-04",
-      "kind": "blog",
-      "category_ids": [
-        17
-      ],
-      "focus_keyword": "leaders of ai",
-      "organic_keywords": [
-        "leaders of ai"
-      ]
-    },
-    {
-      "id": 36513,
-      "slug": "ai-ar-future",
-      "title": "The Accelerating Future: Why AI and AR Will Transform Our World Faster Than You Think",
-      "url": "https://firstmovers.ai/ai-ar-future/",
-      "published_at": "2024-11-03",
-      "kind": "blog",
-      "category_ids": [
-        11
-      ],
-      "focus_keyword": "ai and ar",
-      "organic_keywords": [
-        "ai and ar"
-      ]
-    },
-    {
-      "id": 36524,
-      "slug": "crypto-ai-world",
-      "title": "The Future of Crypto in an AI World: Why Bitcoin Just Got Serious",
-      "url": "https://firstmovers.ai/crypto-ai-world/",
-      "published_at": "2024-10-29",
-      "kind": "blog",
-      "category_ids": [
-        13
-      ],
-      "focus_keyword": "crypto",
-      "organic_keywords": [
-        "ai and bitcoin"
-      ]
-    },
-    {
-      "id": 36426,
-      "slug": "computing-evolving-4x-faster",
-      "title": "NVIDIA CEO&#8217;s Game-Changing Revelation: Computing is Evolving 4x Faster Than Ever Before",
-      "url": "https://firstmovers.ai/computing-evolving-4x-faster/",
-      "published_at": "2024-10-27",
-      "kind": "blog",
-      "category_ids": [
-        13
-      ],
-      "focus_keyword": "computing",
-      "organic_keywords": [
-        "computing"
-      ]
-    },
-    {
-      "id": 37456,
-      "slug": "ai-filmmaking",
-      "title": "The Future of AI in Film: How Artificial Intelligence is Revolutionizing Hollywood&#8217;s Landscape",
-      "url": "https://firstmovers.ai/ai-filmmaking/",
-      "published_at": "2024-10-26",
-      "kind": "blog",
-      "category_ids": [
-        10
-      ],
-      "focus_keyword": "ai in film",
-      "organic_keywords": [
-        "ai in film"
-      ]
-    },
-    {
-      "id": 35488,
-      "slug": "generative-engine-optimization",
-      "title": "The Rise of Generative Engine Optimization (GEO) and How It’s Transforming SEO",
-      "url": "https://firstmovers.ai/generative-engine-optimization/",
-      "published_at": "2024-10-23",
-      "kind": "blog",
-      "category_ids": [
-        13
-      ],
-      "focus_keyword": "rise of generative engine optimization",
-      "organic_keywords": [
-        "rise of generative engine optimization"
-      ]
-    },
-    {
-      "id": 35932,
-      "slug": "googles-alphachip",
-      "title": "Google&#8217;s AlphaChip Can Design AI Chips Now: Did We Hit Matrix-Level?",
-      "url": "https://firstmovers.ai/googles-alphachip/",
-      "published_at": "2024-10-20",
-      "kind": "blog",
-      "category_ids": [
-        14
-      ],
-      "focus_keyword": "alphachip",
-      "organic_keywords": [
-        "alphachip"
-      ]
-    },
-    {
-      "id": 36518,
-      "slug": "we-robot",
-      "title": "Robotaxis and Robonannies? Insider Thoughts on Elon Musk&#8217;s &#8216;We Robot&#8217; Event",
-      "url": "https://firstmovers.ai/we-robot/",
-      "published_at": "2024-10-18",
-      "kind": "blog",
-      "category_ids": [
-        11
-      ],
-      "focus_keyword": "we robot",
-      "organic_keywords": [
-        "we robot"
-      ]
-    },
-    {
-      "id": 35420,
-      "slug": "quantum-computing-breakthrough",
-      "title": "Quantum Computing: Exploring Its Applications, Challenges, and the Quantum Future",
-      "url": "https://firstmovers.ai/quantum-computing-breakthrough/",
-      "published_at": "2024-10-16",
-      "kind": "blog",
-      "category_ids": [
-        10
-      ],
-      "focus_keyword": "quantum computing breakthrough",
-      "organic_keywords": [
-        "quantum computing breakthrough"
       ]
     },
     {
@@ -3409,36 +3274,6 @@
       ]
     },
     {
-      "id": 35086,
-      "slug": "openai-agi-levels",
-      "title": "OpenAI’s 5 Steps to AGI: Level 2 Reasoners Officially Here",
-      "url": "https://firstmovers.ai/openai-agi-levels/",
-      "published_at": "2024-10-01",
-      "kind": "blog",
-      "category_ids": [
-        10
-      ],
-      "focus_keyword": "OpenAI AGI levels",
-      "organic_keywords": [
-        "OpenAI AGI levels"
-      ]
-    },
-    {
-      "id": 35075,
-      "slug": "universal-productivity-dividend",
-      "title": "The Universal Productivity Dividend: Utopia or Answer to AI&#8217;s Rise?",
-      "url": "https://firstmovers.ai/universal-productivity-dividend/",
-      "published_at": "2024-09-30",
-      "kind": "blog",
-      "category_ids": [
-        11
-      ],
-      "focus_keyword": "universal productivity dividend",
-      "organic_keywords": [
-        "universal productivity dividend"
-      ]
-    },
-    {
       "id": 35040,
       "slug": "ai-job-opportunities",
       "title": "AI Job Opportunities: Work That Will Matter in the Age of AI",
@@ -3469,113 +3304,6 @@
       ]
     },
     {
-      "id": 34808,
-      "slug": "ai-job-automation",
-      "title": "Scary Prediction: AI Job Automation and 1 Billion Jobs Gone by 2030",
-      "url": "https://firstmovers.ai/ai-job-automation/",
-      "published_at": "2024-09-26",
-      "kind": "blog",
-      "category_ids": [
-        11
-      ],
-      "focus_keyword": "AI job automation",
-      "organic_keywords": [
-        "what jobs will ai replace by 2030",
-        "will ai take over jobs",
-        "how many jobs will ai replace by 2030"
-      ]
-    },
-    {
-      "id": 34655,
-      "slug": "openai-o1-model",
-      "title": "OpenAI&#8217;s New Reasoning Model, o1 Strawberry: Is This AGI?",
-      "url": "https://firstmovers.ai/openai-o1-model/",
-      "published_at": "2024-09-25",
-      "kind": "blog",
-      "category_ids": [
-        14
-      ],
-      "focus_keyword": "OpenAI O1 model",
-      "organic_keywords": [
-        "OpenAI O1 model"
-      ]
-    },
-    {
-      "id": 34682,
-      "slug": "ai-ethics-pillars",
-      "title": "What Are the Pillars of AI Ethics for Modern Businesses?",
-      "url": "https://firstmovers.ai/ai-ethics-pillars/",
-      "published_at": "2024-09-25",
-      "kind": "blog",
-      "category_ids": [
-        12
-      ],
-      "focus_keyword": "what are the pillars of ai ethics",
-      "organic_keywords": [
-        "what are the pillars of ai ethics"
-      ]
-    },
-    {
-      "id": 34559,
-      "slug": "openai-strawberry-model",
-      "title": "OpenAI Strawberry Model: Dawn of the AI Reasoning Era",
-      "url": "https://firstmovers.ai/openai-strawberry-model/",
-      "published_at": "2024-09-24",
-      "kind": "blog",
-      "category_ids": [
-        14
-      ],
-      "focus_keyword": "OpenAI Strawberry model",
-      "organic_keywords": [
-        "OpenAI Strawberry model"
-      ]
-    },
-    {
-      "id": 34362,
-      "slug": "ai-replacing-blue-collar-jobs",
-      "title": "How AI Replacing Blue-Collar Jobs Impacts the Workforce",
-      "url": "https://firstmovers.ai/ai-replacing-blue-collar-jobs/",
-      "published_at": "2024-09-23",
-      "kind": "blog",
-      "category_ids": [
-        11
-      ],
-      "focus_keyword": "AI replacing blue-collar jobs",
-      "organic_keywords": [
-        "AI replacing blue-collar jobs"
-      ]
-    },
-    {
-      "id": 34356,
-      "slug": "humanoid-robot-economy",
-      "title": "How the Humanoid Robot Economy Shapes Global Markets",
-      "url": "https://firstmovers.ai/humanoid-robot-economy/",
-      "published_at": "2024-09-22",
-      "kind": "blog",
-      "category_ids": [
-        13
-      ],
-      "focus_keyword": "humanoid robot economy",
-      "organic_keywords": [
-        "humanoid robot economy"
-      ]
-    },
-    {
-      "id": 35443,
-      "slug": "ai-economic-impact",
-      "title": "How Will AI Affect Tomorrow&#8217;s Economy?",
-      "url": "https://firstmovers.ai/ai-economic-impact/",
-      "published_at": "2024-09-19",
-      "kind": "blog",
-      "category_ids": [
-        11
-      ],
-      "focus_keyword": "AI economic impact",
-      "organic_keywords": [
-        "AI economic impact"
-      ]
-    },
-    {
       "id": 34171,
       "slug": "resource-based-economy",
       "title": "How a Resource-Based Economy Can Fuel Sustainable Growth",
@@ -3587,127 +3315,7 @@
       ],
       "focus_keyword": "resource-based economy",
       "organic_keywords": [
-        "resource-based economy"
-      ]
-    },
-    {
-      "id": 1168,
-      "slug": "agi-consciousness-soul",
-      "title": "Exploring AGI Consciousness and the Soul: Can Machines Truly Possess a Soul?",
-      "url": "https://firstmovers.ai/agi-consciousness-soul/",
-      "published_at": "2024-09-18",
-      "kind": "blog",
-      "category_ids": [
-        10
-      ],
-      "focus_keyword": "AGI consciousness soul",
-      "organic_keywords": [
-        "AGI consciousness soul"
-      ]
-    },
-    {
-      "id": 1148,
-      "slug": "white-collar-job-automation",
-      "title": "White Collar Job Automation: Thrive in the Age of AI",
-      "url": "https://firstmovers.ai/white-collar-job-automation/",
-      "published_at": "2024-09-17",
-      "kind": "blog",
-      "category_ids": [
-        11
-      ],
-      "focus_keyword": "white collar job automation",
-      "organic_keywords": [
-        "white collar job automation"
-      ]
-    },
-    {
-      "id": 1035,
-      "slug": "ai-job-loss",
-      "title": "How to Lose Your Job to AI: Adapt Your Skills Now",
-      "url": "https://firstmovers.ai/ai-job-loss/",
-      "published_at": "2024-09-16",
-      "kind": "blog",
-      "category_ids": [
-        11
-      ],
-      "focus_keyword": "how to lose your job to ai",
-      "organic_keywords": [
-        "how to lose your job to ai"
-      ]
-    },
-    {
-      "id": 37692,
-      "slug": "ai-image-tools",
-      "title": "AI Image Tools in 2024: Which of These 7 is Right for You?",
-      "url": "https://firstmovers.ai/ai-image-tools/",
-      "published_at": "2024-07-26",
-      "kind": "blog",
-      "category_ids": [
-        14
-      ],
-      "focus_keyword": "ai image tools",
-      "organic_keywords": [
-        "ai image tools"
-      ]
-    },
-    {
-      "id": 34032,
-      "slug": "uncanny-valley-ai",
-      "title": "Uncanny Valley AI: Navigating the Human-Robot Divide",
-      "url": "https://firstmovers.ai/uncanny-valley-ai/",
-      "published_at": "2024-07-23",
-      "kind": "blog",
-      "category_ids": [
-        10
-      ],
-      "focus_keyword": "uncanny valley AI",
-      "organic_keywords": [
-        "uncanny valley AI"
-      ]
-    },
-    {
-      "id": 34232,
-      "slug": "human-ai-evolution",
-      "title": "Will Humans Merge With AI?",
-      "url": "https://firstmovers.ai/human-ai-evolution/",
-      "published_at": "2024-07-15",
-      "kind": "blog",
-      "category_ids": [
-        10
-      ],
-      "focus_keyword": "ai",
-      "organic_keywords": [
-        "ai"
-      ]
-    },
-    {
-      "id": 1034,
-      "slug": "ai-singularity-predictions",
-      "title": "Decoding AI Singularity Predictions: How Close Are We?",
-      "url": "https://firstmovers.ai/ai-singularity-predictions/",
-      "published_at": "2024-07-15",
-      "kind": "blog",
-      "category_ids": [
-        10
-      ],
-      "focus_keyword": "AI singularity predictions",
-      "organic_keywords": [
-        "AI singularity predictions"
-      ]
-    },
-    {
-      "id": 34212,
-      "slug": "ai-content-plagiarism",
-      "title": "Is AI Content Plagiarism? Legal Insights for Creators",
-      "url": "https://firstmovers.ai/ai-content-plagiarism/",
-      "published_at": "2024-07-10",
-      "kind": "blog",
-      "category_ids": [
-        12
-      ],
-      "focus_keyword": "is ai content plagiarism",
-      "organic_keywords": [
-        "is ai content plagiarism"
+        "resource based economy"
       ]
     },
     {
@@ -3741,171 +3349,6 @@
       ]
     },
     {
-      "id": 34037,
-      "slug": "leopold-aschenbrenner-ai-predictions",
-      "title": "Leopold Aschenbrenner AI Predictions: A Vision of Our Future",
-      "url": "https://firstmovers.ai/leopold-aschenbrenner-ai-predictions/",
-      "published_at": "2024-06-24",
-      "kind": "blog",
-      "category_ids": [
-        10
-      ],
-      "focus_keyword": "Leopold Aschenbrenner AI predictions",
-      "organic_keywords": [
-        "Leopold Aschenbrenner AI predictions"
-      ]
-    },
-    {
-      "id": 33930,
-      "slug": "safe-ai",
-      "title": "Can We Build a Safe AI for Humanity?",
-      "url": "https://firstmovers.ai/safe-ai/",
-      "published_at": "2024-06-15",
-      "kind": "blog",
-      "category_ids": [
-        12
-      ],
-      "focus_keyword": "safe ai",
-      "organic_keywords": [
-        "safe ai"
-      ]
-    },
-    {
-      "id": 33841,
-      "slug": "ai-job-displacement-preparation",
-      "title": "How to Prepare for AI Job Displacement: Stay Ahead",
-      "url": "https://firstmovers.ai/ai-job-displacement-preparation/",
-      "published_at": "2024-06-10",
-      "kind": "blog",
-      "category_ids": [
-        11
-      ],
-      "focus_keyword": "How to prepare for AI job displacement",
-      "organic_keywords": [
-        "How to prepare for AI job displacement"
-      ]
-    },
-    {
-      "id": 33874,
-      "slug": "ai-6-stages",
-      "title": "6 Stages of AI: Human Productivity in an AGI World",
-      "url": "https://firstmovers.ai/ai-6-stages/",
-      "published_at": "2024-06-08",
-      "kind": "blog",
-      "category_ids": [
-        10
-      ],
-      "focus_keyword": "AGI",
-      "organic_keywords": [
-        "AGI"
-      ]
-    },
-    {
-      "id": 33829,
-      "slug": "agi-timeline-predictions-benefits",
-      "title": "When Will AGI Happen? Predictions, Benefits and Risks",
-      "url": "https://firstmovers.ai/agi-timeline-predictions-benefits/",
-      "published_at": "2024-06-01",
-      "kind": "blog",
-      "category_ids": [
-        10
-      ],
-      "focus_keyword": "When will AGI happen?",
-      "organic_keywords": [
-        "When will AGI happen?"
-      ]
-    },
-    {
-      "id": 33642,
-      "slug": "ubi-limitations",
-      "title": "The Shortcomings of Universal Basic Income for Humanity",
-      "url": "https://firstmovers.ai/ubi-limitations/",
-      "published_at": "2024-05-19",
-      "kind": "blog",
-      "category_ids": [
-        10
-      ],
-      "focus_keyword": "universal basic income",
-      "organic_keywords": [
-        "universal basic income"
-      ]
-    },
-    {
-      "id": 33477,
-      "slug": "post-agi-universal-basic-income",
-      "title": "The Road to UBI: The Future of Work and Universal Basic Income",
-      "url": "https://firstmovers.ai/post-agi-universal-basic-income/",
-      "published_at": "2024-05-01",
-      "kind": "blog",
-      "category_ids": [
-        11
-      ],
-      "focus_keyword": "UBI",
-      "organic_keywords": [
-        "UBI"
-      ]
-    },
-    {
-      "id": 33206,
-      "slug": "ai-copyright-battle",
-      "title": "Is AI Going to Kill Human Copyright?",
-      "url": "https://firstmovers.ai/ai-copyright-battle/",
-      "published_at": "2024-04-22",
-      "kind": "blog",
-      "category_ids": [
-        12
-      ],
-      "focus_keyword": "copyright",
-      "organic_keywords": [
-        "copyright"
-      ]
-    },
-    {
-      "id": 33202,
-      "slug": "post-agi-world",
-      "title": "Beat The Scarcity Trap in a Post-AGI World",
-      "url": "https://firstmovers.ai/post-agi-world/",
-      "published_at": "2024-04-16",
-      "kind": "blog",
-      "category_ids": [
-        10
-      ],
-      "focus_keyword": "post-agi world",
-      "organic_keywords": [
-        "post-agi world"
-      ]
-    },
-    {
-      "id": 33041,
-      "slug": "life-post-agi",
-      "title": "What Will Life After AGI Look Like?",
-      "url": "https://firstmovers.ai/life-post-agi/",
-      "published_at": "2024-03-26",
-      "kind": "blog",
-      "category_ids": [
-        10
-      ],
-      "focus_keyword": "life after agi",
-      "organic_keywords": [
-        "life after agi"
-      ]
-    },
-    {
-      "id": 32753,
-      "slug": "ai-truth",
-      "title": "The Truth About AI: Its Real Impact on Humanity",
-      "url": "https://firstmovers.ai/ai-truth/",
-      "published_at": "2024-03-06",
-      "kind": "blog",
-      "category_ids": [
-        14
-      ],
-      "focus_keyword": "AI",
-      "organic_keywords": [
-        "AI"
-      ]
-    },
-    {
       "id": 32455,
       "slug": "ai-future",
       "title": "Shaping Tomorrow: The Future of AI in Business and Life",
@@ -3919,6 +3362,50 @@
       "organic_keywords": [
         "future of AI"
       ]
+    },
+    {
+      "id": 73366,
+      "slug": "with-love-julia",
+      "title": "Private message about AI Labs anniversary",
+      "url": "https://firstmovers.ai/with-love-julia/",
+      "published_at": "2026-05-23",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "with love julia",
+      "organic_keywords": []
+    },
+    {
+      "id": 73068,
+      "slug": "labs",
+      "title": "Labs",
+      "url": "https://firstmovers.ai/labs/",
+      "published_at": "2026-05-22",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "labs",
+      "organic_keywords": []
+    },
+    {
+      "id": 72851,
+      "slug": "clone-setup-tools",
+      "title": "Clone Setup Tools",
+      "url": "https://firstmovers.ai/clone-setup-tools/",
+      "published_at": "2026-05-19",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "clone setup tools",
+      "organic_keywords": []
+    },
+    {
+      "id": 72804,
+      "slug": "from-julia",
+      "title": "Private message on the clone mastermind",
+      "url": "https://firstmovers.ai/from-julia/",
+      "published_at": "2026-05-18",
+      "kind": "page",
+      "category_ids": [],
+      "focus_keyword": "from julia",
+      "organic_keywords": []
     },
     {
       "id": 72583,
@@ -3984,28 +3471,6 @@
       "kind": "page",
       "category_ids": [],
       "focus_keyword": "youtube clone mastermind",
-      "organic_keywords": []
-    },
-    {
-      "id": 70462,
-      "slug": "free-blueprint",
-      "title": "Free Blueprint",
-      "url": "https://firstmovers.ai/free-blueprint/",
-      "published_at": "2026-04-20",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "free blueprint",
-      "organic_keywords": []
-    },
-    {
-      "id": 69535,
-      "slug": "bootcamp",
-      "title": "Bootcamp",
-      "url": "https://firstmovers.ai/bootcamp/",
-      "published_at": "2026-04-12",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "bootcamp",
       "organic_keywords": []
     },
     {
@@ -4174,17 +3639,6 @@
       "organic_keywords": []
     },
     {
-      "id": 59057,
-      "slug": "labs",
-      "title": "Labs",
-      "url": "https://firstmovers.ai/labs/",
-      "published_at": "2025-10-18",
-      "kind": "page",
-      "category_ids": [],
-      "focus_keyword": "labs",
-      "organic_keywords": []
-    },
-    {
       "id": 54854,
       "slug": "blueprint",
       "title": "Blueprint",
@@ -4226,9 +3680,7 @@
       "kind": "page",
       "category_ids": [],
       "focus_keyword": "home",
-      "organic_keywords": [
-        "first movers"
-      ]
+      "organic_keywords": []
     },
     {
       "id": 46908,
