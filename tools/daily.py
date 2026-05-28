@@ -55,6 +55,8 @@ class DailyState:
     wp_post_id: int | None = None
     wp_edit_url: str | None = None
     drafted_at: str | None = None          # ISO-8601 UTC
+    rejected_at: str | None = None         # ISO-8601 UTC, set when polling sees a reject status
+    rejected_status_name: str | None = None  # the ClickUp status name that triggered rejection
     notes: list[str] = field(default_factory=list)
 
     @property
@@ -68,6 +70,10 @@ class DailyState:
     @property
     def is_drafted(self) -> bool:
         return bool(self.wp_post_id)
+
+    @property
+    def is_rejected(self) -> bool:
+        return bool(self.rejected_at)
 
 
 # ---------------------------------------------------------------------------
@@ -131,7 +137,10 @@ def pending_approvals(dir_: Path = DAILY_DIR) -> list[DailyState]:
     These are the tasks the polling drafter calls `clickup_get_task` on
     every 3 hours.
     """
-    return [s for s in list_states(dir_) if s.is_emitted and not s.is_approved]
+    return [
+        s for s in list_states(dir_)
+        if s.is_emitted and not s.is_approved and not s.is_rejected
+    ]
 
 
 def pending_drafts(dir_: Path = DAILY_DIR) -> list[DailyState]:
@@ -139,7 +148,10 @@ def pending_drafts(dir_: Path = DAILY_DIR) -> list[DailyState]:
 
     These are the tasks the polling drafter generates prose for.
     """
-    return [s for s in list_states(dir_) if s.is_approved and not s.is_drafted]
+    return [
+        s for s in list_states(dir_)
+        if s.is_approved and not s.is_drafted and not s.is_rejected
+    ]
 
 
 # ---------------------------------------------------------------------------
@@ -213,6 +225,29 @@ def is_task_approved(clickup_task_response: Any) -> tuple[bool, str | None]:
     return _is_subtask_done(status), name or None
 
 
+def is_task_rejected(clickup_task_response: Any) -> tuple[bool, str | None]:
+    """Inspect a `clickup_get_task` response and return (is_rejected, status_name).
+
+    Mirrors `is_task_approved` but uses the rejection allowlist in
+    `tools.clickup` (`_is_subtask_rejected`). Callers should check
+    `is_task_rejected` BEFORE `is_task_approved` so that an explicit
+    rejection wins over an ambiguous approval — and so that a state
+    already approved can still be overridden when the operator changes
+    the ClickUp status to a reject-type one.
+    """
+    from .clickup import _is_subtask_rejected  # noqa: PLC0415 — avoid circular at import
+
+    if not isinstance(clickup_task_response, dict):
+        return False, None
+    status = clickup_task_response.get("status")
+    name = ""
+    if isinstance(status, dict):
+        name = str(status.get("status") or "").strip()
+    elif isinstance(status, str):
+        name = status.strip()
+    return _is_subtask_rejected(status), name or None
+
+
 def mark_emitted(state: DailyState, *, task_id: str) -> DailyState:
     state.clickup_task_id = task_id
     state.clickup_emitted_at = _now_iso()
@@ -222,6 +257,18 @@ def mark_emitted(state: DailyState, *, task_id: str) -> DailyState:
 def mark_approved(state: DailyState, *, status_name: str | None = None) -> DailyState:
     state.approved_at = _now_iso()
     state.approved_status_name = status_name
+    return state
+
+
+def mark_rejected(state: DailyState, *, status_name: str | None = None) -> DailyState:
+    """Mark the state as rejected — terminal, never drafts.
+
+    Overrides any prior approval: a state that was approved then rejected
+    will not appear in `pending_drafts`. The `approved_at` timestamp is
+    preserved on disk as part of the audit trail.
+    """
+    state.rejected_at = _now_iso()
+    state.rejected_status_name = status_name
     return state
 
 
@@ -343,7 +390,8 @@ def should_skip_for_clickup_dup(
 
 def _format_state_summary(s: DailyState) -> str:
     icon = (
-        "DRAFTED " if s.is_drafted
+        "REJECTED" if s.is_rejected
+        else "DRAFTED " if s.is_drafted
         else "APPROVED" if s.is_approved
         else "EMITTED " if s.is_emitted
         else "PENDING "

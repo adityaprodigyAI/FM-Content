@@ -95,10 +95,11 @@ When Nikki does flip the status, the next Job 2 run (which polls every 3 hours) 
 
 3. **For each pending approval:**
    - Call `mcp__first-movers-clickup__clickup_get_task` on the task ID.
-   - Check the task's status against `tools.daily.is_task_approved` (which accepts `published`, `complete`, `closed`, `done`, `ready` — case-insensitive).
-   - If approved, advance the state file to `approved_at = <now>` and persist.
+   - **Check rejection first** via `tools.daily.is_task_rejected` (accepts `rejected`, `cancelled`, `canceled`, `declined`, `archived`, `skip`, `skipped`, `not approved`, `wont do`, `won't do`, `wontfix` — case-insensitive — plus any status whose ClickUp type is `cancelled`). If rejected, advance the state file to `rejected_at = <now>` and persist — terminal, never drafts. `"on hold"` is NOT a rejection — it stays pending so the approver can come back to it.
+   - Otherwise check approval via `tools.daily.is_task_approved` (which accepts `published`, `complete`, `closed`, `done`, `ready` — case-insensitive). If approved, advance the state file to `approved_at = <now>` and persist.
 
 4. **For each pending draft (i.e., state just advanced to approved):**
+   - **Re-check rejection.** Fetch the task once more — if the approver flipped status to a reject-type one *after* approving, mark the state rejected and skip. This is the post-approval override path: it ensures a "Rejected" set after an accidental "complete" still wins.
    - **Re-run the cannibalization gate.** This is defense-in-depth: inventory may have shifted between Job 1's emit and Job 2's draft. If the topic is now `critical` or `high` against the freshest inventory, comment on the ClickUp task explaining the conflict and skip — the operator reconciles manually.
    - **Fetch SERP context** for the focus keyword via `mcp__ahrefs__serp-overview` (top 10 results). This tells the prose-generation step what competitors are saying so the new post can out-write them. If SERP returns empty (narrow keyword), the job continues without it.
    - **Generate the body prose.** The agent writes 2,500-3,800 words of HTML conforming to the rubric (see "The Rubric" below). This is the largest workstep.

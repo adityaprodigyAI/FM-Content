@@ -51,10 +51,20 @@ clickup_create_task_comment(
 ### 3. Process each pending approval
 
 ```python
-from tools.daily import is_task_approved, mark_approved, save_state
+from tools.daily import (
+    is_task_approved, is_task_rejected,
+    mark_approved, mark_rejected, save_state,
+)
 
 for state in pending_approvals():
     resp = clickup_get_task(task_id=state.clickup_task_id, detail_level="summary")
+    # Reject FIRST — an explicit Rejected/Cancelled/Archived status is terminal
+    # and must win over an ambiguous approval check.
+    rejected, status_name = is_task_rejected(resp)
+    if rejected:
+        mark_rejected(state, status_name=status_name)
+        save_state(state)
+        continue
     approved, status_name = is_task_approved(resp)
     if approved:
         mark_approved(state, status_name=status_name)
@@ -81,11 +91,26 @@ from tools.inventory import load
 from tools.rubric import FaqItem, RubricViolation
 from tools.push_wp import build_create_payload
 from tools.rank_math import build_meta
-from tools.daily import mark_drafted
+from tools.daily import is_task_rejected, mark_drafted, mark_rejected, save_state
 
 inv = load(); inv.assert_fresh(); inv.assert_complete()
 
 for state in pending_drafts():
+    # Re-check ClickUp before drafting. If the approver rejected the task after a
+    # prior accidental approval (e.g., status was 'complete' then changed to
+    # 'Rejected'), honour the rejection and skip — this is the defense-in-depth
+    # that ensures rejection wins even after the approval gate.
+    resp = clickup_get_task(task_id=state.clickup_task_id, detail_level="summary")
+    rejected, status_name = is_task_rejected(resp)
+    if rejected:
+        mark_rejected(state, status_name=status_name)
+        save_state(state)
+        clickup_create_task_comment(
+            task_id=state.clickup_task_id,
+            comment_text=f"Skipped drafting: task is now '{status_name}' (rejected).",
+        )
+        continue
+
     prop = SlateProposal(**state.proposal)
     brief = prepare_brief(prop, inv)   # cannibalization defense-in-depth re-check
 

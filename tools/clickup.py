@@ -68,6 +68,29 @@ DONE_STATUS_NAMES: Final[frozenset[str]] = frozenset(
     {"published", "complete", "closed", "done", "ready"}
 )
 
+# When the approver explicitly rejects a daily-idea task (status "Rejected",
+# "Cancelled", "Archived", etc.), the polling-drafter must treat it as terminal —
+# never approve, and override a prior accidental approval. "On hold" is
+# deliberately NOT in this allowlist; it stays in the pending bucket so the
+# approver can come back to it later.
+REJECTED_STATUS_TYPES: Final[frozenset[str]] = frozenset({"cancelled"})
+
+REJECTED_STATUS_NAMES: Final[frozenset[str]] = frozenset(
+    {
+        "rejected",
+        "cancelled",
+        "canceled",
+        "declined",
+        "archived",
+        "skip",
+        "skipped",
+        "not approved",
+        "wont do",
+        "won't do",
+        "wontfix",
+    }
+)
+
 
 # ---------------------------------------------------------------------------
 # Emit (Sunday)
@@ -201,6 +224,31 @@ def _is_subtask_done(status: Any) -> bool:
         return name_str in DONE_STATUS_NAMES
     if isinstance(status, str):
         return status.strip().lower() in DONE_STATUS_NAMES
+    return False
+
+
+def _is_subtask_rejected(status: Any) -> bool:
+    """Recognize an explicitly rejected/cancelled status.
+
+    Mirrors `_is_subtask_done` but for the reject side. Uses OR logic across
+    type and name (unlike `_is_subtask_done`'s type-authoritative pattern) so
+    a custom status named "Rejected" with an arbitrary `type` (e.g., 'custom'
+    or 'open') is still caught. ClickUp lists often add a reject status as a
+    custom one, so this is the safer default.
+
+    NOTE: "on hold" is intentionally NOT in REJECTED_STATUS_NAMES — it remains
+    a pending pause the approver can revisit, not a terminal rejection.
+    """
+    if isinstance(status, dict):
+        type_str = str(status.get("type") or "").strip().lower()
+        name_str = str(status.get("status") or "").strip().lower()
+        if type_str in REJECTED_STATUS_TYPES:
+            return True
+        if name_str in REJECTED_STATUS_NAMES:
+            return True
+        return False
+    if isinstance(status, str):
+        return status.strip().lower() in REJECTED_STATUS_NAMES
     return False
 
 
