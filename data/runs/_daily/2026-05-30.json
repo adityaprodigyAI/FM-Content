@@ -1,0 +1,38 @@
+{
+  "date": "2026-05-30",
+  "proposal": {
+    "focus_keyword": "ai-driven marketing campaigns",
+    "working_title": "AI-Driven Marketing Campaigns: A 2026 Operator Playbook for Designing, Launching, and Optimizing in Days",
+    "one_line_angle": "Existing AI marketing content tells operators what to buy; this is the actual playbook they run to design, launch, and optimize a multi-channel campaign in days, not weeks.",
+    "outline_bullets": [
+      "The Five-Layer Stack Powering AI-Driven Marketing Campaigns in 2026 (and How Operators Pick the Layer-One Brain)",
+      "From Brief to Live in 72 Hours: The Operator Workflow for Designing and Launching an AI-Driven Campaign",
+      "Optimization Loop: How to Read Your Campaign Telemetry and Compound Conversion Lift Week-Over-Week"
+    ],
+    "slug": "ai-driven-marketing-campaigns",
+    "audience": "done-for-you",
+    "category_id": 13,
+    "intent": "informational",
+    "target_date": "2026-05-30",
+    "discovery_source": "searchable_competitor_topic",
+    "discovery_id": "searchable_topic:ai-driven marketing campaigns",
+    "discovery_evidence": {
+      "topic": "AI-Driven Marketing Campaigns",
+      "coverage": 0.0
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "",
+    "matched_post_url": null,
+    "score": 5.0
+  },
+  "clickup_task_id": "86ahtu1ua",
+  "clickup_emitted_at": "2026-05-30T14:15:31.642668+00:00",
+  "approved_at": null,
+  "approved_status_name": null,
+  "wp_post_id": null,
+  "wp_edit_url": null,
+  "drafted_at": null,
+  "rejected_at": null,
+  "rejected_status_name": null,
+  "notes": []
+}
