@@ -1,0 +1,40 @@
+{
+  "date": "2026-05-31",
+  "proposal": {
+    "focus_keyword": "labs explained",
+    "working_title": "FirstMovers Labs Explained: How the AI Implementation Workspace Works",
+    "one_line_angle": "Surging /Labs/ traffic (+7x in 28d) shows search demand for clarity on what FirstMovers Labs actually delivers - this post turns that curiosity into a guided walkthrough of the workspace, the implementation modules, and who it serves.",
+    "outline_bullets": [
+      "What FirstMovers Labs is (and what it isn't): the AI implementation workspace versus the consulting engagement",
+      "Inside the workspace: the four implementation modules (foundation, agents, workflows, measurement) and how teams progress through them",
+      "Who Labs is built for, and the signals that say you're ready for the workspace versus done-for-you consulting"
+    ],
+    "slug": "labs-explained",
+    "audience": "done-for-you",
+    "category_id": 13,
+    "intent": "informational",
+    "target_date": "2026-05-31",
+    "discovery_source": "ga4_high_traffic_gap",
+    "discovery_id": "ga4:labs",
+    "discovery_evidence": {
+      "page_path": "/Labs/",
+      "sessions": 1488,
+      "prior_sessions": 212,
+      "growth_ratio": 7.018867924528302
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "",
+    "matched_post_url": null,
+    "score": 8.652930016342005
+  },
+  "clickup_task_id": "86ahu0p7a",
+  "clickup_emitted_at": "2026-05-31T14:11:02.195053+00:00",
+  "approved_at": null,
+  "approved_status_name": null,
+  "wp_post_id": null,
+  "wp_edit_url": null,
+  "drafted_at": null,
+  "rejected_at": null,
+  "rejected_status_name": null,
+  "notes": []
+}
