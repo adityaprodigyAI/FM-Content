@@ -1,0 +1,43 @@
+{
+  "date": "2026-06-02",
+  "proposal": {
+    "focus_keyword": "ai replacing jobs",
+    "working_title": "AI Replacing Jobs in 2026: How to Audit Which Workflows Reshape vs Disappear",
+    "one_line_angle": "BCG's research says AI reshapes more roles than it replaces; the missing playbook is a workflow-by-workflow audit that pinpoints which steps stay human, which get augmented, and which get fully automated inside one role at a time.",
+    "outline_bullets": [
+      "The reshape-vs-replace distinction: why role-level headlines mislead operations leaders and step-level workflow maps don't",
+      "The 90-minute reshape audit: a five-question workflow inventory we use with done-for-you clients to tag every task as keep, augment, or automate",
+      "Three roles where reshape beats replace in 2026: sales operations, customer support, and financial analysis (with concrete before-and-after task maps)"
+    ],
+    "slug": "ai-replacing-jobs",
+    "audience": "done-for-you",
+    "category_id": 13,
+    "intent": "informational",
+    "target_date": "2026-06-02",
+    "discovery_source": "ahrefs_competitor_gap",
+    "discovery_id": "ahrefs:bcg.com:ai replacing jobs",
+    "discovery_evidence": {
+      "competitor": "bcg.com",
+      "keyword": "ai replacing jobs",
+      "volume": 2700,
+      "difficulty": 59,
+      "competitor_position": 1.0,
+      "competitor_traffic": 1266,
+      "competitor_top_url": "https://www.bcg.com/publications/2026/ai-will-reshape-more-jobs-than-it-replaces"
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "",
+    "matched_post_url": null,
+    "score": 10.883580943953184
+  },
+  "clickup_task_id": "86ahv7j4k",
+  "clickup_emitted_at": "2026-06-02T14:06:35.441338+00:00",
+  "approved_at": null,
+  "approved_status_name": null,
+  "wp_post_id": null,
+  "wp_edit_url": null,
+  "drafted_at": null,
+  "rejected_at": null,
+  "rejected_status_name": null,
+  "notes": []
+}
