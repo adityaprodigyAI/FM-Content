@@ -1,0 +1,40 @@
+{
+  "date": "2026-06-04",
+  "proposal": {
+    "focus_keyword": "consulting explained",
+    "working_title": "AI Consulting Explained: When Mid-Market Operators Should Hire a Partner Instead of Building an Internal AI Team",
+    "one_line_angle": "Most mid-market AI rollouts stall because internal teams under-scope the build; here is the engagement model done-for-you operators use to decide between consulting, contracting, and hiring before committing budget.",
+    "outline_bullets": [
+      "What AI consulting actually delivers (versus internal capability, contractors, and SaaS vendors), and the four-quadrant decision matrix mid-market operators use to scope the right engagement",
+      "The engagement-model playbook: discovery sprint, capability audit, build phase, embed-and-handover; with budget bands and timeline expectations for each stage",
+      "When done-for-you operators should hire a consulting partner versus spin up an internal AI lead, with three diagnostic questions and a hire-or-engage scoring rubric"
+    ],
+    "slug": "consulting-explained",
+    "audience": "done-for-you",
+    "category_id": 13,
+    "intent": "informational",
+    "target_date": "2026-06-04",
+    "discovery_source": "ga4_high_traffic_gap",
+    "discovery_id": "ga4:consulting",
+    "discovery_evidence": {
+      "page_path": "/consulting/",
+      "sessions": 3007,
+      "prior_sessions": 0,
+      "growth_ratio": null
+    },
+    "cannibalization_severity": "medium",
+    "cannibalization_rationale": "medium: 1 match(es) | title token-set Jaccard 0.50 (post #65499 https://firstmovers.ai/consulting/)",
+    "matched_post_url": "https://firstmovers.ai/consulting/",
+    "score": 6.004515342534865
+  },
+  "clickup_task_id": "86ahwp0cx",
+  "clickup_emitted_at": "2026-06-04T14:07:26.334626+00:00",
+  "approved_at": null,
+  "approved_status_name": null,
+  "wp_post_id": null,
+  "wp_edit_url": null,
+  "drafted_at": null,
+  "rejected_at": null,
+  "rejected_status_name": null,
+  "notes": []
+}
