@@ -1,0 +1,40 @@
+{
+  "date": "2026-06-06",
+  "proposal": {
+    "focus_keyword": "labs explained",
+    "working_title": "AI Labs Explained: The Six Operating Metrics That Separate a Cost Center From a Compounding Asset",
+    "one_line_angle": "Most mid-market AI labs measure progress in projects shipped and tools tested, when the leverage signal that decides whether the lab compounds or stalls lives in six operating metrics, from per-workflow payback to model-replacement velocity.",
+    "outline_bullets": [
+      "Why output metrics (pilots shipped, tools tested) miss the leverage signal that decides whether an AI lab compounds or quietly stalls",
+      "The six operating metrics every mid-market AI lab should track in 2026 and the threshold each must cross to count as healthy",
+      "A 30-day audit checklist to wire those six metrics into the AI lab review your CFO and COO will both sign off on"
+    ],
+    "slug": "labs-explained",
+    "audience": "done-for-you",
+    "category_id": 13,
+    "intent": "informational",
+    "target_date": "2026-06-06",
+    "discovery_source": "ga4_high_traffic_gap",
+    "discovery_id": "ga4:labs",
+    "discovery_evidence": {
+      "page_path": "/labs/",
+      "sessions": 7854,
+      "prior_sessions": 0,
+      "growth_ratio": null
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "",
+    "matched_post_url": null,
+    "score": 6.48445277534486
+  },
+  "clickup_task_id": "86ahxn551",
+  "clickup_emitted_at": "2026-06-06T14:08:01.041193+00:00",
+  "approved_at": null,
+  "approved_status_name": null,
+  "wp_post_id": null,
+  "wp_edit_url": null,
+  "drafted_at": null,
+  "rejected_at": null,
+  "rejected_status_name": null,
+  "notes": []
+}
