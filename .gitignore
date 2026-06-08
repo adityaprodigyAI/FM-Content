@@ -2,6 +2,10 @@
 .env
 .env.local
 .env.*.local
+# Google service-account JSON, by name convention used in deployments
+secrets-*.json
+*-service-account*.json
+*credentials*.json
 
 # Python
 __pycache__/
