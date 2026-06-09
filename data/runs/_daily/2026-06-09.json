@@ -1,0 +1,40 @@
+{
+  "date": "2026-06-09",
+  "proposal": {
+    "focus_keyword": "courses explained",
+    "working_title": "AI Implementation Courses Explained: How Mid-Market Operators Pick Training That Ships Real Workflows",
+    "one_line_angle": "Most AI training spend ends in slideware because leaders compare courses on hours and price rather than on shipped workflow output; here is the operator scorecard mid-market teams use to pick a program that produces a working build, not just a completion certificate.",
+    "outline_bullets": [
+      "What 'operator-grade' AI courses actually deliver vs lecture-heavy curricula, and the four signals that separate training that ships workflows from training that produces decks",
+      "The scorecard mid-market leaders use before purchasing: build-hours-to-lecture-hours ratio, instructor track record on similar stacks, deliverable artifacts at completion, and post-course implementation support",
+      "How to evaluate ROI before you commit budget: alumni outcomes, integration depth with your existing tooling, and the three diagnostic questions that surface a course's real fit for a done-for-you operator"
+    ],
+    "slug": "courses-explained",
+    "audience": "done-for-you",
+    "category_id": 13,
+    "intent": "informational",
+    "target_date": "2026-06-09",
+    "discovery_source": "ga4_high_traffic_gap",
+    "discovery_id": "ga4:courses",
+    "discovery_evidence": {
+      "page_path": "/courses",
+      "sessions": 1857,
+      "prior_sessions": 0,
+      "growth_ratio": null
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "no overlap detected against current inventory",
+    "matched_post_url": null,
+    "score": 5.763627959686891
+  },
+  "clickup_task_id": "86ahytwaj",
+  "clickup_emitted_at": "2026-06-09T14:08:51.867510+00:00",
+  "approved_at": null,
+  "approved_status_name": null,
+  "wp_post_id": null,
+  "wp_edit_url": null,
+  "drafted_at": null,
+  "rejected_at": null,
+  "rejected_status_name": null,
+  "notes": []
+}
