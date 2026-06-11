@@ -1,0 +1,40 @@
+{
+  "date": "2026-06-11",
+  "proposal": {
+    "focus_keyword": "dashboard explained",
+    "working_title": "AI Operations Dashboards Explained: How Mid-Market Operators Turn Agent Telemetry Into Decisions",
+    "one_line_angle": "Most AI dashboards drown ops leaders in vanity metrics; this post lays out the 3-layer dashboard stack mid-market operators use to turn raw agent telemetry into approve, reject, or escalate calls executives actually trust.",
+    "outline_bullets": [
+      "What an AI Operations Dashboard Tracks That a Marketing Dashboard Doesn't",
+      "The 3-Layer Stack: Pipeline Health, Decision Quality, Business Outcomes",
+      "Build vs Buy: When a No-Code Stack Beats a Custom BI Dashboard for Operators"
+    ],
+    "slug": "dashboard-explained",
+    "audience": "done-for-you",
+    "category_id": 13,
+    "intent": "informational",
+    "target_date": "2026-06-11",
+    "discovery_source": "ga4_high_traffic_gap",
+    "discovery_id": "ga4:dashboard",
+    "discovery_evidence": {
+      "page_path": "/dashboard",
+      "sessions": 2183,
+      "prior_sessions": 0,
+      "growth_ratio": null
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "",
+    "matched_post_url": null,
+    "score": 5.844456668432398
+  },
+  "clickup_task_id": "86aj06pcr",
+  "clickup_emitted_at": "2026-06-11T14:10:57.383827+00:00",
+  "approved_at": null,
+  "approved_status_name": null,
+  "wp_post_id": null,
+  "wp_edit_url": null,
+  "drafted_at": null,
+  "rejected_at": null,
+  "rejected_status_name": null,
+  "notes": []
+}
