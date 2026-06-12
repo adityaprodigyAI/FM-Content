@@ -1,0 +1,42 @@
+{
+  "date": "2026-06-12",
+  "proposal": {
+    "focus_keyword": "agi development",
+    "working_title": "AGI Development Roadmap: How Mid-Market Operators Should Prepare for the 2027 Capability Jump",
+    "one_line_angle": "Most AGI coverage is futurist hype; this post lays out the concrete 4-phase posture mid-market operators need now (data foundations, agent governance, talent retention, customer trust) so the team is ready when capabilities jump, not scrambling on launch day.",
+    "outline_bullets": [
+      "Why AGI Development Discussions Mislead Operators (And What to Track Instead)",
+      "The 4-Phase Operator Posture: Data Foundations, Agent Governance, Talent, Customer Trust",
+      "What Mid-Market Teams Are Already Building to Stay Optionality-Heavy Through 2027"
+    ],
+    "slug": "agi-development",
+    "audience": "done-for-you",
+    "category_id": 10,
+    "intent": "informational",
+    "target_date": "2026-06-12",
+    "discovery_source": "gsc_striking_distance",
+    "discovery_id": "gsc:agi development",
+    "discovery_evidence": {
+      "query": "agi development",
+      "page": "https://firstmovers.ai/agi-timeline/",
+      "position": 18.4,
+      "impressions": 25,
+      "clicks": 0,
+      "ctr": 0.0
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "no overlap detected against current inventory",
+    "matched_post_url": null,
+    "score": 3.89
+  },
+  "clickup_task_id": "86aj0ug4t",
+  "clickup_emitted_at": "2026-06-12T14:12:56.832331+00:00",
+  "approved_at": null,
+  "approved_status_name": null,
+  "wp_post_id": null,
+  "wp_edit_url": null,
+  "drafted_at": null,
+  "rejected_at": null,
+  "rejected_status_name": null,
+  "notes": []
+}
