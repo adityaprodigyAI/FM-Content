@@ -36,5 +36,8 @@ Thumbs.db
 # Playwright MCP local artifacts
 .playwright-mcp/
 
+# Vendored third-party clone (separate repo; install on each machine via its install.sh)
+claude-seo/
+
 # Inventory snapshots may be large — track only if reasonable size
 # data/inventory/*.json

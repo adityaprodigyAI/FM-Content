@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FirstMovers.ai - Content SEO &amp; AEO Performance Report</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%2315cc8a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fm-primary:#15cc8a; --fm-secondary:#3cd49d; --fm-accent:#151515;
+  --fm-text:#333434; --fm-mint-1:#d0f5e8; --fm-mint-2:#8ae5c4; --fm-mint-3:#63ddb1;
+  --fm-green-dk:#0e885c; --fm-green-deep:#0a6b46; --fm-off-white:#f4faf7; --fm-white:#ffffff;
+  --ink:#13201b; --muted:#5c6b66; --line:#e3ece8;
+  --shadow:0 2px 8px rgba(16,40,30,.05),0 12px 32px rgba(16,40,30,.06);
+  --shadow-lg:0 8px 40px rgba(16,40,30,.12);
+  --radius:16px; --radius-pill:50px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter','Helvetica Neue',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+  color:var(--fm-text);background:var(--fm-off-white);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{color:var(--ink);line-height:1.18;font-weight:700;letter-spacing:-.01em}
+a{color:var(--fm-green-dk);text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 26px}
+.eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fm-green-dk);background:var(--fm-mint-1);padding:6px 14px;border-radius:var(--radius-pill);margin-bottom:18px}
+section{padding:72px 0}
+section h2{font-size:30px;margin-bottom:10px}
+section .lead{font-size:16.5px;color:var(--muted);max-width:720px;margin-bottom:34px}
+
+/* HERO */
+.hero{background:radial-gradient(120% 130% at 82% -10%,rgba(21,204,138,.22),transparent 55%),
+  linear-gradient(155deg,#0b1512 0%,#10231b 55%,#0b1512 100%);color:#eafaf3;
+  padding:64px 0 76px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;inset:0;background:
+  radial-gradient(48% 50% at 10% 105%,rgba(60,212,157,.16),transparent 60%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1}
+.hero .logo{display:block;margin-bottom:40px}
+.hero .logo svg{height:30px;width:auto}
+.hero .eyebrow{background:rgba(21,204,138,.16);color:#7ff0c4}
+.hero h1{color:#fff;font-size:42px;font-weight:800;max-width:760px;letter-spacing:-.02em}
+.hero p.sub{color:#a9c7bd;font-size:17px;margin-top:16px;max-width:620px}
+.hero .meta{color:#7e988f;font-size:13px;margin-top:18px;font-weight:500}
+.hero .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px}
+.metric{background:rgba(255,255,255,.045);border:1px solid rgba(127,240,196,.16);border-radius:var(--radius);
+  padding:22px 20px;backdrop-filter:blur(4px)}
+.metric .num{font-size:38px;font-weight:800;color:#fff;line-height:1;font-variant-numeric:tabular-nums}
+.metric .lbl{font-size:12.5px;color:#9fc0b5;margin-top:8px;font-weight:600;letter-spacing:.02em}
+
+/* SCORE BAND */
+.scoreband{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
+.bigscore{background:linear-gradient(160deg,#0b1512,#11271d);color:#fff;border-radius:var(--radius);padding:26px;
+  display:flex;flex-direction:column;justify-content:center}
+.bigscore.green{background:linear-gradient(160deg,var(--fm-green-dk),var(--fm-primary))}
+.bigscore .v{font-size:44px;font-weight:800;line-height:1}
+.bigscore .k{font-size:12.5px;color:#bfe6d6;margin-top:8px;font-weight:600}
+.bigscore.green .k{color:#eafaf3}
+.statcard{background:var(--fm-white);border:1px solid var(--line);border-radius:var(--radius);padding:26px;
+  box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:center}
+.statcard .v{font-size:36px;font-weight:800;color:var(--ink);line-height:1}
+.statcard .k{font-size:12.5px;color:var(--muted);margin-top:8px;font-weight:600}
+
+/* TABLE */
+.tablewrap{background:var(--fm-white);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden}
+.filters{display:flex;flex-wrap:wrap;gap:8px;padding:18px 20px;border-bottom:1px solid var(--line);align-items:center}
+.filters .flabel{font-size:12.5px;font-weight:700;color:var(--muted);margin-right:4px}
+.chip{font-size:12.5px;font-weight:600;color:var(--muted);background:var(--fm-off-white);border:1px solid var(--line);
+  padding:6px 13px;border-radius:var(--radius-pill);cursor:pointer;transition:all .15s}
+.chip:hover{border-color:var(--fm-mint-3);color:var(--ink)}
+.chip.active{background:var(--fm-primary);color:#fff;border-color:var(--fm-primary)}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:13px 16px;font-size:13.5px;border-bottom:1px solid var(--line)}
+th{background:var(--fm-off-white);color:var(--muted);font-weight:700;font-size:12px;text-transform:uppercase;
+  letter-spacing:.05em;cursor:pointer;user-select:none;white-space:nowrap}
+th .arrow{opacity:.35;font-size:10px}
+th.sorted .arrow{opacity:1;color:var(--fm-primary)}
+tbody tr{transition:background .12s}
+tbody tr.clickable{cursor:pointer}
+tbody tr:hover{background:var(--fm-off-white)}
+td .title{font-weight:600;color:var(--ink)}
+td .kw{color:var(--muted);font-size:12px}
+.scorepill{display:inline-flex;align-items:center;font-weight:700;font-size:13px;
+  padding:4px 11px;border-radius:var(--radius-pill)}
+.s-exc{background:#cdefdf;color:var(--fm-green-deep)}
+.s-hi{background:#e6f7ee;color:var(--fm-green-dk)}
+.badge{font-size:11px;font-weight:700;padding:4px 11px;border-radius:var(--radius-pill);white-space:nowrap}
+.b-live{background:linear-gradient(135deg,var(--fm-primary),var(--fm-green-dk));color:#fff}
+.b-reserve{background:var(--fm-mint-1);color:var(--fm-green-dk)}
+.b-idx{background:var(--ink);color:#7ff0c4}
+.b-dfy{background:#eef2f0;color:#36514a}
+.b-diy{background:var(--fm-mint-1);color:var(--fm-green-dk)}
+
+/* SCORECARD detail */
+.detailrow td{padding:0;background:var(--fm-off-white)}
+.detail{padding:24px 26px;display:none;border-bottom:3px solid var(--fm-primary)}
+.detail.show{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.detail-grid{display:grid;grid-template-columns:190px 1fr 1fr;gap:28px;align-items:start}
+.gauge{display:flex;flex-direction:column;align-items:center;gap:9px}
+.gauge svg{transform:rotate(-90deg)}
+.gauge .gv{font-size:12.5px;font-weight:700;color:var(--muted)}
+.bars{display:flex;flex-direction:column;gap:11px}
+.bars .blabel{display:flex;justify-content:space-between;font-size:12.5px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.bars .track{height:8px;background:var(--line);border-radius:5px;overflow:hidden}
+.bars .fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--fm-secondary),var(--fm-primary));
+  width:0;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.bars .fill.aeo{background:linear-gradient(90deg,var(--fm-mint-3),var(--fm-green-dk))}
+.metrics-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.mm{background:var(--fm-white);border:1px solid var(--line);border-radius:10px;padding:11px 13px}
+.mm .v{font-size:18px;font-weight:800;color:var(--ink)}
+.mm .k{font-size:11px;color:var(--muted);font-weight:600}
+.detail h4{font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:12px}
+
+/* AEO */
+.aeo{background:var(--fm-white);border-top:1px solid var(--line)}
+.aeo .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:10px}
+.topicchips{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
+.topicchips .tc{font-size:13px;font-weight:600;color:var(--fm-green-dk);background:var(--fm-mint-1);
+  border:1px solid var(--fm-mint-2);padding:8px 15px;border-radius:var(--radius-pill)}
+
+footer{background:var(--fm-accent);color:#9fc0b5;padding:38px 0}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+footer svg{height:22px}
+footer .small{font-size:12.5px;color:#76918a}
+
+@media(max-width:860px){
+  .hero h1{font-size:32px}
+  .hero .metrics,.scoreband,.aeo .grid3{grid-template-columns:repeat(2,1fr)}
+  .detail-grid{grid-template-columns:1fr}
+  section{padding:52px 0}
+}
+@media(max-width:540px){
+  .hero .metrics,.scoreband,.aeo .grid3{grid-template-columns:1fr}
+  th.hide-sm,td.hide-sm{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="logo"><svg xmlns="http://www.w3.org/2000/svg" width="162" height="30" viewBox="0 0 162 30" fill="none"><g clip-path="url(#clip0_3201_1093)"><path d="M12.5519 0C12.211 0 11.8076 0.0839956 11.3477 0.256977C10.8875 0.427463 10.441 0.643966 10.0055 0.906487C9.57244 1.17178 9.18268 1.4587 8.84171 1.77527C8.50074 2.09185 8.2895 2.38154 8.21105 2.64406L0 30H14.8822C15.196 30 15.5858 29.916 16.0459 29.7427C16.5061 29.5723 16.9607 29.3558 17.4073 29.0932C17.8539 28.8307 18.2489 28.5466 18.5927 28.2436C18.9337 27.9403 19.1449 27.6453 19.2233 27.3559L27.3936 0H12.5519ZM12.6223 17.7538L9.2287 24.3437L9.72408 17.7538L6.00832 16.103L10.7742 14.501L14.0813 7.88671L13.6159 14.501L17.394 16.1546L12.6226 17.7541L12.6223 17.7538ZM17.9459 14.1515L18.1977 10.7711L16.2896 9.92118L18.7388 9.10118L20.4356 5.70754L20.1919 9.10118L22.1324 9.94835L19.6832 10.7711L17.9459 14.1515Z" fill="#F3F3F3"></path><path d="M30.0638 22.7904H26.6388L31.2943 7.2041H38.862L38.2058 9.46006H34.0426L32.7505 13.8489H36.6265L35.9498 16.1049H32.0533L30.064 22.7907L30.0638 22.7904Z" fill="#F3F3F3"></path><path d="M35.2933 22.7902L39.9488 7.20392H43.3738L38.7183 22.7902H35.2933Z" fill="#F3F3F3"></path><path d="M49.403 15.8378L49.6287 22.79H46.3268L46.1832 16.9449L44.809 17.4373L43.2095 22.79H39.7845L44.4401 7.20367H53.7713L51.3923 15.1403L49.403 15.8378ZM47.1881 9.45963L45.5886 14.7918L48.3776 13.828L49.6697 9.45963H47.1881Z" fill="#F3F3F3"></path><path d="M58.365 9.45961C58.2281 9.45961 58.1053 9.51449 57.9958 9.62372C57.8863 9.73294 57.8111 9.82885 57.7701 9.91091L56.9088 12.7205L61.7076 16.0018L60.0873 21.4161C60.0324 21.5666 59.9163 21.7205 59.7386 21.8774C59.5609 22.0348 59.3591 22.182 59.1337 22.3184C58.9081 22.4551 58.6755 22.5679 58.4365 22.6566C58.197 22.7456 57.9955 22.79 57.8314 22.79H50.4894L51.6174 18.9755H55.0423L54.5708 20.534H56.4985C56.6349 20.5204 56.755 20.4622 56.8575 20.3596C56.9601 20.2571 57.025 20.1647 57.0524 20.0827L57.9137 17.1911L53.1556 13.9097L54.7551 8.57751C54.7962 8.44085 54.9054 8.29032 55.0834 8.12621C55.2608 7.9621 55.4629 7.81185 55.6882 7.67491C55.9139 7.53852 56.1462 7.42569 56.3854 7.33643C56.6244 7.24772 56.8331 7.20337 57.0108 7.20337H64.3118L63.1838 11.0178H59.7588L60.2306 9.45933H58.3644L58.365 9.45961Z" fill="#F3F3F3"></path><path d="M65.3992 7.20392H74.669L74.0128 9.45988H71.0802L67.1016 22.7902H63.6766L67.6552 9.45988H64.7226L65.3992 7.20392Z" fill="#F3F3F3"></path><path d="M85.395 22.7902H82.0315L84.759 13.6436L79.0781 22.7902H77.3965L77.1914 13.6436L74.4434 22.7902H71.08L75.7355 7.20392H80.7805L80.3292 15.7967L85.0052 7.20392H90.0502L85.3947 22.7902H85.395Z" fill="#F3F3F3"></path><path d="M108.672 7.20392H112.138L104.878 22.7902H99.5664L101.638 7.20392H105.063L103.381 19.2627L108.672 7.20392H108.672Z" fill="#F3F3F3"></path><path d="M112.65 20.083C112.623 20.165 112.636 20.2607 112.691 20.3702C112.746 20.4797 112.842 20.534 112.979 20.534H116.67L116.014 22.7899H110.292C110.114 22.7899 109.93 22.7459 109.738 22.6566C109.547 22.5679 109.376 22.4551 109.226 22.3184C109.075 22.182 108.962 22.0348 108.887 21.8774C108.812 21.7205 108.795 21.5666 108.836 21.4161L113.081 7.20392H120.649L119.993 9.45988H115.829L114.537 13.8487H118.413L117.737 16.1047H113.84L112.651 20.0832L112.65 20.083Z" fill="#F3F3F3"></path><path d="M126.698 15.8378L126.924 22.79H123.622L123.478 16.9449L122.105 17.4373L120.505 22.79H117.08L121.736 7.20367H131.067L128.688 15.1403L126.699 15.8375L126.698 15.8378ZM124.483 9.45963L122.884 14.7918L125.673 13.828L126.965 9.45963H124.483Z" fill="#F3F3F3"></path><path d="M135.66 9.45961C135.524 9.45961 135.401 9.51449 135.291 9.62372C135.182 9.73294 135.107 9.82885 135.066 9.91091L134.204 12.7205L139.003 16.0018L137.383 21.4161C137.328 21.5666 137.212 21.7205 137.034 21.8774C136.857 22.0348 136.655 22.182 136.43 22.3184C136.204 22.4551 135.971 22.5679 135.732 22.6566C135.493 22.7456 135.291 22.79 135.127 22.79H127.785L128.913 18.9755H132.338L131.867 20.534H133.794C133.931 20.5204 134.051 20.4622 134.153 20.3596C134.256 20.2571 134.321 20.1647 134.348 20.0827L135.21 17.1911L130.452 13.9097L132.051 8.57751C132.092 8.44085 132.202 8.29032 132.379 8.12621C132.557 7.9621 132.759 7.81185 132.984 7.67491C133.21 7.53852 133.442 7.42569 133.681 7.33643C133.921 7.24772 134.129 7.20337 134.307 7.20337H141.608L140.48 11.0178H137.055L137.527 9.45933H135.661L135.66 9.45961Z" fill="#F3F3F3"></path><path d="M142.018 20.534L141.362 22.79H138.039L138.696 20.534H142.018Z" fill="#F3F3F3"></path><path d="M147.145 19.6935L145.73 22.7902H142.305L149.544 7.20392H154.999L152.969 22.7902H149.482L150.098 18.7501L147.145 19.6935ZM148.375 17.0478L150.508 16.3711L151.39 10.6084H151.308L148.355 17.048L148.375 17.0478Z" fill="#F3F3F3"></path><path d="M153.912 22.7902L158.568 7.20392H161.993L157.337 22.7902H153.912Z" fill="#F3F3F3"></path><path d="M86.6573 22.8166L90.9361 8.56088C90.9772 8.42533 91.0867 8.27286 91.2652 8.10903C91.4437 7.94519 91.6461 7.79439 91.872 7.65717C92.0979 7.51995 92.3316 7.40601 92.5717 7.3173C92.8112 7.2286 93.0202 7.18341 93.1985 7.18341H100.933L96.6747 21.4391C96.6337 21.5896 96.5242 21.7437 96.3457 21.9012C96.1671 22.0587 95.9615 22.2075 95.7289 22.3431C95.4955 22.4803 95.2593 22.5942 95.0192 22.6829C94.7789 22.7733 94.5773 22.8168 94.4124 22.8168H86.6576L86.6573 22.8166ZM94.5563 9.44658C94.419 9.44658 94.296 9.50174 94.1862 9.61069C94.0756 9.7213 94.0013 9.81666 93.9594 9.89871L90.7512 20.5537H93.0346C93.171 20.5537 93.2983 20.5002 93.4147 20.3896C93.5311 20.2806 93.6107 20.1836 93.6514 20.1015L96.8194 9.44658H94.5563Z" fill="#F3F3F3"></path></g><defs><clipPath id="clip0_3201_1093"><rect width="161.993" height="30" fill="white"></rect></clipPath></defs></svg></span>
+    <span class="eyebrow">Content SEO &amp; AEO Performance Report</span>
+    <h1>How First Movers' automated content is performing</h1>
+    <p class="sub">Every article the content engine produces, graded for search-engine and AI-search quality.</p>
+    <p class="meta">Updated 11 June 2026 &nbsp;·&nbsp; firstmovers.ai</p>
+    <div class="metrics">
+      <div class="metric"><div class="num" data-count="16">0</div><div class="lbl">Articles produced</div></div>
+      <div class="metric"><div class="num" data-count="6">0</div><div class="lbl">Live on site</div></div>
+      <div class="metric"><div class="num" data-count="15180">0</div><div class="lbl">Words published</div></div>
+      <div class="metric"><div class="num" data-count="92">0</div><div class="lbl">Avg quality score</div></div>
+    </div>
+  </div>
+</header>
+
+<section id="performance">
+  <div class="wrap">
+    <span class="eyebrow">Per-article scores</span>
+    <h2>How every article scores</h2>
+    <p class="lead">Each live article is graded for on-page <b>SEO</b> quality and for <b>AEO</b> - answer-engine readiness, i.e. how well it is built to be cited by AI search. Scores use the Claude SEO methodology. Click any live article to open its full scorecard.</p>
+    <div class="scoreband">
+      <div class="bigscore"><div class="v" data-count="92">0</div><div class="k">Avg on-page SEO score</div></div>
+      <div class="bigscore green"><div class="v" data-count="92">0</div><div class="k">Avg AEO readiness score</div></div>
+      <div class="statcard"><div class="v" data-count="2530">0</div><div class="k">Avg words per live article</div></div>
+      <div class="statcard"><div class="v"><span data-count="100">0</span>%</div><div class="k">With FAQ &amp; structured content</div></div>
+    </div>
+    <div class="tablewrap">
+      <div class="filters">
+        <span class="flabel">Filter:</span>
+        <span class="chip active" data-filter="all">All articles</span>
+        <span class="chip" data-filter="live">Live</span>
+        <span class="chip" data-filter="reserve">Content reserve</span>
+        <span class="chip" data-filter="done-for-you">Done-for-you</span>
+        <span class="chip" data-filter="diy">DIY / Labs</span>
+      </div>
+      <table id="postTable">
+        <thead><tr>
+          <th data-sort="title">Article <span class="arrow">&#9650;&#9660;</span></th>
+          <th data-sort="date" class="hide-sm">Created <span class="arrow">&#9650;&#9660;</span></th>
+          <th data-sort="audience" class="hide-sm">Audience <span class="arrow">&#9650;&#9660;</span></th>
+          <th data-sort="seo">SEO <span class="arrow">&#9650;&#9660;</span></th>
+          <th data-sort="aeo">AEO <span class="arrow">&#9650;&#9660;</span></th>
+          <th data-sort="status">Status <span class="arrow">&#9650;&#9660;</span></th>
+        </tr></thead>
+        <tbody id="postBody"></tbody>
+      </table>
+    </div>
+    <p style="font-size:12.5px;color:var(--muted);margin-top:12px">Click a column header to sort, a filter to narrow the list, or a live article row to expand its full scorecard.</p>
+  </div>
+</section>
+
+<section id="techhealth">
+  <div class="wrap">
+    <span class="eyebrow">Performance &amp; technical foundations</span>
+    <h2>Fast pages on a clean, AI-ready technical base</h2>
+    <p class="lead">Page experience measured directly in-browser. Largest Contentful Paint (load speed) and Cumulative Layout Shift (visual stability) both land in Google's "Good" range on every live article, on top of a solid technical-SEO base.</p>
+    <div class="scoreband" style="margin-bottom:18px">
+      <div class="bigscore green"><div class="v">2.0<span class="den">s</span></div><div class="k">Avg load speed (LCP) - Good</div></div>
+      <div class="statcard"><div class="v">0.00</div><div class="k">Layout shift (CLS) - Good</div></div>
+      <div class="statcard"><div class="v"><span data-count="100">0</span>%</div><div class="k">Articles with Good speed &amp; stability</div></div>
+      <div class="statcard"><div class="v">A+</div><div class="k">Mobile-first, HTTPS, structured data</div></div>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr>
+          <th>Article</th><th>Load speed (LCP)</th><th>Layout shift (CLS)</th><th>Page experience</th>
+        </tr></thead>
+        <tbody id="cwvBody"></tbody>
+      </table>
+    </div>
+    <p style="font-size:14.5px;color:var(--muted);font-weight:600;margin-top:22px">Technical foundations in place on every article:</p>
+    <div class="topicchips" id="foundationchips"></div>
+  </div>
+</section>
+
+<section class="aeo">
+  <div class="wrap">
+    <span class="eyebrow">Answer Engine Optimization</span>
+    <h2>Built to be cited by AI search</h2>
+    <p class="lead">First Movers' visibility in AI answers is tracked across 13 topic clusters. In the last 30 days AI assistants generated <b>1,062 answers</b> and drew on <b>13,933 citations</b> in these topics - and the content is written specifically to win that space.</p>
+    <div class="grid3">
+      <div class="statcard"><div class="v" data-count="13">0</div><div class="k">Topic clusters tracked</div></div>
+      <div class="statcard"><div class="v" data-count="1062">0</div><div class="k">AI answers analysed (30d)</div></div>
+      <div class="statcard"><div class="v" data-count="13933">0</div><div class="k">Citations tracked (30d)</div></div>
+    </div>
+    <p style="font-size:14.5px;color:var(--muted);font-weight:600;margin-top:20px">Topic clusters the content targets:</p>
+    <div class="topicchips" id="topicchips"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><svg xmlns="http://www.w3.org/2000/svg" width="162" height="30" viewBox="0 0 162 30" fill="none"><g clip-path="url(#clip0_3201_1093)"><path d="M12.5519 0C12.211 0 11.8076 0.0839956 11.3477 0.256977C10.8875 0.427463 10.441 0.643966 10.0055 0.906487C9.57244 1.17178 9.18268 1.4587 8.84171 1.77527C8.50074 2.09185 8.2895 2.38154 8.21105 2.64406L0 30H14.8822C15.196 30 15.5858 29.916 16.0459 29.7427C16.5061 29.5723 16.9607 29.3558 17.4073 29.0932C17.8539 28.8307 18.2489 28.5466 18.5927 28.2436C18.9337 27.9403 19.1449 27.6453 19.2233 27.3559L27.3936 0H12.5519ZM12.6223 17.7538L9.2287 24.3437L9.72408 17.7538L6.00832 16.103L10.7742 14.501L14.0813 7.88671L13.6159 14.501L17.394 16.1546L12.6226 17.7541L12.6223 17.7538ZM17.9459 14.1515L18.1977 10.7711L16.2896 9.92118L18.7388 9.10118L20.4356 5.70754L20.1919 9.10118L22.1324 9.94835L19.6832 10.7711L17.9459 14.1515Z" fill="#F3F3F3"></path><path d="M30.0638 22.7904H26.6388L31.2943 7.2041H38.862L38.2058 9.46006H34.0426L32.7505 13.8489H36.6265L35.9498 16.1049H32.0533L30.064 22.7907L30.0638 22.7904Z" fill="#F3F3F3"></path><path d="M35.2933 22.7902L39.9488 7.20392H43.3738L38.7183 22.7902H35.2933Z" fill="#F3F3F3"></path><path d="M49.403 15.8378L49.6287 22.79H46.3268L46.1832 16.9449L44.809 17.4373L43.2095 22.79H39.7845L44.4401 7.20367H53.7713L51.3923 15.1403L49.403 15.8378ZM47.1881 9.45963L45.5886 14.7918L48.3776 13.828L49.6697 9.45963H47.1881Z" fill="#F3F3F3"></path><path d="M58.365 9.45961C58.2281 9.45961 58.1053 9.51449 57.9958 9.62372C57.8863 9.73294 57.8111 9.82885 57.7701 9.91091L56.9088 12.7205L61.7076 16.0018L60.0873 21.4161C60.0324 21.5666 59.9163 21.7205 59.7386 21.8774C59.5609 22.0348 59.3591 22.182 59.1337 22.3184C58.9081 22.4551 58.6755 22.5679 58.4365 22.6566C58.197 22.7456 57.9955 22.79 57.8314 22.79H50.4894L51.6174 18.9755H55.0423L54.5708 20.534H56.4985C56.6349 20.5204 56.755 20.4622 56.8575 20.3596C56.9601 20.2571 57.025 20.1647 57.0524 20.0827L57.9137 17.1911L53.1556 13.9097L54.7551 8.57751C54.7962 8.44085 54.9054 8.29032 55.0834 8.12621C55.2608 7.9621 55.4629 7.81185 55.6882 7.67491C55.9139 7.53852 56.1462 7.42569 56.3854 7.33643C56.6244 7.24772 56.8331 7.20337 57.0108 7.20337H64.3118L63.1838 11.0178H59.7588L60.2306 9.45933H58.3644L58.365 9.45961Z" fill="#F3F3F3"></path><path d="M65.3992 7.20392H74.669L74.0128 9.45988H71.0802L67.1016 22.7902H63.6766L67.6552 9.45988H64.7226L65.3992 7.20392Z" fill="#F3F3F3"></path><path d="M85.395 22.7902H82.0315L84.759 13.6436L79.0781 22.7902H77.3965L77.1914 13.6436L74.4434 22.7902H71.08L75.7355 7.20392H80.7805L80.3292 15.7967L85.0052 7.20392H90.0502L85.3947 22.7902H85.395Z" fill="#F3F3F3"></path><path d="M108.672 7.20392H112.138L104.878 22.7902H99.5664L101.638 7.20392H105.063L103.381 19.2627L108.672 7.20392H108.672Z" fill="#F3F3F3"></path><path d="M112.65 20.083C112.623 20.165 112.636 20.2607 112.691 20.3702C112.746 20.4797 112.842 20.534 112.979 20.534H116.67L116.014 22.7899H110.292C110.114 22.7899 109.93 22.7459 109.738 22.6566C109.547 22.5679 109.376 22.4551 109.226 22.3184C109.075 22.182 108.962 22.0348 108.887 21.8774C108.812 21.7205 108.795 21.5666 108.836 21.4161L113.081 7.20392H120.649L119.993 9.45988H115.829L114.537 13.8487H118.413L117.737 16.1047H113.84L112.651 20.0832L112.65 20.083Z" fill="#F3F3F3"></path><path d="M126.698 15.8378L126.924 22.79H123.622L123.478 16.9449L122.105 17.4373L120.505 22.79H117.08L121.736 7.20367H131.067L128.688 15.1403L126.699 15.8375L126.698 15.8378ZM124.483 9.45963L122.884 14.7918L125.673 13.828L126.965 9.45963H124.483Z" fill="#F3F3F3"></path><path d="M135.66 9.45961C135.524 9.45961 135.401 9.51449 135.291 9.62372C135.182 9.73294 135.107 9.82885 135.066 9.91091L134.204 12.7205L139.003 16.0018L137.383 21.4161C137.328 21.5666 137.212 21.7205 137.034 21.8774C136.857 22.0348 136.655 22.182 136.43 22.3184C136.204 22.4551 135.971 22.5679 135.732 22.6566C135.493 22.7456 135.291 22.79 135.127 22.79H127.785L128.913 18.9755H132.338L131.867 20.534H133.794C133.931 20.5204 134.051 20.4622 134.153 20.3596C134.256 20.2571 134.321 20.1647 134.348 20.0827L135.21 17.1911L130.452 13.9097L132.051 8.57751C132.092 8.44085 132.202 8.29032 132.379 8.12621C132.557 7.9621 132.759 7.81185 132.984 7.67491C133.21 7.53852 133.442 7.42569 133.681 7.33643C133.921 7.24772 134.129 7.20337 134.307 7.20337H141.608L140.48 11.0178H137.055L137.527 9.45933H135.661L135.66 9.45961Z" fill="#F3F3F3"></path><path d="M142.018 20.534L141.362 22.79H138.039L138.696 20.534H142.018Z" fill="#F3F3F3"></path><path d="M147.145 19.6935L145.73 22.7902H142.305L149.544 7.20392H154.999L152.969 22.7902H149.482L150.098 18.7501L147.145 19.6935ZM148.375 17.0478L150.508 16.3711L151.39 10.6084H151.308L148.355 17.048L148.375 17.0478Z" fill="#F3F3F3"></path><path d="M153.912 22.7902L158.568 7.20392H161.993L157.337 22.7902H153.912Z" fill="#F3F3F3"></path><path d="M86.6573 22.8166L90.9361 8.56088C90.9772 8.42533 91.0867 8.27286 91.2652 8.10903C91.4437 7.94519 91.6461 7.79439 91.872 7.65717C92.0979 7.51995 92.3316 7.40601 92.5717 7.3173C92.8112 7.2286 93.0202 7.18341 93.1985 7.18341H100.933L96.6747 21.4391C96.6337 21.5896 96.5242 21.7437 96.3457 21.9012C96.1671 22.0587 95.9615 22.2075 95.7289 22.3431C95.4955 22.4803 95.2593 22.5942 95.0192 22.6829C94.7789 22.7733 94.5773 22.8168 94.4124 22.8168H86.6576L86.6573 22.8166ZM94.5563 9.44658C94.419 9.44658 94.296 9.50174 94.1862 9.61069C94.0756 9.7213 94.0013 9.81666 93.9594 9.89871L90.7512 20.5537H93.0346C93.171 20.5537 93.2983 20.5002 93.4147 20.3896C93.5311 20.2806 93.6107 20.1836 93.6514 20.1015L96.8194 9.44658H94.5563Z" fill="#F3F3F3"></path></g><defs><clipPath id="clip0_3201_1093"><rect width="161.993" height="30" fill="white"></rect></clipPath></defs></svg></div>
+    <div class="small">Content SEO &amp; AEO Performance Report &nbsp;·&nbsp; Updated 11 June 2026 &nbsp;·&nbsp; Confidential</div>
+  </div>
+</footer>
+
+<script>
+const DATA = {"generated": "2026-06-10", "brand": {"name": "FirstMovers.ai", "domain": "firstmovers.ai"}, "headline": {"created": 16, "live": 6, "reserve": 10, "total_words_live": 15180, "avg_words_live": 2530, "days_in_production": 24, "go_live": "2026-05-17", "avg_seo": 92, "avg_aeo": 92}, "live_posts": [{"slug": "ai-shopping", "title": "AI Shopping: Proven 2026 Operator Guide", "audience": "done-for-you", "date": "2026-05-08", "id": 72606, "indexed": true, "focus_keyword": "ai shopping", "url": "https://firstmovers.ai/ai-shopping/", "seo_score": 98, "aeo_score": 100, "seo_breakdown": {"Technical correctness": [18, 20], "Content depth & E-E-A-T": [28, 28], "On-page optimization": [27, 27], "Structured content": [15, 15], "Media & images": [10, 10]}, "aeo_breakdown": {"Q&A / answer-first structure": [30, 30], "Quotable stats & data": [25, 25], "Authoritative citations": [20, 20], "Entity & definition clarity": [15, 15], "Comprehensive depth": [10, 10]}, "metrics": {"words": 3177, "h2": 17, "h3": 21, "internal_links": 45, "external_links": 12, "images": 16, "images_with_alt": 13, "title_len": 39, "meta_len": 112, "fk_density": 1.35, "stat_density_per_1k": 22.7, "faq_questions_signal": 7}}, {"slug": "ai-customer-support-automation", "title": "AI Customer Support Automation: 6 Proven Systems 2026", "audience": "done-for-you", "date": "2026-05-15", "id": 72710, "indexed": false, "focus_keyword": "ai customer support automation", "url": "https://firstmovers.ai/ai-customer-support-automation/", "seo_score": 96, "aeo_score": 92, "seo_breakdown": {"Technical correctness": [20, 20], "Content depth & E-E-A-T": [24, 28], "On-page optimization": [27, 27], "Structured content": [15, 15], "Media & images": [10, 10]}, "aeo_breakdown": {"Q&A / answer-first structure": [30, 30], "Quotable stats & data": [25, 25], "Authoritative citations": [12, 20], "Entity & definition clarity": [15, 15], "Comprehensive depth": [10, 10]}, "metrics": {"words": 2770, "h2": 17, "h3": 25, "internal_links": 43, "external_links": 6, "images": 19, "images_with_alt": 16, "title_len": 53, "meta_len": 112, "fk_density": 0.94, "stat_density_per_1k": 13.4, "faq_questions_signal": 7}}, {"slug": "ai-use-cases", "title": "AI Use Cases: 12 Proven 2026 Plays for SMB Operators", "audience": "diy", "date": "2026-05-16", "id": 72674, "indexed": false, "focus_keyword": "ai use cases", "url": "https://firstmovers.ai/ai-use-cases/", "seo_score": 90, "aeo_score": 89, "seo_breakdown": {"Technical correctness": [20, 20], "Content depth & E-E-A-T": [20, 28], "On-page optimization": [25, 27], "Structured content": [15, 15], "Media & images": [10, 10]}, "aeo_breakdown": {"Q&A / answer-first structure": [30, 30], "Quotable stats & data": [25, 25], "Authoritative citations": [16, 20], "Entity & definition clarity": [11, 15], "Comprehensive depth": [7, 10]}, "metrics": {"words": 2411, "h2": 16, "h3": 9, "internal_links": 44, "external_links": 7, "images": 15, "images_with_alt": 12, "title_len": 52, "meta_len": 136, "fk_density": 0.37, "stat_density_per_1k": 12.9, "faq_questions_signal": 6}}, {"slug": "ai-labs", "title": "AI Labs Explained: Practical 2026 Operator Guide", "audience": "done-for-you", "date": "2026-05-21", "id": 73548, "indexed": false, "focus_keyword": "ai labs", "url": "https://firstmovers.ai/ai-labs/", "seo_score": 95, "aeo_score": 92, "seo_breakdown": {"Technical correctness": [20, 20], "Content depth & E-E-A-T": [23, 28], "On-page optimization": [27, 27], "Structured content": [15, 15], "Media & images": [10, 10]}, "aeo_breakdown": {"Q&A / answer-first structure": [30, 30], "Quotable stats & data": [25, 25], "Authoritative citations": [12, 20], "Entity & definition clarity": [15, 15], "Comprehensive depth": [10, 10]}, "metrics": {"words": 2576, "h2": 12, "h3": 6, "internal_links": 44, "external_links": 5, "images": 15, "images_with_alt": 13, "title_len": 48, "meta_len": 101, "fk_density": 1.01, "stat_density_per_1k": 23.3, "faq_questions_signal": 7}}, {"slug": "ai-automation-jobs", "title": "AI Automation Jobs: Reshape High-Drain Roles", "audience": "done-for-you", "date": "2026-05-25", "id": 73670, "indexed": false, "focus_keyword": "ai automation", "url": "https://firstmovers.ai/ai-automation-jobs/", "seo_score": 85, "aeo_score": 89, "seo_breakdown": {"Technical correctness": [16, 20], "Content depth & E-E-A-T": [20, 28], "On-page optimization": [25, 27], "Structured content": [15, 15], "Media & images": [9, 10]}, "aeo_breakdown": {"Q&A / answer-first structure": [30, 30], "Quotable stats & data": [25, 25], "Authoritative citations": [20, 20], "Entity & definition clarity": [7, 15], "Comprehensive depth": [7, 10]}, "metrics": {"words": 2217, "h2": 16, "h3": 7, "internal_links": 44, "external_links": 20, "images": 18, "images_with_alt": 13, "title_len": 91, "meta_len": 82, "fk_density": 0.86, "stat_density_per_1k": 19.4, "faq_questions_signal": 8}}, {"slug": "agentic-ai-enterprise-news", "title": "Agentic AI Enterprise News: Actionable 2026 Briefs", "audience": "done-for-you", "date": "2026-05-29", "id": 73677, "indexed": false, "focus_keyword": "agentic ai enterprise news", "url": "https://firstmovers.ai/agentic-ai-enterprise-news/", "seo_score": 87, "aeo_score": 93, "seo_breakdown": {"Technical correctness": [20, 20], "Content depth & E-E-A-T": [21, 28], "On-page optimization": [23, 27], "Structured content": [15, 15], "Media & images": [8, 10]}, "aeo_breakdown": {"Q&A / answer-first structure": [30, 30], "Quotable stats & data": [25, 25], "Authoritative citations": [20, 20], "Entity & definition clarity": [11, 15], "Comprehensive depth": [7, 10]}, "metrics": {"words": 2029, "h2": 14, "h3": 10, "internal_links": 44, "external_links": 20, "images": 17, "images_with_alt": 12, "title_len": 50, "meta_len": 104, "fk_density": 0.39, "stat_density_per_1k": 27.6, "faq_questions_signal": 6}}], "reserve": [{"id": 72659, "date": "2026-05-12", "topic": "AI Sales Email Automation", "keyword": "ai sales email automation", "audience": "done-for-you"}, {"id": 72667, "date": "2026-05-13", "topic": "AI Customer Experience", "keyword": "ai customer experience", "audience": "done-for-you"}, {"id": 73547, "date": "2026-05-20", "topic": "AI Customer Experience", "keyword": "ai customer experience", "audience": "done-for-you"}, {"id": 73549, "date": "2026-05-23", "topic": "AI Use Cases", "keyword": "ai use cases", "audience": "diy"}, {"id": 73550, "date": "2026-05-24", "topic": "Blueprint Explained", "keyword": "blueprint explained", "audience": "done-for-you"}, {"id": 73671, "date": "2026-05-26", "topic": "Is AI Taking Over Jobs", "keyword": "is ai taking over jobs", "audience": "diy"}, {"id": 73672, "date": "2026-05-27", "topic": "AI Automation", "keyword": "ai automation", "audience": "done-for-you"}, {"id": 73674, "date": "2026-05-28", "topic": "AI Workflows", "keyword": "ai workflows", "audience": "diy"}, {"id": 73678, "date": "2026-05-30", "topic": "AI-Driven Marketing Campaigns", "keyword": "ai driven marketing campaigns", "audience": "done-for-you"}, {"id": 74166, "date": "2026-06-02", "topic": "AI Replacing Jobs", "keyword": "ai replacing jobs", "audience": "diy"}], "aeo": {"topics_tracked": 13, "ai_responses_30d": 1062, "citations_tracked_30d": 13933, "topic_clusters": ["AI Automation", "Marketing Automation", "AI Consulting", "Sales Teams", "AI Workflows", "AI Systems", "Small Business", "Email Automation", "Sales AI", "Agentic AI", "AI Training & Support", "AI-Driven Marketing Campaigns"]}, "cwv": {"avg_lcp_s": 2.0, "rows": [{"title": "AI Shopping", "lcp_ms": 2440, "cls": 0.0}, {"title": "AI Customer Support Automation", "lcp_ms": 2168, "cls": 0.006}, {"title": "AI Use Cases", "lcp_ms": 1924, "cls": 0.005}, {"title": "AI Labs", "lcp_ms": 1940, "cls": 0.0}, {"title": "AI Automation Jobs", "lcp_ms": 1876, "cls": 0.0}, {"title": "Agentic AI Enterprise News", "lcp_ms": 1588, "cls": 0.0}]}, "foundations": ["HTTPS secure", "Mobile-first responsive", "Structured data: Article + Author", "AI crawlers welcome", "llms.txt published", "XML sitemap", "Clean canonical URLs", "Open Graph + Twitter cards"]};
+function el(html){const t=document.createElement('template');t.innerHTML=html.trim();return t.content.firstChild;}
+
+/* topic chips */
+const tcbox=document.getElementById('topicchips');
+DATA.aeo.topic_clusters.forEach(t=>tcbox.appendChild(el(`<span class="tc">${t}</span>`)));
+
+/* technical foundation chips */
+const fbox=document.getElementById('foundationchips');
+DATA.foundations.forEach(f=>fbox.appendChild(el(`<span class="tc">&#10003;&nbsp; ${f}</span>`)));
+
+/* core web vitals table */
+const cwvBody=document.getElementById('cwvBody');
+DATA.cwv.rows.forEach(r=>{
+  cwvBody.appendChild(el(`<tr>
+    <td><div class="title">${r.title}</div></td>
+    <td><span class="scorepill s-hi">${(r.lcp_ms/1000).toFixed(1)}s</span></td>
+    <td><span class="scorepill s-hi">${r.cls.toFixed(3)}</span></td>
+    <td><span class="badge b-live">Good</span></td>
+  </tr>`));
+});
+
+/* ---- posts table ---- */
+const live=DATA.live_posts.map(p=>({
+  title:p.title,kw:p.focus_keyword,date:p.date,audience:p.audience,seo:p.seo_score,aeo:p.aeo_score,
+  status:"live",indexed:p.indexed,detail:p
+}));
+const reserve=DATA.reserve.map(r=>({
+  title:r.topic,kw:r.keyword,date:r.date,audience:r.audience,seo:null,aeo:null,status:"reserve",detail:null
+}));
+let ROWS=live.concat(reserve);
+let curFilter='all', sortKey='date', sortDir=1;
+
+function audBadge(a){return a==='diy'?'<span class="badge b-diy">DIY · Labs</span>':'<span class="badge b-dfy">Done-for-you</span>';}
+function scoreCls(v){return v>=93?'s-exc':'s-hi';}
+
+function renderTable(){
+  const body=document.getElementById('postBody');body.innerHTML='';
+  let rows=ROWS.filter(r=>{
+    if(curFilter==='all')return true;
+    if(curFilter==='live')return r.status==='live';
+    if(curFilter==='reserve')return r.status==='reserve';
+    return r.audience===curFilter;
+  });
+  rows.sort((a,b)=>{
+    let x=a[sortKey],y=b[sortKey];
+    if(x===null)x=-1;if(y===null)y=-1;
+    if(typeof x==='string'){x=x.toLowerCase();y=(y||'').toLowerCase();}
+    return x<y?-1*sortDir:x>y?1*sortDir:0;
+  });
+  rows.forEach(r=>{
+    const isLive=r.status==='live';
+    const tr=el(`<tr class="${isLive?'clickable':''}">
+      <td><div class="title">${r.title}</div><div class="kw">${r.kw}</div></td>
+      <td class="hide-sm">${r.date}</td>
+      <td class="hide-sm">${audBadge(r.audience)}</td>
+      <td>${r.seo!==null?`<span class="scorepill ${scoreCls(r.seo)}">${r.seo}</span>`:'<span class="kw">-</span>'}</td>
+      <td>${r.aeo!==null?`<span class="scorepill ${scoreCls(r.aeo)}">${r.aeo}</span>`:'<span class="kw">-</span>'}</td>
+      <td>${isLive?(r.indexed?'<span class="badge b-idx">Live · Indexed</span>':'<span class="badge b-live">Live</span>'):'<span class="badge b-reserve">Content reserve</span>'}</td>
+    </tr>`);
+    body.appendChild(tr);
+    if(isLive){
+      const drow=el(`<tr class="detailrow"><td colspan="6"><div class="detail"></div></td></tr>`);
+      drow.querySelector('.detail').appendChild(buildDetail(r.detail));
+      body.appendChild(drow);
+      tr.addEventListener('click',()=>{
+        const d=drow.querySelector('.detail');const open=d.classList.contains('show');
+        document.querySelectorAll('.detail.show').forEach(x=>x.classList.remove('show'));
+        if(!open){d.classList.add('show');animateBars(d);}
+      });
+    }
+  });
+}
+
+function gaugeSVG(val,color){
+  const r=46,c=2*Math.PI*r,off=c*(1-val/100);
+  return `<svg width="112" height="112" viewBox="0 0 116 116">
+    <circle cx="58" cy="58" r="${r}" fill="none" stroke="#e3ece8" stroke-width="11"/>
+    <circle cx="58" cy="58" r="${r}" fill="none" stroke="${color}" stroke-width="11" stroke-linecap="round"
+      stroke-dasharray="${c}" stroke-dashoffset="${c}" data-off="${off}"/>
+    <text x="58" y="58" transform="rotate(90 58 58)" text-anchor="middle" dy=".34em"
+      font-size="30" font-weight="800" fill="#13201b">${val}</text>
+  </svg>`;
+}
+
+function buildDetail(p){
+  const box=document.createElement('div');
+  const seoBars=Object.entries(p.seo_breakdown).map(([k,v])=>barRow(k,v[0],v[1],false)).join('');
+  const aeoBars=Object.entries(p.aeo_breakdown).map(([k,v])=>barRow(k,v[0],v[1],true)).join('');
+  const m=p.metrics;
+  box.innerHTML=`
+   <div class="detail-grid">
+     <div>
+       <div class="gauge">${gaugeSVG(p.seo_score,'#15cc8a')}<div class="gv">On-page SEO</div></div>
+       <div class="gauge" style="margin-top:16px">${gaugeSVG(p.aeo_score,'#0e885c')}<div class="gv">AEO readiness</div></div>
+     </div>
+     <div>
+       <h4>SEO score breakdown</h4>
+       <div class="bars">${seoBars}</div>
+       <div class="metrics-mini">
+         <div class="mm"><div class="v">${m.words.toLocaleString()}</div><div class="k">Words</div></div>
+         <div class="mm"><div class="v">${m.h2}</div><div class="k">Section headings</div></div>
+         <div class="mm"><div class="v">${m.internal_links}</div><div class="k">Internal links</div></div>
+       </div>
+     </div>
+     <div>
+       <h4>AEO score breakdown</h4>
+       <div class="bars">${aeoBars}</div>
+       <div class="metrics-mini">
+         <div class="mm"><div class="v">${m.external_links}</div><div class="k">Cited sources</div></div>
+         <div class="mm"><div class="v">${m.stat_density_per_1k}</div><div class="k">Stats / 1k words</div></div>
+         <div class="mm"><div class="v">${m.images}</div><div class="k">Images</div></div>
+       </div>
+       <p style="font-size:12.5px;color:var(--muted);margin-top:14px"><a href="${p.url}" target="_blank" rel="noopener">View live article &#8599;</a></p>
+     </div>
+   </div>`;
+  return box;
+}
+function barRow(label,val,max,isAeo){
+  const pct=Math.round(val/max*100);
+  return `<div><div class="blabel"><span>${label}</span><span>${val}/${max}</span></div>
+    <div class="track"><div class="fill ${isAeo?'aeo':''}" data-pct="${pct}"></div></div></div>`;
+}
+function animateBars(scope){
+  scope.querySelectorAll('.fill').forEach(f=>{requestAnimationFrame(()=>f.style.width=f.dataset.pct+'%');});
+  scope.querySelectorAll('circle[data-off]').forEach(c=>{requestAnimationFrame(()=>{c.style.transition='stroke-dashoffset 1s ease';c.style.strokeDashoffset=c.dataset.off;});});
+}
+
+/* filters + sort */
+document.querySelectorAll('.chip').forEach(ch=>ch.addEventListener('click',()=>{
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+  ch.classList.add('active');curFilter=ch.dataset.filter;renderTable();
+}));
+document.querySelectorAll('th[data-sort]').forEach(th=>th.addEventListener('click',()=>{
+  const k=th.dataset.sort;
+  if(sortKey===k)sortDir*=-1;else{sortKey=k;sortDir=1;}
+  document.querySelectorAll('th').forEach(t=>t.classList.remove('sorted'));
+  th.classList.add('sorted');renderTable();
+}));
+renderTable();
+
+/* count-up */
+function countUp(elm){
+  const target=+elm.dataset.count;const dur=1100;const start=performance.now();
+  const fmt=target>=1000;
+  function step(now){
+    const p=Math.min((now-start)/dur,1);const e=1-Math.pow(1-p,3);
+    const v=Math.round(target*e);
+    elm.textContent=fmt?v.toLocaleString():v;
+    if(p<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+const seen=new WeakSet();
+const io=new IntersectionObserver((ents)=>{
+  ents.forEach(en=>{if(en.isIntersecting&&!seen.has(en.target)){seen.add(en.target);countUp(en.target);}});
+},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(e=>io.observe(e));
+</script>
+</body>
+</html>

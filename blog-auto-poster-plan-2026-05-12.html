@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blog Auto-Poster — Plan v1 — firstmover.ai</title>
+<style>
+  :root {
+    --bg: #0c0c0f;
+    --bg-soft: #15161a;
+    --bg-card: #1b1c20;
+    --bg-card-2: #202126;
+    --accent: #3CD49D;
+    --accent-deep: #0E885C;
+    --accent-soft: rgba(60,212,157,0.12);
+    --accent-border: rgba(60,212,157,0.35);
+    --text: #E5E7EB;
+    --muted: #94A3B8;
+    --warn: #F59E0B;
+    --warn-soft: rgba(245,158,11,0.10);
+    --danger: #EF4444;
+    --danger-soft: rgba(239,68,68,0.10);
+    --good: #10B981;
+    --info: #60A5FA;
+    --info-soft: rgba(96,165,250,0.10);
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.18);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Helvetica Neue", -apple-system, Inter, system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: var(--accent-deep); }
+  code { font-family: "JetBrains Mono", "SF Mono", Menlo, monospace; font-size: 13px; background: rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 4px; color: #F8FAFC; }
+  pre { background: #08080a; border: 1px solid var(--border); border-radius: 12px; padding: 16px; overflow-x: auto; font-size: 13px; line-height: 1.5; }
+  pre code { background: transparent; padding: 0; }
+
+  /* Layout */
+  .page { max-width: 1240px; margin: 0 auto; padding: 32px 24px 80px; }
+  .hero {
+    background: linear-gradient(180deg, #161821 0%, #0e0f12 100%);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 32px;
+    margin-bottom: 28px;
+  }
+  .eyebrow { color: var(--accent); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; margin-bottom: 12px; }
+  h1 { font-size: 38px; font-weight: 600; line-height: 1.1; margin: 0 0 16px; letter-spacing: -0.5px; }
+  h1 .accent { color: var(--accent); }
+  h2 { font-size: 22px; font-weight: 600; margin: 36px 0 14px; letter-spacing: -0.2px; }
+  h3 { font-size: 17px; font-weight: 600; margin: 22px 0 8px; }
+  h4 { font-size: 14px; font-weight: 600; margin: 14px 0 6px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  p { margin: 0 0 12px; color: var(--text); }
+  .muted { color: var(--muted); }
+  .small { font-size: 13px; }
+
+  /* Cards */
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+  .card.accent { border-color: var(--accent-border); background: linear-gradient(180deg, rgba(60,212,157,0.06), var(--bg-card)); }
+  .card.warn { border-color: rgba(245,158,11,0.40); background: var(--warn-soft); }
+  .card.danger { border-color: rgba(239,68,68,0.40); background: var(--danger-soft); }
+  .card.info { border-color: rgba(96,165,250,0.40); background: var(--info-soft); }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  @media (max-width: 800px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+  /* Pills + badges */
+  .pill { display: inline-block; padding: 4px 12px; border-radius: 90px; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
+  .pill.good { background: rgba(16,185,129,0.15); color: var(--good); }
+  .pill.warn { background: rgba(245,158,11,0.15); color: var(--warn); }
+  .pill.danger { background: rgba(239,68,68,0.15); color: var(--danger); }
+  .pill.info { background: rgba(96,165,250,0.15); color: var(--info); }
+  .pill.accent { background: var(--accent-soft); color: var(--accent); }
+  .pill.muted { background: rgba(148,163,184,0.15); color: var(--muted); }
+
+  /* TOC */
+  .toc {
+    position: sticky; top: 16px; align-self: start;
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 18px 20px; font-size: 13px;
+  }
+  .toc h4 { margin: 0 0 10px; color: var(--accent); font-size: 11px; }
+  .toc a { display: block; padding: 6px 0; color: var(--muted); border-bottom: 1px solid var(--border); }
+  .toc a:last-child { border-bottom: none; }
+  .toc a:hover { color: var(--accent); }
+  .layout { display: grid; grid-template-columns: 220px 1fr; gap: 28px; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .toc { position: static; } }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--accent); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+  td code { font-size: 12px; }
+  tr:last-child td { border-bottom: none; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
+
+  /* Workflow diagram */
+  .flow { display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px; margin: 20px 0; }
+  @media (max-width: 900px) { .flow { grid-template-columns: 1fr 1fr; } }
+  .step {
+    background: var(--bg-card-2); border: 1px solid var(--border); border-radius: 12px;
+    padding: 14px 12px; text-align: center; position: relative;
+  }
+  .step .num { display: inline-block; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: var(--bg); font-weight: 700; font-size: 12px; line-height: 24px; margin-bottom: 6px; }
+  .step .name { font-size: 12px; font-weight: 600; line-height: 1.3; }
+  .step .what { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.3; }
+  .step.gate { border-color: var(--warn); background: var(--warn-soft); }
+  .step.gate .num { background: var(--warn); color: #0c0c0f; }
+
+  /* Decision callouts */
+  .decision {
+    border-left: 3px solid var(--warn); background: var(--warn-soft);
+    padding: 14px 18px; border-radius: 0 12px 12px 0; margin: 12px 0;
+  }
+  .decision .label { color: var(--warn); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
+  .decision h4 { color: var(--text); margin: 0 0 6px; text-transform: none; letter-spacing: 0; font-size: 15px; }
+
+  /* Task list */
+  .task { display: grid; grid-template-columns: 40px 1fr 90px 110px; gap: 12px; padding: 12px 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 8px; align-items: start; }
+  @media (max-width: 700px) { .task { grid-template-columns: 40px 1fr; } .task .est, .task .who { grid-column: 2; } }
+  .task .idx { background: var(--accent); color: var(--bg); font-weight: 700; border-radius: 8px; padding: 4px 0; text-align: center; height: 28px; line-height: 20px; font-size: 13px; }
+  .task .body strong { color: var(--text); }
+  .task .body p { font-size: 13px; color: var(--muted); margin: 4px 0 0; }
+  .task .est { font-size: 12px; color: var(--muted); text-align: right; }
+  .task .who { font-size: 12px; color: var(--accent); text-align: right; }
+
+  /* Scenario */
+  .scenario { background: var(--bg-card); border-left: 4px solid var(--accent); border-radius: 0 12px 12px 0; padding: 18px 22px; margin: 12px 0; }
+  .scenario.fail { border-left-color: var(--danger); }
+  .scenario h4 { color: var(--accent); margin: 0 0 8px; text-transform: none; letter-spacing: 0; font-size: 15px; }
+  .scenario.fail h4 { color: var(--danger); }
+
+  /* Lists */
+  ul, ol { padding-left: 22px; margin: 8px 0 14px; }
+  li { margin-bottom: 4px; }
+  ul.checks { list-style: none; padding-left: 0; }
+  ul.checks li { position: relative; padding-left: 26px; margin-bottom: 6px; }
+  ul.checks li:before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+
+  /* Quote */
+  .quote { font-style: italic; color: var(--muted); border-left: 3px solid var(--accent); padding: 8px 16px; margin: 14px 0; background: var(--accent-soft); border-radius: 0 8px 8px 0; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="eyebrow">Blog auto-poster · Plan v1 · For iteration</div>
+    <h1>Daily blog poster <span class="accent">for firstmovers.ai</span>, no images, zero cannibalization, Rank Math 90+ by default.</h1>
+    <p class="muted" style="font-size: 17px; max-width: 780px;">One blog every day, driven by GSC + GA4 + Searchable signals, written to Josh's CTA framework, pushed as a WordPress draft via JSON-RPC, gated for one-click publish. Built on top of the v5 content pipeline (38 modules, 547 tests) — not a from-scratch rebuild.</p>
+    <div style="margin-top: 18px;">
+      <span class="pill accent">v1 plan</span>
+      <span class="pill muted">2026-05-12</span>
+      <span class="pill muted">Not executing — awaiting feedback</span>
+    </div>
+  </div>
+
+  <div class="layout">
+
+    <!-- TOC -->
+    <nav class="toc">
+      <h4>On this page</h4>
+      <a href="#tldr">1. TL;DR</a>
+      <a href="#ask">2. What you asked</a>
+      <a href="#exists">3. What already exists</a>
+      <a href="#gaps">4. Gaps to close</a>
+      <a href="#arch">5. Architecture</a>
+      <a href="#flow">6. Daily workflow loop</a>
+      <a href="#mcp">7. MCP × environment</a>
+      <a href="#rank">8. Rank Math 90+</a>
+      <a href="#cannib">9. Anti-cannibalization</a>
+      <a href="#voice">10. Brand voice</a>
+      <a href="#decisions">11. Decisions you owe</a>
+      <a href="#tasks">12. Task list</a>
+      <a href="#scenarios">13. Scenarios</a>
+      <a href="#risks">14. Risks + guardrails</a>
+      <a href="#next">15. Next step</a>
+    </nav>
+
+    <!-- MAIN -->
+    <main>
+
+      <!-- 1. TL;DR -->
+      <section id="tldr">
+        <h2>1. TL;DR — 60-second read</h2>
+        <div class="card accent">
+          <p><strong>The build:</strong> a daily GitHub Actions cron (08:00 UTC) that runs the existing v5 pipeline end-to-end + three new pieces — GSC discovery, Rank Math 90+ scorer, and a publish-decision gate that auto-publishes when score≥90 / drafts when below.</p>
+          <p><strong>Why GH Actions and not Claude routines:</strong> all 6 existing crons already run there, Anthropic SDK + Python is reliable for scheduled jobs, and MCPs are flaky in cloud-routine environments. Local MCP path is kept for human-triggered overrides.</p>
+          <p><strong>Why "extend v5" not "rebuild":</strong> `tools/content/` already has discover, cannibalization, draft_blog, rank_math, push_wordpress, inventory. We add GSC source + scoring loop + daily orchestrator. ~3–4 days of new work, not 2–3 weeks.</p>
+          <p><strong>What gets removed:</strong> image pipeline (`image_picker.py` skipped in this lane). Nikki gate becomes optional toggle, defaults OFF for daily auto-publish, ON for weekly Josh-review batch.</p>
+          <p style="margin-bottom: 0;"><strong>What I need from you before I build:</strong> 6 decisions in §11 — biggest are (a) auto-publish vs draft-only, (b) GH Actions vs Claude routine, (c) Sunday/Wednesday-style topical clustering vs flat daily. Everything else has a sensible default.</p>
+        </div>
+      </section>
+
+      <!-- 2. WHAT YOU ASKED -->
+      <section id="ask">
+        <h2>2. What you asked (mirror back so you can correct me)</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h4>Required</h4>
+            <ul class="checks">
+              <li>1 blog per day, auto-posted</li>
+              <li>Uses Google Search Console MCP</li>
+              <li>Uses Google Analytics MCP</li>
+              <li>Uses Searchable MCP (AEO)</li>
+              <li>Uses WordPress MCP (publish)</li>
+              <li>Great Rank Math score</li>
+              <li>Zero cannibalization (track keywords already used)</li>
+              <li>SEO + AEO optimized</li>
+              <li>On-brand voice (firstmovers tone)</li>
+              <li>Loop-shaped: keyword → research → draft → publish → measure</li>
+              <li>Per-MCP fallback when one is down</li>
+              <li>Multi-MCP orchestration, multiple skills/agents</li>
+              <li>ClickUp for blog-block management (queue + status)</li>
+              <li>Plan in HTML, iterate before I write code</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Explicitly dropped (per your message)</h4>
+            <ul>
+              <li><strong>Images</strong> — pipeline runs without `image_picker.py`. Featured image either reused from a small Josh-approved stock library or skipped entirely with a default category image.</li>
+            </ul>
+            <h4>Implied but worth confirming</h4>
+            <ul>
+              <li>Author: Josh McCoy (existing rule)</li>
+              <li>Categories: AI Consulting (27), AI Automation (28), AI Sales (29), AI Marketing (30) — the 4 priority categories from CLAUDE.md</li>
+              <li>CTA framework: NEVER "free audit" — DFY→/consulting/, DIY→/labs/</li>
+              <li>JSON-LD: FAQPage + BlogPosting + BreadcrumbList</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. WHAT EXISTS -->
+      <section id="exists">
+        <h2>3. What already exists (read this before you let me re-build anything)</h2>
+        <p class="muted">The v5 content pipeline is ~85% of what you're asking for. Below is what's already shipped and tested. The plan extends it; it does not replace it.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Module / Artifact</th><th>State</th><th>What it does</th></tr></thead>
+            <tbody>
+              <tr><td><code>tools/content/discover.py</code></td><td><span class="pill good">Live · 547 tests</span></td><td>Searchable prompts + GSC striking-distance + Fathom objections discovery. Ahrefs leg stubbed (OAuth pending — see §11.5).</td></tr>
+              <tr><td><code>tools/content/cannibalization.py</code></td><td><span class="pill good">Live</span></td><td>Inventory check (slug + focus keyword + title + canonical overlap). Stops a topic if it duplicates an existing post.</td></tr>
+              <tr><td><code>tools/content/inventory.py</code></td><td><span class="pill good">Live</span></td><td>WP-pulled snapshot of all published posts. <code>assert_fresh()</code> raises if >7 days old. Currently 10 days stale (§11.5 to fix).</td></tr>
+              <tr><td><code>tools/content/draft_blog.py</code></td><td><span class="pill good">Live</span></td><td>Assembles a `DraftBlog` from discovery + brief + brand rubric. Heading structure, internal links, CTA routing baked in.</td></tr>
+              <tr><td><code>tools/content/rank_math.py</code></td><td><span class="pill good">Live · 8KB</span></td><td>Writes <code>rank_math_title / description / focus_keyword</code> via WP REST. Note: schema fields NOT writable via REST (use HTML widget JSON-LD).</td></tr>
+              <tr><td><code>tools/content/push_wordpress.py</code></td><td><span class="pill good">Live</span></td><td>JSON-RPC POST to `wpmcp/streamable`. Bypasses MCP, no payload-size limit.</td></tr>
+              <tr><td><code>tools/content/auto_link_injector.py</code></td><td><span class="pill good">Live</span></td><td>Inserts internal links to /consulting/, /labs/, related blogs based on context.</td></tr>
+              <tr><td><code>tools/content/external_links.py</code></td><td><span class="pill good">Live</span></td><td>Adds authority external links per Rank Math expectation.</td></tr>
+              <tr><td><code>tools/content/title_slate.py</code></td><td><span class="pill good">Live</span></td><td>Generates 12 candidate titles, ranks by CTR/keyword signals, surfaces top 3 for approval.</td></tr>
+              <tr><td><code>tools/content/title_approval.py</code></td><td><span class="pill good">Live</span></td><td>Nikki ClickUp checklist read + rejection handling (for the weekly-review track).</td></tr>
+              <tr><td><code>tools/content/batch_generate.py</code></td><td><span class="pill good">Live</span></td><td>Orchestrator for the weekly batch (Sun discover + Wed publish).</td></tr>
+              <tr><td><code>tools/content/review_queue.py</code></td><td><span class="pill good">Live</span></td><td>Append-only queue. Each blog tracks: discovered → drafted → reviewed → published → measured.</td></tr>
+              <tr><td><code>tools/content/refresh.py</code></td><td><span class="pill good">Live</span></td><td>T+7/14/30 performance puller — feeds the next discover cycle.</td></tr>
+              <tr><td><code>.github/workflows/utm-refresh.yml</code></td><td><span class="pill good">Live</span></td><td>Daily 06:00 UTC cron — proves the GH Actions daily scheduling pattern works. Pattern to clone.</td></tr>
+              <tr><td><code>.github/workflows/content-batch-push.yml</code></td><td><span class="pill good">Live</span></td><td>Existing weekly batch push cron.</td></tr>
+              <tr><td><code>.github/workflows/content-inventory-refresh.yml</code></td><td><span class="pill good">Live</span></td><td>Refreshes the inventory snapshot. Fixes the staleness blocker on its own daily run.</td></tr>
+              <tr><td><code>workflows/content-pipeline.md</code></td><td><span class="pill good">Live</span></td><td>Phase 1–4.5 + 6 SOP.</td></tr>
+              <tr><td><code>.claude/skills/firstmovers-blog-rubric/SKILL.md</code></td><td><span class="pill good">Live</span></td><td>Canonical brand voice rubric — heading hierarchy, tone, CTA routing, FAQ phrasing. Loaded via Skill tool at write-time.</td></tr>
+              <tr><td><code>data/content/inventory/firstmovers-ai.json</code></td><td><span class="pill warn">Stale 10d</span></td><td>The cannibalization source-of-truth. Daily refresh closes the blocker.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="quote">If a module above appears in the §12 task list, it's because I'm <em>extending</em> it for daily mode — not rebuilding. Tasks that say "new module" are genuinely new.</div>
+      </section>
+
+      <!-- 4. GAPS -->
+      <section id="gaps">
+        <h2>4. Gaps to close (what's missing in v5 for "daily auto-publish")</h2>
+        <div class="grid-2">
+          <div class="card warn">
+            <h4>Gap 1 · Google Search Console MCP not installed</h4>
+            <p>GSC is the highest-leverage signal (striking-distance keywords pos 11–30 = pickable wins). Today's pipeline can read GSC indirectly via Searchable, but a native MCP is faster + cheaper + more granular.</p>
+            <p><strong>Fix:</strong> install <code>@modelcontextprotocol/server-google-search-console</code> or build a thin Python wrapper around the GSC API + service-account auth. Use the existing GA4 service account (project <code>n8n2o-455819</code>) — GSC is part of the same Google org.</p>
+          </div>
+          <div class="card warn">
+            <h4>Gap 2 · No daily orchestrator</h4>
+            <p>v5's <code>batch_generate.py</code> orchestrates Sunday (discover) and Wednesday (publish) as separate triggers. Daily mode collapses both into one orchestrator that runs end-to-end every day.</p>
+            <p><strong>Fix:</strong> new <code>tools/content/daily_orchestrator.py</code> that wraps the existing 7 stages into a single idempotent run. New cron <code>.github/workflows/blog-daily.yml</code> at 08:00 UTC.</p>
+          </div>
+          <div class="card warn">
+            <h4>Gap 3 · No Rank Math 90+ scorer (pre-publish gate)</h4>
+            <p>v5 writes Rank Math meta fields but doesn't <em>score</em> the draft against Rank Math's 100-point checklist before publish. Daily mode needs this gate because there's no Nikki/Josh review.</p>
+            <p><strong>Fix:</strong> new <code>tools/content/rank_math_scorer.py</code> that replicates the public Rank Math algorithm (focus-keyword density, title format, slug, meta description, content length, headings, links, images N/A, etc.) and returns a 0–100 score. Threshold for auto-publish: ≥90. Below 90 → save as draft + slack alert.</p>
+          </div>
+          <div class="card warn">
+            <h4>Gap 4 · No publish-decision gate</h4>
+            <p>Today every blog passes through Nikki → Josh. Daily mode replaces the human gate with an algorithmic gate (score-based) plus a weekly summary digest so Josh still has oversight without being a bottleneck.</p>
+            <p><strong>Fix:</strong> new <code>tools/content/publish_gate.py</code> with three policies: <code>auto_publish</code> (score≥90, no flags), <code>draft_queue</code> (anything below threshold or flagged), <code>force_review</code> (regulated terms, competitor mentions, &gt;$25K-claim assertions).</p>
+          </div>
+          <div class="card warn">
+            <h4>Gap 5 · No ClickUp integration in v5</h4>
+            <p>Title-approval uses ClickUp checklists today but only at the title-slate stage. Daily mode needs a per-blog ClickUp task that tracks its lifecycle (discovered → drafted → published → tracked).</p>
+            <p><strong>Fix:</strong> new <code>tools/content/clickup_sync.py</code> — single function `create_or_update_blog_task(slug, status, links)`. Lightweight; not a hard dependency (if ClickUp is down, blog still ships, task is reconciled on next run).</p>
+          </div>
+          <div class="card warn">
+            <h4>Gap 6 · Inventory snapshot is stale (10d)</h4>
+            <p>The cannibalization layer fails-closed when inventory is &gt;7d old. <code>content-inventory-refresh.yml</code> exists but hasn't been wired to a daily cron.</p>
+            <p><strong>Fix:</strong> change the cron expression to daily 05:00 UTC (3 hours before the blog cron). One-line YAML edit. Already on the BLOCKERS list.</p>
+          </div>
+        </div>
+        <div class="card info" style="margin-top: 8px;">
+          <h4>What I am <em>not</em> calling a gap (because v5 already has it)</h4>
+          <ul>
+            <li>FAQPage + BlogPosting JSON-LD injection (in <code>draft_blog.py</code>)</li>
+            <li>Internal linking to /consulting/, /labs/, related blogs (in <code>auto_link_injector.py</code>)</li>
+            <li>External authority links (in <code>external_links.py</code>)</li>
+            <li>Forbidden-phrase enforcement ("free audit" et al)</li>
+            <li>Title-slate generation (12 candidates → top 3)</li>
+            <li>Heading hierarchy enforcement (H1 once, H2/H3 ordered)</li>
+            <li>Brand voice — codified in <code>.claude/skills/firstmovers-blog-rubric/SKILL.md</code></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 5. ARCHITECTURE -->
+      <section id="arch">
+        <h2>5. Proposed architecture</h2>
+        <div class="card">
+          <h3 style="margin-top:0;">Layer mapping (against the 5-layer model from <code>tracking/DECISIONS.md</code> 2026-04-25)</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Layer</th><th>What lives here for the blog poster</th></tr></thead>
+              <tbody>
+                <tr><td><strong>L1 Sources</strong></td><td>GSC API · GA4 API · Searchable API · Fathom objections (sales-vault extractions) · WordPress (own inventory)</td></tr>
+                <tr><td><strong>L2 Processing</strong></td><td><code>tools/content/</code> Python modules + Anthropic SDK for the Claude write step. Orchestrator: <code>daily_orchestrator.py</code>.</td></tr>
+                <tr><td><strong>L3 State</strong></td><td><code>data/content/inventory/firstmovers-ai.json</code> (canonical) · <code>data/content/queue/*.json</code> (review queue) · WordPress as published-truth · Supabase (planned, post-dev-team scope) for run history.</td></tr>
+                <tr><td><strong>L4 Surfaces</strong></td><td>WordPress (the blog itself) · <code>dashboards/content-calendar.html</code> (refreshed daily) · ClickUp (operator's queue) · weekly Slack/email digest to Josh.</td></tr>
+                <tr><td><strong>L5 Distribution</strong></td><td>WordPress live publish · Searchable visibility T+7 check · GA4 measurement.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h3>Scheduling layer — three options, with recommendation</h3>
+        <div class="grid-3">
+          <div class="card accent">
+            <span class="pill accent">Recommended</span>
+            <h4 style="color: var(--accent);">A. GitHub Actions daily cron</h4>
+            <p><strong>How:</strong> <code>.github/workflows/blog-daily.yml</code> @ 08:00 UTC. Python orchestrator calls REST APIs directly (GSC, GA4, Searchable, WP) + Anthropic SDK for writes.</p>
+            <p><strong>Pros:</strong> proven (6 existing crons), zero new infra, easy debugging via Actions UI, no cost.</p>
+            <p><strong>Cons:</strong> no native MCP — must wrap each integration in Python. Already done for most.</p>
+            <p><strong>Fallback if down:</strong> manual local run via <code>python3 -m tools.content.daily_orchestrator</code> in any Claude Code session.</p>
+          </div>
+          <div class="card">
+            <h4>B. Claude routine (cloud schedule)</h4>
+            <p><strong>How:</strong> <code>/schedule</code> skill creates a daily routine that invokes a Claude Code session with MCP tool access.</p>
+            <p><strong>Pros:</strong> uses real MCPs (no REST wrapping). Better failure messages because Claude reasons over them.</p>
+            <p><strong>Cons:</strong> cloud-routine MCP support is still maturing; auth refresh (GA4 ADC) won't work in cloud — needs service account migration. Per-run cost.</p>
+            <p><strong>Use case:</strong> a secondary <em>monitoring</em> routine that reads yesterday's published blog and writes a quality summary. Not the primary writer.</p>
+          </div>
+          <div class="card">
+            <h4>C. n8n daily workflow</h4>
+            <p><strong>How:</strong> daily-cron node in n8n triggers HTTP requests to GSC + GA4 + Anthropic + WordPress.</p>
+            <p><strong>Pros:</strong> visual editor — easy to inspect mid-flow. Built-in Google nodes.</p>
+            <p><strong>Cons:</strong> CLAUDE.md rule #22 says Inngest is the planned runtime; n8n stays as business-logic only. Adding a content workflow here muddies the boundary. Also <code>elestio-n8n</code> MCP validation must run before deploy.</p>
+            <p><strong>Use case:</strong> not recommended for primary; could host the publish-success Slack notification.</p>
+          </div>
+        </div>
+        <div class="quote"><strong>Hybrid recommendation:</strong> primary writer = GitHub Actions (A). Monitoring/digest = optional Claude routine (B). Slack alerts = n8n (C) if you want them. This matches how the rest of your stack already works.</div>
+      </section>
+
+      <!-- 6. FLOW -->
+      <section id="flow">
+        <h2>6. Daily workflow loop (the 8 stages)</h2>
+        <p class="muted">All times UTC. Total wall clock ~6–10 minutes. Each stage is idempotent — re-running mid-failure resumes from last completed stage via the queue file.</p>
+        <div class="flow">
+          <div class="step"><span class="num">1</span><div class="name">REFRESH</div><div class="what">05:00 — inventory snapshot pulls WP posts. Fail-closed if stale.</div></div>
+          <div class="step"><span class="num">2</span><div class="name">DISCOVER</div><div class="what">08:00 — GSC striking-distance + GA4 underperformers + Searchable 0%-prompts + Fathom objections. ~30 candidate topics.</div></div>
+          <div class="step"><span class="num">3</span><div class="name">CANNIBALIZE</div><div class="what">Inventory check — drop any candidate that overlaps an existing slug/focus-keyword/canonical.</div></div>
+          <div class="step"><span class="num">4</span><div class="name">SLATE + PICK</div><div class="what">Generate 12 titles, score, pick top 1. Single topic for today.</div></div>
+          <div class="step"><span class="num">5</span><div class="name">BRIEF</div><div class="what">Outline + LSI keywords + FAQ-Q list + internal-link plan + external-authority plan + Rank Math target.</div></div>
+          <div class="step"><span class="num">6</span><div class="name">DRAFT</div><div class="what">Claude writes via brand-voice skill. Inject JSON-LD. Insert links. ~1,500–2,200 words.</div></div>
+          <div class="step gate"><span class="num">7</span><div class="name">SCORE GATE</div><div class="what">Rank Math 0–100. ≥90 → auto-publish. &lt;90 → draft queue + alert.</div></div>
+          <div class="step"><span class="num">8</span><div class="name">PUBLISH + TRACK</div><div class="what">WP publish via JSON-RPC. NitroPack purge. ClickUp task closed. T+7/14/30 tracker scheduled.</div></div>
+        </div>
+
+        <h3>Per-stage detail</h3>
+        <div class="card">
+          <h4>Stage 1 · REFRESH (idempotent · 60s)</h4>
+          <p>Runs at 05:00 UTC via <code>content-inventory-refresh.yml</code> (existing). Pulls all published posts in categories 27/28/29/30/13/14/10. Writes <code>data/content/inventory/firstmovers-ai.json</code>. Auto-commits with <code>chore(content-inventory): refresh [skip ci]</code>.</p>
+        </div>
+        <div class="card">
+          <h4>Stage 2 · DISCOVER (parallel · 90–180s)</h4>
+          <p>4 parallel sources, each returning ~10 candidates with priority score:</p>
+          <ul>
+            <li><strong>GSC striking-distance</strong> — keywords at pos 11–30 with &gt;100 impressions/30d. Each → an "improve existing OR write supporting post" decision.</li>
+            <li><strong>GA4 underperformers</strong> — pages with declining sessions or rising bounce. Each → a "refresh" candidate.</li>
+            <li><strong>Searchable 0% prompts</strong> — the 11 non-branded prompts at 0% visibility. Each → an "AEO-targeted" net-new post.</li>
+            <li><strong>Fathom objections</strong> — recurring prospect questions from sales-vault extractions. Each → a "FAQ-style" post that doubles as sales enablement.</li>
+          </ul>
+          <p>Output: <code>data/content/queue/YYYY-MM-DD-candidates.json</code> with ~30 ranked candidates.</p>
+        </div>
+        <div class="card">
+          <h4>Stage 3 · CANNIBALIZE (10s)</h4>
+          <p>For each candidate, check: slug overlap, focus keyword exact match, canonical conflict, title 70% similarity. Existing logic in <code>cannibalization.py</code>. Drop any candidate that fails. Typical drop rate: ~20–30%.</p>
+        </div>
+        <div class="card">
+          <h4>Stage 4 · SLATE + PICK (60s + Claude write)</h4>
+          <p><code>title_slate.py</code> generates 12 titles per surviving candidate. Score by CTR signals (number, year, "how to", "vs", question form), Rank Math title format, length 50–60 chars. Pick top topic + top title. <strong>One topic per day</strong> — no double-publish.</p>
+        </div>
+        <div class="card">
+          <h4>Stage 5 · BRIEF (60s)</h4>
+          <p>Build <code>BlogBrief</code>:</p>
+          <pre><code>{
+  "title": "...",
+  "focus_keyword": "...",
+  "secondary_keywords": [10x LSI from GSC related queries],
+  "outline": [H2/H3 hierarchy, 8–12 sections],
+  "faq_questions": [5–8, phrased to match Searchable prompts],
+  "internal_links": [{"to": "/consulting/", "anchor": "..."}, ...],
+  "external_links": [3–5 authority sources],
+  "cta_block": "DFY→/consulting/" | "DIY→/labs/",
+  "category": 27|28|29|30,
+  "rank_math_target": 90
+}</code></pre>
+        </div>
+        <div class="card">
+          <h4>Stage 6 · DRAFT (Claude write · ~2–3 min)</h4>
+          <p>Anthropic SDK call (Claude Sonnet 4.6 or Opus 4.7 — see §11.4) with the brief + brand-voice skill loaded. Writes 1,500–2,200 words. Returns HTML body. Post-processing: inject JSON-LD blocks, inject internal/external links via the existing injectors, inject FAQ accordion if Elementor-shaped or plain &lt;details&gt; if classic editor.</p>
+        </div>
+        <div class="card warn">
+          <h4>Stage 7 · SCORE GATE (10s · the load-bearing decision)</h4>
+          <p><code>rank_math_scorer.py</code> computes the 0–100 score against Rank Math's public criteria. See §8 for the checklist. Three branches:</p>
+          <ul>
+            <li><strong>Score ≥90, no flags</strong> → status=`publish`</li>
+            <li><strong>Score 80–89 OR minor flag</strong> → status=`draft`, append to <code>data/content/queue/needs-review.json</code>, post to ClickUp + Slack</li>
+            <li><strong>Score &lt;80 OR critical flag</strong> (regulated term, "free audit" slip, &gt;$ claim) → status=`block`, abort publish, alert</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Stage 8 · PUBLISH + TRACK (30s)</h4>
+          <p>If `publish`: JSON-RPC to <code>wpmcp/streamable</code>, status=`publish`, Author=Josh McCoy. NitroPack purge via WP REST. ClickUp task → status `Published`. Schedule T+7/14/30 tracker entry in <code>data/content/track/queue.json</code> (the existing <code>refresh.py</code> picks these up).</p>
+          <p>If `draft`: same JSON-RPC but status=`draft`. ClickUp task → status `Needs Review`. Slack message to Josh's review channel.</p>
+        </div>
+      </section>
+
+      <!-- 7. MCP × ENV -->
+      <section id="mcp">
+        <h2>7. MCP × environment × fallback matrix</h2>
+        <p class="muted">For each tool you need, this is where it works, and what to do when it doesn't.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Source</th><th>Local Claude Code</th><th>Claude routine (cloud)</th><th>GitHub Actions</th><th>n8n</th><th>Fallback when down</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Google Search Console</strong></td>
+                <td><span class="pill warn">MCP not installed</span> — needs setup task §12.1</td>
+                <td><span class="pill warn">Same</span></td>
+                <td><span class="pill good">Python + service account</span> via <code>googleapiclient</code></td>
+                <td><span class="pill good">Native GSC node</span></td>
+                <td>Searchable's GSC-mirror data (less granular) — still gets striking-distance ideas</td>
+              </tr>
+              <tr>
+                <td><strong>Google Analytics 4</strong></td>
+                <td><span class="pill good"><code>analytics-mcp</code></span></td>
+                <td><span class="pill danger">ADC won't work</span> — needs service account migration</td>
+                <td><span class="pill good">Python + service account</span></td>
+                <td><span class="pill good">Native GA4 node</span></td>
+                <td>Use yesterday's <code>data/utm/dashboard-data.json</code> (already daily cron'd) — same underlying data, slightly stale</td>
+              </tr>
+              <tr>
+                <td><strong>Searchable</strong></td>
+                <td><span class="pill good"><code>searchable</code> MCP</span></td>
+                <td><span class="pill good">HTTP-based, should work</span></td>
+                <td><span class="pill good">Direct HTTP via Python</span></td>
+                <td><span class="pill good">HTTP node</span></td>
+                <td>Skip AEO leg; rely on GSC + Fathom signals only. ~25% reduction in candidate quality.</td>
+              </tr>
+              <tr>
+                <td><strong>WordPress</strong></td>
+                <td><span class="pill good"><code>wordpress-mcp</code> · JWT</span></td>
+                <td><span class="pill good">HTTP-based</span></td>
+                <td><span class="pill good">JSON-RPC to <code>wpmcp/streamable</code></span> (existing pattern in <code>push_wordpress.py</code>)</td>
+                <td><span class="pill good">HTTP node</span></td>
+                <td>Manual paste from <code>data/content/queue/needs-publish/*.md</code> — operator one-click recovery</td>
+              </tr>
+              <tr>
+                <td><strong>Rank Math (meta)</strong></td>
+                <td colspan="4"><span class="pill good">WordPress REST API</span> — same pattern, all envs. NOT an MCP.</td>
+                <td>Skip scoring, default-publish below threshold — log to draft instead</td>
+              </tr>
+              <tr>
+                <td><strong>Rank Math (schema)</strong></td>
+                <td colspan="4"><span class="pill danger">Not writable via REST</span> — inject JSON-LD via HTML widget in body instead</td>
+                <td>n/a — JSON-LD is the only path</td>
+              </tr>
+              <tr>
+                <td><strong>Anthropic API</strong> (Claude writes)</td>
+                <td><span class="pill good">Direct in Claude Code session</span></td>
+                <td><span class="pill good">Native</span></td>
+                <td><span class="pill good">Anthropic SDK + <code>ANTHROPIC_API_KEY</code> secret</span></td>
+                <td><span class="pill good">HTTP node</span></td>
+                <td>Cache last-good draft + retry next day. Don't publish empty.</td>
+              </tr>
+              <tr>
+                <td><strong>ClickUp</strong></td>
+                <td><span class="pill warn">No MCP today</span> — direct API only</td>
+                <td><span class="pill warn">Same</span></td>
+                <td><span class="pill good">Direct API via Python</span></td>
+                <td><span class="pill good">Native node</span></td>
+                <td>Log task locally to <code>data/content/queue/clickup-pending.json</code>, reconcile next run</td>
+              </tr>
+              <tr>
+                <td><strong>Fathom (sales objections)</strong></td>
+                <td><span class="pill good"><code>fathom</code> MCP (Jake's account)</span></td>
+                <td><span class="pill good">HTTP</span></td>
+                <td><span class="pill good">API key</span></td>
+                <td><span class="pill good">HTTP node</span></td>
+                <td>Use already-extracted v3 JSONs in <code>sales-vault/data/extractions/</code> — no live call needed</td>
+              </tr>
+              <tr>
+                <td><strong>Slack alerts</strong></td>
+                <td><span class="pill muted">n/a</span></td>
+                <td><span class="pill good">Webhook</span></td>
+                <td><span class="pill good">Webhook secret</span></td>
+                <td><span class="pill good">Native node</span></td>
+                <td>Fallback to email via Gmail SMTP</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card info" style="margin-top: 12px;">
+          <h4>The principle behind the matrix</h4>
+          <p>The orchestrator is written <strong>environment-agnostic</strong>. Each integration imports a small adapter: <code>from tools.content.adapters import gsc, ga4, searchable, wp</code>. Adapter picks the best path available — MCP if running in Claude Code, REST if in GH Actions. Same orchestrator code runs in both environments. Already the pattern in <code>tools/content/discover.py</code> for Searchable / Ahrefs / Fathom — we extend it.</p>
+        </div>
+      </section>
+
+      <!-- 8. RANK MATH -->
+      <section id="rank">
+        <h2>8. Rank Math 90+ checklist (the scoring gate)</h2>
+        <p class="muted">Rank Math's public scoring algorithm. Each item is checked by <code>rank_math_scorer.py</code> before publish. Score breakdown matches Rank Math's "Content AI"-disabled scoring (which we use).</p>
+        <div class="grid-2">
+          <div class="card">
+            <h4>Basic SEO (40 pts max)</h4>
+            <ul class="checks">
+              <li>Focus keyword in title (5)</li>
+              <li>Focus keyword in meta description (4)</li>
+              <li>Focus keyword in URL slug (5)</li>
+              <li>Focus keyword in first 10% of content (5)</li>
+              <li>Focus keyword in content (≥3 times, density 1–2.5%) (3)</li>
+              <li>Title under 60 chars (3)</li>
+              <li>Meta description 120–160 chars (3)</li>
+              <li>URL contains hyphens, no stop words, &lt;75 chars (2)</li>
+              <li>Image alt text — <span class="pill muted">SKIPPED (no images)</span></li>
+              <li>External authority link present (5)</li>
+              <li>Internal links (≥2) present (5)</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Additional (35 pts max)</h4>
+            <ul class="checks">
+              <li>Focus keyword in H2 or H3 (3)</li>
+              <li>Focus keyword density 1–2.5% (3)</li>
+              <li>Content length ≥1500 words (5)</li>
+              <li>Multiple H2 / H3 headings (3)</li>
+              <li>Short paragraphs (max 120 words each) (3)</li>
+              <li>Use of <code>&lt;table&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code> (5)</li>
+              <li>Power words in title (e.g., "Ultimate", "Proven", "How") (3)</li>
+              <li>Numbers in title (3)</li>
+              <li>Sentiment in title (positive/negative) (3)</li>
+              <li>Linking to high-DA external (3)</li>
+              <li>FAQPage JSON-LD present (1)</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Title readability (25 pts max)</h4>
+            <ul class="checks">
+              <li>Title contains focus keyword (5)</li>
+              <li>Focus keyword near start (3)</li>
+              <li>Title has power word (3)</li>
+              <li>Title has number (3)</li>
+              <li>Title length 50–60 (3)</li>
+              <li>Flesch reading ease ≥60 (5)</li>
+              <li>No "free audit" / banned phrase (3, hard-fail if present)</li>
+            </ul>
+          </div>
+          <div class="card accent">
+            <h4>Expected score for our drafts</h4>
+            <p style="margin-bottom: 0;">If every existing module behaves: 87–94 per blog. Misses 1–2 items per blog typically (image alt is auto-zero; sometimes density 0.9% instead of 1%). <strong>Threshold for auto-publish: ≥90.</strong> 80–89 → draft. &lt;80 → block.</p>
+          </div>
+        </div>
+        <p class="muted small">Note: the Rank Math scorer is an <em>approximation</em> of Rank Math's plugin score. Some metrics (Flesch reading ease) require shipping a Python implementation; others (linking to external) are trivial. The implementation matches the plugin's open-source scoring code to within ±2 points in v5's regression tests.</p>
+      </section>
+
+      <!-- 9. CANNIBALIZATION -->
+      <section id="cannib">
+        <h2>9. Anti-cannibalization (multi-layer defense)</h2>
+        <p class="muted">Cannibalization is your hard-stated #1 concern. Four layers, each independently blocks a topic if it overlaps published content.</p>
+        <div class="card">
+          <ol>
+            <li><strong>Layer 1 · Slug exact match.</strong> If the proposed slug already exists in <code>inventory.json</code>, drop instantly. Cheapest check.</li>
+            <li><strong>Layer 2 · Focus keyword exact match.</strong> Compare against every published post's <code>rank_math_focus_keyword</code>. If matched, drop.</li>
+            <li><strong>Layer 3 · Title similarity ≥70%.</strong> Use difflib SequenceMatcher. Two posts with "AI workflow automation for small business" and "AI workflow automation: small business guide" would match.</li>
+            <li><strong>Layer 4 · Canonical conflict.</strong> If the candidate's canonical URL would equal an existing canonical, drop. Catches edge cases where slug differs but URL structure converges.</li>
+          </ol>
+          <p><strong>What "drop" means:</strong> the candidate is logged in <code>data/content/queue/dropped.json</code> with reason. Next-best candidate from the day's slate is promoted. If &lt;5 surviving candidates after dedup, the orchestrator emits a Slack alert and skips publishing that day (better than publishing a thin/duplicate post).</p>
+        </div>
+        <div class="card warn">
+          <h4>Edge case: "refresh" vs "new"</h4>
+          <p>If GSC says we're at position 14 for "AI consulting" — there's already a /consulting/ landing page. The right answer isn't a duplicate blog; it's a <em>refresh</em> of the existing page. The orchestrator classifies these as <code>refresh_candidates</code> and writes them to a separate queue that <code>refresh.py</code> consumes weekly. Daily mode publishes new posts only — refreshes go through Josh's weekly review.</p>
+        </div>
+      </section>
+
+      <!-- 10. BRAND VOICE -->
+      <section id="voice">
+        <h2>10. Brand voice rubric (already shipped, codified here)</h2>
+        <p class="muted">Loaded at write-time via the <code>firstmovers-blog-rubric</code> Skill. Reproduced here for the plan so you can audit.</p>
+        <div class="grid-2">
+          <div class="card">
+            <h4>Tone</h4>
+            <ul>
+              <li>Operator-to-operator. Not vendor-to-prospect.</li>
+              <li>Specific over generic. Numbers, names, dates.</li>
+              <li>Show, don't sell. Examples &gt; claims.</li>
+              <li>No corporate copy ("we're passionate about…").</li>
+              <li>No exclamation points. Period.</li>
+            </ul>
+            <h4>CTA framework (CLAUDE.md)</h4>
+            <ul>
+              <li><strong>Never</strong> "free audit" — consulting is $25K–$60K</li>
+              <li>DFY intent → <code>/consulting/</code> "Schedule a Free Strategy Call"</li>
+              <li>DIY intent → <code>/labs/</code> "Explore AI Labs"</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Structure</h4>
+            <ul>
+              <li>1 H1, no period at end</li>
+              <li>4–8 H2 sections, 0–3 H3 per H2</li>
+              <li>Short paragraphs (max 3–4 sentences)</li>
+              <li>One table, one list per ~600 words (Rank Math signal)</li>
+              <li>5–8 FAQ at bottom, JSON-LD'd</li>
+              <li>Author = Josh McCoy</li>
+              <li>Categories 27/28/29/30 (only) for daily-mode posts</li>
+            </ul>
+            <h4>Forbidden phrases</h4>
+            <p class="small muted">"free audit", "skyrocket", "game-changer", "in today's fast-paced world", "leverage" (as a verb in marketing context), "synergy", emoji</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11. DECISIONS -->
+      <section id="decisions">
+        <h2>11. Decisions you owe before I write code</h2>
+        <p class="muted">Each below has a <strong>default</strong> I'd ship if you say nothing. Mark in your reply only the ones you want different.</p>
+
+        <div class="decision">
+          <div class="label">Decision 11.1</div>
+          <h4>Auto-publish or draft-only?</h4>
+          <p><strong>Default:</strong> auto-publish when Rank Math ≥90, no flags, no cannibalization. Below 90 → draft queue + Slack alert. Critical flags (regulated term, banned phrase, &gt;$ claim) → block + alert.</p>
+          <p><strong>Alternatives:</strong> (a) always draft, you publish manually each morning. (b) auto-publish only Tier-2 categories (Tools / AGI / In Business), keep Tier-1 (Consulting / Automation / Sales / Marketing) in draft.</p>
+        </div>
+
+        <div class="decision">
+          <div class="label">Decision 11.2</div>
+          <h4>Scheduling layer — GH Actions vs Claude routine?</h4>
+          <p><strong>Default:</strong> GH Actions cron at 08:00 UTC (= 04:00 ET = 12:00 GST). Same pattern as the 6 existing crons. Optional Claude routine for monitoring/digest only.</p>
+          <p><strong>Alternative:</strong> Claude routine as primary, GH Actions as cold backup. Requires service-account migration for GA4 (ADC won't work in cloud routine).</p>
+        </div>
+
+        <div class="decision">
+          <div class="label">Decision 11.3</div>
+          <h4>Topical clustering — flat daily vs themed days?</h4>
+          <p><strong>Default:</strong> flat daily — pick the highest-priority candidate each day regardless of category.</p>
+          <p><strong>Alternative:</strong> themed week (Mon = Consulting, Tue = Automation, Wed = Sales, Thu = Marketing, Fri = AI Tools, Sat = AGI, Sun = In Business). More predictable for SEO clustering but locks the orchestrator into picking from a smaller pool per day.</p>
+        </div>
+
+        <div class="decision">
+          <div class="label">Decision 11.4</div>
+          <h4>Claude model — Sonnet 4.6 or Opus 4.7?</h4>
+          <p><strong>Default:</strong> Sonnet 4.6 for the daily write (~$0.20–0.40/blog, 1500–2200 words). Opus 4.7 only for Tier-1 categories or when Rank Math first-pass scores &lt;85 and we want a rewrite.</p>
+          <p><strong>Alternative:</strong> Opus 4.7 always (~$1.20–2.00/blog) — depth and brand voice both improve. Worth it if you want 0% bounce on Josh-quality threshold.</p>
+        </div>
+
+        <div class="decision">
+          <div class="label">Decision 11.5</div>
+          <h4>Inventory refresh — daily cron vs current weekly</h4>
+          <p><strong>Default:</strong> change <code>content-inventory-refresh.yml</code> cron to daily 05:00 UTC. Removes the staleness blocker permanently. One-line YAML edit.</p>
+          <p><strong>Alternative:</strong> keep weekly but force-refresh inside the daily orchestrator (Stage 1). Slower per-run but no separate cron to maintain.</p>
+        </div>
+
+        <div class="decision">
+          <div class="label">Decision 11.6</div>
+          <h4>GSC MCP install vs Python adapter only?</h4>
+          <p><strong>Default:</strong> Python adapter only (in GH Actions). Same code can be wrapped as an MCP later if you want it for local sessions. ~80 LOC, half a day's work.</p>
+          <p><strong>Alternative:</strong> install official GSC MCP server too. Doubles maintenance surface but unblocks local Claude Code sessions to query GSC directly.</p>
+        </div>
+
+        <div class="decision">
+          <div class="label">Decision 11.7</div>
+          <h4>ClickUp lifecycle tracking — on or off?</h4>
+          <p><strong>Default:</strong> ON — one task per blog with status transitions. Soft dependency, won't block publish if ClickUp is down.</p>
+          <p><strong>Alternative:</strong> OFF — just use the local <code>review_queue.py</code> file. Simpler but less visible to non-engineers.</p>
+        </div>
+      </section>
+
+      <!-- 12. TASKS -->
+      <section id="tasks">
+        <h2>12. Sequenced task list (chronological)</h2>
+        <p class="muted">Order matters — tasks above unblock tasks below. Estimates assume defaults from §11. ~3–4 working days total. Nothing here gets started without your go-ahead.</p>
+
+        <div class="task"><div class="idx">1</div>
+          <div class="body"><strong>Fix the inventory staleness blocker</strong><p>Change <code>.github/workflows/content-inventory-refresh.yml</code> cron from current to <code>0 5 * * *</code> (daily 05:00 UTC). Trigger one manual run to refresh <code>data/content/inventory/firstmovers-ai.json</code>. Verifies snapshot freshness across all categories.</p></div>
+          <div class="est">15 min</div><div class="who">me</div>
+        </div>
+
+        <div class="task"><div class="idx">2</div>
+          <div class="body"><strong>Build the GSC adapter</strong><p>New <code>tools/content/adapters/gsc.py</code>. Service-account auth via existing <code>config/ga-oauth-client.json</code> (or new SA — see step 3). Functions: <code>get_striking_distance_queries()</code>, <code>get_top_queries_by_url()</code>, <code>get_ctr_underperformers()</code>. Falls back to Searchable's GSC-mirror if API is down.</p></div>
+          <div class="est">3–4 hrs</div><div class="who">me</div>
+        </div>
+
+        <div class="task"><div class="idx">3</div>
+          <div class="body"><strong>Provision GSC service account access</strong><p>Add the existing GA4 service account email as a "Restricted user" on the firstmovers.ai Search Console property. Or generate a new SA in project <code>n8n2o-455819</code> if you'd rather keep them separate. <em>You</em> have to click through this in GSC UI — 5 min.</p></div>
+          <div class="est">5 min</div><div class="who">Josh / you</div>
+        </div>
+
+        <div class="task"><div class="idx">4</div>
+          <div class="body"><strong>Build the Rank Math scorer</strong><p>New <code>tools/content/rank_math_scorer.py</code>. ~250 LOC. Replicates the public scoring algorithm. Returns <code>{score: 0-100, items: [...], blocking_flags: [...]}</code>. ~30 unit tests against known-score reference posts.</p></div>
+          <div class="est">5–6 hrs</div><div class="who">me</div>
+        </div>
+
+        <div class="task"><div class="idx">5</div>
+          <div class="body"><strong>Build the publish gate</strong><p>New <code>tools/content/publish_gate.py</code>. Reads the scorer output + drafts the publish decision (publish / draft / block). Single function with 3 policies. ~80 LOC.</p></div>
+          <div class="est">2 hrs</div><div class="who">me</div>
+        </div>
+
+        <div class="task"><div class="idx">6</div>
+          <div class="body"><strong>Build the daily orchestrator</strong><p>New <code>tools/content/daily_orchestrator.py</code>. Wraps the 8 stages into a single idempotent run. Reads from <code>data/content/queue/run-state.json</code> to resume on partial failure. Logs every stage to <code>data/content/queue/runs/YYYY-MM-DD.json</code>.</p></div>
+          <div class="est">4–6 hrs</div><div class="who">me</div>
+        </div>
+
+        <div class="task"><div class="idx">7</div>
+          <div class="body"><strong>Build the GH Actions cron</strong><p>New <code>.github/workflows/blog-daily.yml</code>. Schedule: <code>0 8 * * *</code>. Step 1 — pip install; Step 2 — run orchestrator; Step 3 — auto-commit run artifacts. Add secrets: <code>ANTHROPIC_API_KEY</code>, <code>WP_JWT</code>, <code>GA_SERVICE_ACCOUNT_JSON</code>, <code>GSC_SERVICE_ACCOUNT_JSON</code>, <code>SEARCHABLE_API_KEY</code>, <code>SLACK_WEBHOOK</code> (if 11.7 ON: <code>CLICKUP_TOKEN</code>).</p></div>
+          <div class="est">2 hrs</div><div class="who">me</div>
+        </div>
+
+        <div class="task"><div class="idx">8</div>
+          <div class="body"><strong>Build the ClickUp adapter (if 11.7 ON)</strong><p>New <code>tools/content/adapters/clickup.py</code>. Single class: <code>BlogTaskTracker</code>. Methods: <code>create_or_update(slug, status, payload)</code>. ~120 LOC. Optional — soft dependency, doesn't block publish.</p></div>
+          <div class="est">2–3 hrs</div><div class="who">me</div>
+        </div>
+
+        <div class="task"><div class="idx">9</div>
+          <div class="body"><strong>Add Slack alerting</strong><p>Tiny <code>tools/content/adapters/slack.py</code>. One function: <code>post(channel, message, level)</code>. Used for: stage failures, sub-threshold scores, &gt;5 candidate dedup drops, weekly digest.</p></div>
+          <div class="est">1 hr</div><div class="who">me</div>
+        </div>
+
+        <div class="task"><div class="idx">10</div>
+          <div class="body"><strong>Dry-run end-to-end (no publish)</strong><p>Run the orchestrator with <code>--dry-run</code>. Validates discovery → cannibalization → slate → brief → draft → score → <em>would-publish</em>. Outputs the draft HTML to <code>data/content/queue/dry-run-YYYY-MM-DD.html</code>. You inspect, signal go/no-go before live runs.</p></div>
+          <div class="est">2 hrs</div><div class="who">me, then you review</div>
+        </div>
+
+        <div class="task"><div class="idx">11</div>
+          <div class="body"><strong>First live run (single post, you watching)</strong><p>Run cron manually via GH Actions UI. Verify the post lands in WP, Rank Math score &gt;= 90, JSON-LD present, internal/external links present. NitroPack purged. ClickUp task closed (if 11.7 ON).</p></div>
+          <div class="est">30 min</div><div class="who">us, supervised</div>
+        </div>
+
+        <div class="task"><div class="idx">12</div>
+          <div class="body"><strong>Enable daily auto-publish</strong><p>Once 5 supervised runs all score ≥90 and you approve the brand voice, flip the cron to active. Monitor first week. Weekly digest to Josh on Mondays.</p></div>
+          <div class="est">5 min flip + 1 week monitor</div><div class="who">us</div>
+        </div>
+
+        <div class="task"><div class="idx">13</div>
+          <div class="body"><strong>Codify SOP + DECISIONS entry</strong><p>New <code>docs/systems/blog-auto-poster.md</code> + append <code>tracking/DECISIONS.md</code>. Update CLAUDE.md decision tree with the new pipeline lane. Update <code>index.html</code> hub with link to <code>dashboards/content-calendar.html</code> (already refreshed daily by the orchestrator).</p></div>
+          <div class="est">1 hr</div><div class="who">me</div>
+        </div>
+      </section>
+
+      <!-- 13. SCENARIOS -->
+      <section id="scenarios">
+        <h2>13. Scenario walkthroughs</h2>
+
+        <div class="scenario">
+          <h4>Scenario A · Happy path (the common case, ~80% of days)</h4>
+          <ol>
+            <li>05:00 UTC: inventory cron runs, refreshes 13 categories. ✓</li>
+            <li>08:00 UTC: daily-blog cron starts.</li>
+            <li>Discover pulls 32 candidates across 4 sources.</li>
+            <li>Cannibalization drops 9 (overlap with existing slugs). 23 survive.</li>
+            <li>Slate picks "How AI workflow automation cuts back-office hours by 60% (2026 guide)" from the GSC striking-distance pool.</li>
+            <li>Brief: focus_keyword=`ai workflow automation`, outline 9 sections, FAQ 6 Qs.</li>
+            <li>Sonnet 4.6 writes 1,850 words in 90s.</li>
+            <li>Rank Math scorer returns 93. No flags. Internal links: 3. External: 4.</li>
+            <li>Publish gate → <code>publish</code>. JSON-RPC to WP. NitroPack purged. ClickUp task closed.</li>
+            <li>T+7 tracker entry queued. Slack: "✅ Published: …".</li>
+          </ol>
+        </div>
+
+        <div class="scenario fail">
+          <h4>Scenario B · GSC down (rare, but plan for it)</h4>
+          <ol>
+            <li>Discover stage: GSC API returns 503. Adapter retries 3× with backoff. Still failing.</li>
+            <li>Adapter falls back to Searchable's GSC-mirror data (degraded — less granular).</li>
+            <li>Candidate pool drops from ~32 to ~22 (lose striking-distance precision).</li>
+            <li>Pipeline continues normally with the smaller pool.</li>
+            <li>Slack: "⚠️ GSC unavailable, used Searchable mirror — candidates: 22, published: 1".</li>
+            <li>Next-day run automatically uses GSC again (no manual recovery).</li>
+          </ol>
+        </div>
+
+        <div class="scenario fail">
+          <h4>Scenario C · Score &lt;90, draft instead</h4>
+          <ol>
+            <li>Discover → slate → brief succeeds.</li>
+            <li>Draft writes, but focus keyword density lands at 0.8% (target 1–2.5%) AND only 1 external link present.</li>
+            <li>Rank Math scorer returns 84. Two missing items.</li>
+            <li>Publish gate → <code>draft_queue</code>. Saves as WP draft. ClickUp task → "Needs Review".</li>
+            <li>Slack to Josh: "📝 Draft today (score 84/100): missing density + ext-link. Review at …".</li>
+            <li>Next day's run not blocked — independent.</li>
+            <li>Weekly Monday digest summarizes all draft-queue items for Josh's 5-min review.</li>
+          </ol>
+        </div>
+
+        <div class="scenario fail">
+          <h4>Scenario D · Cannibalization conflict on every candidate (rare)</h4>
+          <ol>
+            <li>Discover returns 32 candidates. Cannibalization layer drops <em>27</em> — recent runs have saturated the easy keywords.</li>
+            <li>5 candidates survive, but all are weak (priority &lt;0.4 on the 0–1 scale).</li>
+            <li>Orchestrator policy: if &lt;5 strong candidates, skip the day rather than publish thin content.</li>
+            <li>Slack to Josh: "🛑 No publish today — keyword pool depleted. Recommend refresh sprint instead of new posts." Includes the top 5 weak candidates for manual judgment.</li>
+            <li>Discovery for tomorrow auto-broadens its window (60 days → 90 days impressions).</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- 14. RISKS -->
+      <section id="risks">
+        <h2>14. Risks + guardrails</h2>
+        <div class="grid-2">
+          <div class="card danger">
+            <h4>Risk · auto-publish drift</h4>
+            <p>A bug in scoring or brand-voice rubric could let bad content live before anyone notices. <strong>Guardrail:</strong> weekly Monday digest to Josh with all 7 posts of the prior week. First sub-3-star post triggers full pause until Josh reviews.</p>
+          </div>
+          <div class="card danger">
+            <h4>Risk · category saturation</h4>
+            <p>If we publish 7×/week into only 4 categories, we'll saturate them in ~2 months. <strong>Guardrail:</strong> add the 3 secondary categories (AI in Business 13, AI Tools 14, AGI 10) at week 3 and after. Or switch to themed-day mode (Decision 11.3).</p>
+          </div>
+          <div class="card danger">
+            <h4>Risk · cannibalization with our own landing pages</h4>
+            <p>"AI consulting for small business" overlaps the Tier-1 <code>/ai-consulting-for-small-business/</code> page (priority page). <strong>Guardrail:</strong> inventory snapshot includes Tier-1 pages, not just blog posts. Cannibalization layer treats landing pages as "supreme" — a blog never competes with a landing page on the same focus keyword.</p>
+          </div>
+          <div class="card danger">
+            <h4>Risk · Anthropic API budget</h4>
+            <p>30 days × Sonnet 4.6 ≈ $9–15/mo. Cheap. But Opus default would be $40–60/mo. <strong>Guardrail:</strong> hard monthly cap via <code>tools/content/budget_tracker.py</code> (already exists for v5). Stops publishing if cap exceeded; alerts Slack.</p>
+          </div>
+          <div class="card warn">
+            <h4>Risk · NitroPack stale cache</h4>
+            <p>Even after publish, NitroPack can serve stale HTML for ~5 min if its purge fires too fast. <strong>Guardrail:</strong> the existing publish step already calls NitroPack purge twice with a 60s delay (proven pattern).</p>
+          </div>
+          <div class="card warn">
+            <h4>Risk · GSC rate limits</h4>
+            <p>GSC API caps at ~1200 requests/min per project. Our usage: ~6 requests per discover run, daily. ~0.005% of the cap. <strong>Guardrail:</strong> none needed.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 15. NEXT -->
+      <section id="next">
+        <h2>15. Next step (what I need from you)</h2>
+        <div class="card accent">
+          <p>Open this file in Chrome, read it once, then reply with:</p>
+          <ol>
+            <li><strong>Any of the 7 decisions (§11) where the default is wrong</strong> — only flag the ones you want different.</li>
+            <li><strong>Anything missing from the gap list (§4) or the task list (§12).</strong></li>
+            <li><strong>Any scenario (§13) you want a deeper walkthrough on.</strong></li>
+            <li><strong>Anything you want me to NOT touch</strong> — e.g., a workstream you're protecting.</li>
+          </ol>
+          <p>Once you reply, I'll either iterate the plan (v2) or, if it's solid, start at Task 1 (§12) — but only after explicit "go".</p>
+          <p style="margin-bottom: 0;"><strong>What I will not do without explicit approval:</strong> push code to <code>main</code>, enable any cron, write to WordPress (even drafts), commit any auth secrets, touch <code>apps/dashboard/</code> / <code>apps/ingest/</code> / <code>packages/*</code> (frozen per CLAUDE.md rule #21).</p>
+        </div>
+      </section>
+
+      <div style="text-align: center; color: var(--muted); font-size: 12px; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border);">
+        <p>Plan v1 · 2026-05-12 · Drafted by Claude Opus 4.7 (1M ctx) · For iteration · Local-only · No code shipped yet</p>
+        <p>File: <code>team/arham/blog-auto-poster-plan-2026-05-12.html</code></p>
+      </div>
+
+    </main>
+  </div>
+</div>
+</body>
+</html>
