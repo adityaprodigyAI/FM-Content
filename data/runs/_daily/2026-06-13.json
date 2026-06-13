@@ -1,0 +1,40 @@
+{
+  "date": "2026-06-13",
+  "proposal": {
+    "focus_keyword": "automation to delegation explained",
+    "working_title": "Automation to Delegation Explained: How Mid-Market Operators Hand Off Decisions to AI Agents Safely",
+    "one_line_angle": "Most AI advice still optimizes automation, automating one human task at a time. Mid-market scaling requires delegation: giving an agent end-to-end ownership of a decision loop. This post lays out the four-stage handoff (boundary mapping, escalation rules, evidence logging, weekly audit) that turns ChatGPT from a copy machine into a colleague.",
+    "outline_bullets": [
+      "Why Automation Stops Scaling Around 80% of Operator Decisions",
+      "The Four-Stage Delegation Handoff: Boundary Mapping, Escalation Rules, Evidence Logging, Weekly Audit",
+      "How To Tell If An AI Agent Is Ready For Decision Ownership (And What To Pull Back When It Is Not)"
+    ],
+    "slug": "automation-to-delegation-explained",
+    "audience": "done-for-you",
+    "category_id": 13,
+    "intent": "informational",
+    "target_date": "2026-06-13",
+    "discovery_source": "ga4_high_traffic_gap",
+    "discovery_id": "ga4:automation-to-delegation",
+    "discovery_evidence": {
+      "page_path": "/courses/automation-to-delegation",
+      "sessions": 241,
+      "prior_sessions": 0,
+      "growth_ratio": null
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "no overlap detected against current inventory",
+    "matched_post_url": null,
+    "score": 4.74
+  },
+  "clickup_task_id": "86aj1anqy",
+  "clickup_emitted_at": "2026-06-13T14:12:47.744053+00:00",
+  "approved_at": null,
+  "approved_status_name": null,
+  "wp_post_id": null,
+  "wp_edit_url": null,
+  "drafted_at": null,
+  "rejected_at": null,
+  "rejected_status_name": null,
+  "notes": []
+}
