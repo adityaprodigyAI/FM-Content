@@ -1,0 +1,40 @@
+{
+  "date": "2026-06-14",
+  "proposal": {
+    "focus_keyword": "labs explained",
+    "working_title": "AI Labs Explained: Why Mid-Market Operators Stand Up Internal AI Sandboxes Before Production Agent Rollout",
+    "one_line_angle": "Most mid-market teams skip the lab step and push GPT straight into production, then scramble when agents misfire under live load. This post lays out the 4-component AI Lab (sandbox env, eval set, governance rubric, decision log) operators are building so production rollout stops being a coin flip.",
+    "outline_bullets": [
+      "Why Skipping the Lab Step Breaks Mid-Market AI Rollouts",
+      "The 4-Component AI Lab: Sandbox, Eval Set, Governance Rubric, Decision Log",
+      "Inside a 90-Day AI Lab Sprint: What to Build, Test, and Promote to Production"
+    ],
+    "slug": "labs-explained",
+    "audience": "done-for-you",
+    "category_id": 13,
+    "intent": "informational",
+    "target_date": "2026-06-14",
+    "discovery_source": "ga4_high_traffic_gap",
+    "discovery_id": "ga4:labs",
+    "discovery_evidence": {
+      "page_path": "/labs/",
+      "sessions": 8482,
+      "prior_sessions": 0,
+      "growth_ratio": null
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "",
+    "matched_post_url": null,
+    "score": 6.5229097199038675
+  },
+  "clickup_task_id": "86aj1mc9u",
+  "clickup_emitted_at": "2026-06-14T14:09:03.271908+00:00",
+  "approved_at": null,
+  "approved_status_name": null,
+  "wp_post_id": null,
+  "wp_edit_url": null,
+  "drafted_at": null,
+  "rejected_at": null,
+  "rejected_status_name": null,
+  "notes": []
+}
