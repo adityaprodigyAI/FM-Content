@@ -1,0 +1,42 @@
+{
+  "date": "2026-06-16",
+  "proposal": {
+    "focus_keyword": "is ai taking over jobs",
+    "working_title": "Is AI Taking Over Jobs? What CFOs Actually See in Their 2026 Workforce Data",
+    "one_line_angle": "The headline 'AI takes jobs' narrative does not match the 2026 board-level data. Mid-market CFOs are seeing AI compress specific function costs (support tier-1, RevOps reporting, outbound email ops) by 30 to 60 percent while net headcount drifts up because revenue per FTE rose. Reframe the question from 'is ai taking over jobs' to 'which seat shrinks first, and how do we redeploy that capacity before the news cycle forces our hand'.",
+    "outline_bullets": [
+      "The headline number versus the boardroom number: why 'is AI taking over jobs' looks different inside the P&L than on the cable news chyron",
+      "Where AI actually replaced work in 2026 (tier-1 support, RevOps reporting, contract review) and the three functions it stalled in (field sales, account management, ops leadership)",
+      "The mid-market redeployment playbook: a 90-day plan to map the shrinking seat, retrain the human, and capture the productivity surplus before it walks out the door"
+    ],
+    "slug": "is-ai-taking-over-jobs",
+    "audience": "done-for-you",
+    "category_id": 13,
+    "intent": "informational",
+    "target_date": "2026-06-16",
+    "discovery_source": "ahrefs_competitor_gap",
+    "discovery_id": "ahrefs:bcg.com:is ai taking over jobs",
+    "discovery_evidence": {
+      "competitor": "bcg.com",
+      "keyword": "is ai taking over jobs",
+      "volume": 2500,
+      "difficulty": 51,
+      "competitor_position": 1.0,
+      "competitor_traffic": 898
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "",
+    "matched_post_url": null,
+    "score": 10.71508744811343
+  },
+  "clickup_task_id": "86aj2t0cv",
+  "clickup_emitted_at": "2026-06-16T14:05:43.142095+00:00",
+  "approved_at": null,
+  "approved_status_name": null,
+  "wp_post_id": null,
+  "wp_edit_url": null,
+  "drafted_at": null,
+  "rejected_at": null,
+  "rejected_status_name": null,
+  "notes": []
+}
