@@ -1,0 +1,40 @@
+{
+  "date": "2026-06-18",
+  "proposal": {
+    "focus_keyword": "bible ai analysis explained",
+    "working_title": "Bible AI Analysis Explained: A Christian Founder's Framework for Smart AI Adoption",
+    "one_line_angle": "The /bible-ai-analysis/ post is rising in organic traffic but has no practical companion that translates scriptural principles into the concrete AI adoption decisions Christian founders are facing right now, from agentic automation to AI hiring tools to the ethics of replacing human work.",
+    "outline_bullets": [
+      "Three biblical principles that should frame every AI adoption decision in a values-driven business (stewardship, honesty, human dignity)",
+      "Where AI genuinely honors biblical stewardship versus where it slips into laziness, deception, or quiet idolatry",
+      "A practical decision framework for Christian founders evaluating AI tools, automation systems, and agentic workflows in 2026"
+    ],
+    "slug": "bible-ai-analysis-explained",
+    "audience": "done-for-you",
+    "category_id": 13,
+    "intent": "informational",
+    "target_date": "2026-06-18",
+    "discovery_source": "ga4_high_traffic_gap",
+    "discovery_id": "ga4:bible-ai-analysis",
+    "discovery_evidence": {
+      "page_path": "/bible-ai-analysis/",
+      "sessions": 252,
+      "prior_sessions": 0,
+      "growth_ratio": null
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "",
+    "matched_post_url": null,
+    "score": 4.76669474436376
+  },
+  "clickup_task_id": "86aj47b0p",
+  "clickup_emitted_at": "2026-06-18T14:13:57.616071+00:00",
+  "approved_at": null,
+  "approved_status_name": null,
+  "wp_post_id": null,
+  "wp_edit_url": null,
+  "drafted_at": null,
+  "rejected_at": null,
+  "rejected_status_name": null,
+  "notes": []
+}
