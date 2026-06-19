@@ -1,0 +1,63 @@
+{
+  "date": "2026-06-19",
+  "proposal": {
+    "focus_keyword": "ai implementation for small business",
+    "working_title": "AI Implementation for Small Business: Why It Stalls and How to Make It Actually Work",
+    "one_line_angle": "Most SMB AI rollouts stall on the same five gaps, not the technology. This is the operator's diagnostic for the post-pilot trough Accenture's enterprise playbook cannot fix.",
+    "outline_bullets": [
+      "Why Most Small-Business AI Rollouts Stall at Month Three",
+      "The Five Implementation Gaps That Decide Whether AI Pays Back",
+      "A 30-Day Operator Diagnostic to Get Your AI Implementation Working"
+    ],
+    "slug": "ai-implementation-for-small-business",
+    "audience": "done-for-you",
+    "category_id": 27,
+    "intent": "informational",
+    "target_date": "2026-06-19",
+    "discovery_source": "searchable_competitor_topic",
+    "discovery_id": "searchable_topic:small_business",
+    "discovery_evidence": {
+      "topic": "Small Business",
+      "coverage": 0.0,
+      "prompt_count": 5,
+      "top_competitors": [
+        {
+          "name": "Accenture",
+          "mentionCount": 4
+        },
+        {
+          "name": "Markovate",
+          "mentionCount": 3
+        },
+        {
+          "name": "NoGood",
+          "mentionCount": 3
+        }
+      ],
+      "representative_prompts": [
+        "Our AI implementation isn't meeting targets, what to do?",
+        "We bought ChatGPT but still doing everything manually",
+        "Ready to implement AI systems in my business"
+      ],
+      "cross_topic_evidence": [
+        "AI Consulting topic at 11% (weak), Accenture and Deloitte dominate on AI Overviews and Perplexity",
+        "AI Systems topic at 0% across 3 prompts including 'Need help building agentic AI processes for sales'",
+        "Marketing Automation topic at 0%, 'Top AI consulting agencies for marketing automation' (Accenture and Markovate dominate)"
+      ]
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "",
+    "matched_post_url": null,
+    "score": 5.0
+  },
+  "clickup_task_id": "86aj4v6q8",
+  "clickup_emitted_at": "2026-06-19T14:08:57.237411+00:00",
+  "approved_at": null,
+  "approved_status_name": null,
+  "wp_post_id": null,
+  "wp_edit_url": null,
+  "drafted_at": null,
+  "rejected_at": null,
+  "rejected_status_name": null,
+  "notes": []
+}
