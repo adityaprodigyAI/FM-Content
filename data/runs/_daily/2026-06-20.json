@@ -1,0 +1,60 @@
+{
+  "date": "2026-06-20",
+  "proposal": {
+    "focus_keyword": "ai email automation for service businesses",
+    "working_title": "AI Email Automation for Service Businesses: The 2026 Playbook for Sequences That Convert Without Sounding Robotic",
+    "one_line_angle": "Most AI-email guides pitch tools; this is the operator playbook showing service businesses which sequence patterns ship pipeline in 2026, with the prompts and CRM triggers AI consultants actually run.",
+    "outline_bullets": [
+      "The five AI email-sequence patterns service businesses run in 2026 (and which of them Deloitte's clients keep botching)",
+      "Where AI email automation breaks: the four hand-offs between the LLM, the CRM, and the human reply box that kill conversion",
+      "How to instrument AI email sequences so you measure pipeline impact and reply quality, not just open rates"
+    ],
+    "slug": "ai-email-automation-for-service-businesses",
+    "audience": "done-for-you",
+    "category_id": 30,
+    "intent": "commercial",
+    "target_date": "2026-06-20",
+    "discovery_source": "searchable_competitor_topic",
+    "discovery_id": "searchable_topic:email-automation",
+    "discovery_evidence": {
+      "topic": "Email Automation",
+      "topic_id": "647bd8d2-4c49-4e51-8354-b9128261893d",
+      "coverage": 0.0,
+      "related_topic": "Marketing Automation",
+      "related_topic_id": "4091ff09-4726-4256-85d2-362e9504d749",
+      "top_competitors": [
+        {
+          "name": "Deloitte",
+          "mention_count": 3
+        },
+        {
+          "name": "Accenture Song",
+          "mention_count": 2
+        },
+        {
+          "name": "AIVA",
+          "mention_count": 1
+        }
+      ],
+      "buyer_prompts": [
+        "What is the best way to automate email sequences",
+        "Top AI consulting agencies for marketing automation"
+      ],
+      "agent_override_rationale": "Algorithmic pick_top_candidate selected 'forgot password explained' from ga4_high_traffic_gap (score 7.87 * weight 1.1 = 8.66); this is FM's /forgot-password app auth page, not an editorial topic. Remaining high-score GA4 candidates were FM-internal product/course slugs. Falling back to highest-scoring Searchable AEO candidate where the 0% FM coverage + dominant competitor citations represents a genuine AEO gap. Focus keyword narrowed from generic 'email automation' to 'ai email automation for service businesses' for editorial specificity."
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "",
+    "matched_post_url": null,
+    "score": 5.0
+  },
+  "clickup_task_id": "86aj5ajyz",
+  "clickup_emitted_at": "2026-06-20T14:07:10.077241+00:00",
+  "approved_at": null,
+  "approved_status_name": null,
+  "wp_post_id": null,
+  "wp_edit_url": null,
+  "drafted_at": null,
+  "rejected_at": null,
+  "rejected_status_name": null,
+  "notes": []
+}
