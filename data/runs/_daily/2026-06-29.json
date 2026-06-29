@@ -1,0 +1,42 @@
+{
+  "date": "2026-06-29",
+  "proposal": {
+    "focus_keyword": "agentic commerce",
+    "working_title": "Agentic Commerce for Mid-Market Brands: A 90-Day Implementation Playbook",
+    "one_line_angle": "While McKinsey explains the macro shift, we map the exact agent stack, vendor choices, and revenue checkpoints a mid-market commerce team can ship in one quarter.",
+    "outline_bullets": [
+      "What changes when an AI agent transacts on behalf of the buyer, and what the first wave of production deployments shows about conversion and AOV",
+      "The minimum viable agentic commerce stack: discovery agent, checkout broker, identity rails, and the vendor choices behind each",
+      "A 90-day implementation roadmap with go/no-go gates, instrumentation, and revenue checkpoints for a mid-market commerce team"
+    ],
+    "slug": "agentic-commerce",
+    "audience": "done-for-you",
+    "category_id": 13,
+    "intent": "informational",
+    "target_date": "2026-06-29",
+    "discovery_source": "ahrefs_competitor_gap",
+    "discovery_id": "ahrefs:mckinsey.com:agentic commerce",
+    "discovery_evidence": {
+      "competitor": "mckinsey.com",
+      "keyword": "agentic commerce",
+      "volume": 7300,
+      "difficulty": 50,
+      "competitor_position": 1.0,
+      "competitor_traffic": 2639
+    },
+    "cannibalization_severity": "clear",
+    "cannibalization_rationale": "",
+    "matched_post_url": null,
+    "score": 12.335033702126266
+  },
+  "clickup_task_id": "86aj9et4b",
+  "clickup_emitted_at": "2026-06-29T14:07:05.132237+00:00",
+  "approved_at": null,
+  "approved_status_name": null,
+  "wp_post_id": null,
+  "wp_edit_url": null,
+  "drafted_at": null,
+  "rejected_at": null,
+  "rejected_status_name": null,
+  "notes": []
+}
